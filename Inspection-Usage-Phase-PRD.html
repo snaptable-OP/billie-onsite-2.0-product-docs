@@ -1,0 +1,3746 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Inspection Usage Phase PRD</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+        />
+        <style>
+            :root {
+                --ground: #eef1ef;
+                --surface: #ffffff;
+                --surface-2: #f4f6f5;
+                --surface-3: #e9edeb;
+                --ink: #17211f;
+                --ink-2: #4a5652;
+                --ink-3: #727d79;
+                --border: #dce2df;
+                --border-strong: #c6cfca;
+                --accent: #0e6f68;
+                --accent-ink: #0a4f4a;
+                --accent-soft: #d8ebe8;
+                --ok: #1f7a45;
+                --ok-soft: #dcefe1;
+                --warn: #a9660f;
+                --warn-soft: #f6e8d1;
+                --gap: #b1382f;
+                --gap-soft: #f5dbd6;
+                --future: #2f5cae;
+                --future-soft: #dde5f7;
+                --open: #6a49bd;
+                --open-soft: #e6ddf6;
+                --p0: #17211f;
+                --p0-ink: #ffffff;
+                --shadow: 0 1px 2px rgba(20, 30, 28, 0.06), 0 8px 24px -14px rgba(20, 30, 28, 0.22);
+                --shadow-sm: 0 1px 2px rgba(20, 30, 28, 0.05);
+                --radius: 12px;
+                --radius-sm: 8px;
+                --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+                --sans: "IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root:not([data-theme="light"]) {
+                    --ground: #0d1312;
+                    --surface: #141c1a;
+                    --surface-2: #19221f;
+                    --surface-3: #212c29;
+                    --ink: #e9efec;
+                    --ink-2: #a7b2ae;
+                    --ink-3: #7b8681;
+                    --border: #26312e;
+                    --border-strong: #354441;
+                    --accent: #43b9af;
+                    --accent-ink: #7fd7cf;
+                    --accent-soft: #123331;
+                    --ok: #4fbf7d;
+                    --ok-soft: #12281c;
+                    --warn: #d69a3d;
+                    --warn-soft: #2a1f0d;
+                    --gap: #e06a60;
+                    --gap-soft: #2c1512;
+                    --future: #7099e8;
+                    --future-soft: #121d31;
+                    --open: #a488e6;
+                    --open-soft: #1b1430;
+                    --p0: #e9efec;
+                    --p0-ink: #0d1312;
+                    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 30px -16px rgba(0, 0, 0, 0.7);
+                    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+                }
+            }
+            :root[data-theme="dark"] {
+                --ground: #0d1312;
+                --surface: #141c1a;
+                --surface-2: #19221f;
+                --surface-3: #212c29;
+                --ink: #e9efec;
+                --ink-2: #a7b2ae;
+                --ink-3: #7b8681;
+                --border: #26312e;
+                --border-strong: #354441;
+                --accent: #43b9af;
+                --accent-ink: #7fd7cf;
+                --accent-soft: #123331;
+                --ok: #4fbf7d;
+                --ok-soft: #12281c;
+                --warn: #d69a3d;
+                --warn-soft: #2a1f0d;
+                --gap: #e06a60;
+                --gap-soft: #2c1512;
+                --future: #7099e8;
+                --future-soft: #121d31;
+                --open: #a488e6;
+                --open-soft: #1b1430;
+                --p0: #e9efec;
+                --p0-ink: #0d1312;
+                --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 30px -16px rgba(0, 0, 0, 0.7);
+                --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                background: var(--ground);
+                color: var(--ink);
+                font-family: var(--sans);
+                line-height: 1.55;
+                -webkit-font-smoothing: antialiased;
+                font-size: 15px;
+            }
+            a {
+                color: var(--accent-ink);
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            :focus-visible {
+                outline: 2px solid var(--accent);
+                outline-offset: 2px;
+                border-radius: 4px;
+            }
+
+            /* ---------- App shell ---------- */
+            .app {
+                display: grid;
+                grid-template-columns: 288px minmax(0, 1fr);
+                min-height: 100vh;
+            }
+
+            .sidebar {
+                position: sticky;
+                top: 0;
+                height: 100vh;
+                overflow: auto;
+                background: var(--surface);
+                border-right: 1px solid var(--border);
+                padding: 22px 18px 40px;
+                display: flex;
+                flex-direction: column;
+                gap: 26px;
+            }
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 11px;
+            }
+            .brand__mark {
+                width: 34px;
+                height: 34px;
+                border-radius: 9px;
+                background: var(--accent);
+                color: #fff;
+                display: grid;
+                place-items: center;
+                flex: none;
+                box-shadow: var(--shadow-sm);
+            }
+            .brand__mark svg {
+                width: 19px;
+                height: 19px;
+            }
+            .brand__name {
+                font-weight: 700;
+                font-size: 14px;
+                letter-spacing: 0.01em;
+                line-height: 1.2;
+            }
+            .brand__sub {
+                font-size: 11px;
+                color: var(--ink-3);
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                margin-top: 2px;
+            }
+
+            .rail-label {
+                font-size: 10.5px;
+                letter-spacing: 0.11em;
+                text-transform: uppercase;
+                color: var(--ink-3);
+                font-weight: 600;
+                margin: 0 0 9px 4px;
+            }
+
+            .doc-list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            .doc-item {
+                display: flex;
+                gap: 10px;
+                align-items: flex-start;
+                padding: 9px 11px;
+                border-radius: var(--radius-sm);
+                color: var(--ink-2);
+                font-size: 13px;
+                line-height: 1.35;
+                cursor: default;
+            }
+            .doc-item.is-active {
+                background: var(--accent-soft);
+                color: var(--ink);
+                font-weight: 600;
+            }
+            .doc-item.is-active .doc-item__idx {
+                background: var(--accent);
+                color: #fff;
+            }
+            .doc-item.is-placeholder {
+                color: var(--ink-3);
+                opacity: 0.75;
+            }
+            .doc-item__idx {
+                width: 20px;
+                height: 20px;
+                border-radius: 6px;
+                background: var(--surface-3);
+                color: var(--ink-3);
+                font-size: 11px;
+                font-weight: 600;
+                display: grid;
+                place-items: center;
+                flex: none;
+                margin-top: 1px;
+            }
+            .doc-item__meta {
+                font-size: 11px;
+                color: var(--ink-3);
+                font-weight: 500;
+                margin-top: 2px;
+            }
+
+            .outline {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 1px;
+                border-left: 1px solid var(--border);
+                margin-left: 6px;
+            }
+            .outline a {
+                display: block;
+                padding: 5px 12px;
+                font-size: 12.5px;
+                color: var(--ink-2);
+                border-left: 2px solid transparent;
+                margin-left: -1px;
+                line-height: 1.35;
+            }
+            .outline a:hover {
+                color: var(--ink);
+                text-decoration: none;
+            }
+            .outline a.is-current {
+                color: var(--accent-ink);
+                border-left-color: var(--accent);
+                font-weight: 600;
+            }
+            .outline a .o-num {
+                color: var(--ink-3);
+                font-family: var(--mono);
+                font-size: 11px;
+                margin-right: 7px;
+            }
+
+            /* ---------- Main column ---------- */
+            .main {
+                min-width: 0;
+                display: flex;
+                flex-direction: column;
+            }
+            .topbar {
+                position: sticky;
+                top: 0;
+                z-index: 20;
+                background: color-mix(in srgb, var(--ground) 82%, transparent);
+                backdrop-filter: saturate(1.4) blur(10px);
+                border-bottom: 1px solid var(--border);
+            }
+            .topbar__inner {
+                max-width: 1080px;
+                margin: 0 auto;
+                padding: 20px 34px 0;
+            }
+            .doc-title {
+                font-size: 26px;
+                font-weight: 700;
+                letter-spacing: -0.015em;
+                line-height: 1.12;
+                text-wrap: balance;
+                margin: 0;
+            }
+            .doc-meta {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px 10px;
+                margin-top: 12px;
+                align-items: center;
+            }
+            .meta-chip {
+                font-size: 11.5px;
+                color: var(--ink-2);
+                background: var(--surface);
+                border: 1px solid var(--border);
+                padding: 4px 10px;
+                border-radius: 999px;
+                display: inline-flex;
+                gap: 6px;
+                align-items: center;
+            }
+            .meta-chip b {
+                color: var(--ink);
+                font-weight: 600;
+            }
+            .meta-chip .dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--ok);
+            }
+
+            .theme-toggle {
+                position: absolute;
+                top: 20px;
+                right: 34px;
+                width: 36px;
+                height: 36px;
+                border-radius: 9px;
+                border: 1px solid var(--border);
+                background: var(--surface);
+                color: var(--ink-2);
+                cursor: pointer;
+                display: grid;
+                place-items: center;
+            }
+            .theme-toggle:hover {
+                color: var(--ink);
+                border-color: var(--border-strong);
+            }
+            .theme-toggle svg {
+                width: 17px;
+                height: 17px;
+            }
+
+            .tabs {
+                display: flex;
+                gap: 2px;
+                max-width: 1080px;
+                margin: 16px auto 0;
+                padding: 0 34px;
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+            .tabs::-webkit-scrollbar {
+                display: none;
+            }
+            .tab {
+                appearance: none;
+                background: none;
+                border: none;
+                font-family: inherit;
+                cursor: pointer;
+                white-space: nowrap;
+                padding: 11px 15px 13px;
+                font-size: 13.5px;
+                font-weight: 600;
+                color: var(--ink-3);
+                border-bottom: 2.5px solid transparent;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .tab:hover {
+                color: var(--ink-2);
+            }
+            .tab.is-active {
+                color: var(--accent-ink);
+                border-bottom-color: var(--accent);
+            }
+            .tab__badge {
+                font-family: var(--mono);
+                font-size: 10.5px;
+                font-weight: 600;
+                background: var(--surface-3);
+                color: var(--ink-2);
+                padding: 1px 7px;
+                border-radius: 999px;
+            }
+            .tab.is-active .tab__badge {
+                background: var(--accent);
+                color: #fff;
+            }
+
+            .content {
+                max-width: 1080px;
+                margin: 0 auto;
+                padding: 30px 34px 90px;
+                width: 100%;
+            }
+            .panel {
+                display: none;
+                animation: fade 0.25s ease;
+            }
+            .panel.is-active {
+                display: block;
+            }
+            @keyframes fade {
+                from {
+                    opacity: 0;
+                    transform: translateY(4px);
+                }
+                to {
+                    opacity: 1;
+                    transform: none;
+                }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .panel,
+                .panel.is-active {
+                    animation: none;
+                }
+            }
+
+            /* ---------- Section blocks ---------- */
+            .sec {
+                margin: 0 0 34px;
+                scroll-margin-top: 150px;
+            }
+            .sec__head {
+                display: flex;
+                gap: 13px;
+                align-items: baseline;
+                margin-bottom: 6px;
+            }
+            .sec__num {
+                font-family: var(--mono);
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--accent);
+                flex: none;
+                padding-top: 2px;
+                min-width: 26px;
+            }
+            .sec h2 {
+                font-size: 20px;
+                font-weight: 700;
+                letter-spacing: -0.01em;
+                margin: 0;
+                line-height: 1.2;
+                text-wrap: balance;
+            }
+            .sec h3 {
+                font-size: 15.5px;
+                font-weight: 600;
+                margin: 22px 0 8px;
+                color: var(--ink);
+                letter-spacing: -0.005em;
+            }
+            .sec h3 .h3num {
+                font-family: var(--mono);
+                font-size: 12px;
+                color: var(--ink-3);
+                margin-right: 8px;
+            }
+            .sec p {
+                margin: 9px 0;
+                color: var(--ink-2);
+                max-width: 74ch;
+            }
+            .sec p strong,
+            .sec li strong {
+                color: var(--ink);
+                font-weight: 600;
+            }
+            .sec ul {
+                margin: 9px 0;
+                padding-left: 20px;
+                color: var(--ink-2);
+                max-width: 74ch;
+            }
+            .sec ul li {
+                margin: 5px 0;
+            }
+            .lead {
+                font-size: 16px;
+                color: var(--ink-2);
+                max-width: 74ch;
+            }
+            em {
+                color: var(--ink);
+                font-style: normal;
+                font-weight: 600;
+                background: var(--accent-soft);
+                padding: 0 4px;
+                border-radius: 4px;
+                font-size: 0.94em;
+            }
+
+            .divider {
+                height: 1px;
+                background: var(--border);
+                border: none;
+                margin: 34px 0;
+            }
+
+            /* callout */
+            .callout {
+                border: 1px solid var(--border);
+                border-left: 3px solid var(--accent);
+                background: var(--surface);
+                border-radius: var(--radius-sm);
+                padding: 13px 16px;
+                margin: 14px 0;
+                font-size: 13.5px;
+                color: var(--ink-2);
+            }
+            .callout.is-warn {
+                border-left-color: var(--warn);
+            }
+            .callout.is-open {
+                border-left-color: var(--open);
+            }
+            .callout .co-label {
+                font-size: 11px;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-weight: 700;
+                color: var(--ink);
+                display: block;
+                margin-bottom: 3px;
+            }
+            .callout.is-warn .co-label {
+                color: var(--warn);
+            }
+            .callout.is-open .co-label {
+                color: var(--open);
+            }
+
+            /* pills */
+            .pill {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                font-size: 11.5px;
+                font-weight: 600;
+                line-height: 1;
+                padding: 4px 9px;
+                border-radius: 999px;
+                white-space: nowrap;
+                font-family: var(--sans);
+            }
+            .pill::before {
+                content: "";
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: currentColor;
+                opacity: 0.9;
+            }
+            .pill--ok {
+                background: var(--ok-soft);
+                color: var(--ok);
+            }
+            .pill--warn {
+                background: var(--warn-soft);
+                color: var(--warn);
+            }
+            .pill--gap {
+                background: var(--gap-soft);
+                color: var(--gap);
+            }
+            .pill--future {
+                background: var(--future-soft);
+                color: var(--future);
+            }
+            .pill--open {
+                background: var(--open-soft);
+                color: var(--open);
+            }
+            .pill--neutral {
+                background: var(--surface-3);
+                color: var(--ink-2);
+            }
+            .pill--neutral::before {
+                opacity: 0.5;
+            }
+
+            /* tables */
+            .tbl-wrap {
+                overflow-x: auto;
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                margin: 14px 0;
+                background: var(--surface);
+                box-shadow: var(--shadow-sm);
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                font-size: 13px;
+                min-width: 520px;
+            }
+            thead th {
+                text-align: left;
+                font-weight: 600;
+                font-size: 11px;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                color: var(--ink-3);
+                padding: 11px 15px;
+                background: var(--surface-2);
+                border-bottom: 1px solid var(--border);
+                white-space: nowrap;
+                position: sticky;
+                top: 0;
+            }
+            tbody td {
+                padding: 12px 15px;
+                border-bottom: 1px solid var(--border);
+                color: var(--ink-2);
+                vertical-align: top;
+                line-height: 1.45;
+            }
+            tbody tr:last-child td {
+                border-bottom: none;
+            }
+            tbody tr:hover td {
+                background: var(--surface-2);
+            }
+            td strong,
+            td b {
+                color: var(--ink);
+                font-weight: 600;
+            }
+            .td-key {
+                font-weight: 600;
+                color: var(--ink);
+                white-space: nowrap;
+            }
+            .num-cell {
+                font-family: var(--mono);
+                font-size: 12px;
+                color: var(--ink-3);
+                text-align: right;
+                font-variant-numeric: tabular-nums;
+            }
+            code,
+            .mono {
+                font-family: var(--mono);
+                font-size: 0.86em;
+                background: var(--surface-3);
+                padding: 1.5px 5px;
+                border-radius: 5px;
+                color: var(--ink);
+                word-break: break-word;
+            }
+            td code {
+                white-space: nowrap;
+            }
+
+            /* two-column target vs current */
+            .tc-grid {
+                display: grid;
+                gap: 12px;
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                margin: 14px 0;
+            }
+            .tc-box {
+                border: 1px solid var(--border);
+                border-radius: var(--radius-sm);
+                padding: 13px 15px;
+                background: var(--surface);
+            }
+            .tc-box h4 {
+                margin: 0 0 7px;
+                font-size: 11px;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+                color: var(--ink-3);
+                font-weight: 700;
+            }
+            .tc-box.is-target {
+                border-top: 2px solid var(--accent);
+            }
+            .tc-box.is-current {
+                border-top: 2px solid var(--warn);
+            }
+            .tc-box p {
+                margin: 0;
+                font-size: 13px;
+            }
+
+            /* stat row */
+            .stat-row {
+                display: grid;
+                gap: 12px;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                margin: 16px 0;
+            }
+            .stat {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                padding: 15px 16px;
+                box-shadow: var(--shadow-sm);
+            }
+            .stat__n {
+                font-size: 27px;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                line-height: 1;
+                font-variant-numeric: tabular-nums;
+            }
+            .stat__l {
+                font-size: 12px;
+                color: var(--ink-3);
+                margin-top: 6px;
+                font-weight: 500;
+            }
+            .stat--ok .stat__n {
+                color: var(--ok);
+            }
+            .stat--warn .stat__n {
+                color: var(--warn);
+            }
+            .stat--gap .stat__n {
+                color: var(--gap);
+            }
+            .stat--future .stat__n {
+                color: var(--future);
+            }
+            .stat--open .stat__n {
+                color: var(--open);
+            }
+            .stat--accent .stat__n {
+                color: var(--accent);
+            }
+
+            /* ---------- Flow diagram ---------- */
+            .flow {
+                display: flex;
+                gap: 0;
+                overflow-x: auto;
+                padding: 6px 2px 16px;
+                margin: 16px 0;
+            }
+            .flow-stage {
+                flex: none;
+                width: 210px;
+                padding: 0 16px;
+                border-right: 1px dashed var(--border);
+                position: relative;
+            }
+            .flow-stage:last-child {
+                border-right: none;
+            }
+            .flow-stage__t {
+                font-size: 11px;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+                font-weight: 700;
+                color: var(--accent);
+                margin-bottom: 12px;
+                height: 16px;
+            }
+            .flow-nodes {
+                display: flex;
+                flex-direction: column;
+                gap: 0;
+            }
+            .node {
+                background: var(--surface);
+                border: 1px solid var(--border-strong);
+                border-radius: 9px;
+                padding: 9px 11px;
+                font-size: 12px;
+                font-weight: 500;
+                color: var(--ink);
+                box-shadow: var(--shadow-sm);
+                line-height: 1.3;
+                position: relative;
+            }
+            .node small {
+                display: block;
+                font-family: var(--mono);
+                font-size: 9.5px;
+                color: var(--ink-3);
+                margin-top: 2px;
+                font-weight: 400;
+            }
+            .node--ai {
+                border-color: var(--open);
+                background: var(--open-soft);
+            }
+            .node--pub {
+                border-color: var(--accent);
+                background: var(--accent-soft);
+            }
+            .node--branch {
+                border-style: dashed;
+            }
+            .n-arrow {
+                height: 18px;
+                display: grid;
+                place-items: center;
+                color: var(--ink-3);
+            }
+            .n-arrow::before {
+                content: "↓";
+                font-size: 14px;
+            }
+            .n-split {
+                font-size: 10px;
+                color: var(--ink-3);
+                text-align: center;
+                padding: 4px 0 2px;
+                font-style: italic;
+            }
+
+            /* legend */
+            .legend {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px 16px;
+                margin: 10px 0 4px;
+                padding: 12px 15px;
+                background: var(--surface-2);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-sm);
+                font-size: 12px;
+                color: var(--ink-2);
+            }
+            .legend .pill {
+                font-size: 11px;
+            }
+
+            /* ---------- Test cases ---------- */
+            .tc-toolbar {
+                position: sticky;
+                top: 150px;
+                z-index: 10;
+                background: var(--ground);
+                padding: 14px 0 16px;
+                margin-bottom: 8px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                align-items: center;
+            }
+            .filter-grp {
+                display: flex;
+                gap: 4px;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 9px;
+                padding: 3px;
+            }
+            .filter-btn {
+                appearance: none;
+                border: none;
+                background: none;
+                font-family: inherit;
+                font-size: 12px;
+                font-weight: 600;
+                color: var(--ink-3);
+                padding: 6px 12px;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+            .filter-btn:hover {
+                color: var(--ink);
+            }
+            .filter-btn.is-on {
+                background: var(--accent);
+                color: #fff;
+            }
+            .search {
+                flex: 1;
+                min-width: 180px;
+                position: relative;
+            }
+            .search input {
+                width: 100%;
+                font-family: inherit;
+                font-size: 13px;
+                color: var(--ink);
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 9px;
+                padding: 9px 12px 9px 34px;
+            }
+            .search input::placeholder {
+                color: var(--ink-3);
+            }
+            .search svg {
+                position: absolute;
+                left: 11px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 15px;
+                height: 15px;
+                color: var(--ink-3);
+            }
+            .tc-count {
+                font-size: 12px;
+                color: var(--ink-3);
+                font-weight: 500;
+                white-space: nowrap;
+            }
+
+            .tc-group {
+                margin: 26px 0 8px;
+            }
+            .tc-group__t {
+                font-size: 14px;
+                font-weight: 700;
+                color: var(--ink);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin: 0 0 4px;
+                letter-spacing: -0.005em;
+            }
+            .tc-group__t .g-num {
+                font-family: var(--mono);
+                font-size: 12px;
+                color: var(--accent);
+                font-weight: 600;
+            }
+
+            .tc-list {
+                display: grid;
+                gap: 12px;
+                margin-top: 14px;
+            }
+            .tc-card {
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                background: var(--surface);
+                box-shadow: var(--shadow-sm);
+                overflow: hidden;
+            }
+            .tc-card__top {
+                display: flex;
+                gap: 12px;
+                align-items: flex-start;
+                padding: 14px 16px;
+                cursor: pointer;
+                user-select: none;
+            }
+            .tc-card__top:hover {
+                background: var(--surface-2);
+            }
+            .tc-prio {
+                font-family: var(--mono);
+                font-size: 11px;
+                font-weight: 600;
+                padding: 3px 8px;
+                border-radius: 6px;
+                flex: none;
+                line-height: 1.2;
+                margin-top: 1px;
+            }
+            .tc-prio.P0 {
+                background: var(--p0);
+                color: var(--p0-ink);
+            }
+            .tc-prio.P1 {
+                background: var(--warn-soft);
+                color: var(--warn);
+            }
+            .tc-prio.P2 {
+                background: var(--future-soft);
+                color: var(--future);
+            }
+            .tc-id {
+                font-family: var(--mono);
+                font-size: 12px;
+                color: var(--ink-3);
+                font-weight: 500;
+            }
+            .tc-hd {
+                flex: 1;
+                min-width: 0;
+            }
+            .tc-name {
+                font-size: 13.5px;
+                font-weight: 600;
+                color: var(--ink);
+                margin: 2px 0 0;
+                line-height: 1.35;
+            }
+            .tc-tags {
+                display: flex;
+                gap: 6px;
+                flex-wrap: wrap;
+                margin-top: 7px;
+            }
+            .tc-chev {
+                flex: none;
+                color: var(--ink-3);
+                transition: transform 0.2s;
+                margin-top: 3px;
+            }
+            .tc-card.is-open .tc-chev {
+                transform: rotate(90deg);
+            }
+            .tc-body {
+                display: none;
+                padding: 0 16px 16px;
+                border-top: 1px solid var(--border);
+                margin-top: -1px;
+            }
+            .tc-card.is-open .tc-body {
+                display: block;
+            }
+            .tc-body dl {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 4px 16px;
+                margin: 14px 0 0;
+                font-size: 13px;
+            }
+            .tc-body dt {
+                font-size: 11px;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                color: var(--ink-3);
+                font-weight: 700;
+                padding-top: 3px;
+            }
+            .tc-body dd {
+                margin: 0;
+                color: var(--ink-2);
+            }
+            .tc-body ol {
+                margin: 0;
+                padding-left: 18px;
+                color: var(--ink-2);
+            }
+            .tc-body ol li {
+                margin: 3px 0;
+            }
+            .tc-exp {
+                color: var(--ink);
+                font-weight: 500;
+            }
+            .tc-cur {
+                display: block;
+                margin-top: 8px;
+                padding: 9px 12px;
+                background: var(--warn-soft);
+                border-radius: 7px;
+                font-size: 12.5px;
+                color: var(--ink);
+            }
+            .tc-cur b {
+                color: var(--warn);
+            }
+            .tc-empty {
+                text-align: center;
+                padding: 50px 20px;
+                color: var(--ink-3);
+            }
+
+            footer {
+                border-top: 1px solid var(--border);
+                padding: 22px 0 0;
+                margin-top: 30px;
+                font-size: 12px;
+                color: var(--ink-3);
+            }
+
+            /* ---------- responsive ---------- */
+            @media (max-width: 900px) {
+                .app {
+                    grid-template-columns: 1fr;
+                }
+                .sidebar {
+                    position: static;
+                    height: auto;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    gap: 16px;
+                    border-right: none;
+                    border-bottom: 1px solid var(--border);
+                    padding: 14px 20px;
+                }
+                .sidebar__docs,
+                .sidebar__outline {
+                    display: none;
+                }
+                .brand {
+                    flex: 1;
+                }
+                .topbar__inner,
+                .tabs,
+                .content {
+                    padding-left: 20px;
+                    padding-right: 20px;
+                }
+                .theme-toggle {
+                    position: static;
+                }
+                .sidebar .theme-toggle {
+                    margin-left: auto;
+                }
+                .tc-toolbar {
+                    top: 0;
+                }
+            }
+            @media (max-width: 560px) {
+                .doc-title {
+                    font-size: 22px;
+                }
+                .content {
+                    padding-top: 22px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="app">
+            <!-- ============ SIDEBAR ============ -->
+            <aside class="sidebar">
+                <div class="brand">
+                    <span class="brand__mark" aria-hidden="true">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M9 11l3 3L22 4" />
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                        </svg>
+                    </span>
+                    <div>
+                        <div class="brand__name">Billie Onsite</div>
+                        <div class="brand__sub">Product Docs</div>
+                    </div>
+                    <button class="theme-toggle" id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme">
+                        <svg
+                            id="themeIcon"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="12" cy="12" r="4" />
+                            <path
+                                d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                            />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="sidebar__docs">
+                    <p class="rail-label">Document Library</p>
+                    <ul class="doc-list">
+                        <li class="doc-item is-active">
+                            <span class="doc-item__idx">1</span>
+                            <span
+                                >Usage Phase PRD
+                                <span class="doc-item__meta">v2.0 · codebase-informed</span>
+                            </span>
+                        </li>
+                        <li class="doc-item is-placeholder">
+                            <span class="doc-item__idx">+</span>
+                            <span
+                                >Additional product docs
+                                <span class="doc-item__meta">slot for siblings</span>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar__outline">
+                    <p class="rail-label" id="outlineLabel">On This Page</p>
+                    <ul class="outline" id="outline"></ul>
+                </div>
+            </aside>
+
+            <!-- ============ MAIN ============ -->
+            <div class="main">
+                <div class="topbar">
+                    <div class="topbar__inner">
+                        <h1 class="doc-title">Inspection App — Usage Phase</h1>
+                        <div class="doc-meta">
+                            <span class="meta-chip"><span class="dot"></span>Status: <b>Refined vs. wb-billie-mobile</b></span>
+                            <span class="meta-chip">Version <b>2.0</b></span>
+                            <span class="meta-chip">Audience: <b>Product · Design · Engineering</b></span>
+                            <span class="meta-chip">Platform: <b>Mobile + Desktop</b></span>
+                        </div>
+                    </div>
+                    <nav class="tabs" id="tabs" role="tablist">
+                        <button class="tab is-active" data-tab="req" role="tab">
+                            Main Requirements <span class="tab__badge">§1–17</span>
+                        </button>
+                        <button class="tab" data-tab="tests" role="tab">Test Cases <span class="tab__badge">§18</span></button>
+                        <button class="tab" data-tab="todo" role="tab">
+                            Not Yet Implemented <span class="tab__badge">§19</span>
+                        </button>
+                        <button class="tab" data-tab="open" role="tab">Open Decisions <span class="tab__badge">§20</span></button>
+                    </nav>
+                </div>
+
+                <div class="content">
+                    <!-- ================= TAB 1: MAIN REQUIREMENTS ================= -->
+                    <section class="panel is-active" id="panel-req" role="tabpanel">
+                        <p class="lead" style="margin-bottom: 22px">
+                            This document refines the original Usage Phase PRD with user journeys, data-model clarity, platform
+                            constraints, and implementation status grounded in the current mobile codebase. Where
+                            <em>target behavior</em> and <em>current build</em> diverge, both are called out.
+                        </p>
+
+                        <div class="stat-row">
+                            <div class="stat stat--accent">
+                                <div class="stat__n">17</div>
+                                <div class="stat__l">Requirement sections</div>
+                            </div>
+                            <div class="stat stat--ok">
+                                <div class="stat__n">3</div>
+                                <div class="stat__l">Lifecycle statuses</div>
+                            </div>
+                            <div class="stat stat--warn">
+                                <div class="stat__n">2</div>
+                                <div class="stat__l">Publish paths</div>
+                            </div>
+                            <div class="stat stat--future">
+                                <div class="stat__n">2</div>
+                                <div class="stat__l">AI assist engines</div>
+                            </div>
+                        </div>
+
+                        <div class="legend">
+                            <strong style="color: var(--ink)">Status key:</strong>
+                            <span class="pill pill--ok">Implemented</span>
+                            <span class="pill pill--warn">Partial / In progress</span>
+                            <span class="pill pill--gap">Gap / Not started</span>
+                            <span class="pill pill--future">Future</span>
+                            <span class="pill pill--open">Open decision</span>
+                        </div>
+
+                        <hr class="divider" />
+
+                        <!-- §1 Purpose -->
+                        <div class="sec" id="s-purpose" data-outline="1 · Purpose">
+                            <div class="sec__head">
+                                <span class="sec__num">01</span>
+                                <h2>Purpose</h2>
+                            </div>
+                            <p>
+                                Transform the product from an issue-logging tool into an
+                                <em>inspection and report-generation workflow</em> for field inspectors.
+                            </p>
+                            <p>
+                                The usage phase must let inspectors start an inspection on site, capture evidence and findings,
+                                use AI assistance, review outputs, sign off, and publish a report from mobile or desktop.
+                            </p>
+                        </div>
+
+                        <!-- §2 Goals -->
+                        <div class="sec" id="s-goals" data-outline="2 · Goals">
+                            <div class="sec__head">
+                                <span class="sec__num">02</span>
+                                <h2>Goals</h2>
+                            </div>
+                            <ul>
+                                <li>Let inspectors start an inspection directly on site without office scheduling.</li>
+                                <li>Support quick manual entry for structured data and AI assistance for narrative content.</li>
+                                <li>
+                                    Preserve inspector control through review, editing, and conflict handling before publication.
+                                </li>
+                                <li>
+                                    Generate reports from inspection data using either customer-specific or default templates.
+                                </li>
+                                <li>Make inspections and reports accessible on both mobile and desktop.</li>
+                            </ul>
+                        </div>
+
+                        <!-- §4 Users -->
+                        <div class="sec" id="s-users" data-outline="4 · Users">
+                            <div class="sec__head">
+                                <span class="sec__num">04</span>
+                                <h2>Users</h2>
+                            </div>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Primary needs</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Field inspector</td>
+                                            <td>
+                                                Start inspections, capture structured answers, photos, findings, signatures, and
+                                                publish reports
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Inspector returning from site</td>
+                                            <td>
+                                                Use AI once internet is available to expand narrative fields and incorporate
+                                                document references
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Manager</td>
+                                            <td>View team inspections and reports</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- §5 Data model glossary -->
+                        <div class="sec" id="s-glossary" data-outline="5 · Data model glossary">
+                            <div class="sec__head">
+                                <span class="sec__num">05</span>
+                                <h2>Data model glossary</h2>
+                            </div>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Concept</th>
+                                            <th>User-facing term</th>
+                                            <th>Technical term in app</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Inspection</td>
+                                            <td>Inspection</td>
+                                            <td><code>Walk / Room</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Checklist item instance</td>
+                                            <td>Item / finding page</td>
+                                            <td><code>Issue</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Finding fields</td>
+                                            <td>Finding (compliance, evidence, action, etc.)</td>
+                                            <td>Form fields on an issue</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Inspector notes</td>
+                                            <td>Observation / notes</td>
+                                            <td>Chat messages on issue</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Workspace item</td>
+                                            <td>Tracked issue</td>
+                                            <td><code>WIS</code> / published issue</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="callout is-warn">
+                                <span class="co-label">Terminology migration</span>
+                                The mobile tab label is <strong>Inspections</strong>, but many flows still say
+                                <strong>Journal</strong> (exit, delete, create, desktop “My Journal”). Backend APIs and IDs
+                                continue to use walk/room/journal terminology. A full rename is in progress.
+                            </div>
+                        </div>
+
+                        <!-- §6 Inspection lifecycle -->
+                        <div class="sec" id="s-lifecycle" data-outline="6 · Inspection lifecycle">
+                            <div class="sec__head">
+                                <span class="sec__num">06</span>
+                                <h2>Inspection lifecycle</h2>
+                            </div>
+
+                            <h3><span class="h3num">6.1</span>Terminology</h3>
+                            <p>Rename <strong>Journal</strong> to <strong>Inspections</strong> throughout the product.</p>
+                            <p>
+                                <span class="pill pill--warn">Partial</span>&nbsp; Tab = Inspections; legacy strings and API
+                                identifiers remain.
+                            </p>
+
+                            <h3><span class="h3num">6.2</span>Statuses</h3>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>Target definition</th>
+                                            <th>Current behavior</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="pill pill--neutral">Scheduled</span></td>
+                                            <td>Future-dated inspection with no entered data</td>
+                                            <td>
+                                                Empty inspection or “start from scratch.” <code>scheduledAt</code> field exists
+                                                but is <strong>not set</strong> — future-date scheduling is
+                                                <strong>not implemented</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="pill pill--warn">In&nbsp;Progress</span></td>
+                                            <td>Data entry has started</td>
+                                            <td>Set when checklist is selected, content exists, or first answer entered</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="pill pill--ok">Completed</span></td>
+                                            <td>Report published for the inspection</td>
+                                            <td>
+                                                Also triggered when walk is <strong>archived</strong> or all publishable issues
+                                                are published to <strong>workspace</strong> — may diverge from “report file
+                                                exported”
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>
+                                <span class="h3num">6.3</span>Report status
+                                <span style="font-weight: 400; color: var(--ink-3); font-size: 13px">(secondary axis)</span>
+                            </h3>
+                            <p>Separate from lifecycle, report status currently intrinsically indicates:</p>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Report status</th>
+                                            <th>Meaning</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Not published</td>
+                                            <td>No export or workspace publish</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Pending</td>
+                                            <td>Publish in progress</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Published</td>
+                                            <td>Report file exists and/or items published to workspace</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="callout is-warn">
+                                <span class="co-label">Current state</span>Computed client-side (<code
+                                    >published | pending | not_published</code
+                                >) but <strong>not displayed</strong> on inspection list cards. May decide to display in the
+                                future.
+                            </div>
+
+                            <h3><span class="h3num">6.4</span>Inspection list journey</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>Inspector opens <strong>Inspections</strong> tab.</li>
+                                <li>Filters by <strong>Scheduled / In progress / Completed</strong>.</li>
+                                <li>
+                                    Card shows checklist name; report template name is modeled but often shows “No report
+                                    template” because export choice is not persisted to inspection metadata after export.
+                                </li>
+                                <li>Swipe archive toggles lifecycle locally (optimistic).</li>
+                            </ol>
+                            <p>
+                                An inspection started directly on site appears as <strong>In Progress</strong> once the inspector
+                                begins entering data.
+                            </p>
+                        </div>
+
+                        <!-- §7 Core onsite workflow -->
+                        <div class="sec" id="s-onsite" data-outline="7 · Core onsite workflow">
+                            <div class="sec__head">
+                                <span class="sec__num">07</span>
+                                <h2>Core onsite workflow</h2>
+                            </div>
+
+                            <h3><span class="h3num">7.1</span>Start inspection</h3>
+                            <p>
+                                Inspectors must be able to begin without an office user creating or scheduling the record first.
+                            </p>
+
+                            <div class="tc-grid">
+                                <div class="tc-box is-target">
+                                    <h4>Target flow</h4>
+                                    <p style="color: var(--ink-2)">
+                                        Open Inspections → start new → select project → select checklist → complete forms &amp;
+                                        findings → review &amp; publish report.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p style="font-weight: 600; color: var(--ink); margin-top: 18px">Implemented create paths</p>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Path</th>
+                                            <th>Steps</th>
+                                            <th>Result</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">
+                                                Online create
+                                                <span class="pill pill--ok" style="margin-top: 4px">Implemented</span>
+                                            </td>
+                                            <td>Inspections (+) → Choose project → Pick team checklist</td>
+                                            <td>
+                                                Walk created with one issue per requirement; lifecycle
+                                                <strong>In Progress</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">
+                                                Start from scratch
+                                                <span class="pill pill--neutral" style="margin-top: 4px">Hidden from UI</span>
+                                            </td>
+                                            <td>Skip checklist at create</td>
+                                            <td>Scheduled empty inspection with one blank issue</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">
+                                                Offline create
+                                                <span class="pill pill--gap" style="margin-top: 4px"
+                                                    >Not possible this release</span
+                                                >
+                                            </td>
+                                            <td>Skip project/checklist when offline</td>
+                                            <td>
+                                                Bare walk without project/checklist —
+                                                <strong>not possible in this release</strong>, since the checklist must load when
+                                                there is signal
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <p style="font-weight: 600; color: var(--ink); margin-top: 18px">Additional constraints</p>
+                            <ul>
+                                <li>
+                                    <strong>Solution Library checklists:</strong> adopt on web first; mobile lists team-adopted
+                                    checklists only.
+                                </li>
+                                <li>
+                                    <strong>Multi-device (mobile + desktop):</strong> second device lazy-loads checklist schema;
+                                    form answers autosave after 1 second when online; desktop visibility should sync. However,
+                                    team visibility of in-progress inspection work is only available when published.
+                                </li>
+                            </ul>
+
+                            <p style="font-weight: 600; color: var(--ink); margin-top: 22px">Onsite workflow map</p>
+                            <div
+                                class="flow"
+                                role="img"
+                                aria-label="Create → On-site capture → AI assistance → Publish → Post-publish access flow"
+                            >
+                                <div class="flow-stage">
+                                    <div class="flow-stage__t">Create Inspection</div>
+                                    <div class="flow-nodes">
+                                        <div class="node">Inspections Tab (+)<small>InspectionsTabPlus</small></div>
+                                        <div class="n-arrow"></div>
+                                        <div class="node">Choose Project<small>ChooseProjectSheet</small></div>
+                                        <div class="n-arrow"></div>
+                                        <div class="node">Preload Checklist<small>PreloadChecklistSheet</small></div>
+                                        <div class="n-arrow"></div>
+                                        <div class="node">Walk Open<small>WalkOpen</small></div>
+                                    </div>
+                                </div>
+                                <div class="flow-stage">
+                                    <div class="flow-stage__t">On-site Capture</div>
+                                    <div class="flow-nodes">
+                                        <div class="node">Issue Carousel<small>IssueCarousel</small></div>
+                                        <div class="n-arrow"></div>
+                                        <div class="node">Forms · Notes · Photos<small>FormsAndNotesPhotos</small></div>
+                                        <div class="n-arrow"></div>
+                                        <div class="node">Duplicate / Add Item<small>DuplicateOrAddItem</small></div>
+                                    </div>
+                                </div>
+                                <div class="flow-stage">
+                                    <div class="flow-stage__t">AI Assistance</div>
+                                    <div class="flow-nodes">
+                                        <div class="node node--ai">Magic Wand<small>MagicWand</small></div>
+                                        <div class="n-split">from Forms ↑ / Ask AI ↓</div>
+                                        <div class="node node--ai">Ask AI<small>AskAI</small></div>
+                                        <div class="n-arrow"></div>
+                                        <div class="node node--ai">
+                                            Insert into Notes<small>InsertIntoNotes → rerun Wand</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flow-stage">
+                                    <div class="flow-stage__t">Publish</div>
+                                    <div class="flow-nodes">
+                                        <div class="node node--pub">
+                                            Publish Options Sheet<small>PublishWalkOptionsSheet</small>
+                                        </div>
+                                        <div class="n-split">splits into two paths</div>
+                                        <div class="node node--branch">
+                                            ① Export Report → Select Type → Generate Summary → Post-export Preview
+                                        </div>
+                                        <div class="n-arrow"></div>
+                                        <div class="node node--branch">② Track Issues → Walk Summary → Publish WIS</div>
+                                    </div>
+                                </div>
+                                <div class="flow-stage">
+                                    <div class="flow-stage__t">Post-publish Access</div>
+                                    <div class="flow-nodes">
+                                        <div class="node">Project Reports Tab<small>from Export path</small></div>
+                                        <div class="n-arrow"></div>
+                                        <div class="node">Project Workspace Items<small>from WIS path</small></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3><span class="h3num">7.2</span>Project-linked values</h3>
+                            <p>
+                                The inspection experience should support values from project or export information (e.g.
+                                development approval number, building approval number, inspection record date, inspection record
+                                number). These are set up at the account or project level and will be exported along with the
+                                JSON.
+                            </p>
+                            <p style="font-weight: 600; color: var(--ink)">To specify in implementation</p>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Decision</th>
+                                            <th>Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Source objects</td>
+                                            <td>Project profile, export metadata, checklist preset fields</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Population timing</td>
+                                            <td>At create, first open, export summary generation, or publish</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Target surfaces</td>
+                                            <td>
+                                                Inspection forms (not currently visible in UI), report-only fields (visible at
+                                                publish), WIS custom fields (not currently visible in UI)
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- §8 Form completion -->
+                        <div class="sec" id="s-forms" data-outline="8 · Form completion">
+                            <div class="sec__head">
+                                <span class="sec__num">08</span>
+                                <h2>Form completion</h2>
+                            </div>
+
+                            <h3><span class="h3num">8.1</span>Supported inspection input</h3>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Field type</th>
+                                            <th>Target</th>
+                                            <th>Mobile support today</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Short text</td>
+                                            <td>Yes</td>
+                                            <td><span class="pill pill--ok">Implemented</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Long text</td>
+                                            <td>Yes</td>
+                                            <td><span class="pill pill--ok">Implemented</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Multiple-choice (single selection)</td>
+                                            <td>Yes</td>
+                                            <td><span class="pill pill--ok">Implemented</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Date</td>
+                                            <td>Yes</td>
+                                            <td><span class="pill pill--ok">Implemented</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Number</td>
+                                            <td>Yes</td>
+                                            <td><span class="pill pill--ok">Implemented</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Photo capture</td>
+                                            <td>Yes</td>
+                                            <td><span class="pill pill--ok">Implemented</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">File attachment</td>
+                                            <td>Yes</td>
+                                            <td>
+                                                <span class="pill pill--warn">Limited</span> — non-image types mapped to image
+                                                flow currently (need to double-check JSON)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Signature</td>
+                                            <td>Yes</td>
+                                            <td><span class="pill pill--ok">Implemented</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Multi-select checkboxes</td>
+                                            <td>Yes</td>
+                                            <td>
+                                                <span class="pill pill--gap">Gap</span> — backend <code>checkboxes</code> rendered
+                                                as single-select (target: multi-select)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Time</td>
+                                            <td>Yes</td>
+                                            <td>
+                                                <span class="pill pill--gap">Gap</span> — rendered as short text, no time picker;
+                                                implement next
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Dropdown</td>
+                                            <td>Yes</td>
+                                            <td><span class="pill pill--ok">Implemented</span> (single select)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3><span class="h3num">8.2</span>Manual-first use</h3>
+                            <p>
+                                Inspectors must be able to manually complete fields while on site, including offline. Discrete
+                                fields (compliant/non-compliant, yes/no) are especially important offline.
+                            </p>
+                            <p style="font-weight: 600; color: var(--ink)">
+                                Form capture loop <span class="pill pill--ok">Implemented</span> — assuming single inspector
+                            </p>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>
+                                    Inspector navigates <strong>issue carousel</strong> (each item = one checklist requirement
+                                    instance).
+                                </li>
+                                <li>Forms render inside the item via requirement journal block.</li>
+                                <li>Answers stored locally: <code>formAnswers[walkId][issueId][fieldId]</code>.</li>
+                                <li>When online: 1s debounced autosave; on reconnect, batch sync flushes pending issues.</li>
+                                <li>
+                                    <strong>Conflict model today:</strong> server answers replace local wholesale on fetch — no
+                                    field-level merge.
+                                </li>
+                            </ol>
+                            <div class="callout is-open">
+                                <span class="co-label">Multiple inspectors — possibly not in this release</span> Not developed
+                                yet. The UI needs to support showing offline captures from multiple inspectors once synced online.
+                                The Host has the right to confirm the final value for the report — choosing one value or all
+                                values to be shown. (JSON will need author name and timestamp at form-field level.)
+                            </div>
+
+                            <h3>
+                                <span class="h3num">8.3</span>Form usability
+                                <span style="font-weight: 400; color: var(--ink-3); font-size: 13px"
+                                    >— continuously improved</span
+                                >
+                            </h3>
+                            <p>Validate improvements for long forms and large option sets:</p>
+                            <ul>
+                                <li>Stronger visual indication of selected binary or multiple-choice responses (color codes).</li>
+                                <li>Alternative layouts for long multiple-choice lists.</li>
+                                <li>
+                                    Clear visibility of complete vs incomplete fields (required flags, completion checks, publish
+                                    tag derivation).
+                                </li>
+                            </ul>
+                            <p>
+                                No hard limit on option count; long forms may use multiple forms or sections. UI or cosmetic
+                                improvements on form usability will be a work in progress — do not expect perfect polish in this
+                                release.
+                            </p>
+                        </div>
+
+                        <!-- §9 Findings -->
+                        <div class="sec" id="s-findings" data-outline="9 · Findings & repeated items">
+                            <div class="sec__head">
+                                <span class="sec__num">09</span>
+                                <h2>Findings and repeated items</h2>
+                            </div>
+
+                            <h3><span class="h3num">9.1</span>Findings structure</h3>
+                            <p>
+                                <strong>Data model:</strong> Findings are <em>not a separate entity</em>. They are
+                                <strong>form fields on checklist items</strong> (e.g. Compliant?, Finding category, Evidence,
+                                Action, Photo in the food-safety demo).
+                            </p>
+                            <p>
+                                A finding record may include: Location · Compliance status · Short defect / non-compliance
+                                description or relevant clause · Comment · Action required · Photos.
+                            </p>
+
+                            <h3><span class="h3num">9.2</span>Duplicate and insertion behavior</h3>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>Behavior (current)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Duplicate current item</td>
+                                            <td>
+                                                Copies <strong>requirement structure only</strong> (and carries over requirement
+                                                ID in the JSON output); form values and inspector notes
+                                                <strong>not copied</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Insert position</td>
+                                            <td>
+                                                Immediately after focused item (<code>createdAt</code> ordering); later items
+                                                shifted
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Add blank item</td>
+                                            <td>
+                                                New issue without requirements, blank for notes capture; appears in
+                                                <code>content[]</code> in the JSON
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Final section / sign-off placement</td>
+                                            <td>
+                                                Final checklist section(s) always remain last in carousel after any insert or
+                                                duplicate — unless the final item itself is duplicated, in which case the
+                                                duplicate appears immediately after it
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>
+                                Sign-off is implemented as
+                                <strong>signature fields on designated final checklist section(s)</strong>, not a dedicated
+                                sign-off route.
+                            </p>
+
+                            <h3><span class="h3num">9.3</span>Checklist creation and on-site usage</h3>
+                            <ul>
+                                <li>Long checklists pre-create one carousel item per requirement at start.</li>
+                                <li>Inspector duplicates an item when the same checklist section applies again on site.</li>
+                                <li>Newly added or duplicated findings must remain before the final sign-off section.</li>
+                                <li>JSON output will contain the duplicated items with identical requirement ID for looping.</li>
+                            </ul>
+                        </div>
+
+                        <!-- §10 Magic Wand -->
+                        <div class="sec" id="s-wand" data-outline="10 · AI: Magic Wand">
+                            <div class="sec__head">
+                                <span class="sec__num">10</span>
+                                <h2>AI assistance: Magic Wand</h2>
+                            </div>
+
+                            <h3><span class="h3num">10.1</span>Purpose</h3>
+                            <p>
+                                Hybrid workflow: offline capture on site, then AI drafts or improves narrative content after
+                                connectivity returns.
+                            </p>
+
+                            <h3><span class="h3num">10.2</span>Modes</h3>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Mode</th>
+                                            <th>Requirement</th>
+                                            <th>Current implementation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Item-level</td>
+                                            <td>Run Magic Wand for one finding or form item</td>
+                                            <td><code>POST /form-fields/requirement</code> — may modify existing values</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Batch</td>
+                                            <td>Run across multiple items in parallel</td>
+                                            <td>
+                                                <code>POST /form-fields/requirement/batch</code> — may modify existing values;
+                                                skips rows without journal notes; max 100 requirements per AI API call, but
+                                                backend splits into batches (e.g. 300 items → 3 AI calls). Assume no limits from
+                                                the user's perspective.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Manual + AI</td>
+                                            <td>Manual entry before or after AI</td>
+                                            <td><span class="pill pill--ok">Supported</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>
+                                <strong>Eligible fields:</strong> short text, long text, number, date, yes/no, multiple-choice.
+                                Currently <em>excludes</em> image and signature.
+                            </p>
+
+                            <h3><span class="h3num">10.3</span>User journey</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>Inspector captures onsite notes (voice/text) in journal per item.</li>
+                                <li>After connectivity returns, runs Magic Wand on current item or all forms.</li>
+                                <li>Batch skips requirements without notes.</li>
+                                <li>Inspector reviews filled fields; no AI attribution badges in UI today (will add later).</li>
+                            </ol>
+
+                            <h3><span class="h3num">10.4</span>Conflict handling</h3>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Field type</th>
+                                            <th>Target behavior</th>
+                                            <th>Current state</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Discrete fields</td>
+                                            <td>
+                                                Manual values persist unless conflict detected; surface indicator; preserve manual
+                                                value pending review
+                                            </td>
+                                            <td>
+                                                Batch: intent not to overwrite manual entries. Item-level: may overwrite.
+                                                <strong>Conflict indicator UI to be added.</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Long narrative</td>
+                                            <td>AI may rewrite or add; not every difference is a hard conflict</td>
+                                            <td><span class="pill pill--warn">Partial</span> — no attribution or undo</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">All fields</td>
+                                            <td>Review and edit before publication</td>
+                                            <td><span class="pill pill--ok">Supported</span> via form editing</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3><span class="h3num">10.5</span>Offline behavior</h3>
+                            <ul>
+                                <li>Magic Wand disabled offline (network required).</li>
+                                <li>Manual structured entry remains available offline.</li>
+                                <li>
+                                    Today: cannot start a new inspection and load a checklist while offline. (Future: may allow
+                                    previously loaded checklists to be opened offline.)
+                                </li>
+                            </ul>
+
+                            <h3><span class="h3num">10.6</span>Performance</h3>
+                            <p>
+                                Validate with larger volumes of findings and real inspection data. Current performance acceptable
+                                in the demonstrated flow.
+                            </p>
+                        </div>
+
+                        <!-- §11 Ask AI -->
+                        <div class="sec" id="s-askai" data-outline="11 · Knowledge Agent (Ask AI)">
+                            <div class="sec__head">
+                                <span class="sec__num">11</span>
+                                <h2>Knowledge Agent (Ask AI)</h2>
+                            </div>
+
+                            <h3><span class="h3num">11.1</span>Purpose</h3>
+                            <p>
+                                Retrieve relevant information from linked documents (e.g. technical reports) and insert into the
+                                inspection. Example: identify and state the most relevant clause or condition in concise language.
+                            </p>
+
+                            <h3><span class="h3num">11.2</span>User flow</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>Inspector completes initial observations and manual responses (in journal notes).</li>
+                                <li>Inspector opens <strong>Ask AI</strong> (host-only; disabled offline).</li>
+                                <li>Inspector selects knowledge agent tied to document set.</li>
+                                <li>
+                                    Knowledge Agent returns a <strong>compiled answer</strong> with
+                                    <strong>source document links</strong> (not full doc excerpts).
+                                </li>
+                                <li>
+                                    Inspector <strong>Insert</strong> or <strong>Copy</strong> — operates on compiled answer,
+                                    inserted into <strong>inspector notes</strong> (not form fields directly).
+                                </li>
+                                <li>
+                                    <strong>Ask follow up</strong> opens nested sheet; session persists until Back to agent
+                                    picker; <strong>Fold</strong> returns to notes without losing state.
+                                </li>
+                                <li>Inspector may rerun Magic Wand to incorporate inserted reference into narrative fields.</li>
+                            </ol>
+                            <p>
+                                Non-mock walks use richer Ask AI with doc filters, voice input, chat history, and
+                                preview-before-insert dialog.
+                            </p>
+
+                            <h3><span class="h3num">11.3</span>Requirements</h3>
+                            <ul>
+                                <li>Display compiled response and referenced source documents (links only).</li>
+                                <li>Allow insert into inspection (notes today; direct field insert = future enhancement).</li>
+                                <li>Preserve original observation when refilling with added context.</li>
+                                <li>
+                                    During re-run of Magic Wand — apply conflict logic when added information contradicts
+                                    structured answers (target; UI not built).
+                                </li>
+                            </ul>
+
+                            <h3><span class="h3num">11.4</span>Session persistence</h3>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>Behavior</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Fold / dismiss Ask AI</td>
+                                            <td>Preserves answer and follow-up trail</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Back to agent selection</td>
+                                            <td>Clears session</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Reopen Ask AI</td>
+                                            <td>
+                                                Restores prior answer or follow-up sheet state (if “Back to agent selection” was
+                                                not triggered)
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3><span class="h3num">11.5</span>Constraints</h3>
+                            <ul>
+                                <li>Image recognition not supported.</li>
+                                <li>Performance slower than Magic Wand; optimization needed.</li>
+                            </ul>
+                        </div>
+
+                        <!-- §12 Review, preview, report generation -->
+                        <div class="sec" id="s-review" data-outline="12 · Review, preview & report">
+                            <div class="sec__head">
+                                <span class="sec__num">12</span>
+                                <h2>Review, preview, and report generation</h2>
+                            </div>
+
+                            <h3><span class="h3num">12.1</span>Pre-publication review</h3>
+                            <p>
+                                Before publishing, inspectors must review and manually change entered or AI-generated responses
+                                via form and notes editing.
+                            </p>
+                            <div class="tc-grid">
+                                <div class="tc-box">
+                                    <h4>Publish to workspace path</h4>
+                                    <p>
+                                        Walk Summary reviews items with requirement and form values, assignee, status, location,
+                                        tags before WIS publish.
+                                    </p>
+                                </div>
+                                <div class="tc-box">
+                                    <h4>Export path</h4>
+                                    <p>
+                                        Generates report immediately after template selection; no rendered pre-export gate today.
+                                        (Aim to add a preview step with in-app doc editor, but not in this release.)
+                                    </p>
+                                </div>
+                            </div>
+
+                            <h3><span class="h3num">12.2</span>Dual publish paths</h3>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Path</th>
+                                            <th>Purpose</th>
+                                            <th>Result</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">
+                                                Export as document
+                                                <span class="pill pill--neutral" style="margin-top: 4px">default</span>
+                                            </td>
+                                            <td>Generate Word/PDF/Excel report file</td>
+                                            <td>Post-export preview opens</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Publish to project workspace</td>
+                                            <td>Create/track WIS items in project</td>
+                                            <td>Walk summary assign/publish flow</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="callout is-open">
+                                <span class="co-label">Open decision</span>Does <strong>Completed</strong> require file export,
+                                workspace publish, or either? <strong>To be clarified.</strong>
+                            </div>
+
+                            <h3><span class="h3num">12.3</span>Report template selection</h3>
+                            <ul>
+                                <li>Chosen at <strong>export/publish time</strong>, not at inspection create.</li>
+                                <li>Team Carbone templates filtered by checklist ID.</li>
+                                <li>Default templates (PDF/Excel/Word) from backend when no custom template.</li>
+                                <li>
+                                    Checklist can be linked to multiple template IDs; user can override report template for the
+                                    same record (e.g. one for external distribution, one for internal circulation).
+                                </li>
+                                <li>Export regenerates walk summary first to freeze latest form answers.</li>
+                                <li>
+                                    <span class="pill pill--gap">Gap</span> selected template not persisted on inspection metadata
+                                    after export. (Not sure if this linkage is needed yet.)
+                                </li>
+                            </ul>
+
+                            <h3><span class="h3num">12.4</span>Default report templates</h3>
+                            <p>
+                                Required formats when no custom template: <strong>Word, PDF, Excel</strong>. Default templates
+                                should be redesigned to reflect checklist content and polished output (backend/design scope).
+                            </p>
+
+                            <h3><span class="h3num">12.5</span>Mobile report preview</h3>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Capability</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Preview <strong>after</strong> export (PDF/Word/Excel)</td>
+                                            <td><span class="pill pill--ok">Implemented</span> — download, share, re-open</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Preview <strong>before</strong> committing export/send</td>
+                                            <td>
+                                                <span class="pill pill--gap">Not implemented</span> — gap currently filled by
+                                                preview / edit of the forms
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>
+                                Before export or sending, the inspector must be able to verify: responses, project information,
+                                preset fields, formatting, signatures. Target = pre-export rendered preview.
+                            </p>
+                        </div>
+
+                        <!-- §13 Publishing -->
+                        <div class="sec" id="s-publish" data-outline="13 · Publishing & distribution">
+                            <div class="sec__head">
+                                <span class="sec__num">13</span>
+                                <h2>Publishing, reports, and distribution</h2>
+                            </div>
+
+                            <h3><span class="h3num">13.1</span>Publish</h3>
+                            <p>
+                                Publishing a report changes inspection status to <strong>Completed</strong> (see open decision on
+                                canonical definition).
+                            </p>
+
+                            <h3><span class="h3num">13.2</span>Post-publication access</h3>
+                            <ul>
+                                <li>Download report locally.</li>
+                                <li>Send report out.</li>
+                                <li>Find latest export from relevant project.</li>
+                                <li>Re-download reports later.</li>
+                            </ul>
+                            <p style="font-weight: 600; color: var(--ink)">Journeys today</p>
+                            <ul>
+                                <li>
+                                    <strong>Project → Reports tab:</strong> export files grouped by <strong>inspection</strong>,
+                                    not template.
+                                </li>
+                                <li>Preview action bars: open, download, share.</li>
+                            </ul>
+
+                            <h3><span class="h3num">13.3</span>Report organization</h3>
+                            <div class="tc-grid">
+                                <div class="tc-box is-current">
+                                    <h4>Current</h4>
+                                    <p>Organize by template; multiple exported versions under each template.</p>
+                                </div>
+                                <div class="tc-box is-target">
+                                    <h4>Target</h4>
+                                    <p>Grouped by template first, then inspections; add keyword search bar.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- §14 Sign-off -->
+                        <div class="sec" id="s-signoff" data-outline="14 · Sign-off">
+                            <div class="sec__head">
+                                <span class="sec__num">14</span>
+                                <h2>Sign-off</h2>
+                            </div>
+
+                            <h3><span class="h3num">14.1</span>Signature capture</h3>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Requirement</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Signature widget on any form item</td>
+                                            <td><span class="pill pill--ok">Implemented</span> (SVG pad → JPG upload)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Save signature</td>
+                                            <td><span class="pill pill--ok">Implemented</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Discard and redraw</td>
+                                            <td><span class="pill pill--ok">Implemented</span> (replace/remove)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">
+                                                Signer name &amp; date auto-generated from <code>export_info</code> JSON
+                                            </td>
+                                            <td>
+                                                <span class="pill pill--gap">Not clearly implemented</span> — specify: separate
+                                                fields, system captions, or report-template logic
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Repeated placement across pages/items</td>
+                                            <td>Via multiple <code>signature</code> fields in checklist design</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3><span class="h3num">14.2</span>Offline</h3>
+                            <div class="callout is-open">
+                                <span class="co-label">Open decision</span>Signature capture can draw offline but
+                                <strong>upload fails without network</strong>. Define target: queue vs block.
+                            </div>
+                        </div>
+
+                        <!-- §15 Mobile & desktop -->
+                        <div class="sec" id="s-platforms" data-outline="15 · Mobile & desktop flow">
+                            <div class="sec__head">
+                                <span class="sec__num">15</span>
+                                <h2>Mobile and desktop inspection usage flow</h2>
+                            </div>
+
+                            <h3><span class="h3num">15.1</span>Mobile (primary onsite)</h3>
+                            <p>Tabs: <strong>Inspections · Projects · Documents · Notifications · More</strong></p>
+                            <p>
+                                Supports: start inspections, offline manual entry, photos, AI when connected, review, sign-off,
+                                publication, report access.
+                            </p>
+
+                            <h3><span class="h3num">15.2</span>Desktop</h3>
+                            <p>
+                                Supports inspection and report workflow: view inspections, open directly, Magic Wand, publish,
+                                project repository. Aim to mirror the mobile workflow 100% plus a few more features. UI functional
+                                but not optimized.
+                            </p>
+
+                            <h3><span class="h3num">15.3</span>Team and manager visibility</h3>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>View</th>
+                                            <th>Target</th>
+                                            <th>Mobile today</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">My Inspections</td>
+                                            <td>Logged-in user's inspections (in progress, completed, scheduled)</td>
+                                            <td><span class="pill pill--ok">Inspections tab</span> ≈ user walks</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Project team inspections</td>
+                                            <td>
+                                                Team inspections (only published) for a project; user sees all of their own
+                                                (scheduled, in progress, completed), but only completed inspections of others;
+                                                logic may need refining
+                                            </td>
+                                            <td>
+                                                <span class="pill pill--gap">Not implemented</span> — Project tab shows workspace
+                                                items + reports, not project team inspections; can add later
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Manager workload</td>
+                                            <td>To be discussed</td>
+                                            <td><span class="pill pill--gap">Not implemented</span> on mobile</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- §16 Multi-inspector -->
+                        <div class="sec" id="s-multi" data-outline="16 · Multi-inspector collaboration">
+                            <div class="sec__head">
+                                <span class="sec__num">16</span>
+                                <h2>Multi-inspector collaboration</h2>
+                            </div>
+                            <p>
+                                <strong>Direction:</strong> Multiple inspectors on same inspection; visibility into who
+                                contributed to each requirement.
+                            </p>
+                            <div class="tc-grid">
+                                <div class="tc-box is-current">
+                                    <h4>Current (unvalidated)</h4>
+                                    <p>Single inspector workflow only; no invitation for other inspectors allowed.</p>
+                                </div>
+                                <div class="tc-box is-target">
+                                    <h4>Target (unvalidated) — not this release</h4>
+                                    <p>
+                                        Invitation button for host to invite others; each inspector can contribute to every form
+                                        field, while offline; on sync, form values show author, time/date, and value; a different
+                                        UI design will be needed.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- §17 End-to-end narrative -->
+                        <div class="sec" id="s-e2e" data-outline="17 · End-to-end onsite day">
+                            <div class="sec__head">
+                                <span class="sec__num">17</span>
+                                <h2>
+                                    End-to-end onsite day
+                                    <span style="font-weight: 400; color: var(--ink-3); font-size: 14px"
+                                        >(reference narrative)</span
+                                    >
+                                </h2>
+                            </div>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch; line-height: 1.7">
+                                <li>Start inspection on phone → pick project + checklist.</li>
+                                <li>Walk site requirement-by-requirement; enter yes/no and photos offline.</li>
+                                <li>Dictate/type notes per item.</li>
+                                <li>Duplicate item when same checklist section / requirement applies again downstream.</li>
+                                <li>Regain signal → batch Magic Wand fills narrative fields from notes.</li>
+                                <li>Open Ask AI on tricky clause → insert compiled answer into notes → rerun wand on item.</li>
+                                <li>Complete signature section(s).</li>
+                                <li>Publish → choose export template → review generated file → share/download.</li>
+                                <li>Optionally track selected findings to project workspace.</li>
+                                <li>Manager finds report under Project → Reports; inspector sees inspection marked Completed.</li>
+                            </ol>
+                        </div>
+
+                        <!-- Appendix -->
+                        <div class="sec" id="s-appendix" data-outline="Appendix · Codebase references">
+                            <div class="sec__head">
+                                <span class="sec__num">A</span>
+                                <h2>Appendix: Key codebase references</h2>
+                            </div>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Area</th>
+                                            <th>Path</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Lifecycle meta</td>
+                                            <td><code>util/inspectionListMeta.ts</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Inspection list</td>
+                                            <td>
+                                                <code>components/Walks/WalkTab.tsx</code>, <code>WalkList.tsx</code>,
+                                                <code>WalkEntry.tsx</code>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Create flow</td>
+                                            <td><code>components/ActionSheets/PreloadChecklistSheet.tsx</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Form fields</td>
+                                            <td><code>components/Screens/ChecklistMock/FormFields.tsx</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Checklist bridge</td>
+                                            <td><code>components/Screens/ChecklistMock/checklistFormBridge.ts</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Duplicate item</td>
+                                            <td><code>components/AddIssueButtonV2.tsx</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Autosave / publish</td>
+                                            <td><code>components/RoomEndV2.tsx</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Magic Wand</td>
+                                            <td>
+                                                <code>components/AutoFillFormButton.tsx</code>,
+                                                <code>util/formFieldComplete.ts</code>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Ask AI</td>
+                                            <td>
+                                                <code>components/ActionSheets/MockAskAISheet.tsx</code>,
+                                                <code>AskAISheet.tsx</code>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Publish options</td>
+                                            <td><code>components/ActionSheets/PublishWalkOptionsSheet.tsx</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Template picker</td>
+                                            <td><code>components/ActionSheets/SelectExportTypeSheet.tsx</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Walk summary</td>
+                                            <td><code>components/Screens/WalkSummary/WalkSummary.tsx</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Reports library</td>
+                                            <td><code>components/WIS/ProjectReportsDashboard.tsx</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Preview</td>
+                                            <td>
+                                                <code>app/(modals)/pdf-report-preview.tsx</code>,
+                                                <code>webview-word-preview.tsx</code>, <code>webview-excel-preview.tsx</code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <footer>
+                            Inspection App — Usage Phase PRD · v2.0 · Refined against the
+                            <code>wb-billie-mobile</code> implementation.
+                        </footer>
+                    </section>
+
+                    <!-- ================= TAB 2: TEST CASES ================= -->
+                    <section class="panel" id="panel-tests" role="tabpanel">
+                        <p class="lead" style="margin-bottom: 6px">
+                            Test cases reflect <em>expected behavior for this release</em>, grounded in the PRD and current mobile
+                            implementation. Where behavior is deferred or partial, the case is tagged.
+                        </p>
+                        <p style="color: var(--ink-3); font-size: 13px; margin: 0 0 4px">
+                            Format: ID · Priority · Preconditions · Steps · Expected result. Tap any case to expand.
+                        </p>
+
+                        <div class="tc-toolbar">
+                            <div class="filter-grp" id="prioFilter">
+                                <button class="filter-btn is-on" data-p="all">All</button>
+                                <button class="filter-btn" data-p="P0">P0</button>
+                                <button class="filter-btn" data-p="P1">P1</button>
+                                <button class="filter-btn" data-p="P2">P2</button>
+                            </div>
+                            <div class="filter-grp" id="tagFilter">
+                                <button class="filter-btn is-on" data-t="all">All status</button>
+                                <button class="filter-btn" data-t="release">This release</button>
+                                <button class="filter-btn" data-t="Partial">Partial</button>
+                                <button class="filter-btn" data-t="Future">Future</button>
+                                <button class="filter-btn" data-t="Open">Open</button>
+                            </div>
+                            <label class="search">
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                >
+                                    <circle cx="11" cy="11" r="7" />
+                                    <path d="M21 21l-4-4" />
+                                </svg>
+                                <input
+                                    type="search"
+                                    id="tcSearch"
+                                    placeholder="Search test cases…"
+                                    aria-label="Search test cases"
+                                />
+                            </label>
+                            <span class="tc-count" id="tcCount"></span>
+                        </div>
+
+                        <div id="tcContainer"></div>
+                    </section>
+
+                    <!-- ================= TAB 3: NOT YET IMPLEMENTED ================= -->
+                    <section class="panel" id="panel-todo" role="tabpanel">
+                        <p class="lead">
+                            Items from the product requirements (§6–17) and product feature requests that are
+                            <em>not yet implemented</em>, remain <em>partial</em>, or are <em>deferred</em>. Done items are
+                            omitted.
+                        </p>
+
+                        <div class="stat-row">
+                            <div class="stat stat--gap">
+                                <div class="stat__n" id="c-notstarted">—</div>
+                                <div class="stat__l">Not started</div>
+                            </div>
+                            <div class="stat stat--warn">
+                                <div class="stat__n" id="c-partial">—</div>
+                                <div class="stat__l">Partial / in progress</div>
+                            </div>
+                            <div class="stat stat--open">
+                                <div class="stat__n" id="c-open">—</div>
+                                <div class="stat__l">Open</div>
+                            </div>
+                            <div class="stat stat--future">
+                                <div class="stat__n" id="c-future">—</div>
+                                <div class="stat__l">Not this release</div>
+                            </div>
+                        </div>
+
+                        <div class="tbl-wrap" id="todoTblWrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40px">#</th>
+                                        <th>Item</th>
+                                        <th style="width: 150px">Status</th>
+                                        <th>Notes / reference</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="todoBody"></tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- ================= TAB 4: OPEN DECISIONS ================= -->
+                    <section class="panel" id="panel-open" role="tabpanel">
+                        <p class="lead">
+                            Open decisions log — the questions still in play, their current direction, the options still open, and
+                            what each one touches.
+                        </p>
+                        <div class="tbl-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40px">#</th>
+                                        <th>Decision</th>
+                                        <th>Current direction</th>
+                                        <th>Options still open</th>
+                                        <th>Impact</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="openBody"></tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            /* ---------------- Theme toggle ---------------- */
+            ;(function () {
+                var root = document.documentElement,
+                    btn = document.getElementById("themeBtn"),
+                    icon = document.getElementById("themeIcon")
+                var sun =
+                    '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'
+                var moon = '<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>'
+                function apply(t) {
+                    root.setAttribute("data-theme", t)
+                    icon.innerHTML = t === "dark" ? sun : moon
+                }
+                var saved
+                try {
+                    saved = localStorage.getItem("prd-theme")
+                } catch (e) {}
+                if (saved) {
+                    apply(saved)
+                } else {
+                    icon.innerHTML = window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches ? sun : moon
+                }
+                btn.addEventListener("click", function () {
+                    var cur = root.getAttribute("data-theme")
+                    var next = cur
+                        ? cur === "dark"
+                            ? "light"
+                            : "dark"
+                        : window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches
+                          ? "light"
+                          : "dark"
+                    apply(next)
+                    try {
+                        localStorage.setItem("prd-theme", next)
+                    } catch (e) {}
+                })
+            })()
+
+            /* ---------------- Tabs ---------------- */
+            ;(function () {
+                var tabs = document.querySelectorAll(".tab"),
+                    panels = document.querySelectorAll(".panel")
+                function show(id) {
+                    tabs.forEach(function (t) {
+                        t.classList.toggle("is-active", t.dataset.tab === id)
+                    })
+                    panels.forEach(function (p) {
+                        p.classList.toggle("is-active", p.id === "panel-" + id)
+                    })
+                    buildOutline(id)
+                    window.scrollTo({ top: 0, behavior: "instant" in document.documentElement.style ? "instant" : "auto" })
+                }
+                tabs.forEach(function (t) {
+                    t.addEventListener("click", function () {
+                        show(t.dataset.tab)
+                    })
+                })
+                window.__showTab = show
+            })()
+
+            /* ---------------- Sidebar outline (per active tab) ---------------- */
+            var outlineLabels = { req: "On This Page", tests: "Test Case Groups", todo: "Status Summary", open: "Decisions" }
+            function buildOutline(tabId) {
+                var ol = document.getElementById("outline"),
+                    lbl = document.getElementById("outlineLabel")
+                ol.innerHTML = ""
+                lbl.textContent = outlineLabels[tabId] || "On This Page"
+                var panel = document.getElementById("panel-" + tabId)
+                var items = []
+                if (tabId === "req") {
+                    panel.querySelectorAll(".sec[data-outline]").forEach(function (s) {
+                        items.push({ id: s.id, text: s.getAttribute("data-outline") })
+                    })
+                } else if (tabId === "tests") {
+                    panel.querySelectorAll(".tc-group[id]").forEach(function (g) {
+                        items.push({ id: g.id, text: g.getAttribute("data-outline") })
+                    })
+                } else {
+                    ol.innerHTML = '<li style="padding:6px 12px;font-size:12.5px;color:var(--ink-3)">Single table view</li>'
+                    return
+                }
+                items.forEach(function (it) {
+                    var li = document.createElement("li"),
+                        a = document.createElement("a")
+                    a.href = "#" + it.id
+                    var parts = it.text.split(" · ")
+                    a.innerHTML = '<span class="o-num">' + parts[0] + "</span>" + (parts[1] || "")
+                    a.addEventListener("click", function (e) {
+                        e.preventDefault()
+                        document.getElementById(it.id).scrollIntoView({ behavior: "smooth", block: "start" })
+                    })
+                    li.appendChild(a)
+                    ol.appendChild(li)
+                })
+                currentOutlineIds = items.map(function (i) {
+                    return i.id
+                })
+            }
+            var currentOutlineIds = []
+
+            /* scroll spy */
+            window.addEventListener(
+                "scroll",
+                function () {
+                    if (!currentOutlineIds.length) return
+                    var best = null,
+                        bestTop = -1e9
+                    currentOutlineIds.forEach(function (id) {
+                        var el = document.getElementById(id)
+                        if (!el) return
+                        var top = el.getBoundingClientRect().top - 160
+                        if (top <= 0 && top > bestTop) {
+                            bestTop = top
+                            best = id
+                        }
+                    })
+                    document.querySelectorAll(".outline a").forEach(function (a) {
+                        a.classList.toggle("is-current", best != null && a.getAttribute("href") === "#" + best)
+                    })
+                },
+                { passive: true },
+            )
+        </script>
+
+        <script>
+            /* ================= TEST CASE DATA (§18) ================= */
+            var TC_GROUPS = [
+                { id: "g-lc", num: "18.1", title: "Inspection lifecycle and list" },
+                { id: "g-fm", num: "18.2", title: "Form capture and offline sync" },
+                { id: "g-fn", num: "18.3", title: "Findings, duplicate, and sign-off placement" },
+                { id: "g-mw", num: "18.4", title: "Magic Wand" },
+                { id: "g-ai", num: "18.5", title: "Knowledge Agent (Ask AI)" },
+                { id: "g-pb", num: "18.6", title: "Publish, export, and reports" },
+                { id: "g-so", num: "18.7", title: "Sign-off and signatures" },
+                { id: "g-vs", num: "18.8", title: "Visibility and collaboration (deferred)" },
+                { id: "g-e2e", num: "18.9", title: "End-to-end smoke (reference narrative)" },
+            ]
+            var TC = [
+                /* 18.1 */
+                {
+                    g: "g-lc",
+                    id: "TC-LC-001",
+                    p: "P0",
+                    cat: "release",
+                    name: "Create inspection without office scheduling",
+                    pre: "User is host; device online; project with adopted team checklist exists.",
+                    steps: ["Open Inspections tab → tap (+).", "Select project → select team checklist."],
+                    exp: "Inspection opens with one carousel item per checklist requirement; lifecycle In Progress; checklist name shown on inspection card.",
+                },
+                {
+                    g: "g-lc",
+                    id: "TC-LC-002",
+                    p: "P0",
+                    cat: "release",
+                    name: "Inspection list lifecycle filters",
+                    pre: "User has inspections in mixed states.",
+                    steps: ["Open Inspections tab.", "Tap Scheduled, In progress, and Completed filter chips in turn."],
+                    exp: "List shows only inspections matching each filter; chip selection is visually distinct.",
+                },
+                {
+                    g: "g-lc",
+                    id: "TC-LC-003",
+                    p: "P0",
+                    cat: "release",
+                    name: "In Progress after data entry",
+                    pre: "New inspection with checklist open.",
+                    steps: ["Enter a form answer or inspector note on any item."],
+                    exp: "Inspection remains or becomes In Progress on list after refresh/reopen.",
+                },
+                {
+                    g: "g-lc",
+                    id: "TC-LC-004",
+                    p: "P1",
+                    cat: "release",
+                    name: "Swipe archive toggles lifecycle",
+                    pre: "Inspection in In Progress.",
+                    steps: ["On Inspections list, swipe archive on inspection card."],
+                    exp: "Lifecycle updates optimistically (e.g. toward Completed/archived per current client rules).",
+                },
+                {
+                    g: "g-lc",
+                    id: "TC-LC-005",
+                    p: "P2",
+                    cat: "Future",
+                    tags: ["Future"],
+                    name: "Report status on list card",
+                    pre: "Inspection with exported report or workspace publish.",
+                    steps: ["Open Inspections list."],
+                    exp: "Card shows report status (Not published / Pending / Published) in addition to lifecycle.",
+                    cur: "Status is computed but not displayed — case documents target behavior.",
+                },
+                {
+                    g: "g-lc",
+                    id: "TC-LC-006",
+                    p: "P0",
+                    cat: "release",
+                    name: "Cannot create inspection fully offline",
+                    pre: "Device offline; no in-progress inspection open.",
+                    steps: ["Attempt to create new inspection via Inspections (+)."],
+                    exp: "User cannot complete project + checklist selection flow; must wait for connectivity to load checklist (this release).",
+                },
+                /* 18.2 */
+                {
+                    g: "g-fm",
+                    id: "TC-FM-001",
+                    p: "P0",
+                    cat: "release",
+                    name: "Manual structured entry offline (open inspection)",
+                    pre: "Inspection already open; device goes offline mid-capture.",
+                    steps: [
+                        "Set yes/no, multiple-choice, short text, and long text on current item.",
+                        "Navigate to another item and enter values.",
+                    ],
+                    exp: "Values persist locally in UI; no data loss while offline.",
+                },
+                {
+                    g: "g-fm",
+                    id: "TC-FM-002",
+                    p: "P0",
+                    cat: "release",
+                    name: "Form autosave when online",
+                    pre: "Inspection open; device online.",
+                    steps: [
+                        "Edit a form field.",
+                        "Wait ≥1 second without further edits.",
+                        "Reopen inspection on same or second device (same user).",
+                    ],
+                    exp: "Answers sync to server via debounced autosave; visible after reload.",
+                },
+                {
+                    g: "g-fm",
+                    id: "TC-FM-003",
+                    p: "P0",
+                    cat: "release",
+                    name: "Reconnect batch sync",
+                    pre: "Offline edits made on open inspection; device reconnects.",
+                    steps: ["Restore network connectivity.", "Remain on inspection or background/foreground app."],
+                    exp: "Pending issue updates flush; local answers reach server.",
+                },
+                {
+                    g: "g-fm",
+                    id: "TC-FM-004",
+                    p: "P0",
+                    cat: "release",
+                    name: "Core field types render and save",
+                    pre: "Checklist includes short text, long text, yes/no, single MC, dropdown, date, number, photo, signature.",
+                    steps: ["Complete each field type on one item.", "Save/persist (online)."],
+                    exp: "Each type renders correctly; values stored in formAnswers[walkId][issueId][fieldId] and appear after reopen.",
+                },
+                {
+                    g: "g-fm",
+                    id: "TC-FM-005",
+                    p: "P1",
+                    cat: "release",
+                    name: "Photo and signature require network to finalize",
+                    pre: "Inspection open.",
+                    steps: ["Capture photo field while offline → attempt save.", "Draw signature while offline → attempt save."],
+                    exp: "Upload/finalization fails or remains pending without network; user can retry when online.",
+                },
+                {
+                    g: "g-fm",
+                    id: "TC-FM-006",
+                    p: "P1",
+                    cat: "Partial",
+                    tags: ["Partial — current build"],
+                    name: "Multi-select checkbox fields",
+                    pre: "Checklist field type checkboxes from backend.",
+                    steps: ["Open form item with checkbox group.", "Attempt to select multiple options."],
+                    exp: "Target: multiple selections saved.",
+                    cur: "Renders as single-select only.",
+                },
+                {
+                    g: "g-fm",
+                    id: "TC-FM-007",
+                    p: "P2",
+                    cat: "Future",
+                    tags: ["Future"],
+                    name: "Time field with picker",
+                    pre: "Checklist includes time field.",
+                    steps: ["Open time field."],
+                    exp: "Target: native/time picker UI; value stored in correct format.",
+                    cur: "Free-text short text field.",
+                },
+                /* 18.3 */
+                {
+                    g: "g-fn",
+                    id: "TC-FN-001",
+                    p: "P0",
+                    cat: "release",
+                    name: "Duplicate item inserts after current",
+                    pre: "Inspection with ≥3 items; user focused on middle item.",
+                    steps: ["Tap duplicate current item (+ menu / duplicate action).", "Observe carousel order."],
+                    exp: "New item appears immediately after focused item; later items shift; sign-off section (if not duplicated) remains last.",
+                },
+                {
+                    g: "g-fn",
+                    id: "TC-FN-002",
+                    p: "P0",
+                    cat: "release",
+                    name: "Duplicate copies structure only",
+                    pre: "Source item has form values and inspector notes.",
+                    steps: ["Duplicate current item.", "Open duplicated item."],
+                    exp: "Same requirement structure and same requirement ID in export JSON; form fields empty; inspector notes empty.",
+                },
+                {
+                    g: "g-fn",
+                    id: "TC-FN-003",
+                    p: "P1",
+                    cat: "release",
+                    name: "Add blank item",
+                    pre: "Inspection open.",
+                    steps: ["Add blank item from + menu.", "Inspect item and export JSON."],
+                    exp: "New issue with no requirements; available for free-form notes; appears in JSON content[] as blank capture.",
+                },
+                {
+                    g: "g-fn",
+                    id: "TC-FN-004",
+                    p: "P1",
+                    cat: "release",
+                    name: "Duplicate sign-off section",
+                    pre: "Final carousel item is sign-off section with signature fields.",
+                    steps: ["Focus sign-off item → duplicate."],
+                    exp: "Duplicated sign-off item inserted immediately after original; both contain signature field structure; export JSON includes duplicate requirement IDs for looping.",
+                },
+                {
+                    g: "g-fn",
+                    id: "TC-FN-005",
+                    p: "P0",
+                    cat: "release",
+                    name: "Findings are form fields on items",
+                    pre: "Food-safety or equivalent checklist (Compliant?, Evidence, Action, Photo).",
+                    steps: ["Complete finding fields on one requirement item.", "Export or inspect summary JSON."],
+                    exp: "Finding data lives on issue form fields, not a separate Finding entity.",
+                },
+                /* 18.4 */
+                {
+                    g: "g-mw",
+                    id: "TC-MW-001",
+                    p: "P0",
+                    cat: "release",
+                    name: "Item-level Magic Wand",
+                    pre: "Online; host; current item has inspector notes; eligible empty/partial form fields.",
+                    steps: ["Focus item with notes.", "Run Magic Wand (item scope)."],
+                    exp: "API POST /form-fields/requirement called; eligible text/MC/date/number/yes-no fields updated from notes + field instructions; image/signature not filled.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-002",
+                    p: "P0",
+                    cat: "release",
+                    name: "Batch Magic Wand parallel fill",
+                    pre: "Online; multiple items with notes across inspection.",
+                    steps: ["Run Magic Wand (all forms / batch scope)."],
+                    exp: "Batch API invoked; items with notes processed; large inspections split server-side (e.g. 300 items → multiple batches) without user-visible limit errors.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-003",
+                    p: "P1",
+                    cat: "release",
+                    name: "Batch skips items without notes",
+                    pre: "Mix of items with and without journal notes.",
+                    steps: ["Run batch Magic Wand."],
+                    exp: "Items without notes skipped; no erroneous fill. Target: UI surfaces count of skipped items.",
+                    cur: "Skips silently.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-004",
+                    p: "P0",
+                    cat: "release",
+                    name: "Magic Wand disabled offline",
+                    pre: "Device offline; inspection open.",
+                    steps: ["Attempt Magic Wand (item or batch)."],
+                    exp: "Action blocked or fails with connectivity message; manual fields still editable.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-005",
+                    p: "P0",
+                    cat: "release",
+                    name: "Manual edit after Magic Wand",
+                    pre: "Magic Wand filled narrative field.",
+                    steps: ["Open filled long-text field.", "Edit text manually before publish."],
+                    exp: "User can review and change AI-generated content; edited value persists and exports.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-006",
+                    p: "P1",
+                    cat: "Future",
+                    tags: ["Future"],
+                    name: "Discrete field conflict indicator",
+                    pre: "Manual yes/no or MC value set; Magic Wand returns conflicting value.",
+                    steps: ["Run item-level Magic Wand."],
+                    exp: "Manual value preserved; conflict indicator shown; user resolves before publish.",
+                    cur: "No conflict UI.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-007",
+                    p: "P0",
+                    cat: "release",
+                    name: "Ask AI context consumed by Magic Wand",
+                    pre: "Ask AI answer inserted into inspector notes on an item.",
+                    steps: ["Run Magic Wand on that item."],
+                    exp: "Narrative fields incorporate inserted reference text from notes.",
+                },
+                /* 18.5 */
+                {
+                    g: "g-ai",
+                    id: "TC-AI-001",
+                    p: "P0",
+                    cat: "release",
+                    name: "Ask AI requires network and host",
+                    pre: "Form inspection walk; user is host.",
+                    steps: ["Offline: tap Ask AI → expect blocked.", "Online: tap Ask AI → sheet opens."],
+                    exp: "Disabled offline; enabled online for host on mock/form inspections (and knowledge-agent-enabled teams on production walks).",
+                },
+                {
+                    g: "g-ai",
+                    id: "TC-AI-002",
+                    p: "P0",
+                    cat: "release",
+                    name: "Compiled answer with source links only",
+                    pre: "Online; observation text in current item notes; knowledge agent with linked docs.",
+                    steps: ["Open Ask AI → select agent → wait for results."],
+                    exp: "Compiled answer shown at top; Sources list shows document name + page links only (no full doc excerpt bodies); Insert / Copy / Ask follow up under answer.",
+                },
+                {
+                    g: "g-ai",
+                    id: "TC-AI-003",
+                    p: "P0",
+                    cat: "release",
+                    name: "Insert inserts compiled answer into notes",
+                    pre: "Ask AI results visible.",
+                    steps: ["Tap Insert."],
+                    exp: "Compiled answer text appended to inspector notes; toast “Inserted in inspector notes”; user stays on inspection page (no navigation away).",
+                },
+                {
+                    g: "g-ai",
+                    id: "TC-AI-004",
+                    p: "P1",
+                    cat: "release",
+                    name: "Copy copies compiled answer only",
+                    pre: "Ask AI results visible.",
+                    steps: ["Tap Copy."],
+                    exp: "Clipboard receives compiled answer text only, not source doc excerpt text.",
+                },
+                {
+                    g: "g-ai",
+                    id: "TC-AI-005",
+                    p: "P0",
+                    cat: "release",
+                    name: "Ask follow up sheet",
+                    pre: "Initial Ask AI answer displayed.",
+                    steps: ["Tap Ask follow up.", "Enter follow-up question → send.", "Tap back on follow-up sheet (not Fold)."],
+                    exp: "Nested sheet opens with seed answer + chat trail; follow-up refines against same agent/document set; returning to main Ask AI updates summary if assistant reply changed.",
+                },
+                {
+                    g: "g-ai",
+                    id: "TC-AI-006",
+                    p: "P0",
+                    cat: "release",
+                    name: "Fold preserves Ask AI session",
+                    pre: "Ask AI results or follow-up sheet open.",
+                    steps: ["Tap Fold.", "Reopen Ask AI on same inspection."],
+                    exp: "Prior answer restored; follow-up sheet reopens if that was last state; chat trail preserved.",
+                },
+                {
+                    g: "g-ai",
+                    id: "TC-AI-007",
+                    p: "P0",
+                    cat: "release",
+                    name: "Back to agent selection clears session",
+                    pre: "Ask AI results with follow-up trail.",
+                    steps: ["From results, navigate back to agent picker (back on main Ask AI header)."],
+                    exp: "Session cleared; reopening Ask AI shows agent picker, not prior answer.",
+                },
+                {
+                    g: "g-ai",
+                    id: "TC-AI-008",
+                    p: "P1",
+                    cat: "release",
+                    name: "Source link opens document viewer",
+                    pre: "Ask AI results with source links (file_url present).",
+                    steps: ["Tap a source link."],
+                    exp: "Document page viewer opens at referenced page; closing returns to Ask AI.",
+                },
+                {
+                    g: "g-ai",
+                    id: "TC-AI-009",
+                    p: "P2",
+                    cat: "Future",
+                    tags: ["Future"],
+                    name: "Insert into form field directly",
+                    pre: "Ask AI answer available.",
+                    steps: ["Attempt one-tap insert into specific form field (e.g. Evidence)."],
+                    exp: "Answer lands in targeted field.",
+                    cur: "Insert goes to notes only.",
+                },
+                /* 18.6 */
+                {
+                    g: "g-pb",
+                    id: "TC-PB-001",
+                    p: "P0",
+                    cat: "release",
+                    name: "Publish options sheet",
+                    pre: "Inspection with captured data; online.",
+                    steps: ["Tap Publish on inspection."],
+                    exp: "PublishWalkOptionsSheet shows Export as document (default) and Publish to project workspace.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-002",
+                    p: "P0",
+                    cat: "release",
+                    name: "Export report flow",
+                    pre: "Project linked; export templates exist for checklist.",
+                    steps: [
+                        "Publish → Export as document.",
+                        "Select team Carbone or default PDF/Word/Excel template → continue.",
+                    ],
+                    exp: "Walk summary regenerated first; export API runs; post-export preview opens (PDF / Word / Excel viewer).",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-003",
+                    p: "P0",
+                    cat: "release",
+                    name: "Template filtered by checklist",
+                    pre: "Project with multiple templates; inspection tied to checklist A.",
+                    steps: ["Open template picker at export."],
+                    exp: "Team Carbone templates filtered to checklist A; default templates (non-Carbone) also listed; user can override template choice.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-004",
+                    p: "P0",
+                    cat: "release",
+                    name: "Publish to workspace flow",
+                    pre: "Inspection with publishable items.",
+                    steps: [
+                        "Publish → Publish to project workspace.",
+                        "Review Walk Summary → assign status/location/tags → publish selected items.",
+                    ],
+                    exp: "WIS items created/updated in project workspace; form values and requirements visible in review.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-005",
+                    p: "P1",
+                    cat: "release",
+                    name: "Post-export download and share",
+                    pre: "Completed export; preview open.",
+                    steps: ["Use download and share actions from preview action bar."],
+                    exp: "File downloads locally; OS share sheet available.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-006",
+                    p: "P0",
+                    cat: "release",
+                    name: "Project Reports access",
+                    pre: "Prior report export for project.",
+                    steps: ["Projects → select project → Reports tab.", "Open a report row."],
+                    exp: "Published exports listed; preview/download/share work from Project Reports.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-007",
+                    p: "P2",
+                    cat: "Future",
+                    tags: ["Future — not this release"],
+                    name: "Pre-export rendered preview",
+                    pre: "Inspection ready to publish.",
+                    steps: ["Choose template → attempt preview before export commit."],
+                    exp: "Rendered report preview with signatures and project metadata.",
+                    cur: "Export generates immediately; user reviews via form edit + post-export preview.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-008",
+                    p: "P1",
+                    cat: "Partial",
+                    tags: ["Partial"],
+                    name: "Project-linked metadata in export JSON",
+                    pre: "Project configured with approval numbers / record metadata at account level.",
+                    steps: ["Complete inspection → export report.", "Inspect export JSON / generated document."],
+                    exp: "Project-linked fields (e.g. approval number, inspection record date) included in export payload.",
+                    cur: "Population timing and form visibility TBD.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-009",
+                    p: "P2",
+                    cat: "Partial",
+                    tags: ["Partial / verify"],
+                    name: "Reports grouped by template with search",
+                    pre: "Multiple exports under same template.",
+                    steps: ["Open Project Reports.", "Use keyword search (when available)."],
+                    exp: "Target: reports grouped template-first, then inspections; search filters results.",
+                    cur: "Verify against ProjectReportsDashboard implementation.",
+                },
+                /* 18.7 */
+                {
+                    g: "g-so",
+                    id: "TC-SO-001",
+                    p: "P0",
+                    cat: "release",
+                    name: "Capture, save, replace signature",
+                    pre: "Online; item with signature field (sign-off section).",
+                    steps: ["Draw signature → save.", "Replace/redraw → save again.", "Remove signature."],
+                    exp: "SVG pad → JPG upload; saved URL stored; replace and remove work.",
+                },
+                {
+                    g: "g-so",
+                    id: "TC-SO-002",
+                    p: "P1",
+                    cat: "release",
+                    name: "Multiple signature fields (repeated sign-off)",
+                    pre: "Checklist with two signature fields (e.g. Inspector 1 / Inspector 2).",
+                    steps: ["Complete both signatures on sign-off item."],
+                    exp: "Each field independent; both appear in export JSON.",
+                },
+                {
+                    g: "g-so",
+                    id: "TC-SO-003",
+                    p: "P2",
+                    cat: "Partial",
+                    tags: ["Partial"],
+                    name: "Signer name and date from export_info",
+                    pre: "Signature saved; export generated.",
+                    steps: ["Export report → verify sign-off block."],
+                    exp: "Target: signer name and date populated from export_info JSON.",
+                    cur: "Not clearly implemented in widget — verify export output.",
+                },
+                {
+                    g: "g-so",
+                    id: "TC-SO-004",
+                    p: "P1",
+                    cat: "Open",
+                    tags: ["Open decision"],
+                    name: "Offline signature draw",
+                    pre: "Device offline.",
+                    steps: ["Draw signature on pad → attempt save."],
+                    exp: "Behavior per product decision — queue for upload on reconnect or block until online.",
+                    cur: "Upload fails without network.",
+                },
+                /* 18.8 */
+                {
+                    g: "g-vs",
+                    id: "TC-VS-001",
+                    p: "P0",
+                    cat: "release",
+                    name: "My Inspections on mobile",
+                    pre: "User with multiple walks.",
+                    steps: ["Open Inspections tab."],
+                    exp: "User’s own inspections listed with lifecycle filters (≈ My Inspections).",
+                },
+                {
+                    g: "g-vs",
+                    id: "TC-VS-002",
+                    p: "P2",
+                    cat: "Future",
+                    tags: ["Future"],
+                    name: "Project team inspections view",
+                    pre: "Multiple team members with inspections on same project.",
+                    steps: ["Open Project → team inspections view."],
+                    exp: "Own inspections (all statuses); others’ inspections (completed only).",
+                    cur: "Not implemented on mobile Project tab.",
+                },
+                {
+                    g: "g-vs",
+                    id: "TC-VS-003",
+                    p: "P2",
+                    cat: "Future",
+                    tags: ["Not this release"],
+                    name: "Multi-inspector invitation and merge",
+                    pre: "Host on shared inspection.",
+                    steps: ["Invite second inspector → both capture offline → sync online."],
+                    exp: "Target: author/timestamp per field; host selects final value for report.",
+                    cur: "Single inspector only; no invitation.",
+                },
+                /* 18.9 */
+                {
+                    g: "g-e2e",
+                    id: "TC-E2E-001",
+                    p: "P0",
+                    cat: "release",
+                    name: "Full onsite day (happy path)",
+                    pre: "Online at create; offline mid-walk; connectivity returns before publish.",
+                    steps: [
+                        "Inspections (+) → project → checklist → open inspection.",
+                        "Walk items: enter yes/no + photos offline; dictate notes per item.",
+                        "Duplicate one requirement item downstream (empty copy).",
+                        "Online: batch Magic Wand → verify narrative fields filled from notes.",
+                        "Ask AI on one item → Insert answer into notes → item Magic Wand again.",
+                        "Complete sign-off signatures (online).",
+                        "Publish → export template → post-export preview → share/download.",
+                        "Optionally: Publish selected items to workspace.",
+                        "Verify report in Project → Reports; inspection shows Completed/archived per lifecycle rules.",
+                    ],
+                    exp: "Full flow completes without data loss; export matches latest form state; AI and manual content coexist in final output.",
+                },
+            ]
+
+            var catPill = { release: "pill--ok", Partial: "pill--warn", Future: "pill--future", Open: "pill--open" }
+            function esc(s) {
+                return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+            }
+
+            function renderTC() {
+                var cont = document.getElementById("tcContainer")
+                var fp = document.querySelector("#prioFilter .is-on").dataset.p
+                var ft = document.querySelector("#tagFilter .is-on").dataset.t
+                var q = (document.getElementById("tcSearch").value || "").toLowerCase().trim()
+                cont.innerHTML = ""
+                var shown = 0
+                TC_GROUPS.forEach(function (grp) {
+                    var rows = TC.filter(function (t) {
+                        return t.g === grp.id
+                    }).filter(function (t) {
+                        if (fp !== "all" && t.p !== fp) return false
+                        if (ft !== "all") {
+                            if (ft === "release") {
+                                if (t.cat !== "release") return false
+                            } else if (t.cat !== ft) return false
+                        }
+                        if (q) {
+                            var hay = (
+                                t.id +
+                                " " +
+                                t.name +
+                                " " +
+                                t.pre +
+                                " " +
+                                t.exp +
+                                " " +
+                                (t.cur || "") +
+                                " " +
+                                t.steps.join(" ")
+                            ).toLowerCase()
+                            if (hay.indexOf(q) < 0) return false
+                        }
+                        return true
+                    })
+                    if (!rows.length) return
+                    shown += rows.length
+                    var g = document.createElement("div")
+                    g.className = "tc-group"
+                    g.id = grp.id
+                    g.setAttribute("data-outline", grp.num + " · " + grp.title)
+                    g.innerHTML = '<h3 class="tc-group__t"><span class="g-num">' + grp.num + "</span>" + esc(grp.title) + "</h3>"
+                    var list = document.createElement("div")
+                    list.className = "tc-list"
+                    rows.forEach(function (t) {
+                        var tagsHtml = (t.tags || [])
+                            .map(function (tag) {
+                                return '<span class="pill ' + (catPill[t.cat] || "pill--neutral") + '">' + esc(tag) + "</span>"
+                            })
+                            .join("")
+                        var card = document.createElement("div")
+                        card.className = "tc-card"
+                        card.innerHTML =
+                            '<div class="tc-card__top">' +
+                            '<span class="tc-prio ' +
+                            t.p +
+                            '">' +
+                            t.p +
+                            "</span>" +
+                            '<div class="tc-hd"><span class="tc-id">' +
+                            t.id +
+                            "</span>" +
+                            '<div class="tc-name">' +
+                            esc(t.name) +
+                            "</div>" +
+                            (tagsHtml ? '<div class="tc-tags">' + tagsHtml + "</div>" : "") +
+                            "</div>" +
+                            '<svg class="tc-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>' +
+                            "</div>" +
+                            '<div class="tc-body"><dl>' +
+                            "<dt>Pre</dt><dd>" +
+                            esc(t.pre) +
+                            "</dd>" +
+                            "<dt>Steps</dt><dd><ol>" +
+                            t.steps
+                                .map(function (s) {
+                                    return "<li>" + esc(s) + "</li>"
+                                })
+                                .join("") +
+                            "</ol></dd>" +
+                            '<dt>Expected</dt><dd class="tc-exp">' +
+                            esc(t.exp) +
+                            (t.cur ? '<span class="tc-cur"><b>Current build:</b> ' + esc(t.cur) + "</span>" : "") +
+                            "</dd>" +
+                            "</dl></div>"
+                        card.querySelector(".tc-card__top").addEventListener("click", function () {
+                            card.classList.toggle("is-open")
+                        })
+                        list.appendChild(card)
+                    })
+                    g.appendChild(list)
+                    cont.appendChild(g)
+                })
+                if (!shown) {
+                    cont.innerHTML = '<div class="tc-empty">No test cases match these filters.</div>'
+                }
+                document.getElementById("tcCount").textContent = shown + " of " + TC.length + " cases"
+                if (document.getElementById("panel-tests").classList.contains("is-active")) buildOutline("tests")
+            }
+            document.querySelectorAll("#prioFilter .filter-btn").forEach(function (b) {
+                b.addEventListener("click", function () {
+                    document.querySelectorAll("#prioFilter .filter-btn").forEach(function (x) {
+                        x.classList.remove("is-on")
+                    })
+                    b.classList.add("is-on")
+                    renderTC()
+                })
+            })
+            document.querySelectorAll("#tagFilter .filter-btn").forEach(function (b) {
+                b.addEventListener("click", function () {
+                    document.querySelectorAll("#tagFilter .filter-btn").forEach(function (x) {
+                        x.classList.remove("is-on")
+                    })
+                    b.classList.add("is-on")
+                    renderTC()
+                })
+            })
+            document.getElementById("tcSearch").addEventListener("input", renderTC)
+
+            /* ================= §19 NOT YET IMPLEMENTED ================= */
+            var STATE_PILL = {
+                "Not started": "pill--gap",
+                "Needs verification": "pill--warn",
+                Open: "pill--open",
+                Partial: "pill--warn",
+                "In progress": "pill--warn",
+                "Not in this release": "pill--future",
+            }
+            var TODO = [
+                ["Project-linked values in forms during capture", "Not started", "Report-only at publish today — §7.2"],
+                [
+                    "JSON preview variants (blank WIS, requirement-without-form, empty-value, project-linked metadata)",
+                    "Not started",
+                    "Product feature request — map editor / export preview tooling",
+                ],
+                [
+                    "Looping simulation in preview (duplicate WIS/form block for Carboni render test)",
+                    "Not started",
+                    "Product feature request — §9.3 JSON looping",
+                ],
+                [
+                    "Fix and expand JSON field previews (date output, signature/image URL, result, notes)",
+                    "Not started",
+                    "Product feature request — export preview tooling",
+                ],
+                [
+                    "Project-link simulator (template ↔ sample project for populated metadata preview)",
+                    "Not started",
+                    "Product feature request — §7.2",
+                ],
+                ["Multi-select checkbox fields", "Not started", "Backend checkboxes render as single-select — §8.1"],
+                ["Time field with time picker", "Not started", "Rendered as short text today — §8.1"],
+                ["Magic Wand: image/signature fields", "Not started", "Excluded from eligible fields — §10.2"],
+                ["Batch Magic Wand skip messaging", "Not started", "Skips items without notes silently — §10.3"],
+                ["Ask AI insert into form fields", "Not started", "Notes only today — §11.3"],
+                ["Signer name/date from export_info JSON", "Not started", "Spec TBD — §14.1"],
+                ["File attachment JSON behavior", "Needs verification", "Non-image types mapped to image flow — §8.1"],
+                ["Completed lifecycle canonical rule", "Open", "Report export vs workspace publish vs archive — §12.2"],
+                ["Offline signature upload (queue vs block)", "Open", "Draw works offline; upload fails — §14.2"],
+                ["Journal → Inspections full rename", "Partial", "Tab only; legacy strings remain — §6.1"],
+                [
+                    "Project-linked metadata in export JSON",
+                    "Partial",
+                    "Project-level setup described; population timing/surfaces TBD — §7.2",
+                ],
+                [
+                    "Form usability polish (color codes, long MC layouts, completion visibility)",
+                    "In progress",
+                    "Continuous improvement; not perfect this release — §8.3",
+                ],
+                [
+                    "Report status on inspection list cards",
+                    "Not in this release",
+                    "Computed client-side; display deferred — §6.3",
+                ],
+                [
+                    "AI conflict indicator UI (discrete fields)",
+                    "Not in this release",
+                    "Target; batch vs item-level overwrite policy differs — §10.4",
+                ],
+                ["AI attribution badges", "Not in this release", "Planned for later — §10.3"],
+                [
+                    "Offline inspection create + checklist load",
+                    "Not in this release",
+                    "Checklist required when signal available — §10.5",
+                ],
+                ["Ask AI performance optimization", "Not in this release", "Slower than Magic Wand — §11.5"],
+                ["Pre-export rendered report preview", "Not in this release", "Form review/edit fills gap — §12.5"],
+                ["In-app doc editor at publish", "Not in this release", "Aspirational — §12.1"],
+                [
+                    "Reports: template-first grouping + keyword search",
+                    "Not in this release",
+                    "Target in §13.3; confirm against ProjectReportsDashboard",
+                ],
+                ["Template name on inspection list card", "Not in this release", "Persist after export — linkage TBD — §12.3"],
+                ["Project team inspections view (mobile)", "Not in this release", "Can add later — §15.3"],
+                ["Manager workload view", "Not in this release", "To be discussed — §15.3"],
+                ["Multi-inspector collaboration", "Not in this release", "Single inspector only — §16"],
+                ["Multi-device form conflict merge + host final-value UI", "Not in this release", "§8.2"],
+                [
+                    "Blank-capture toggle (disable free-form blank issues per client)",
+                    "Not in this release",
+                    "Product feature request — §9.2",
+                ],
+                ["Checklist locking (Billie admin lock; clients cannot edit)", "Not in this release", "Product feature request"],
+                [
+                    "Team-level metadata (e.g. company logo once per team in export JSON)",
+                    "Not in this release",
+                    "Product feature request",
+                ],
+                [
+                    "Industry organization in solution template library",
+                    "Not in this release",
+                    "Product feature request — group beyond region and name",
+                ],
+                [
+                    "Image recognition for inspection photos",
+                    "Not in this release",
+                    "Product feature request — §11.5 out of scope",
+                ],
+                [
+                    "Expanded summary module (report-level summaries from findings)",
+                    "Not in this release",
+                    "Product feature request — out of scope §3",
+                ],
+            ]
+            ;(function () {
+                var tb = document.getElementById("todoBody"),
+                    ns = 0,
+                    pa = 0,
+                    op = 0,
+                    fu = 0
+                TODO.forEach(function (r, i) {
+                    var st = r[1]
+                    if (st === "Not started" || st === "Needs verification") ns++
+                    else if (st === "Partial" || st === "In progress") pa++
+                    else if (st === "Open") op++
+                    else if (st === "Not in this release") fu++
+                    var notes = esc(r[2]).replace(
+                        /(§[\d.]+|content\[\]|checkboxes|export_info|ProjectReportsDashboard|reportTemplateId\/Name)/g,
+                        "<code>$1</code>",
+                    )
+                    var tr = document.createElement("tr")
+                    tr.innerHTML =
+                        '<td class="num-cell">' +
+                        (i + 1) +
+                        "</td><td><strong>" +
+                        esc(r[0]) +
+                        "</strong></td>" +
+                        '<td><span class="pill ' +
+                        (STATE_PILL[st] || "pill--neutral") +
+                        '">' +
+                        esc(st) +
+                        "</span></td>" +
+                        "<td>" +
+                        notes +
+                        "</td>"
+                    tb.appendChild(tr)
+                })
+                document.getElementById("c-notstarted").textContent = ns
+                document.getElementById("c-partial").textContent = pa
+                document.getElementById("c-open").textContent = op
+                document.getElementById("c-future").textContent = fu
+            })()
+
+            /* ================= §20 OPEN DECISIONS ================= */
+            var DEC = [
+                [
+                    "Canonical Completed definition",
+                    "To be clarified",
+                    "To be clarified — §12.2",
+                    "Report file exported / workspace items published / walk archived / any combination",
+                    "Lifecycle UX, manager reporting, list filters",
+                ],
+                [
+                    "Duplicate copies answers/notes?",
+                    "Decided",
+                    "Decided: structure + requirement ID only; values and notes not copied — §9.2",
+                    "Whether to offer optional full clone in future",
+                    "Inspector efficiency, JSON looping",
+                ],
+                [
+                    "Offline create without project/checklist",
+                    "Decided",
+                    "Decided for this release: not possible; checklist must load when signal available — §7.1, §10.5",
+                    "Pre-cache adopted checklists for offline start (future)",
+                    "Offline UX, data quality",
+                ],
+                [
+                    "Magic Wand overwrite policy",
+                    "Partial",
+                    "Partial: batch and item-level both may modify existing values per current API — §10.2",
+                    "Unify to never-overwrite manual discrete values; add conflict UI",
+                    "Trust, §10.4",
+                ],
+                [
+                    "Project-field population",
+                    "Partial",
+                    "Partial: values set at project account level, exported in JSON — §7.2",
+                    "Timing (create / first open / summary / publish); which fields appear in forms vs report-only vs WIS",
+                    "Export accuracy, inspector UX",
+                ],
+                [
+                    "Ask AI insert target",
+                    "Decided",
+                    "Decided for this release: inspector notes only — §11.3",
+                    "Bound form fields / one-click field actions (future)",
+                    "Knowledge Agent workflow",
+                ],
+                [
+                    "Report library grouping and search",
+                    "Target",
+                    "Target: by template first, then inspections; keyword search bar — §13.3",
+                    "Confirm current UI vs target; version history presentation",
+                    "Project Reports tab",
+                ],
+                [
+                    "Template persisted on inspection card",
+                    "Open",
+                    "Open: not sure linkage needed yet — §12.3",
+                    "Persist reportTemplateId/Name after export vs derive from latest export",
+                    "Inspection list cards",
+                ],
+                [
+                    "Signer name and date on signatures",
+                    "Open",
+                    "Open: should come from export_info JSON — §14.1",
+                    "Separate form fields vs system captions vs report-template only",
+                    "Sign-off, export",
+                ],
+                [
+                    "Offline signature behavior",
+                    "Open",
+                    "Open — §14.2",
+                    "Queue upload when back online vs block save until connected",
+                    "Offline sign-off",
+                ],
+                [
+                    "Project team inspections (mobile)",
+                    "Deferred",
+                    "Deferred: can add later — §15.3",
+                    "Own = all statuses; others = completed only; refine access rules",
+                    "Manager visibility",
+                ],
+                [
+                    "Manager workload view",
+                    "To be discussed",
+                    "To be discussed — §15.3",
+                    "Desktop-only vs mobile; metrics definition",
+                    "Resource planning",
+                ],
+                [
+                    "Multi-inspector collaboration",
+                    "Not this release",
+                    "Not this release — §16",
+                    "Invitation flow, author/timestamp per field, host confirms final value for report",
+                    "JSON schema, UI design",
+                ],
+                [
+                    "Blank-capture toggle",
+                    "Future",
+                    "Future product request",
+                    "Per-client disable of free-form blank issues",
+                    "Data structure in JSON",
+                ],
+                [
+                    "Start from scratch create path",
+                    "Hidden",
+                    "Hidden from UI this release — §7.1",
+                    "Remove permanently vs re-enable for ad-hoc inspections",
+                    "Create flow",
+                ],
+            ]
+            var DEC_PILL = {
+                Decided: "pill--ok",
+                Partial: "pill--warn",
+                Open: "pill--open",
+                Target: "pill--future",
+                Deferred: "pill--future",
+                "To be clarified": "pill--open",
+                "To be discussed": "pill--open",
+                "Not this release": "pill--future",
+                Future: "pill--future",
+                Hidden: "pill--neutral",
+            }
+            ;(function () {
+                var tb = document.getElementById("openBody")
+                DEC.forEach(function (r, i) {
+                    var dir = esc(r[2])
+                        .replace(/(§[\d.,\s]+)/g, "<code>$1</code>")
+                        .replace(/(export_info|reportTemplateId\/Name)/g, "<code>$1</code>")
+                    var tr = document.createElement("tr")
+                    tr.innerHTML =
+                        '<td class="num-cell">' +
+                        (i + 1) +
+                        "</td>" +
+                        "<td><strong>" +
+                        esc(r[0]) +
+                        "</strong></td>" +
+                        '<td><span class="pill ' +
+                        (DEC_PILL[r[1]] || "pill--neutral") +
+                        '">' +
+                        esc(r[1]) +
+                        '</span><div style="margin-top:6px">' +
+                        dir +
+                        "</div></td>" +
+                        "<td>" +
+                        esc(r[3]) +
+                        "</td>" +
+                        "<td>" +
+                        esc(r[4]) +
+                        "</td>"
+                    tb.appendChild(tr)
+                })
+            })()
+
+            /* ================= INIT ================= */
+            renderTC()
+            buildOutline("req")
+        </script>
+    </body>
+</html>
