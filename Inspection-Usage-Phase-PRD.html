@@ -919,6 +919,31 @@
                 font-weight: 500;
                 white-space: nowrap;
             }
+            .tc-export-btn {
+                appearance: none;
+                border: 1px solid var(--border);
+                background: var(--surface);
+                font-family: inherit;
+                font-size: 12px;
+                font-weight: 600;
+                color: var(--ink);
+                padding: 8px 14px;
+                border-radius: 9px;
+                cursor: pointer;
+                white-space: nowrap;
+                display: inline-flex;
+                align-items: center;
+                gap: 7px;
+            }
+            .tc-export-btn:hover {
+                border-color: var(--accent);
+                color: var(--accent);
+            }
+            .tc-export-btn svg {
+                width: 14px;
+                height: 14px;
+                flex: none;
+            }
 
             .tc-group {
                 margin: 26px 0 8px;
@@ -938,6 +963,28 @@
                 font-size: 12px;
                 color: var(--accent);
                 font-weight: 600;
+            }
+            .tc-group__note {
+                margin: 10px 0 4px;
+                padding: 12px 14px;
+                border: 1px solid color-mix(in srgb, var(--warn) 35%, var(--border));
+                border-left: 4px solid var(--warn);
+                border-radius: var(--radius-sm);
+                background: color-mix(in srgb, var(--warn) 12%, var(--surface));
+                font-size: 13.5px;
+                font-weight: 600;
+                line-height: 1.45;
+                color: var(--ink);
+                max-width: none;
+            }
+            .tc-group__note-label {
+                display: block;
+                font-size: 11px;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-weight: 700;
+                color: var(--warn);
+                margin-bottom: 4px;
             }
 
             .tc-list {
@@ -2538,6 +2585,14 @@
                                 />
                             </label>
                             <span class="tc-count" id="tcCount"></span>
+                            <button type="button" class="tc-export-btn" id="tcExportExcel" title="Download currently filtered test cases as Excel">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                Download Excel
+                            </button>
                         </div>
 
                         <div id="tcContainer"></div>
@@ -2738,12 +2793,14 @@
             /* ================= TEST CASE DATA (§18) ================= */
             var TC_GROUPS = [
                 { id: "g-lc", num: "18.1", title: "Inspection lifecycle and list" },
-                { id: "g-fm", num: "18.2", title: "Form capture and offline sync" },
+                { id: "g-fm", num: "18.2", title: "Form capture and offline sync", note: "Dropdown, checkboxes, and number field UI is being refined." },
                 { id: "g-fn", num: "18.3", title: "Findings, duplicate, and sign-off placement" },
                 { id: "g-mw", num: "18.4", title: "Magic Wand" },
                 { id: "g-ai", num: "18.5", title: "Knowledge Agent (Ask AI)" },
                 { id: "g-pb", num: "18.6", title: "Publish, export, and reports" },
                 { id: "g-so", num: "18.7", title: "Sign-off and signatures" },
+                { id: "g-img", num: "18.8", title: "Image fields and reuse" },
+                { id: "g-pg", num: "18.9", title: "Form progress" },
             ]
             var TC = [
                 /* 18.1 */
@@ -2751,7 +2808,8 @@
                     g: "g-lc",
                     id: "TC-LC-001",
                     p: "P0",
-                    cat: "release",
+                    cat: "Open",
+                    tags: ["Not ready for testing"],
                     name: "Create inspection without office scheduling",
                     pre: "User is host; device online; project with adopted team checklist exists.",
                     steps: ["Open Inspections tab → tap (+).", "Select project → select team checklist."],
@@ -2761,7 +2819,8 @@
                     g: "g-lc",
                     id: "TC-LC-002",
                     p: "P0",
-                    cat: "release",
+                    cat: "Open",
+                    tags: ["Not ready for testing"],
                     name: "Inspection list lifecycle filters",
                     pre: "User has inspections in mixed states.",
                     steps: ["Open Inspections tab.", "Tap Scheduled, In progress, and Completed filter chips in turn."],
@@ -2771,7 +2830,8 @@
                     g: "g-lc",
                     id: "TC-LC-003",
                     p: "P0",
-                    cat: "release",
+                    cat: "Open",
+                    tags: ["Not ready for testing"],
                     name: "In Progress after data entry",
                     pre: "New inspection with checklist open.",
                     steps: ["Enter a form answer or inspector note on any item."],
@@ -2787,19 +2847,45 @@
                     steps: ["Attempt to create new inspection via Inspections (+)."],
                     exp: "User cannot complete project + checklist selection flow; must wait for connectivity to load checklist (this release).",
                 },
+                {
+                    g: "g-lc",
+                    id: "TC-LC-007",
+                    p: "P0",
+                    cat: "Open",
+                    tags: ["Not ready for testing"],
+                    name: "Export report marks inspection completed",
+                    pre: "In-progress inspection with capturable data; device online.",
+                    steps: ["Publish → Export report → complete export."],
+                    exp: "Inspection lifecycle becomes Completed (markInspectionReportExported / inspectionStatus === COMPLETED).",
+                },
+                {
+                    g: "g-lc",
+                    id: "TC-LC-008",
+                    p: "P0",
+                    cat: "release",
+                    name: "Track Issues does not complete inspection",
+                    pre: "In-progress inspection with previously untracked publishable findings.",
+                    steps: [
+                        "Publish → Track Issues → assign assignee/location as required → publish findings to WIS.",
+                    ],
+                    exp: "WIS items created once; inspection remains In Progress (not completed or archived).",
+                },
                 /* 18.2 */
                 {
                     g: "g-fm",
                     id: "TC-FM-001",
                     p: "P0",
-                    cat: "release",
+                    cat: "Partial",
+                    tags: ["UI improvement"],
                     name: "Manual structured entry offline (open inspection)",
-                    pre: "Inspection already open; device goes offline mid-capture.",
+                    pre: "Inspection already open; device goes offline mid-capture; in-app offline toggle ON when testing voice.",
                     steps: [
                         "Set yes/no, multiple-choice, short text, and long text on current item.",
                         "Navigate to another item and enter values.",
+                        "Attempt voice/notes capture offline (with airplane mode and/or offline toggle).",
                     ],
                     exp: "Values persist locally in UI; no data loss while offline.",
+                    cur: "UI improvement: offline/error messages currently pop up disruptively. UI improvement: even in airplane mode, the in-app offline toggle must be switched on before voice can be captured offline.",
                 },
                 {
                     g: "g-fm",
@@ -2819,11 +2905,13 @@
                     g: "g-fm",
                     id: "TC-FM-003",
                     p: "P0",
-                    cat: "release",
+                    cat: "Partial",
+                    tags: ["UI improvement"],
                     name: "Reconnect batch sync",
-                    pre: "Offline edits made on open inspection; device reconnects.",
+                    pre: "Offline edits made on open inspection (in-app offline toggle ON if voice was used); device reconnects.",
                     steps: ["Restore network connectivity.", "Remain on inspection or background/foreground app."],
                     exp: "Pending issue updates flush; local answers reach server.",
+                    cur: "UI improvement: offline/error messages currently pop up disruptively during offline capture and reconnect. UI improvement: even in airplane mode, the in-app offline toggle must be switched on before voice can be captured offline.",
                 },
                 {
                     g: "g-fm",
@@ -2839,11 +2927,13 @@
                     g: "g-fm",
                     id: "TC-FM-005",
                     p: "P1",
-                    cat: "release",
+                    cat: "Partial",
+                    tags: ["UI improvement"],
                     name: "Photo and signature require network to finalize",
-                    pre: "Inspection open.",
+                    pre: "Inspection open; for any voice notes offline, in-app offline toggle must be ON even if airplane mode is on.",
                     steps: ["Capture photo field while offline → attempt save.", "Draw signature while offline → attempt save."],
                     exp: "Upload/finalization fails or remains pending without network; user can retry when online.",
+                    cur: "UI improvement: offline/error messages currently pop up disruptively. UI improvement: even in airplane mode, the in-app offline toggle must be switched on before voice can be captured offline.",
                 },
                 {
                     g: "g-fm",
@@ -3054,7 +3144,7 @@
                     name: "Publish options sheet",
                     pre: "Inspection with captured data; online.",
                     steps: ["Tap Publish on inspection."],
-                    exp: "PublishWalkOptionsSheet shows Export as document (default) and Publish to project workspace.",
+                    exp: "Publish sheet shows Export report (default for inspections) and Track Issues.",
                 },
                 {
                     g: "g-pb",
@@ -3064,10 +3154,10 @@
                     name: "Export report flow",
                     pre: "Project linked; export templates exist for checklist.",
                     steps: [
-                        "Publish → Export as document.",
+                        "Publish → Export report.",
                         "Select team Carbone or default PDF/Word/Excel template → continue.",
                     ],
-                    exp: "Walk summary regenerated first; export API runs; post-export preview opens (PDF / Word / Excel viewer).",
+                    exp: "Walk summary regenerated first; export API runs; post-export preview opens (PDF / Word / Excel viewer); inspection completes per TC-LC-007.",
                 },
                 {
                     g: "g-pb",
@@ -3084,13 +3174,13 @@
                     id: "TC-PB-004",
                     p: "P0",
                     cat: "release",
-                    name: "Publish to workspace flow",
-                    pre: "Inspection with publishable items.",
+                    name: "Track Issues workspace flow (neutral completion)",
+                    pre: "Inspection with untracked publishable items.",
                     steps: [
-                        "Publish → Publish to project workspace.",
-                        "Review Walk Summary → assign status/location/tags → publish selected items.",
+                        "Publish → Track Issues.",
+                        "Individually select items → assign status/location as required → publish.",
                     ],
-                    exp: "WIS items created/updated in project workspace; form values and requirements visible in review.",
+                    exp: "Only selected items publish to WIS with requirement and form answers; inspection is not marked Completed by Track Issues alone.",
                 },
                 {
                     g: "g-pb",
@@ -3124,6 +3214,73 @@
                     exp: "Project-linked fields (e.g. approval number, inspection record date) included in export payload.",
                     cur: "Population timing and form visibility TBD.",
                 },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-010",
+                    p: "P0",
+                    cat: "release",
+                    name: "Publish sheet: Export vs Track Issues copy",
+                    pre: "Inspection with data; online.",
+                    steps: ["Tap Publish."],
+                    exp: "Sheet shows Export report (default) and Track Issues with follow-up wording (e.g. share findings to project workspace for team follow-up).",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-011",
+                    p: "P0",
+                    cat: "release",
+                    name: "Track Issues: items individually selectable for publish",
+                    pre: "Project with active members and locations; checklist inspection with ≥3 untracked publishable items; online.",
+                    steps: [
+                        "Publish → Track Issues.",
+                        "Toggle selection on individual items (select some, leave others unselected).",
+                        "Assign project member + location on selected items → publish.",
+                        "Confirm only the selected items appear as WIS items.",
+                    ],
+                    exp: "Each issue can be selected or deselected independently for Track Issues; only selected items publish via publishWIS with real project member IDs and locations; unselected items remain untracked; WIS status Open/Closed only.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-012",
+                    p: "P0",
+                    cat: "Open",
+                    tags: ["Not ready for testing"],
+                    name: "Cannot republish already-tracked items to Track Issues",
+                    pre: "Some inspection items previously published via Track Issues.",
+                    steps: [
+                        "Open Track Issues again.",
+                        "Attempt to select or republish items that were already tracked.",
+                    ],
+                    exp: "Already-tracked items are not selectable for Track Issues (or publish is blocked); they cannot be published to Track Issues a second time.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-013",
+                    p: "P0",
+                    cat: "Open",
+                    tags: ["Not ready for testing"],
+                    name: "Tracked items stay editable; further publish via report only",
+                    pre: "Item already published to WIS via Track Issues.",
+                    steps: [
+                        "Edit form fields and inspector notes on that item in the inspection.",
+                        "Attempt Track Issues again for that item (expect blocked).",
+                        "Publish → Export report including the edited item.",
+                    ],
+                    exp: "Item remains fully editable in the inspection; cannot Track Issues again; updates can only be republished via Export report.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-014",
+                    p: "P0",
+                    cat: "release",
+                    name: "Tracked issue carries requirement and form",
+                    pre: "Item with requirement text and completed form fields; not yet tracked.",
+                    steps: [
+                        "Publish → Track Issues → select that item individually → publish.",
+                        "Open the created WIS item in project workspace.",
+                    ],
+                    exp: "WIS item carries over the checklist requirement and form field answers (not title-only); requirement/form meta available for follow-up.",
+                },
                 /* 18.7 */
                 {
                     g: "g-so",
@@ -3150,12 +3307,144 @@
                     id: "TC-SO-004",
                     p: "P1",
                     cat: "Open",
-                    tags: ["Open decision"],
+                    tags: ["Open decision", "UI improvement"],
                     name: "Offline signature draw",
-                    pre: "Device offline.",
+                    pre: "Device offline; in-app offline toggle ON if also testing voice notes.",
                     steps: ["Draw signature on pad → attempt save."],
                     exp: "Behavior per product decision — queue for upload on reconnect or block until online.",
-                    cur: "Upload fails without network.",
+                    cur: "Upload fails without network. UI improvement: offline/error messages currently pop up disruptively. UI improvement: even in airplane mode, the in-app offline toggle must be switched on before voice can be captured offline.",
+                },
+                /* 18.8 */
+                {
+                    g: "g-img",
+                    id: "TC-IMG-001",
+                    p: "P0",
+                    cat: "release",
+                    name: "Image field stores list of URLs",
+                    pre: "Online; image field empty.",
+                    steps: ["Capture or upload 2+ photos to the same image field.", "Reopen the item."],
+                    exp: "Field stores and displays multiple URLs (array), not a single string overwrite.",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-002",
+                    p: "P1",
+                    cat: "release",
+                    name: "Legacy single-URL image answer still loads",
+                    pre: "Item whose image answer is a legacy single URL string.",
+                    steps: ["Open item with that image field."],
+                    exp: "Thumbnail(s) render without crash; user can add more images.",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-003",
+                    p: "P0",
+                    cat: "release",
+                    name: "Capture path: camera → editor → upload",
+                    pre: "Online; image field.",
+                    steps: ["Snap via VisionCamera → edit in photo editor → confirm."],
+                    exp: "Image uploads; thumbnail appears on the field.",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-004",
+                    p: "P0",
+                    cat: "release",
+                    name: "Multi-select from album",
+                    pre: "Online; image field.",
+                    steps: ["Pick multiple album photos."],
+                    exp: "All selected images attach; HEIC converts via ensureJpeg / compatible representation where needed.",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-005",
+                    p: "P1",
+                    cat: "release",
+                    name: "Single album pick still opens editor",
+                    pre: "Online; image field.",
+                    steps: ["Pick one album photo."],
+                    exp: "Flow goes through photo editor before upload.",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-006",
+                    p: "P1",
+                    cat: "release",
+                    name: "Reuse photos from this item’s notes",
+                    pre: "Current item has notes with attached photos.",
+                    steps: ["Image field → choose from this item’s notes photos → select."],
+                    exp: "Selected note photos attach to the image field.",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-007",
+                    p: "P1",
+                    cat: "release",
+                    name: "Snap a document page from project docs",
+                    pre: "Project has docs; image field open.",
+                    steps: ["Choose Snap a document page → capture page."],
+                    exp: "Page image attaches to the image field.",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-008",
+                    p: "P1",
+                    cat: "release",
+                    name: "Re-edit thumbnail and re-upload",
+                    pre: "Image field already has ≥1 thumbnail.",
+                    steps: ["Tap thumbnail → re-edit markup → save."],
+                    exp: "Updated image re-uploads; field shows the new version.",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-009",
+                    p: "P0",
+                    cat: "release",
+                    name: "Published WIS shows image grid",
+                    pre: "Item with image or signature field published via Track Issues.",
+                    steps: ["Open published WIS in project workspace."],
+                    exp: "Image/signature fields render as an image grid, not “Photo attached” text.",
+                },
+                /* 18.9 */
+                {
+                    g: "g-pg",
+                    id: "TC-PG-001",
+                    p: "P0",
+                    cat: "release",
+                    name: "Progress drawer shows filled / total",
+                    pre: "Real checklist inspection with form fields.",
+                    steps: ["Open progress drawer."],
+                    exp: "Shows filled / total fields and a progress bar.",
+                },
+                {
+                    g: "g-pg",
+                    id: "TC-PG-002",
+                    p: "P0",
+                    cat: "release",
+                    name: "Progress appears on real inspections",
+                    pre: "Non-mock inspection with hasInspectionForms.",
+                    steps: ["Open inspection → open progress."],
+                    exp: "Progress UI is shown (gated by hasInspectionForms, not mock-only walks).",
+                },
+                {
+                    g: "g-pg",
+                    id: "TC-PG-003",
+                    p: "P0",
+                    cat: "release",
+                    name: "Bar turns green when complete",
+                    pre: "Fill all form fields on all form-bearing requirements.",
+                    steps: ["Open progress drawer."],
+                    exp: "Count shows complete (e.g. N/N); bar is green.",
+                },
+                {
+                    g: "g-pg",
+                    id: "TC-PG-004",
+                    p: "P1",
+                    cat: "release",
+                    name: "Progress updates per requirement form",
+                    pre: "Partially fill one requirement’s form.",
+                    steps: ["Reopen progress."],
+                    exp: "Progress reflects filled vs total via getRequirementFormProgress for form-bearing requirements.",
                 },
             ]
 
@@ -3164,48 +3453,310 @@
                 return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
             }
 
-            function renderTC() {
-                var cont = document.getElementById("tcContainer")
+            function getFilteredTC() {
                 var fp = document.querySelector("#prioFilter .is-on").dataset.p
                 var ft = document.querySelector("#tagFilter .is-on").dataset.t
                 var q = (document.getElementById("tcSearch").value || "").toLowerCase().trim()
-                cont.innerHTML = ""
-                var shown = 0
+                var out = []
                 TC_GROUPS.forEach(function (grp) {
-                    var rows = TC.filter(function (t) {
+                    TC.filter(function (t) {
                         return t.g === grp.id
-                    }).filter(function (t) {
-                        if (fp !== "all" && t.p !== fp) return false
-                        if (ft !== "all") {
-                            if (ft === "release") {
-                                if (t.cat !== "release") return false
-                            } else if (t.cat !== ft) return false
-                        }
-                        if (q) {
-                            var hay = (
-                                t.id +
-                                " " +
-                                t.name +
-                                " " +
-                                t.pre +
-                                " " +
-                                t.exp +
-                                " " +
-                                (t.cur || "") +
-                                " " +
-                                t.steps.join(" ")
-                            ).toLowerCase()
-                            if (hay.indexOf(q) < 0) return false
-                        }
-                        return true
                     })
+                        .filter(function (t) {
+                            if (fp !== "all" && t.p !== fp) return false
+                            if (ft !== "all") {
+                                if (ft === "release") {
+                                    if (t.cat !== "release") return false
+                                } else if (t.cat !== ft) return false
+                            }
+                            if (q) {
+                                var hay = (
+                                    t.id +
+                                    " " +
+                                    t.name +
+                                    " " +
+                                    t.pre +
+                                    " " +
+                                    t.exp +
+                                    " " +
+                                    (t.cur || "") +
+                                    " " +
+                                    (t.tags || []).join(" ") +
+                                    " " +
+                                    t.steps.join(" ")
+                                ).toLowerCase()
+                                if (hay.indexOf(q) < 0) return false
+                            }
+                            return true
+                        })
+                        .forEach(function (t) {
+                            out.push(t)
+                        })
+                })
+                return out
+            }
+
+            function formatStepsForExcel(steps) {
+                return (steps || [])
+                    .map(function (s, i) {
+                        return i + 1 + ". " + s
+                    })
+                    .join("\n")
+            }
+
+            function buildTCExportRows() {
+                var cases = getFilteredTC()
+                var aoa = [["#", "test case title", "pre", "steps", "expected", "Tester Observations"]]
+                cases.forEach(function (t, i) {
+                    aoa.push([
+                        String(i + 1),
+                        t.id + " - " + t.name,
+                        t.pre || "",
+                        formatStepsForExcel(t.steps),
+                        t.exp + (t.cur ? "\n\nCurrent build: " + t.cur : ""),
+                        "",
+                    ])
+                })
+                return { cases: cases, aoa: aoa }
+            }
+
+            function triggerDownload(blob, filename) {
+                var url = URL.createObjectURL(blob)
+                var a = document.createElement("a")
+                a.href = url
+                a.download = filename
+                a.rel = "noopener"
+                document.body.appendChild(a)
+                a.click()
+                a.remove()
+                setTimeout(function () {
+                    URL.revokeObjectURL(url)
+                }, 1500)
+            }
+
+            function u8(str) {
+                return new TextEncoder().encode(str)
+            }
+
+            function crc32(buf) {
+                var table = crc32._t
+                if (!table) {
+                    table = crc32._t = new Uint32Array(256)
+                    for (var n = 0; n < 256; n++) {
+                        var c = n
+                        for (var k = 0; k < 8; k++) c = c & 1 ? (0xedb88320 ^ (c >>> 1)) : c >>> 1
+                        table[n] = c
+                    }
+                }
+                var crc = 0 ^ -1
+                for (var i = 0; i < buf.length; i++) crc = (crc >>> 8) ^ table[(crc ^ buf[i]) & 0xff]
+                return (crc ^ -1) >>> 0
+            }
+
+            function zipStore(files) {
+                // Minimal ZIP (store / no compression) — enough for Excel .xlsx
+                var parts = []
+                var central = []
+                var offset = 0
+                function pushBytes(arr) {
+                    parts.push(arr)
+                    offset += arr.length
+                }
+                function u16(n) {
+                    return new Uint8Array([n & 255, (n >>> 8) & 255])
+                }
+                function u32(n) {
+                    return new Uint8Array([n & 255, (n >>> 8) & 255, (n >>> 16) & 255, (n >>> 24) & 255])
+                }
+                files.forEach(function (f) {
+                    var name = u8(f.name)
+                    var data = typeof f.data === "string" ? u8(f.data) : f.data
+                    var crc = crc32(data)
+                    var localOffset = offset
+                    pushBytes(u32(0x04034b50))
+                    pushBytes(u16(20))
+                    pushBytes(u16(0))
+                    pushBytes(u16(0))
+                    pushBytes(u16(0))
+                    pushBytes(u16(0))
+                    pushBytes(u32(crc))
+                    pushBytes(u32(data.length))
+                    pushBytes(u32(data.length))
+                    pushBytes(u16(name.length))
+                    pushBytes(u16(0))
+                    pushBytes(name)
+                    pushBytes(data)
+                    central.push({ name: name, data: data, crc: crc, offset: localOffset })
+                })
+                var centralStart = offset
+                central.forEach(function (e) {
+                    pushBytes(u32(0x02014b50))
+                    pushBytes(u16(20))
+                    pushBytes(u16(20))
+                    pushBytes(u16(0))
+                    pushBytes(u16(0))
+                    pushBytes(u16(0))
+                    pushBytes(u16(0))
+                    pushBytes(u32(e.crc))
+                    pushBytes(u32(e.data.length))
+                    pushBytes(u32(e.data.length))
+                    pushBytes(u16(e.name.length))
+                    pushBytes(u16(0))
+                    pushBytes(u16(0))
+                    pushBytes(u16(0))
+                    pushBytes(u16(0))
+                    pushBytes(u32(0))
+                    pushBytes(u32(e.offset))
+                    pushBytes(e.name)
+                })
+                var centralSize = offset - centralStart
+                pushBytes(u32(0x06054b50))
+                pushBytes(u16(0))
+                pushBytes(u16(0))
+                pushBytes(u16(central.length))
+                pushBytes(u16(central.length))
+                pushBytes(u32(centralSize))
+                pushBytes(u32(centralStart))
+                pushBytes(u16(0))
+                var total = 0
+                parts.forEach(function (p) {
+                    total += p.length
+                })
+                var out = new Uint8Array(total)
+                var pos = 0
+                parts.forEach(function (p) {
+                    out.set(p, pos)
+                    pos += p.length
+                })
+                return out
+            }
+
+            function colLetter(n) {
+                var s = ""
+                n += 1
+                while (n > 0) {
+                    var m = (n - 1) % 26
+                    s = String.fromCharCode(65 + m) + s
+                    n = Math.floor((n - 1) / 26)
+                }
+                return s
+            }
+
+            function xmlText(s) {
+                return String(s == null ? "" : s)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/\r\n|\r|\n/g, "&#10;")
+            }
+
+            function buildXlsxBlob(aoa) {
+                var sheetRows = []
+                aoa.forEach(function (row, r) {
+                    var cells = []
+                    row.forEach(function (val, c) {
+                        var ref = colLetter(c) + (r + 1)
+                        cells.push(
+                            '<c r="' +
+                                ref +
+                                '" t="inlineStr"><is><t xml:space="preserve">' +
+                                xmlText(val) +
+                                "</t></is></c>",
+                        )
+                    })
+                    sheetRows.push('<row r="' + (r + 1) + '">' + cells.join("") + "</row>")
+                })
+                var lastCol = colLetter((aoa[0] || []).length - 1)
+                var lastRow = aoa.length
+                var sheet =
+                    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+                    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+                    '<dimension ref="A1:' +
+                    lastCol +
+                    lastRow +
+                    '"/>' +
+                    "<sheetData>" +
+                    sheetRows.join("") +
+                    "</sheetData></worksheet>"
+                var workbook =
+                    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+                    '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" ' +
+                    'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">' +
+                    "<sheets><sheet name=\"Test Cases\" sheetId=\"1\" r:id=\"rId1\"/></sheets></workbook>"
+                var contentTypes =
+                    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+                    '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
+                    '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>' +
+                    '<Default Extension="xml" ContentType="application/xml"/>' +
+                    '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>' +
+                    '<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>' +
+                    "</Types>"
+                var rels =
+                    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+                    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+                    '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>' +
+                    "</Relationships>"
+                var wbRels =
+                    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+                    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+                    '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>' +
+                    "</Relationships>"
+                var bytes = zipStore([
+                    { name: "[Content_Types].xml", data: contentTypes },
+                    { name: "_rels/.rels", data: rels },
+                    { name: "xl/workbook.xml", data: workbook },
+                    { name: "xl/_rels/workbook.xml.rels", data: wbRels },
+                    { name: "xl/worksheets/sheet1.xml", data: sheet },
+                ])
+                return new Blob([bytes], {
+                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                })
+            }
+
+            function downloadTCExcel() {
+                var built = buildTCExportRows()
+                if (!built.cases.length) {
+                    alert("No test cases match the current filters.")
+                    return
+                }
+                var stamp = new Date().toISOString().slice(0, 10)
+                try {
+                    var blob = buildXlsxBlob(built.aoa)
+                    triggerDownload(blob, "Usage-Phase-Test-Cases-" + stamp + ".xlsx")
+                } catch (err) {
+                    console.error(err)
+                    alert("Excel export failed. Please refresh and try again.")
+                }
+            }
+
+            function renderTC() {
+                var cont = document.getElementById("tcContainer")
+                var rowsByGroup = {}
+                var shown = 0
+                getFilteredTC().forEach(function (t) {
+                    if (!rowsByGroup[t.g]) rowsByGroup[t.g] = []
+                    rowsByGroup[t.g].push(t)
+                    shown++
+                })
+                cont.innerHTML = ""
+                TC_GROUPS.forEach(function (grp) {
+                    var rows = rowsByGroup[grp.id] || []
                     if (!rows.length) return
-                    shown += rows.length
                     var g = document.createElement("div")
                     g.className = "tc-group"
                     g.id = grp.id
                     g.setAttribute("data-outline", grp.num + " · " + grp.title)
-                    g.innerHTML = '<h3 class="tc-group__t"><span class="g-num">' + grp.num + "</span>" + esc(grp.title) + "</h3>"
+                    g.innerHTML =
+                        '<h3 class="tc-group__t"><span class="g-num">' +
+                        grp.num +
+                        "</span>" +
+                        esc(grp.title) +
+                        "</h3>" +
+                        (grp.note
+                            ? '<p class="tc-group__note"><span class="tc-group__note-label">Note</span>' +
+                              esc(grp.note) +
+                              "</p>"
+                            : "")
                     var list = document.createElement("div")
                     list.className = "tc-list"
                     rows.forEach(function (t) {
@@ -3282,6 +3833,7 @@
                 })
             })
             document.getElementById("tcSearch").addEventListener("input", renderTC)
+            document.getElementById("tcExportExcel").addEventListener("click", downloadTCExcel)
 
             /* ================= §19 NOT YET IMPLEMENTED ================= */
             var STATE_PILL = {
