@@ -2950,14 +2950,12 @@
                 {
                     g: "g-fm",
                     id: "TC-FM-007",
-                    p: "P2",
-                    cat: "Future",
-                    tags: ["Future"],
+                    p: "P1",
+                    cat: "release",
                     name: "Time field with picker",
                     pre: "Checklist includes time field.",
-                    steps: ["Open time field."],
-                    exp: "Target: native/time picker UI; value stored in correct format.",
-                    cur: "Free-text short text field.",
+                    steps: ["Open time field.", "Select a time via the picker.", "Save/persist and reopen."],
+                    exp: "Native/time picker UI opens; selected time is stored in the correct format and appears after reopen.",
                 },
                 /* 18.3 */
                 {
@@ -3031,18 +3029,6 @@
                     pre: "Device offline; inspection open.",
                     steps: ["Attempt Magic Wand (item or batch)."],
                     exp: "Action blocked or fails with connectivity message; manual fields still editable.",
-                },
-                {
-                    g: "g-mw",
-                    id: "TC-MW-006",
-                    p: "P1",
-                    cat: "Future",
-                    tags: ["Future"],
-                    name: "Discrete field conflict indicator",
-                    pre: "Manual yes/no or MC value set; Magic Wand returns conflicting value.",
-                    steps: ["Run item-level Magic Wand."],
-                    exp: "Manual value preserved; conflict indicator shown; user resolves before publish.",
-                    cur: "No conflict UI.",
                 },
                 {
                     g: "g-mw",
