@@ -1329,29 +1329,208 @@
             <li>Batch Magic Wand uses the same rules per item; items without a note are skipped (not 422).</li>
           </ul>
 
-          <h3><span class="h3num">0.3</span>Quick reference</h3>
-          <div class="tbl-wrap">
+          <h3><span class="h3num">0.3</span>Logic &amp; expected performance matrix</h3>
+          <p>Every combination of <strong>field state</strong> × <strong>field family</strong> × <strong>how the inspector note relates to the field</strong>. Image / signature fields are never touched.</p>
+          <div class="legend" style="margin:10px 0 14px">
+            <strong style="color:var(--ink)">Outcomes:</strong>
+            <span class="pill pill--ok">Update</span>
+            <span class="pill pill--future">Keep</span>
+            <span class="pill pill--neutral">Stay blank</span>
+            <span class="pill pill--warn">Update if exact</span>
+            <span class="pill pill--open">Model default</span>
+          </div>
+          <div class="tbl-wrap" style="overflow-x:auto">
             <table>
               <thead>
                 <tr>
-                  <th>Starting state</th>
-                  <th>Narrative</th>
-                  <th>Discrete</th>
+                  <th style="min-width:7rem">Pre-filled / Empty</th>
+                  <th style="min-width:7rem">Narrative / Discrete</th>
+                  <th style="min-width:10rem">Notes relation</th>
+                  <th style="min-width:8rem">Expected</th>
+                  <th>What happens</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="td-key">Empty</td>
-                  <td>Draft from note if groundable; else stay blank</td>
-                  <td>Set only if note/description states exact value / option; else stay blank</td>
+                <tr style="background:var(--surface-2)">
+                  <td colspan="5" style="font-weight:700;color:var(--ink);font-size:12.5px;letter-spacing:0.02em">PRE-FILLED · NARRATIVE <span style="font-weight:500;color:var(--ink-3)">(Long text already has a value)</span></td>
                 </tr>
                 <tr>
-                  <td class="td-key">Already filled</td>
-                  <td>May rewrite / expand to match the note</td>
-                  <td>Keep unless note states a different exact value</td>
+                  <td class="td-key">Pre-filled</td>
+                  <td>Narrative</td>
+                  <td>Alternative meaning</td>
+                  <td><span class="pill pill--ok">Update</span></td>
+                  <td>Rewrite the prose so it matches the note’s meaning. Prior wording may be replaced entirely. Flags: <code>ai_generated</code> + <code>ai_modified</code>.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Pre-filled</td>
+                  <td>Narrative</td>
+                  <td>More detail in notes</td>
+                  <td><span class="pill pill--ok">Update</span></td>
+                  <td>Expand or rewrite the narrative to incorporate the extra detail from the note. Not treated as a hard conflict.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Pre-filled</td>
+                  <td>Narrative</td>
+                  <td>Less detail in notes</td>
+                  <td><span class="pill pill--ok">Update</span></td>
+                  <td>May rewrite toward the thinner note. Richer prior text is not protected — inspector should review if the note under-specifies.
+                    <div class="callout is-warn" style="margin:10px 0 0;padding:10px 12px">
+                      <span class="co-label">Edge case</span>
+                      Happens when the inspector <strong>manually typed a lot in the form field</strong>, then said something thin in the notes. This is <strong>usually not the case for narrative-driven fields</strong> (notes typically carry the detail the wand expands from).
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td-key">Pre-filled</td>
+                  <td>Narrative</td>
+                  <td>Not relevant notes</td>
+                  <td><span class="pill pill--future">Keep</span></td>
+                  <td>Note does not speak to this field → leave the existing narrative unchanged.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Pre-filled</td>
+                  <td>Narrative</td>
+                  <td>Conflict within notes</td>
+                  <td><span class="pill pill--open">Model default</span></td>
+                  <td><strong>No dedicated logic in the system prompt</strong> for this case. Behavior relies on the model’s default handling — <strong>test whether results are satisfactory</strong>.</td>
+                </tr>
+
+                <tr style="background:var(--surface-2)">
+                  <td colspan="5" style="font-weight:700;color:var(--ink);font-size:12.5px;letter-spacing:0.02em">PRE-FILLED · DISCRETE <span style="font-weight:500;color:var(--ink-3)">(Short text, Number, Date, Time, MC, Checkboxes, Dropdown already set)</span></td>
+                </tr>
+                <tr>
+                  <td class="td-key">Pre-filled</td>
+                  <td>Discrete</td>
+                  <td>Alternative meaning</td>
+                  <td><span class="pill pill--warn">Update if exact</span></td>
+                  <td>Replace the value <strong>only if</strong> the note states a different exact answer / matching option outright. Otherwise <strong>Keep</strong>. On replace: <code>ai_generated</code> + <code>ai_modified</code>.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Pre-filled</td>
+                  <td>Discrete</td>
+                  <td>More detail in notes</td>
+                  <td><span class="pill pill--warn">Update if exact</span></td>
+                  <td>Extra narrative detail alone does not change the discrete answer. Update only if the note also names a new exact value/option; else <strong>Keep</strong>.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Pre-filled</td>
+                  <td>Discrete</td>
+                  <td>Less detail in notes</td>
+                  <td><span class="pill pill--future">Keep</span></td>
+                  <td>Thinner note does not clearly replace the exact value → leave the existing discrete answer.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Pre-filled</td>
+                  <td>Discrete</td>
+                  <td>Not relevant notes</td>
+                  <td><span class="pill pill--future">Keep</span></td>
+                  <td>Note is unrelated to this field → no change.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Pre-filled</td>
+                  <td>Discrete</td>
+                  <td>Conflict within notes</td>
+                  <td><span class="pill pill--open">Model default</span></td>
+                  <td><strong>No dedicated logic in the system prompt</strong> for this case. Behavior relies on the model’s default handling — <strong>test whether results are satisfactory</strong>.</td>
+                </tr>
+
+                <tr style="background:var(--surface-2)">
+                  <td colspan="5" style="font-weight:700;color:var(--ink);font-size:12.5px;letter-spacing:0.02em">EMPTY · NARRATIVE <span style="font-weight:500;color:var(--ink-3)">(Long text blank — no manual or prior wand value)</span></td>
+                </tr>
+                <tr>
+                  <td class="td-key">Empty</td>
+                  <td>Narrative</td>
+                  <td>Alternative meaning</td>
+                  <td><span class="pill pill--ok">Update</span></td>
+                  <td>Draft narrative from the note’s stated meaning. Never invent beyond what the note (or Smart Description) grounds. <code>ai_generated: true</code> (no <code>ai_modified</code>).</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Empty</td>
+                  <td>Narrative</td>
+                  <td>More detail in notes</td>
+                  <td><span class="pill pill--ok">Update</span></td>
+                  <td>Draft a fuller narrative from the rich note content.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Empty</td>
+                  <td>Narrative</td>
+                  <td>Less detail in notes</td>
+                  <td><span class="pill pill--ok">Update</span></td>
+                  <td>Draft a short narrative if the thin note is still groundable; if it is not concrete enough, <strong>Stay blank</strong>.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Empty</td>
+                  <td>Narrative</td>
+                  <td>Not relevant notes</td>
+                  <td><span class="pill pill--neutral">Stay blank</span></td>
+                  <td>Note does not speak to this field → leave empty. Do not invent filler prose.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Empty</td>
+                  <td>Narrative</td>
+                  <td>Conflict within notes</td>
+                  <td><span class="pill pill--open">Model default</span></td>
+                  <td><strong>No dedicated logic in the system prompt</strong> for this case. Behavior relies on the model’s default handling — <strong>test whether results are satisfactory</strong>.</td>
+                </tr>
+
+                <tr style="background:var(--surface-2)">
+                  <td colspan="5" style="font-weight:700;color:var(--ink);font-size:12.5px;letter-spacing:0.02em">EMPTY · DISCRETE <span style="font-weight:500;color:var(--ink-3)">(constrained field blank)</span></td>
+                </tr>
+                <tr>
+                  <td class="td-key">Empty</td>
+                  <td>Discrete</td>
+                  <td>Alternative meaning</td>
+                  <td><span class="pill pill--warn">Update if exact</span></td>
+                  <td>Set the value only when the note (or Smart Description) states that exact answer / matching option. Otherwise <strong>Stay blank</strong> — no guessing.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Empty</td>
+                  <td>Discrete</td>
+                  <td>More detail in notes</td>
+                  <td><span class="pill pill--warn">Update if exact</span></td>
+                  <td>Rich notes help only if they still name an exact value/option for this field. Else <strong>Stay blank</strong>.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Empty</td>
+                  <td>Discrete</td>
+                  <td>Less detail in notes</td>
+                  <td><span class="pill pill--warn">Update if exact</span></td>
+                  <td>Set only if the thin note still states the exact value/option; otherwise <strong>Stay blank</strong>.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Empty</td>
+                  <td>Discrete</td>
+                  <td>Not relevant notes</td>
+                  <td><span class="pill pill--neutral">Stay blank</span></td>
+                  <td>Note unrelated to this field → leave empty.</td>
+                </tr>
+                <tr>
+                  <td class="td-key">Empty</td>
+                  <td>Discrete</td>
+                  <td>Conflict within notes</td>
+                  <td><span class="pill pill--open">Model default</span></td>
+                  <td><strong>No dedicated logic in the system prompt</strong> for this case. Behavior relies on the model’s default handling — <strong>test whether results are satisfactory</strong>.</td>
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div class="callout" style="margin-top:14px">
+            <span class="co-label">Notes relation definitions</span>
+            <ul style="margin:8px 0 0;padding-left:18px">
+              <li><strong>Alternative meaning</strong> — note implies a different interpretation than the current value (or supplies the meaning to write when empty).</li>
+              <li><strong>More detail in notes</strong> — note adds information beyond what is already in the field (or is rich enough to draft from when empty).</li>
+              <li><strong>Less detail in notes</strong> — note is thinner than the current field content (or is sparse when empty). <em>Edge case:</em> inspector manually typed a lot in the form field, then said something thin in the notes — <strong>usually not the case for narrative-driven fields</strong>.</li>
+              <li><strong>Not relevant notes</strong> — note does not speak to this field.</li>
+              <li><strong>Conflict within notes</strong> — note contradicts itself and/or conflicts with the current value. <em>No dedicated system-prompt logic</em> — rely on model default and test if results are satisfactory.</li>
+            </ul>
+          </div>
+          <div class="callout is-warn" style="margin-top:10px">
+            <span class="co-label">Outcome meanings</span>
+            <strong>Update</strong> = write or revise the field from groundable note content.<br>
+            <strong>Keep</strong> = leave the pre-filled value unchanged.<br>
+            <strong>Stay blank</strong> = leave an empty field empty.<br>
+            <strong>Update if exact</strong> = change/fill a discrete field only when the note states that exact value or matching option; otherwise Keep / Stay blank.<br>
+            <strong>Model default</strong> = no dedicated logic in the system prompt; rely on the model’s default behavior and test whether results are satisfactory.
           </div>
         </div>
 

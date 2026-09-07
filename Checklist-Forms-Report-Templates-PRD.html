@@ -922,12 +922,12 @@
 
             .tc-export-btn {
                 appearance: none;
-                border: 1px solid var(--border);
-                background: var(--surface);
+                border: 1px solid var(--accent);
+                background: var(--accent-soft);
                 font-family: inherit;
                 font-size: 12px;
-                font-weight: 600;
-                color: var(--ink);
+                font-weight: 650;
+                color: var(--accent-ink);
                 padding: 8px 14px;
                 border-radius: 9px;
                 cursor: pointer;
@@ -935,10 +935,13 @@
                 display: inline-flex;
                 align-items: center;
                 gap: 7px;
+                flex: none;
+                margin-left: auto;
             }
             .tc-export-btn:hover {
                 border-color: var(--accent);
-                color: var(--accent);
+                background: var(--accent);
+                color: #fff;
             }
             .tc-export-btn svg {
                 width: 14px;
@@ -1789,7 +1792,7 @@ formSchema / specialFormSchema deep-copied  →  field &amp; special field ids p
 </section>
 <section class="panel" id="panel-tests" role="tabpanel">
 <p class="lead" style="margin-bottom:6px">Test cases break down each feature and user journey from this PRD into verifiable web-authoring behavior. Where locking, lifecycle mocks, or preview-only simulation apply, cases are tagged.</p>
-<p style="color:var(--ink-3);font-size:13px;margin:0 0 4px">Format: ID · Priority · Preconditions · Steps · Expected result. Tap any case to expand.</p>
+<p style="color:var(--ink-3);font-size:13px;margin:0 0 12px">Format: ID · Priority · Preconditions · Steps · Expected result. Tap any case to expand. Use <strong style="color:var(--accent-ink)">Download Excel</strong> in the toolbar to export the currently filtered set.</p>
 <div class="tc-toolbar">
   <div class="filter-grp" id="prioFilter">
     <button class="filter-btn is-on" data-p="all">All</button>
@@ -1809,7 +1812,7 @@ formSchema / specialFormSchema deep-copied  →  field &amp; special field ids p
     <input type="search" id="tcSearch" placeholder="Search test cases…" aria-label="Search test cases"/>
   </label>
   <span class="tc-count" id="tcCount"></span>
-  <button type="button" class="tc-export-btn" id="tcExportExcel" title="Download currently filtered test cases as Excel">
+  <button type="button" class="tc-export-btn" id="tcExportExcel" title="Download currently filtered test cases as Excel (.xlsx)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     Download Excel
   </button>
@@ -2739,7 +2742,10 @@ document.querySelectorAll("#tagFilter .filter-btn").forEach(function (b) {
   });
 });
 document.getElementById("tcSearch").addEventListener("input", renderTC);
-document.getElementById("tcExportExcel").addEventListener("click", downloadTCExcel);
+(function () {
+  var btn = document.getElementById("tcExportExcel");
+  if (btn) btn.addEventListener("click", downloadTCExcel);
+})();
 renderTC();
 </script>
 
