@@ -919,6 +919,51 @@
                 white-space: nowrap;
             }
 
+
+            .tc-export-btn {
+                appearance: none;
+                border: 1px solid var(--border);
+                background: var(--surface);
+                font-family: inherit;
+                font-size: 12px;
+                font-weight: 600;
+                color: var(--ink);
+                padding: 8px 14px;
+                border-radius: 9px;
+                cursor: pointer;
+                white-space: nowrap;
+                display: inline-flex;
+                align-items: center;
+                gap: 7px;
+            }
+            .tc-export-btn:hover {
+                border-color: var(--accent);
+                color: var(--accent);
+            }
+            .tc-export-btn svg {
+                width: 14px;
+                height: 14px;
+                flex: none;
+            }
+            .tc-group__note {
+                font-size: 12.5px;
+                color: var(--ink-2);
+                margin: 0 0 12px;
+                padding: 10px 12px;
+                background: var(--warn-soft);
+                border-radius: var(--radius-sm);
+                border: 1px solid var(--border);
+                line-height: 1.45;
+            }
+            .tc-group__note-label {
+                display: inline-block;
+                font-size: 10.5px;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: var(--warn);
+                margin-right: 8px;
+            }
             .tc-group {
                 margin: 26px 0 8px;
             }
@@ -1478,7 +1523,7 @@
         </div>
       </div>
       <nav class="tabs" id="tabs" role="tablist">
-        <button class="tab is-active" data-tab="overview" role="tab">Overview <span class="tab__badge">§1–2</span></button><button class="tab" data-tab="libraries" role="tab">Libraries <span class="tab__badge">§3–4</span></button><button class="tab" data-tab="forms" role="tab">Forms & Specials <span class="tab__badge">§5–6</span></button><button class="tab" data-tab="export" role="tab">Export & Mapping <span class="tab__badge">§7–8</span></button><button class="tab" data-tab="adoption" role="tab">Adoption <span class="tab__badge">§9–10</span></button><button class="tab" data-tab="scenarios" role="tab">Scenarios & Gaps <span class="tab__badge">§11–13</span></button><button class="tab" data-tab="appendix" role="tab">Appendix <span class="tab__badge">§14</span></button>
+        <button class="tab is-active" data-tab="overview" role="tab">Overview <span class="tab__badge">§1–2</span></button><button class="tab" data-tab="libraries" role="tab">Libraries <span class="tab__badge">§3–4</span></button><button class="tab" data-tab="forms" role="tab">Forms & Specials <span class="tab__badge">§5–6</span></button><button class="tab" data-tab="export" role="tab">Export & Mapping <span class="tab__badge">§7–8</span></button><button class="tab" data-tab="adoption" role="tab">Adoption <span class="tab__badge">§9–10</span></button><button class="tab" data-tab="scenarios" role="tab">Scenarios & Gaps <span class="tab__badge">§11–13</span></button><button class="tab" data-tab="appendix" role="tab">Appendix <span class="tab__badge">§14</span></button><button class="tab" data-tab="tests" role="tab">Test Cases <span class="tab__badge">§15</span></button>
       </nav>
     </div>
 
@@ -1742,6 +1787,36 @@ formSchema / specialFormSchema deep-copied  →  field &amp; special field ids p
 </div>
 <footer>Billie Onsite — Checklist, Forms &amp; Report Templates PRD · Living design document · aligned to web app architecture.</footer>
 </section>
+<section class="panel" id="panel-tests" role="tabpanel">
+<p class="lead" style="margin-bottom:6px">Test cases break down each feature and user journey from this PRD into verifiable web-authoring behavior. Where locking, lifecycle mocks, or preview-only simulation apply, cases are tagged.</p>
+<p style="color:var(--ink-3);font-size:13px;margin:0 0 4px">Format: ID · Priority · Preconditions · Steps · Expected result. Tap any case to expand.</p>
+<div class="tc-toolbar">
+  <div class="filter-grp" id="prioFilter">
+    <button class="filter-btn is-on" data-p="all">All</button>
+    <button class="filter-btn" data-p="P0">P0</button>
+    <button class="filter-btn" data-p="P1">P1</button>
+    <button class="filter-btn" data-p="P2">P2</button>
+  </div>
+  <div class="filter-grp" id="tagFilter">
+    <button class="filter-btn is-on" data-t="all">All status</button>
+    <button class="filter-btn" data-t="release">This release</button>
+    <button class="filter-btn" data-t="Partial">Partial</button>
+    <button class="filter-btn" data-t="Future">Future</button>
+    <button class="filter-btn" data-t="Open">Open</button>
+  </div>
+  <label class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+    <input type="search" id="tcSearch" placeholder="Search test cases…" aria-label="Search test cases"/>
+  </label>
+  <span class="tc-count" id="tcCount"></span>
+  <button type="button" class="tc-export-btn" id="tcExportExcel" title="Download currently filtered test cases as Excel">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download Excel
+  </button>
+</div>
+<div id="tcContainer"></div>
+</section>
+
     </div>
   </div>
 </div>
@@ -1776,16 +1851,22 @@ formSchema / specialFormSchema deep-copied  →  field &amp; special field ids p
 })();
 
 /* Outline */
-var outlineLabels={overview:'Overview',libraries:'Libraries',forms:'Forms & Specials',export:'Export & Mapping',adoption:'Adoption',scenarios:'Scenarios & Gaps',appendix:'Appendix'};
+var outlineLabels={overview:'Overview',libraries:'Libraries',forms:'Forms & Specials',export:'Export & Mapping',adoption:'Adoption',scenarios:'Scenarios & Gaps',appendix:'Appendix',tests:'Test Case Groups'};
 var currentOutlineIds=[];
 function buildOutline(tabId){
   var ol=document.getElementById('outline'), lbl=document.getElementById('outlineLabel');
   ol.innerHTML=''; lbl.textContent=outlineLabels[tabId]||'On This Page';
   var panel=document.getElementById('panel-'+tabId);
   var items=[];
-  panel.querySelectorAll('.sec[data-outline]').forEach(function(s){
-    items.push({id:s.id,text:s.getAttribute('data-outline')});
-  });
+  if(tabId==='tests'){
+    panel.querySelectorAll('.tc-group[id]').forEach(function(g){
+      items.push({id:g.id,text:g.getAttribute('data-outline')});
+    });
+  } else {
+    panel.querySelectorAll('.sec[data-outline]').forEach(function(s){
+      items.push({id:s.id,text:s.getAttribute('data-outline')});
+    });
+  }
   if(!items.length){ ol.innerHTML='<li style="padding:6px 12px;font-size:12.5px;color:var(--ink-3)">Single section view</li>'; return; }
   items.forEach(function(it){
     var li=document.createElement('li'), a=document.createElement('a');
@@ -1890,6 +1971,776 @@ buildOutline('overview');
     });
   }
 })();
+</script>
+
+
+<script>
+/* ================= TEST CASE DATA (§15) ================= */
+var TC_GROUPS = [
+  { id: "g-sl", num: "15.1", title: "Solution Library authoring" },
+  { id: "g-tl", num: "15.2", title: "Team Checklist & Forms Library", note: "Locking of adopted templates may not be fully enforced in UI yet — treat as required product behavior." },
+  { id: "g-fb", num: "15.3", title: "Form building (requirement forms)" },
+  { id: "g-sp", num: "15.4", title: "Section special fields (AI summary)" },
+  { id: "g-ex", num: "15.5", title: "Export flags & JSON preview", note: "Looped item / Blank after / Notes are primarily frontend simulation ahead of full backend parity." },
+  { id: "g-rm", num: "15.6", title: "Report template mapping" },
+  { id: "g-ad", num: "15.7", title: "Adoption & ID continuity" },
+  { id: "g-pt", num: "15.8", title: "Permissions & tenancy" },
+  { id: "g-e2e", num: "15.9", title: "End-to-end journeys" },
+];
+
+var TC = [
+  /* 15.1 Solution Library */
+  {
+    g: "g-sl", id: "TC-SL-001", p: "P0", cat: "release",
+    name: "Create regional checklist template draft",
+    pre: "User is a Solution operator with Solution Library access.",
+    steps: [
+      "Open Solution Library → Checklist & Forms templates.",
+      "Create a new checklist template with name, description, and region (e.g. AU).",
+      "Add at least one section and one requirement; save as draft."
+    ],
+    exp: "Draft template is saved in Solution Library; status is DRAFT (not yet visible in team Template library catalogs)."
+  },
+  {
+    g: "g-sl", id: "TC-SL-002", p: "P0", cat: "release",
+    name: "Publish checklist template to regional catalog",
+    pre: "Solution checklist template exists in DRAFT with valid structure.",
+    steps: ["Open the draft checklist template.", "Publish the template."],
+    exp: "Lifecycle becomes PUBLISHED; matching-region teams can see it in Template library (Universal visible to all)."
+  },
+  {
+    g: "g-sl", id: "TC-SL-003", p: "P0", cat: "release",
+    name: "Author and publish Solution form template",
+    pre: "Solution operator in Solution Forms catalog.",
+    steps: [
+      "Create a named form with regions.",
+      "Add standard fields in the form builder (label, options as needed).",
+      "Publish the form template."
+    ],
+    exp: "Published form appears for matching teams to Adopt into Team Forms library."
+  },
+  {
+    g: "g-sl", id: "TC-SL-004", p: "P0", cat: "release",
+    name: "Author Solution report template with checklist binding",
+    pre: "Published Solution checklist template exists; Solution operator can open report authoring.",
+    steps: [
+      "Create a Solution report template (name + regions).",
+      "Open upload / mapping wizard in Solution mode.",
+      "Bind a checklist template, map at least one document tag to a JSON path, save/publish."
+    ],
+    exp: "Published Solution report template stores mappings + optional checklist link for team adoption."
+  },
+  {
+    g: "g-sl", id: "TC-SL-005", p: "P1", cat: "release",
+    name: "Multi-select regions including Universal",
+    pre: "Solution author creating or editing a template.",
+    steps: [
+      "Set regions to Universal only, then to a country code (e.g. AU), then to multiple countries.",
+      "Save / publish each configuration as needed for verification."
+    ],
+    exp: "Universal templates are available to all teams; country-specific templates only appear for matching team owner regions."
+  },
+  {
+    g: "g-sl", id: "TC-SL-006", p: "P1", cat: "Partial",
+    tags: ["Shell maturity"],
+    name: "Tag and Knowledge agent sub-libraries are lighter shells",
+    pre: "Solution operator opens Solution Library hub.",
+    steps: ["Open Tag templates and Knowledge agent templates sub-libraries.", "Compare authoring depth to Checklist & Report."],
+    exp: "Surfaces exist but are thinner / shell-level versus full Checklist & Report authoring (per PRD maturity).",
+    cur: "Product treats these as lighter; do not block release on full parity."
+  },
+
+  /* 15.2 Team Library */
+  {
+    g: "g-tl", id: "TC-TL-001", p: "P0", cat: "release",
+    name: "Create team-authored checklist",
+    pre: "User is a team member with Checklist & Forms access.",
+    steps: [
+      "Open Team Checklist & Forms.",
+      "Create a new checklist.",
+      "Add sections and requirements; save."
+    ],
+    exp: "Checklist appears in team library as team-owned and fully editable."
+  },
+  {
+    g: "g-tl", id: "TC-TL-002", p: "P0", cat: "release",
+    name: "Attach form to requirement (inline or library)",
+    pre: "Team checklist with at least one requirement open in editor.",
+    steps: [
+      "Open a requirement → Form builder.",
+      "Add fields or Clone Form from library.",
+      "Save so form content is persisted with the checklist."
+    ],
+    exp: "Requirement holds formSchema; saving does not leave form stranded only in ephemeral UI state."
+  },
+  {
+    g: "g-tl", id: "TC-TL-003", p: "P0", cat: "release",
+    name: "Team-authored checklist remains editable",
+    pre: "Team-created checklist exists (not adopted).",
+    steps: ["Open the checklist.", "Edit a requirement label and a form field; save."],
+    exp: "Edits succeed; asset remains editable (distinct from locked adopted templates)."
+  },
+  {
+    g: "g-tl", id: "TC-TL-004", p: "P0", cat: "Partial",
+    tags: ["Lock enforcement"],
+    name: "Adopted checklist appears locked vs team-authored",
+    pre: "Team has both a team-authored checklist and an adopted Solution checklist.",
+    steps: [
+      "Open Template library → Use a published Solution checklist.",
+      "Compare library badges / edit affordances for authored vs adopted.",
+      "Attempt to edit structure on the adopted checklist."
+    ],
+    exp: "Adopted asset is marked locked/read-only; structural editors disabled (product intention).",
+    cur: "Locking may not be fully enforced in UI yet — flag gaps; treat read-only as required behavior."
+  },
+  {
+    g: "g-tl", id: "TC-TL-005", p: "P1", cat: "Partial",
+    tags: ["Mock lifecycle"],
+    name: "Team draft/publish UX is preview until real APIs",
+    pre: "Team checklist open; observe status controls if present.",
+    steps: ["Toggle mock DRAFT / PUBLISHED if UI exposes it.", "Reload and confirm persistence source."],
+    exp: "Backend status remains ACTIVE/INACTIVE; frontend mock DRAFT/PUBLISHED may use localStorage until real lifecycle ships.",
+    cur: "Do not treat localStorage mock as production lifecycle."
+  },
+
+  /* 15.3 Form building */
+  {
+    g: "g-fb", id: "TC-FB-001", p: "P0", cat: "release",
+    name: "Add all standard field types from palette",
+    pre: "Requirement form builder open on a team-authored checklist.",
+    steps: [
+      "Add short text, long text, number, date, time, multiple choice, checkboxes, dropdown, file/image, and signature.",
+      "Provide options where required; set labels."
+    ],
+    exp: "All standard types from the PRD field table can be added and saved on the requirement form."
+  },
+  {
+    g: "g-fb", id: "TC-FB-002", p: "P0", cat: "release",
+    name: "Per-field settings order and required flag",
+    pre: "Form builder open with at least one choice field and one text field.",
+    steps: [
+      "For a field, set Label, Placeholder, Smart Description, Options (if applicable), Required.",
+      "Save and reopen the field."
+    ],
+    exp: "Settings persist; Required is honored in authoring model for inspector fill."
+  },
+  {
+    g: "g-fb", id: "TC-FB-003", p: "P0", cat: "release",
+    name: "Save named form into Forms library",
+    pre: "Form builder on a requirement with fields configured.",
+    steps: ["Enter a form name.", "Save to Forms library.", "Open Forms library and locate the form."],
+    exp: "Named form appears in team Forms library for reuse / clone."
+  },
+  {
+    g: "g-fb", id: "TC-FB-004", p: "P0", cat: "release",
+    name: "Clone form onto requirement regenerates field IDs",
+    pre: "Named form exists in team Forms library; target requirement has no form or will be replaced.",
+    steps: [
+      "On a requirement, Clone Form from library.",
+      "Inspect field/option ids in schema (or via export preview / debug) vs library original."
+    ],
+    exp: "Clone mints new form id + field/option UUIDs on the requirement; library entry ids stay unchanged."
+  },
+  {
+    g: "g-fb", id: "TC-FB-005", p: "P1", cat: "release",
+    name: "Label rename changes Carbone slug keys",
+    pre: "Form field with label mapped in a report template (or visible in JSON preview).",
+    steps: [
+      "Note the current label slug in JSON preview.",
+      "Rename the field label and refresh JSON preview / mappings."
+    ],
+    exp: "Export JSON form keys follow the new label slug; prior slug-based tag mappings break until remapped."
+  },
+  {
+    g: "g-fb", id: "TC-FB-006", p: "P0", cat: "release",
+    name: "Include in AI summary opt-in on form field",
+    pre: "Parent section has an AI summary special field with a label; nested requirement form open.",
+    steps: [
+      "On a standard field, toggle Include in AI summary.",
+      "Pick the parent-section AI summary by label.",
+      "Save."
+    ],
+    exp: "Field stores includeInAiSummary + aiSummaryId; summary Included sources lists the field."
+  },
+
+  /* 15.4 Special fields */
+  {
+    g: "g-sp", id: "TC-SP-001", p: "P0", cat: "release",
+    name: "Add AI summary via section Special",
+    pre: "Team or Solution checklist editor open on a section row.",
+    steps: [
+      "Click Special on a section.",
+      "Add AI summary; set label and Smart Description prompt; save."
+    ],
+    exp: "specialFormSchema on the section includes type ai_summary; label appears in nested Include in AI summary pickers."
+  },
+  {
+    g: "g-sp", id: "TC-SP-002", p: "P0", cat: "release",
+    name: "AI summary Included sources unlink",
+    pre: "At least one nested field opted into a section AI summary.",
+    steps: [
+      "Open section Special → AI summary settings.",
+      "Confirm Included sources lists the field.",
+      "Unlink a source and save."
+    ],
+    exp: "Unlinked field no longer targets that aiSummaryId; Included sources updates."
+  },
+  {
+    g: "g-sp", id: "TC-SP-003", p: "P0", cat: "release",
+    name: "Special outputs are not requirement form palette items",
+    pre: "Requirement form builder open.",
+    steps: ["Inspect the left field palette for AI summary / Pivot Table."],
+    exp: "AI summary and pivots are not available as requirement form fields; they are section Special only."
+  },
+  {
+    g: "g-sp", id: "TC-SP-004", p: "P2", cat: "Future",
+    tags: ["Not in this release"],
+    name: "Pivot tables remain concept-only this release",
+    pre: "Section Special dialog open (if pivot placeholders visible).",
+    steps: ["Look for Pivot Table types / builder.", "Confirm no shipping runtime journey is required."],
+    exp: "Pivot tables are Not in this release — high-level concept only; no required E2E ship path."
+  },
+  {
+    g: "g-sp", id: "TC-SP-005", p: "P1", cat: "Partial",
+    tags: ["Runtime lag"],
+    name: "AI summary authoring ahead of full generation runtime",
+    pre: "Checklist with AI summary + opted-in fields saved.",
+    steps: ["Complete authoring wiring.", "Check mobile/backend generation / sp_output if available."],
+    exp: "Authoring wiring is available; full mobile/backend generation may still lag — document Partial if runtime missing.",
+    cur: "Authoring ahead of full runtime; mock AI summary options may appear in demo until Special fields are saved."
+  },
+
+  /* 15.5 Export flags & JSON preview */
+  {
+    g: "g-ex", id: "TC-EX-001", p: "P0", cat: "release",
+    name: "Import library checklist into report mapper",
+    pre: "Team has a library checklist; Export / Report Template Mapper open.",
+    steps: [
+      "Upload or select a DOCX/XLSX.",
+      "In checklist panel, choose Import library… and select a team checklist."
+    ],
+    exp: "Mapper session clones the checklist structure into the preview/mapping context."
+  },
+  {
+    g: "g-ex", id: "TC-EX-002", p: "P0", cat: "Partial",
+    tags: ["Preview simulation"],
+    name: "Looped item repeats finding block ×3 in JSON preview",
+    pre: "Mapper or checklist editor with a finding requirement; JSON preview visible.",
+    steps: [
+      "Mark requirement as Looped item.",
+      "Refresh / open JSON preview."
+    ],
+    exp: "Finding block repeats ×3 in export JSON preview (DEFAULT_REQUIREMENT_LOOP_COUNT).",
+    cur: "Frontend simulation; full backend parity may lag."
+  },
+  {
+    g: "g-ex", id: "TC-EX-003", p: "P0", cat: "Partial",
+    tags: ["Preview simulation"],
+    name: "Blank after inserts spacer notes row in preview",
+    pre: "Requirement visible in mapper checklist panel.",
+    steps: ["Enable Blank after on a requirement.", "Inspect JSON preview after that requirement."],
+    exp: "A blank notes item (text + photo placeholders) appears after the requirement in preview JSON.",
+    cur: "Frontend simulation ahead of full backend parity."
+  },
+  {
+    g: "g-ex", id: "TC-EX-004", p: "P0", cat: "Partial",
+    tags: ["Preview simulation"],
+    name: "Notes samples appear as wis_detail content",
+    pre: "Requirement in mapper checklist panel.",
+    steps: ["Open Notes; add text and/or image sample notes.", "Inspect JSON preview content arrays."],
+    exp: "Preview shows onsite notes separate from form answers (simulating wis_detail[].content[]).",
+    cur: "Preview-only samples; do not change production inspection history."
+  },
+  {
+    g: "g-ex", id: "TC-EX-005", p: "P0", cat: "release",
+    name: "Project sync populates project_info in JSON preview",
+    pre: "Team has a project with name/code/client (and optional custom metadata); mapper open.",
+    steps: [
+      "Open Project picker and select the project.",
+      "Inspect project_info / metadata in JSON preview."
+    ],
+    exp: "project_info (and configured metadata) populate from the selected project instead of empty stubs."
+  },
+  {
+    g: "g-ex", id: "TC-EX-006", p: "P0", cat: "release",
+    name: "Form sample values keyed by label slugs",
+    pre: "Requirement form with labeled fields; sample values present or Magic Wand filled.",
+    steps: ["Open JSON preview and locate form answer objects."],
+    exp: "Form value keys use label slugs, not field UUIDs."
+  },
+  {
+    g: "g-ex", id: "TC-EX-007", p: "P1", cat: "release",
+    name: "Magic Wand fills eligible blank sample form fields",
+    pre: "Mapper JSON preview with blank eligible form sample fields.",
+    steps: ["Run Magic Wand fill on sample form fields.", "Inspect denser preview values."],
+    exp: "Eligible blank sample fields receive AI-assisted values for mapping density."
+  },
+  {
+    g: "g-ex", id: "TC-EX-008", p: "P1", cat: "Partial",
+    tags: ["Heuristic"],
+    name: "From template and Blank checklist bootstrap",
+    pre: "Mapper open without a bound report-template path that disables Blank.",
+    steps: [
+      "Try From template to generate a mock tree from the uploaded document.",
+      "Try Blank to start an empty local checklist."
+    ],
+    exp: "Both bootstrap paths establish a structure for mapping; From template may remain heuristic/mock in places; Blank may be disabled in some flows (e.g. report template ID).",
+    cur: "Heuristic/mock in places; Blank disabled in some flows."
+  },
+
+  /* 15.6 Report mapping */
+  {
+    g: "g-rm", id: "TC-RM-001", p: "P0", cat: "release",
+    name: "Detect tags in uploaded document template",
+    pre: "DOCX/XLSX with Carbone-style tags prepared.",
+    steps: ["Upload / select the document in the mapper.", "Review detected tags list."],
+    exp: "Document tags are detected and available for binding (Billie-suggested tags optional)."
+  },
+  {
+    g: "g-rm", id: "TC-RM-002", p: "P0", cat: "release",
+    name: "Bind document tag to JSON path",
+    pre: "Mapper has checklist JSON preview and detected tags.",
+    steps: [
+      "Select a tag.",
+      "Bind it to a JSON path from the preview tree.",
+      "Validate preview shows the linked path."
+    ],
+    exp: "PathKeyMapping stores jsonPath ↔ tagId/tagKey; preview reflects the binding."
+  },
+  {
+    g: "g-rm", id: "TC-RM-003", p: "P0", cat: "release",
+    name: "Save/publish team export template",
+    pre: "At least one tag mapped; checklist linked in mapper session.",
+    steps: ["Save/publish the export template for the team."],
+    exp: "Team export template persists Carbone template id + checklist link + mappings."
+  },
+  {
+    g: "g-rm", id: "TC-RM-004", p: "P0", cat: "release",
+    name: "Use Solution report adopts linked checklist first",
+    pre: "Published Solution report template linked to a Solution checklist; team in matching region.",
+    steps: [
+      "From Team Template Library, Use the Solution report template.",
+      "Observe adopt + export template creation."
+    ],
+    exp: "System adopts the linked checklist into the team (locked) before/while creating the team export template."
+  },
+  {
+    g: "g-rm", id: "TC-RM-005", p: "P0", cat: "release",
+    name: "Team export never stores raw Solution checklist id",
+    pre: "Publish/use flow that starts from a Solution checklist template id.",
+    steps: [
+      "Complete adopt-on-link / publish wizard.",
+      "Inspect resulting team export template checklist_id."
+    ],
+    exp: "checklist_id references the team-adopted checklist, not the raw Solution checklist template id."
+  },
+
+  /* 15.7 Adoption */
+  {
+    g: "g-ad", id: "TC-AD-001", p: "P0", cat: "release",
+    name: "Adopt checklist via Template library Use (client clone)",
+    pre: "Published Solution checklist visible to the team; team Checklist library open.",
+    steps: ["Template library → Use checklist template.", "Open the new team library row."],
+    exp: "New team-owned checklist set is created; nested section/requirement ids preserved on client clone path; asset intended locked."
+  },
+  {
+    g: "g-ad", id: "TC-AD-002", p: "P0", cat: "release",
+    name: "Nested IDs preserved; checklist set id is new",
+    pre: "Known Solution checklist with recorded section/requirement ids.",
+    steps: [
+      "Adopt via Team Checklist → Template library → Use.",
+      "Compare section/requirement ids and checklist set id to Solution source."
+    ],
+    exp: "Section/requirement ids match Solution; checklist set id is new for the team."
+  },
+  {
+    g: "g-ad", id: "TC-AD-003", p: "P0", cat: "release",
+    name: "Solution original unchanged after adopt",
+    pre: "Published Solution checklist; team about to adopt.",
+    steps: [
+      "Note Solution template content/status.",
+      "Adopt into team.",
+      "Re-open Solution Library template."
+    ],
+    exp: "Solution original is not mutated; adopt writes only into the adopting team."
+  },
+  {
+    g: "g-ad", id: "TC-AD-004", p: "P0", cat: "Partial",
+    tags: ["Lock enforcement", "Not ready for testing"],
+    name: "Adopted checklist cannot be structurally edited",
+    pre: "Adopted locked checklist in team library.",
+    steps: [
+      "Attempt to edit tree, embedded forms, or special fields.",
+      "Look for lock badge / provenance (“Adopted from …”)."
+    ],
+    exp: "Editors disabled; lock badge + source template shown (product intention).",
+    cur: "Enforcement may lag — mark failed until lock UX ships; still required behavior."
+  },
+  {
+    g: "g-ad", id: "TC-AD-005", p: "P0", cat: "Partial",
+    tags: ["Lock enforcement"],
+    name: "Adopt Solution form into team Forms library as locked",
+    pre: "Published Solution form visible in Template Library.",
+    steps: ["Team Forms → Template Library → Adopt form.", "Open the team library entry."],
+    exp: "New team form library id created; entry is locked with optional sourceSolutionFormTemplateId provenance.",
+    cur: "Prefer attach-without-structural-edit; enforcement may lag."
+  },
+  {
+    g: "g-ad", id: "TC-AD-006", p: "P0", cat: "Open",
+    tags: ["Product risk"],
+    name: "Client clone vs API adopt ID semantics agree",
+    pre: "Same Solution checklist can be adopted via Template library Use and via export/report adopt API.",
+    steps: [
+      "Adopt once via client clone path; record nested ids.",
+      "Adopt via export/report adoptSolutionChecklistTemplate path (separate team or reset).",
+      "Compare nested id policy."
+    ],
+    exp: "Both paths preserve nested ids consistently so mappings/specials keep working.",
+    cur: "Dual paths may diverge — open product risk until unified."
+  },
+  {
+    g: "g-ad", id: "TC-AD-007", p: "P2", cat: "Future",
+    tags: ["Not in this release"],
+    name: "Detach / create editable copy",
+    pre: "Adopted locked checklist in team library.",
+    steps: ["Look for Detach / Create editable copy."],
+    exp: "Not shipped this release; future escape hatch with remapping warnings."
+  },
+  {
+    g: "g-ad", id: "TC-AD-008", p: "P1", cat: "Future",
+    tags: ["Not in this release"],
+    name: "Re-adopt / update from Solution when template changes",
+    pre: "Team previously adopted a Solution checklist; Solution publishes a new version.",
+    steps: ["Look for update / re-adopt from Solution flow."],
+    exp: "No silent overwrite; explicit future upgrade path (not this release)."
+  },
+
+  /* 15.8 Permissions */
+  {
+    g: "g-pt", id: "TC-PT-001", p: "P0", cat: "Partial",
+    tags: ["Allowlist"],
+    name: "Solution operator can open Solution Library",
+    pre: "User is on Solution allowlist / Solution operator role.",
+    steps: ["Sign in and navigate to Solution Library."],
+    exp: "Solution Library hub is accessible.",
+    cur: "Access may still lean on email allowlist rather than full RBAC."
+  },
+  {
+    g: "g-pt", id: "TC-PT-002", p: "P0", cat: "Partial",
+    tags: ["Allowlist"],
+    name: "Ordinary team member cannot author Solution assets",
+    pre: "User is a normal team member (not Solution operator).",
+    steps: ["Attempt to open Solution Library authoring."],
+    exp: "Solution authoring is not available; user sees Team Checklist & Forms + regional Template library only.",
+    cur: "Depends on allowlist/RBAC maturity."
+  },
+  {
+    g: "g-pt", id: "TC-PT-003", p: "P0", cat: "release",
+    name: "Regional catalog filters by team owner country",
+    pre: "Published AU-only and Universal Solution templates; team owner country = AU (and optionally a non-AU team).",
+    steps: [
+      "As AU team, open Template library and list available templates.",
+      "As non-AU team (if available), confirm AU-only templates are hidden; Universal still visible."
+    ],
+    exp: "Server filters catalogs by team owner country / Universal."
+  },
+  {
+    g: "g-pt", id: "TC-PT-004", p: "P0", cat: "release",
+    name: "Team assets scoped to active team",
+    pre: "User belongs to more than one team with different checklists (if available).",
+    steps: ["Switch active team.", "Open Checklist & Forms library."],
+    exp: "Only the active team’s assets are shown; adopt writes into the active team."
+  },
+
+  /* 15.9 E2E */
+  {
+    g: "g-e2e", id: "TC-E2E-001", p: "P0", cat: "release",
+    name: "Ship regional checklist + report end to end",
+    pre: "Solution operator + matching-region team; Carbone/export path available.",
+    steps: [
+      "Solution: author AU checklist template → publish.",
+      "Solution: author report template mapped to that checklist JSON → publish.",
+      "Team (AU): Use report from Template Library → confirm linked checklist adopted locked → team export template created.",
+      "Run inspection / export path as available to confirm mappings resolve."
+    ],
+    exp: "Matched Solution checklist+report pair lands in team as locked checklist + export template usable for export."
+  },
+  {
+    g: "g-e2e", id: "TC-E2E-002", p: "P0", cat: "Partial",
+    tags: ["Lock enforcement"],
+    name: "Start from Solution checklist only",
+    pre: "Published Solution checklist for team region.",
+    steps: [
+      "Team Checklist & Forms → Template library → Use checklist.",
+      "Confirm new set id, preserved nested ids, locked.",
+      "Use on project / report mapping without structural edits."
+    ],
+    exp: "Adopted checklist usable without editing; lock enforced per product intention.",
+    cur: "Lock enforcement may lag."
+  },
+  {
+    g: "g-e2e", id: "TC-E2E-003", p: "P0", cat: "release",
+    name: "Build forms + AI summary + mapper preview",
+    pre: "Team-authored checklist editor and report mapper available.",
+    steps: [
+      "Create section + nested requirements; build standard forms.",
+      "Mark finding requirements Looped item where needed.",
+      "Section → Special → AI summary; opt fields into Include in AI summary.",
+      "In report mapper: import checklist, sync project, preview JSON (loops/notes/blanks), map at least one tag."
+    ],
+    exp: "Authoring + preview journey completes; pivot tables not required (Not in this release)."
+  },
+  {
+    g: "g-e2e", id: "TC-E2E-004", p: "P1", cat: "Partial",
+    tags: ["Lock enforcement"],
+    name: "Reuse adopted Solution form on many requirements",
+    pre: "Published Solution form; team Forms library.",
+    steps: [
+      "Adopt form into team Forms as locked.",
+      "Attach/use that form on multiple requirements without structural edit.",
+      "Confirm labels/slugs stay consistent across requirements."
+    ],
+    exp: "Same locked schema reused; Carbone slugs remain consistent because schema is not team-edited.",
+    cur: "Exact attach UX TBD with lock enforcement."
+  }
+];
+
+var catPill = { release: "pill--ok", Partial: "pill--warn", Future: "pill--future", Open: "pill--open" };
+function esc(s) {
+  return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function getFilteredTC() {
+  var fp = document.querySelector("#prioFilter .is-on").dataset.p;
+  var ft = document.querySelector("#tagFilter .is-on").dataset.t;
+  var q = (document.getElementById("tcSearch").value || "").toLowerCase().trim();
+  var out = [];
+  TC_GROUPS.forEach(function (grp) {
+    TC.filter(function (t) { return t.g === grp.id; })
+      .filter(function (t) {
+        if (fp !== "all" && t.p !== fp) return false;
+        if (ft !== "all") {
+          if (ft === "release") { if (t.cat !== "release") return false; }
+          else if (t.cat !== ft) return false;
+        }
+        if (q) {
+          var hay = (t.id + " " + t.name + " " + t.pre + " " + t.exp + " " + (t.cur || "") + " " + (t.tags || []).join(" ") + " " + t.steps.join(" ")).toLowerCase();
+          if (hay.indexOf(q) < 0) return false;
+        }
+        return true;
+      })
+      .forEach(function (t) { out.push(t); });
+  });
+  return out;
+}
+function formatStepsForExcel(steps) {
+  return (steps || []).map(function (s, i) { return (i + 1) + ". " + s; }).join("\n");
+}
+function buildTCExportRows() {
+  var cases = getFilteredTC();
+  var aoa = [["#", "test case title", "pre", "steps", "expected", "Tester Observations"]];
+  cases.forEach(function (t, i) {
+    aoa.push([
+      String(i + 1),
+      t.id + " - " + t.name,
+      t.pre || "",
+      formatStepsForExcel(t.steps),
+      t.exp + (t.cur ? "\n\nCurrent build: " + t.cur : ""),
+      ""
+    ]);
+  });
+  return { cases: cases, aoa: aoa };
+}
+function triggerDownload(blob, filename) {
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url; a.download = filename; a.rel = "noopener";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+}
+function u8(str) { return new TextEncoder().encode(str); }
+function crc32(buf) {
+  var table = crc32._t;
+  if (!table) {
+    table = crc32._t = new Uint32Array(256);
+    for (var n = 0; n < 256; n++) {
+      var c = n;
+      for (var k = 0; k < 8; k++) c = c & 1 ? (0xedb88320 ^ (c >>> 1)) : c >>> 1;
+      table[n] = c;
+    }
+  }
+  var crc = 0 ^ -1;
+  for (var i = 0; i < buf.length; i++) crc = (crc >>> 8) ^ table[(crc ^ buf[i]) & 0xff];
+  return (crc ^ -1) >>> 0;
+}
+function zipStore(files) {
+  var parts = [], central = [], offset = 0;
+  function pushBytes(arr) { parts.push(arr); offset += arr.length; }
+  function u16(n) { return new Uint8Array([n & 255, (n >>> 8) & 255]); }
+  function u32(n) { return new Uint8Array([n & 255, (n >>> 8) & 255, (n >>> 16) & 255, (n >>> 24) & 255]); }
+  files.forEach(function (f) {
+    var data = typeof f.data === "string" ? u8(f.data) : f.data;
+    var name = u8(f.name);
+    var crc = crc32(data);
+    var localOffset = offset;
+    pushBytes(u32(0x04034b50));
+    pushBytes(u16(20)); pushBytes(u16(0)); pushBytes(u16(0));
+    pushBytes(u16(0)); pushBytes(u16(0));
+    pushBytes(u32(crc)); pushBytes(u32(data.length)); pushBytes(u32(data.length));
+    pushBytes(u16(name.length)); pushBytes(u16(0));
+    pushBytes(name); pushBytes(data);
+    central.push({ name: name, data: data, crc: crc, offset: localOffset });
+  });
+  var centralStart = offset;
+  central.forEach(function (e) {
+    pushBytes(u32(0x02014b50));
+    pushBytes(u16(20)); pushBytes(u16(20)); pushBytes(u16(0)); pushBytes(u16(0));
+    pushBytes(u16(0)); pushBytes(u16(0));
+    pushBytes(u32(e.crc)); pushBytes(u32(e.data.length)); pushBytes(u32(e.data.length));
+    pushBytes(u16(e.name.length)); pushBytes(u16(0)); pushBytes(u16(0));
+    pushBytes(u16(0)); pushBytes(u16(0)); pushBytes(u32(0)); pushBytes(u32(e.offset));
+    pushBytes(e.name);
+  });
+  var centralSize = offset - centralStart;
+  pushBytes(u32(0x06054b50));
+  pushBytes(u16(0)); pushBytes(u16(0));
+  pushBytes(u16(central.length)); pushBytes(u16(central.length));
+  pushBytes(u32(centralSize)); pushBytes(u32(centralStart)); pushBytes(u16(0));
+  var total = 0; parts.forEach(function (p) { total += p.length; });
+  var out = new Uint8Array(total), pos = 0;
+  parts.forEach(function (p) { out.set(p, pos); pos += p.length; });
+  return out;
+}
+function colLetter(n) {
+  var s = ""; n += 1;
+  while (n > 0) { var m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); }
+  return s;
+}
+function xmlText(s) {
+  return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\r\n|\r|\n/g, "&#10;");
+}
+function buildXlsxBlob(aoa) {
+  var sheetRows = [];
+  aoa.forEach(function (row, r) {
+    var cells = [];
+    row.forEach(function (val, c) {
+      var ref = colLetter(c) + (r + 1);
+      cells.push('<c r="' + ref + '" t="inlineStr"><is><t xml:space="preserve">' + xmlText(val) + "</t></is></c>");
+    });
+    sheetRows.push('<row r="' + (r + 1) + '">' + cells.join("") + "</row>");
+  });
+  var lastCol = colLetter((aoa[0] || []).length - 1);
+  var lastRow = aoa.length;
+  var sheet = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+    '<dimension ref="A1:' + lastCol + lastRow + '"/>' +
+    '<sheetData>' + sheetRows.join("") + "</sheetData></worksheet>";
+  var workbook = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">' +
+    '<sheets><sheet name="Test Cases" sheetId="1" r:id="rId1"/></sheets></workbook>';
+  var contentTypes = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
+    '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>' +
+    '<Default Extension="xml" ContentType="application/xml"/>' +
+    '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>' +
+    '<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>' +
+    "</Types>";
+  var rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+    '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>' +
+    "</Relationships>";
+  var wbRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+    '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>' +
+    "</Relationships>";
+  var bytes = zipStore([
+    { name: "[Content_Types].xml", data: contentTypes },
+    { name: "_rels/.rels", data: rels },
+    { name: "xl/workbook.xml", data: workbook },
+    { name: "xl/_rels/workbook.xml.rels", data: wbRels },
+    { name: "xl/worksheets/sheet1.xml", data: sheet }
+  ]);
+  return new Blob([bytes], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+}
+function downloadTCExcel() {
+  var built = buildTCExportRows();
+  if (!built.cases.length) { alert("No test cases match the current filters."); return; }
+  var stamp = new Date().toISOString().slice(0, 10);
+  try {
+    triggerDownload(buildXlsxBlob(built.aoa), "Checklist-Forms-Report-Templates-Test-Cases-" + stamp + ".xlsx");
+  } catch (err) {
+    console.error(err);
+    alert("Excel export failed. Please refresh and try again.");
+  }
+}
+function renderTC() {
+  var cont = document.getElementById("tcContainer");
+  if (!cont) return;
+  var rowsByGroup = {}, shown = 0;
+  getFilteredTC().forEach(function (t) {
+    if (!rowsByGroup[t.g]) rowsByGroup[t.g] = [];
+    rowsByGroup[t.g].push(t);
+    shown++;
+  });
+  cont.innerHTML = "";
+  TC_GROUPS.forEach(function (grp) {
+    var rows = rowsByGroup[grp.id] || [];
+    if (!rows.length) return;
+    var g = document.createElement("div");
+    g.className = "tc-group";
+    g.id = grp.id;
+    g.setAttribute("data-outline", grp.num + " · " + grp.title);
+    g.innerHTML = '<h3 class="tc-group__t"><span class="g-num">' + grp.num + "</span>" + esc(grp.title) + "</h3>" +
+      (grp.note ? '<p class="tc-group__note"><span class="tc-group__note-label">Note</span>' + esc(grp.note) + "</p>" : "");
+    var list = document.createElement("div");
+    list.className = "tc-list";
+    rows.forEach(function (t) {
+      var tagsHtml = (t.tags || []).map(function (tag) {
+        return '<span class="pill ' + (catPill[t.cat] || "pill--neutral") + '">' + esc(tag) + "</span>";
+      }).join("");
+      var card = document.createElement("div");
+      card.className = "tc-card";
+      card.innerHTML =
+        '<div class="tc-card__top">' +
+        '<span class="tc-prio ' + t.p + '">' + t.p + "</span>" +
+        '<div class="tc-hd"><span class="tc-id">' + t.id + "</span>" +
+        '<div class="tc-name">' + esc(t.name) + "</div>" +
+        (tagsHtml ? '<div class="tc-tags">' + tagsHtml + "</div>" : "") +
+        "</div>" +
+        '<svg class="tc-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>' +
+        "</div>" +
+        '<div class="tc-body"><dl>' +
+        "<dt>Pre</dt><dd>" + esc(t.pre) + "</dd>" +
+        "<dt>Steps</dt><dd><ol>" + t.steps.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol></dd>" +
+        '<dt>Expected</dt><dd class="tc-exp">' + esc(t.exp) +
+        (t.cur ? '<span class="tc-cur"><b>Current build:</b> ' + esc(t.cur) + "</span>" : "") +
+        "</dd></dl></div>";
+      card.querySelector(".tc-card__top").addEventListener("click", function () { card.classList.toggle("is-open"); });
+      list.appendChild(card);
+    });
+    g.appendChild(list);
+    cont.appendChild(g);
+  });
+  if (!shown) cont.innerHTML = '<div class="tc-empty">No test cases match these filters.</div>';
+  document.getElementById("tcCount").textContent = shown + " of " + TC.length + " cases";
+  if (document.getElementById("panel-tests").classList.contains("is-active")) buildOutline("tests");
+}
+document.querySelectorAll("#prioFilter .filter-btn").forEach(function (b) {
+  b.addEventListener("click", function () {
+    document.querySelectorAll("#prioFilter .filter-btn").forEach(function (x) { x.classList.remove("is-on"); });
+    b.classList.add("is-on");
+    renderTC();
+  });
+});
+document.querySelectorAll("#tagFilter .filter-btn").forEach(function (b) {
+  b.addEventListener("click", function () {
+    document.querySelectorAll("#tagFilter .filter-btn").forEach(function (x) { x.classList.remove("is-on"); });
+    b.classList.add("is-on");
+    renderTC();
+  });
+});
+document.getElementById("tcSearch").addEventListener("input", renderTC);
+document.getElementById("tcExportExcel").addEventListener("click", downloadTCExcel);
+renderTC();
 </script>
 
 </body>
