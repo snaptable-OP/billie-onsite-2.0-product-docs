@@ -1178,6 +1178,208 @@
                 }
             }
         </style>
+
+<style>
+  /* ----- Readability enhancements ----- */
+  .panel > .lead {
+    font-size: 16.5px;
+    max-width: 68ch;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, var(--accent-soft), var(--surface));
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+  #panel-req .sec {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 12px;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  #panel-req .sec.is-open {
+    box-shadow: var(--shadow);
+    border-color: var(--border-strong);
+  }
+  #panel-req .sec > hr.divider,
+  #panel-req .sec > .divider {
+    display: none;
+  }
+  #panel-req .sec__head {
+    display: flex;
+    gap: 13px;
+    align-items: center;
+    margin: 0;
+    padding: 4px 0;
+    border-bottom: none;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 8px;
+  }
+  #panel-req .sec__head:hover {
+    background: color-mix(in srgb, var(--accent-soft) 35%, transparent);
+  }
+  #panel-req .sec__head:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  #panel-req .sec.is-open .sec__head {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  #panel-req .sec__num {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    display: grid;
+    place-items: center;
+    padding-top: 0;
+    font-size: 12px;
+  }
+  #panel-req .sec__chev {
+    margin-left: auto;
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    color: var(--ink-3);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    transition: transform 0.2s ease, color 0.15s ease, background 0.15s ease;
+  }
+  #panel-req .sec.is-open .sec__chev {
+    transform: rotate(90deg);
+    color: var(--accent-ink);
+    background: var(--accent-soft);
+    border-color: transparent;
+  }
+  #panel-req .sec__body {
+    display: none;
+  }
+  #panel-req .sec.is-open .sec__body {
+    display: block;
+  }
+  #panel-req .sec-accordion-hint {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin: 0 0 14px;
+  }
+  .subsec {
+    margin: 14px 0;
+    padding: 14px 16px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+  .subsec > h3:first-child {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .subsec > h3:first-child::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    flex: none;
+    background: currentColor;
+    opacity: 0.55;
+  }
+  .subsec--intent > h3:first-child { color: var(--ok); }
+  .subsec--features > h3:first-child { color: var(--future); }
+  .subsec--limits > h3:first-child { color: var(--warn); }
+  .subsec--journey > h3:first-child { color: var(--open); }
+  .subsec > h3:first-child .h3num { color: inherit; opacity: 0.85; }
+  .subsec--intent {
+    border-left: 4px solid var(--ok);
+    background: color-mix(in srgb, var(--ok-soft) 55%, var(--surface));
+  }
+  .subsec--features {
+    border-left: 4px solid var(--future);
+    background: color-mix(in srgb, var(--future-soft) 45%, var(--surface));
+  }
+  .subsec--limits {
+    border-left: 4px solid var(--warn);
+    background: color-mix(in srgb, var(--warn-soft) 50%, var(--surface));
+  }
+  .subsec--journey {
+    border-left: 4px solid var(--open);
+    background: color-mix(in srgb, var(--open-soft) 45%, var(--surface));
+  }
+  #panel-req .sec h4 {
+    margin: 16px 0 8px;
+    padding: 0 0 6px;
+    font-size: 13.5px;
+    font-weight: 650;
+    color: var(--ink);
+    border-bottom: 1px dashed var(--border-strong);
+    background: transparent;
+  }
+  #panel-req .tbl-wrap {
+    margin: 12px 0 14px;
+    box-shadow: var(--shadow-sm);
+  }
+  #panel-req .tbl-wrap table thead th {
+    background: color-mix(in srgb, var(--accent-soft) 70%, var(--surface-2));
+  }
+  #panel-req .callout {
+    box-shadow: var(--shadow-sm);
+  }
+  #panel-req .legend {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 14px 16px;
+    margin: 10px 0 14px;
+    align-items: center;
+  }
+  #panel-req footer,
+  .panel footer {
+    margin-top: 8px;
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    border: 1px dashed var(--border-strong);
+  }
+  #panel-req .flow {
+    margin: 14px 0;
+    padding: 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+  #panel-req .tc-grid {
+    margin: 12px 0;
+  }
+  #panel-todo .tbl-wrap,
+  #panel-open .tbl-wrap {
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  #panel-tests .lead {
+    font-size: 16.5px;
+    max-width: 68ch;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, var(--accent-soft), var(--surface));
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+</style>
+
     </head>
     <body>
         <div class="app">
@@ -1281,9 +1483,12 @@
                     <!-- ================= TAB 1: MAIN REQUIREMENTS ================= -->
                     <section class="panel is-active" id="panel-req" role="tabpanel">
                         <p class="lead" style="margin-bottom: 22px">
-                            This document refines the original Usage Phase PRD with user journeys, data-model clarity, platform
-                            constraints, and implementation status grounded in the current mobile codebase. Where
-                            <em>target behavior</em> and <em>current build</em> diverge, both are called out.
+                            This document refines the Usage Phase PRD with user journeys, data-model clarity, platform
+                            constraints, and implementation status grounded in the current mobile codebase—including
+                            <strong>sync / Progress review</strong>, <strong>AI attribution</strong> (AI-modified + Tap to undo),
+                            the <strong>host / collaborator notes</strong> collaboration model, and batch-2 mobile features
+                            (camera, markup, image-to-text on notes, Progress / Reports search, unsynced export guardrails).
+                            Where <em>target behavior</em> and <em>current build</em> diverge, both are called out.
                         </p>
 
                         <div class="stat-row">
@@ -1313,8 +1518,14 @@
                             <span class="pill pill--future">Future</span>
                             <span class="pill pill--open">Open decision</span>
                         </div>
-
-                        <hr class="divider" />
+                        <div class="legend" style="margin-top: 8px">
+                            <strong style="color: var(--ink)">How to read each section:</strong>
+                            <span class="pill pill--ok">Design intent</span>
+                            <span class="pill pill--future">Feature descriptions</span>
+                            <span class="pill pill--warn">Limitations</span>
+                            <span class="pill pill--open">User journey</span>
+                        </div>
+                        <p class="sec-accordion-hint">Click a section title to expand it. Only one section stays open at a time — use the outline on the left to jump.</p>
 
                         <!-- §1 Purpose -->
                         <div class="sec" id="s-purpose" data-outline="1 · Purpose">
@@ -1430,6 +1641,21 @@
                                             <td>Tracked issue</td>
                                             <td><code>WIS</code> / published issue</td>
                                         </tr>
+                                        <tr>
+                                            <td class="td-key">AI summary field</td>
+                                            <td>Special AI summary (e.g. Closing summary)</td>
+                                            <td><code>ai_summary</code> form field type</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Progress</td>
+                                            <td>Progress (item list drawer)</td>
+                                            <td>Walk Progress UI — completion, sync, AI signals</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Sync status</td>
+                                            <td>Synced / pending / failed icons</td>
+                                            <td><code>SENT</code> · <code>PENDING</code>/<code>UPLOADING</code> · <code>FAILED</code></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -1448,14 +1674,23 @@
                                 <h2>Inspection lifecycle</h2>
                             </div>
 
-                            <h3><span class="h3num">6.1</span>Terminology</h3>
-                            <p>Rename <strong>Journal</strong> to <strong>Inspections</strong> throughout the product.</p>
+                            <h3><span class="h3num">6.1</span>Design intent</h3>
                             <p>
+                                Give inspectors a clear, filterable lifecycle for every inspection—from empty/scheduled through
+                                active capture to completed—while separating <strong>inspection lifecycle</strong> from
+                                <strong>report publish status</strong>. Rename <strong>Journal</strong> →
+                                <strong>Inspections</strong> in the product surface.
+                            </p>
+
+                            <h3><span class="h3num">6.2</span>Feature descriptions</h3>
+                            <h4>Terminology</h4>
+                            <p>
+                                Rename <strong>Journal</strong> to <strong>Inspections</strong> throughout the product.
                                 <span class="pill pill--warn">Partial</span>&nbsp; Tab = Inspections; legacy strings and API
                                 identifiers remain.
                             </p>
 
-                            <h3><span class="h3num">6.2</span>Statuses</h3>
+                            <h4>Lifecycle statuses</h4>
                             <div class="tbl-wrap">
                                 <table>
                                     <thead>
@@ -1493,10 +1728,10 @@
                                 </table>
                             </div>
 
-                            <h3>
-                                <span class="h3num">6.3</span>Report status
+                            <h4>
+                                Report status
                                 <span style="font-weight: 400; color: var(--ink-3); font-size: 13px">(secondary axis)</span>
-                            </h3>
+                            </h4>
                             <p>Separate from lifecycle, report status currently intrinsically indicates:</p>
                             <div class="tbl-wrap">
                                 <table>
@@ -1529,20 +1764,35 @@
                                 future.
                             </div>
 
-                            <h3><span class="h3num">6.4</span>Inspection list journey</h3>
+                            <h3><span class="h3num">6.3</span>Limitations</h3>
+                            <ul>
+                                <li>Future-date <strong>Scheduled</strong> inspections are not implemented (<code>scheduledAt</code> unused).</li>
+                                <li>
+                                    <strong>Completed</strong> can mean archive, workspace publish, or report export—canonical
+                                    rule is still open (§12 / §20).
+                                </li>
+                                <li>Report status is computed but not shown on list cards.</li>
+                                <li>Journal → Inspections rename is partial (tab label vs legacy copy and API IDs).</li>
+                                <li>
+                                    Report template name is modeled on cards but often shows “No report template” because export
+                                    choice is not persisted to inspection metadata after export.
+                                </li>
+                            </ul>
+
+                            <h3><span class="h3num">6.4</span>User journey expected</h3>
                             <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
                                 <li>Inspector opens <strong>Inspections</strong> tab.</li>
                                 <li>Filters by <strong>Scheduled / In progress / Completed</strong>.</li>
                                 <li>
-                                    Card shows checklist name; report template name is modeled but often shows “No report
-                                    template” because export choice is not persisted to inspection metadata after export.
+                                    Card shows checklist name; report template name may show “No report template” if export choice
+                                    was not persisted.
                                 </li>
                                 <li>Swipe archive toggles lifecycle locally (optimistic).</li>
+                                <li>
+                                    An inspection started directly on site appears as <strong>In Progress</strong> once the
+                                    inspector begins entering data.
+                                </li>
                             </ol>
-                            <p>
-                                An inspection started directly on site appears as <strong>In Progress</strong> once the inspector
-                                begins entering data.
-                            </p>
                         </div>
 
                         <!-- §7 Core onsite workflow -->
@@ -1552,11 +1802,15 @@
                                 <h2>Core onsite workflow</h2>
                             </div>
 
-                            <h3><span class="h3num">7.1</span>Start inspection</h3>
+                            <h3><span class="h3num">7.1</span>Design intent</h3>
                             <p>
-                                Inspectors must be able to begin without an office user creating or scheduling the record first.
+                                Inspectors must be able to begin an inspection on site without an office user creating or
+                                scheduling the record first—then capture, get AI help when connected, publish, and find outputs
+                                afterward.
                             </p>
 
+                            <h3><span class="h3num">7.2</span>Feature descriptions</h3>
+                            <h4>Start inspection</h4>
                             <div class="tc-grid">
                                 <div class="tc-box is-target">
                                     <h4>Target flow</h4>
@@ -1692,7 +1946,7 @@
                                 </div>
                             </div>
 
-                            <h3><span class="h3num">7.2</span>Project-linked values</h3>
+                            <h4>Project-linked values</h4>
                             <p>
                                 The inspection experience should support values from project or export information (e.g.
                                 development approval number, building approval number, inspection record date, inspection record
@@ -1727,6 +1981,31 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <h3><span class="h3num">7.3</span>Limitations</h3>
+                            <ul>
+                                <li>Offline create of a new inspection with checklist load is not possible this release.</li>
+                                <li>Start-from-scratch path exists but is hidden from UI.</li>
+                                <li>Solution Library checklists must be adopted on web before they appear on mobile.</li>
+                                <li>
+                                    Team visibility of in-progress work is limited until publish; multi-device sync of answers
+                                    uses wholesale server replace (no field-level merge).
+                                </li>
+                                <li>Project-linked value population timing and form surfaces are still open.</li>
+                            </ul>
+
+                            <h3><span class="h3num">7.4</span>User journey expected</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>Inspector opens <strong>Inspections</strong> → (+).</li>
+                                <li>Chooses project → picks a team checklist (online).</li>
+                                <li>Walk opens with one carousel item per requirement.</li>
+                                <li>
+                                    Inspector captures forms, notes, and photos; optionally duplicates items; uses Magic Wand /
+                                    Ask AI when connected.
+                                </li>
+                                <li>Publishes via Export report and/or Track issues to workspace.</li>
+                                <li>Finds exports under Project → Reports and/or workspace items under the project.</li>
+                            </ol>
                         </div>
 
                         <!-- §8 Form completion -->
@@ -1736,7 +2015,15 @@
                                 <h2>Form completion</h2>
                             </div>
 
-                            <h3><span class="h3num">8.1</span>Supported inspection input</h3>
+                            <h3><span class="h3num">8.1</span>Design intent</h3>
+                            <p>
+                                Let inspectors manually complete structured fields on site (including offline), with clear sync
+                                state, fast photo capture/markup, and optional image-to-text drafts for notes—without forcing AI
+                                for discrete answers.
+                            </p>
+
+                            <h3><span class="h3num">8.2</span>Feature descriptions</h3>
+                            <h4>Supported inspection input</h4>
                             <div class="tbl-wrap">
                                 <table>
                                     <thead>
@@ -1811,17 +2098,25 @@
                                             <td>Yes</td>
                                             <td><span class="pill pill--ok">Implemented</span> (single select)</td>
                                         </tr>
+                                        <tr>
+                                            <td class="td-key">AI summary (<code>ai_summary</code>)</td>
+                                            <td>Yes</td>
+                                            <td>
+                                                <span class="pill pill--ok">Implemented</span> — generate/regenerate via Sparkles;
+                                                host-authored (see §10)
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
 
-                            <h3><span class="h3num">8.2</span>Manual-first use</h3>
+                            <h4>Manual-first capture loop</h4>
                             <p>
                                 Inspectors must be able to manually complete fields while on site, including offline. Discrete
                                 fields (compliant/non-compliant, yes/no) are especially important offline.
                             </p>
                             <p style="font-weight: 600; color: var(--ink)">
-                                Form capture loop <span class="pill pill--ok">Implemented</span> — assuming single inspector
+                                Form capture loop <span class="pill pill--ok">Implemented</span> — host owns form values
                             </p>
                             <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
                                 <li>
@@ -1833,22 +2128,73 @@
                                 <li>When online: 1s debounced autosave; on reconnect, batch sync flushes pending issues.</li>
                                 <li>
                                     <strong>Conflict model today:</strong> server answers replace local wholesale on fetch — no
-                                    field-level merge.
+                                    field-level merge. Host is authoritative for form values; collaborators contribute via notes
+                                    (§16).
                                 </li>
                             </ol>
-                            <div class="callout is-open">
-                                <span class="co-label">Multiple inspectors — possibly not in this release</span> Not developed
-                                yet. The UI needs to support showing offline captures from multiple inspectors once synced online.
-                                The Host has the right to confirm the final value for the report — choosing one value or all
-                                values to be shown. (JSON will need author name and timestamp at form-field level.)
-                            </div>
 
-                            <h3>
-                                <span class="h3num">8.3</span>Form usability
+                            <h4>Sync status icons <span class="pill pill--ok">Batch-2</span></h4>
+                            <p>
+                                Form field values and inspector notes carry sync status so offline ↔ online work stays visible:
+                            </p>
+                            <ul>
+                                <li><strong>Green tick</strong> — successfully synced (<code>SENT</code>).</li>
+                                <li>
+                                    <strong>Grey clock</strong> (or spinner while uploading) — pending / in flight
+                                    (<code>PENDING</code> / <code>UPLOADING</code>).
+                                </li>
+                                <li><strong>Red exclamation</strong> — sync failed (<code>FAILED</code>).</li>
+                                <li>Empty fields show no sync icon. Notes use the same visual language where status applies.</li>
+                                <li>Autosave / reconnect paths flush pending form answers and local form images when online.</li>
+                            </ul>
+                            <p>
+                                On <strong>Publish → Export report → choose template → Continue</strong>, if unsynced
+                                (pending/failed) data remains, a <strong>warning modal</strong> appears (completed-field count,
+                                review warning, <strong>Open Progress</strong> / <strong>Proceed anyway</strong> / dismiss). See
+                                §12.
+                            </p>
+
+                            <h4>Camera capture <span class="pill pill--ok">Batch-2</span></h4>
+                            <p>
+                                In-app camera (Vision Camera) supports familiar phone-camera behaviors, then hands off to markup /
+                                compression / save:
+                            </p>
+                            <ul>
+                                <li>Front / back camera switch; torch / flash where hardware allows; zoom; tap-to-focus; shutter.</li>
+                                <li>
+                                    After capture, flow typically continues to <strong>photo editor / markup</strong>, then
+                                    compression and attachment to notes or form image fields.
+                                </li>
+                                <li>Gallery pick remains available as an alternative to live capture.</li>
+                                <li>
+                                    Optional behaviors: timestamp watermark, save to device album (product / plan dependent).
+                                </li>
+                            </ul>
+
+                            <h4>Photo markup <span class="pill pill--ok">Batch-2</span></h4>
+                            <p>
+                                After capture (or from editor entry points), inspectors can add <strong>shape stickers</strong>
+                                — arrows and rectangles (and related shapes such as ellipses, depending on platform), with multiple
+                                colors; stickers can be dragged, scaled, and rotated. Edited image is saved/uploaded as the
+                                attachment used downstream. Android may also expose draw-mode shape tools; iOS uses the native
+                                photo-editor shape sticker container.
+                            </p>
+
+                            <h4>Image-to-text on note photos <span class="pill pill--ok">Batch-2</span></h4>
+                            <p>
+                                On the inspector’s <strong>own</strong> photo messages in <strong>inspector notes</strong>, a
+                                Sparkles control runs image-to-text against the uploaded image URL. The caption is inserted as a
+                                <strong>draft</strong> in the note composer (not auto-sent). Related: form <strong>image</strong>
+                                fields may offer a separate control that generates text into the notes thread (upload URL
+                                required). This is <em>not</em> Ask AI RAG image recognition—see §11.
+                            </p>
+
+                            <h4>
+                                Form usability
                                 <span style="font-weight: 400; color: var(--ink-3); font-size: 13px"
                                     >— continuously improved</span
                                 >
-                            </h3>
+                            </h4>
                             <p>Validate improvements for long forms and large option sets:</p>
                             <ul>
                                 <li>Stronger visual indication of selected binary or multiple-choice responses (color codes).</li>
@@ -1863,6 +2209,46 @@
                                 improvements on form usability will be a work in progress — do not expect perfect polish in this
                                 release.
                             </p>
+
+                            <h3><span class="h3num">8.3</span>Limitations</h3>
+                            <ul>
+                                <li>Multi-select checkboxes and dedicated time picker remain gaps.</li>
+                                <li>File attachment non-image types are limited / need JSON verification.</li>
+                                <li>
+                                    Export unsynced warning is a <strong>guardrail</strong>, not a hard block—
+                                    <strong>Proceed anyway</strong> is allowed.
+                                </li>
+                                <li>Sync retries are capped; persistent failures need user attention (retry / Re-sync / connectivity).</li>
+                                <li>
+                                    Camera requires permission; behavior varies by device; large images are compressed (plan rules
+                                    may alter compression).
+                                </li>
+                                <li>
+                                    Markup stickers are raster overlays (not editable vector layers after save); iOS/Android tool
+                                    parity may differ slightly.
+                                </li>
+                                <li>
+                                    Image-to-text: own note photos only; needs network + uploaded URL; draft quality depends on
+                                    photo/model; does not auto-fill structured form fields.
+                                </li>
+                                <li>
+                                    Full multi-author merge of the same form field is not solved (host-owned form model)—see §16.
+                                </li>
+                            </ul>
+
+                            <h3><span class="h3num">8.4</span>User journey expected</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>Host (or solo inspector) opens an item and fills discrete/manual fields; icons show sync state.</li>
+                                <li>
+                                    Captures a photo from notes or an image field → optionally marks up with arrow/rectangle →
+                                    confirms attachment.
+                                </li>
+                                <li>
+                                    On an uploaded note photo, taps Sparkles → edits draft caption → sends note (or discards).
+                                </li>
+                                <li>While offline, grey clocks remain; on reconnect, icons move to green (or red if failed).</li>
+                                <li>Before export, if anything is unsynced, warning modal offers Open Progress or Proceed anyway.</li>
+                            </ol>
                         </div>
 
                         <!-- §9 Findings -->
@@ -1872,7 +2258,15 @@
                                 <h2>Findings and repeated items</h2>
                             </div>
 
-                            <h3><span class="h3num">9.1</span>Findings structure</h3>
+                            <h3><span class="h3num">9.1</span>Design intent</h3>
+                            <p>
+                                Treat findings as structured form fields on checklist items—not a separate entity—and let
+                                inspectors duplicate or insert items on site when the same requirement applies again, while
+                                keeping final sign-off sections last.
+                            </p>
+
+                            <h3><span class="h3num">9.2</span>Feature descriptions</h3>
+                            <h4>Findings structure</h4>
                             <p>
                                 <strong>Data model:</strong> Findings are <em>not a separate entity</em>. They are
                                 <strong>form fields on checklist items</strong> (e.g. Compliant?, Finding category, Evidence,
@@ -1883,7 +2277,7 @@
                                 description or relevant clause · Comment · Action required · Photos.
                             </p>
 
-                            <h3><span class="h3num">9.2</span>Duplicate and insertion behavior</h3>
+                            <h4>Duplicate and insertion behavior</h4>
                             <div class="tbl-wrap">
                                 <table>
                                     <thead>
@@ -1932,13 +2326,30 @@
                                 sign-off route.
                             </p>
 
-                            <h3><span class="h3num">9.3</span>Checklist creation and on-site usage</h3>
+                            <h4>Checklist creation and on-site usage</h4>
                             <ul>
                                 <li>Long checklists pre-create one carousel item per requirement at start.</li>
                                 <li>Inspector duplicates an item when the same checklist section applies again on site.</li>
                                 <li>Newly added or duplicated findings must remain before the final sign-off section.</li>
                                 <li>JSON output will contain the duplicated items with identical requirement ID for looping.</li>
                             </ul>
+
+                            <h3><span class="h3num">9.3</span>Limitations</h3>
+                            <ul>
+                                <li>Duplicate does not copy answers or notes—structure and requirement ID only.</li>
+                                <li>Blank items are free-form notes capture without requirements.</li>
+                                <li>
+                                    Per-client toggle to disable blank-capture is a future product request (not this release).
+                                </li>
+                            </ul>
+
+                            <h3><span class="h3num">9.4</span>User journey expected</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>Inspector walks requirement-by-requirement in the carousel.</li>
+                                <li>When the same section applies again, duplicates the current item (blank answers/notes).</li>
+                                <li>Optionally adds a blank item for free-form notes capture.</li>
+                                <li>Final sign-off section(s) stay last unless the final item itself was duplicated.</li>
+                            </ol>
                         </div>
 
                         <!-- §10 Magic Wand -->
@@ -1948,13 +2359,16 @@
                                 <h2>AI assistance: Magic Wand</h2>
                             </div>
 
-                            <h3><span class="h3num">10.1</span>Purpose</h3>
+                            <h3><span class="h3num">10.1</span>Design intent</h3>
                             <p>
                                 Hybrid workflow: offline capture on site, then AI drafts or improves narrative content after
-                                connectivity returns.
+                                connectivity returns—with visible <strong>AI-modified</strong> attribution and
+                                <strong>Tap to undo</strong> so trust stays high. Magic Wand (and AI summary generate) are
+                                <strong>host-only</strong>.
                             </p>
 
-                            <h3><span class="h3num">10.2</span>Modes</h3>
+                            <h3><span class="h3num">10.2</span>Feature descriptions</h3>
+                            <h4>Modes</h4>
                             <div class="tbl-wrap">
                                 <table>
                                     <thead>
@@ -1990,18 +2404,63 @@
                             </div>
                             <p>
                                 <strong>Eligible fields:</strong> short text, long text, number, date, yes/no, multiple-choice.
-                                Currently <em>excludes</em> image and signature.
+                                Currently <em>excludes</em> image and signature. <strong>Host-only</strong> — collaborators
+                                cannot run Magic Wand.
                             </p>
 
-                            <h3><span class="h3num">10.3</span>User journey</h3>
-                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
-                                <li>Inspector captures onsite notes (voice/text) in journal per item.</li>
-                                <li>After connectivity returns, runs Magic Wand on current item or all forms.</li>
-                                <li>Batch skips requirements without notes.</li>
-                                <li>Inspector reviews filled fields; no AI attribution badges in UI today (will add later).</li>
-                            </ol>
+                            <h4>Special AI summary fields <span class="pill pill--ok">Batch-2</span></h4>
+                            <ul>
+                                <li>
+                                    Checklist may include special AI fields of type <code>ai_summary</code> (e.g. Closing
+                                    summary).
+                                </li>
+                                <li>
+                                    Authors configure contributing fields (<code>includeInAiSummary</code>) and optional preset
+                                    instruction (<code>smartDescription</code>) in checklist / team settings on web—not on the
+                                    mobile inspection screen.
+                                </li>
+                                <li>
+                                    On the item form: editable text area, chips for contributing field labels, and an
+                                    <strong>AI (Sparkles)</strong> button to generate or regenerate.
+                                </li>
+                                <li>
+                                    Generation collects opted-in answers across the walk, calls the forms-summary API, writes
+                                    returned text into the field (fully editable afterward).
+                                </li>
+                            </ul>
 
-                            <h3><span class="h3num">10.4</span>Conflict handling</h3>
+                            <h4>AI-modified indication <span class="pill pill--ok">Batch-2 · Current</span></h4>
+                            <ul>
+                                <li>
+                                    After Magic Wand runs, fields AI writes are marked <strong>AI-modified</strong> (persisted
+                                    with answer metadata).
+                                </li>
+                                <li>On the item form: AI star / compact chip next to the field label.</li>
+                                <li>
+                                    On <strong>Progress</strong>: any item with at least one AI-modified field shows an
+                                    <strong>AI modified</strong> pill.
+                                </li>
+                                <li>Manual editing of a field clears its AI-modified mark.</li>
+                            </ul>
+
+                            <h4>Tap to undo <span class="pill pill--ok">Batch-2 · Current</span></h4>
+                            <ul>
+                                <li>
+                                    On each AI-modified form field, <strong>Tap to undo</strong> (with AI star) restores the
+                                    previous value stored when AI wrote the field and removes the AI-modified mark.
+                                </li>
+                                <li>Undo is per field; one previous snapshot only (no multi-step AI history).</li>
+                                <li>
+                                    Orthogonal: manual undo to last synced baseline may exist for non–AI-modified, already-synced
+                                    fields.
+                                </li>
+                            </ul>
+
+                            <h4>Conflict / overwrite handling</h4>
+                            <p>
+                                <strong>Trust layer (current):</strong> AI-modified badges + Tap to undo make overwrites visible
+                                and reversible. Dedicated conflict-chooser UI for discrete fields remains a target gap.
+                            </p>
                             <div class="tbl-wrap">
                                 <table>
                                     <thead>
@@ -2020,13 +2479,17 @@
                                             </td>
                                             <td>
                                                 Batch: intent not to overwrite manual entries. Item-level: may overwrite.
-                                                <strong>Conflict indicator UI to be added.</strong>
+                                                Attribution + Tap to undo are live; dedicated conflict-chooser UI still to be
+                                                added.
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="td-key">Long narrative</td>
                                             <td>AI may rewrite or add; not every difference is a hard conflict</td>
-                                            <td><span class="pill pill--warn">Partial</span> — no attribution or undo</td>
+                                            <td>
+                                                <span class="pill pill--ok">Partial+</span> — AI-modified indication and Tap to
+                                                undo available
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="td-key">All fields</td>
@@ -2037,21 +2500,50 @@
                                 </table>
                             </div>
 
-                            <h3><span class="h3num">10.5</span>Offline behavior</h3>
+                            <h4>Offline behavior &amp; performance</h4>
                             <ul>
-                                <li>Magic Wand disabled offline (network required).</li>
+                                <li>Magic Wand and AI summary generate disabled offline (network required).</li>
                                 <li>Manual structured entry remains available offline.</li>
                                 <li>
                                     Today: cannot start a new inspection and load a checklist while offline. (Future: may allow
                                     previously loaded checklists to be opened offline.)
                                 </li>
+                                <li>
+                                    Performance: validate with larger volumes of findings; current performance acceptable in the
+                                    demonstrated flow.
+                                </li>
                             </ul>
 
-                            <h3><span class="h3num">10.6</span>Performance</h3>
-                            <p>
-                                Validate with larger volumes of findings and real inspection data. Current performance acceptable
-                                in the demonstrated flow.
-                            </p>
+                            <h3><span class="h3num">10.3</span>Limitations</h3>
+                            <ul>
+                                <li>Host-only; collaborators cannot create AI-modified states via Wand.</li>
+                                <li>
+                                    Indication is tied to Magic Wand (and related AI write paths)—Ask AI insert into notes does
+                                    not mark form fields.
+                                </li>
+                                <li>Image and signature fields are outside Magic Wand fill eligibility.</li>
+                                <li>Only the latest AI write’s prior value is retained for undo; repeated wand runs overwrite it.</li>
+                                <li>
+                                    AI summary: contribution mapping authored on web; generation needs network and usable
+                                    contributor answers; Progress pill does not list which fields changed.
+                                </li>
+                                <li>Dedicated discrete-field conflict-chooser UI is not built.</li>
+                            </ul>
+
+                            <h3><span class="h3num">10.4</span>User journey expected</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>Host (and/or collaborators via notes) captures onsite notes per item.</li>
+                                <li>After connectivity returns, host runs Magic Wand on current item or all forms.</li>
+                                <li>Batch skips requirements without notes.</li>
+                                <li>
+                                    Fields written by AI show AI-modified affordances; Progress shows <strong>AI modified</strong>
+                                    pills.
+                                </li>
+                                <li>Host taps <strong>Tap to undo</strong> on any disagreed value, or edits manually.</li>
+                                <li>
+                                    If an AI summary field exists, host taps Sparkles to generate, then edits the summary text.
+                                </li>
+                            </ol>
                         </div>
 
                         <!-- §11 Ask AI -->
@@ -2061,13 +2553,14 @@
                                 <h2>Knowledge Agent (Ask AI)</h2>
                             </div>
 
-                            <h3><span class="h3num">11.1</span>Purpose</h3>
+                            <h3><span class="h3num">11.1</span>Design intent</h3>
                             <p>
                                 Retrieve relevant information from linked documents (e.g. technical reports) and insert into the
                                 inspection. Example: identify and state the most relevant clause or condition in concise language.
                             </p>
 
-                            <h3><span class="h3num">11.2</span>User flow</h3>
+                            <h3><span class="h3num">11.2</span>Feature descriptions</h3>
+                            <h4>User flow</h4>
                             <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
                                 <li>Inspector completes initial observations and manual responses (in journal notes).</li>
                                 <li>Inspector opens <strong>Ask AI</strong> (host-only; disabled offline).</li>
@@ -2091,18 +2584,19 @@
                                 preview-before-insert dialog.
                             </p>
 
-                            <h3><span class="h3num">11.3</span>Requirements</h3>
+                            <h4>Requirements</h4>
                             <ul>
                                 <li>Display compiled response and referenced source documents (links only).</li>
                                 <li>Allow insert into inspection (notes today; direct field insert = future enhancement).</li>
                                 <li>Preserve original observation when refilling with added context.</li>
                                 <li>
                                     During re-run of Magic Wand — apply conflict logic when added information contradicts
-                                    structured answers (target; UI not built).
+                                    structured answers (target; dedicated conflict-chooser UI not built; attribution + undo
+                                    apply via §10).
                                 </li>
                             </ul>
 
-                            <h3><span class="h3num">11.4</span>Session persistence</h3>
+                            <h4>Session persistence</h4>
                             <div class="tbl-wrap">
                                 <table>
                                     <thead>
@@ -2131,11 +2625,31 @@
                                 </table>
                             </div>
 
-                            <h3><span class="h3num">11.5</span>Constraints</h3>
+                            <div class="callout is-warn">
+                                <span class="co-label">Not Ask AI</span>
+                                <strong>Image-to-text on note photos</strong> (§8) is a separate Sparkles vision path that drafts
+                                note captions. It is <em>not</em> Ask AI document RAG. Ask AI still has
+                                <strong>no image recognition</strong> for knowledge retrieval.
+                            </div>
+
+                            <h3><span class="h3num">11.3</span>Limitations</h3>
                             <ul>
-                                <li>Image recognition not supported.</li>
+                                <li>
+                                    <strong>Ask AI has no image recognition</strong> for RAG / knowledge retrieval (photos are not
+                                    query inputs to the Knowledge Agent).
+                                </li>
+                                <li>Insert target is inspector notes only this release (not form fields directly).</li>
+                                <li>Host-only; disabled offline.</li>
                                 <li>Performance slower than Magic Wand; optimization needed.</li>
                             </ul>
+
+                            <h3><span class="h3num">11.4</span>User journey expected</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>Host captures notes, then opens Ask AI and picks a knowledge agent.</li>
+                                <li>Reviews compiled answer + source links; Insert or Copy into notes.</li>
+                                <li>Optionally asks follow-ups; Fold preserves session; Back to agent clears it.</li>
+                                <li>Reruns Magic Wand on the item so narrative fields pick up the inserted reference.</li>
+                            </ol>
                         </div>
 
                         <!-- §12 Review, preview, report generation -->
@@ -2145,7 +2659,15 @@
                                 <h2>Review, preview, and report generation</h2>
                             </div>
 
-                            <h3><span class="h3num">12.1</span>Pre-publication review</h3>
+                            <h3><span class="h3num">12.1</span>Design intent</h3>
+                            <p>
+                                Before publishing, give hosts a single place to scan completion, sync risk, and AI review
+                                signals—then generate a report (or publish to workspace) with guardrails when data may still be
+                                unsynced.
+                            </p>
+
+                            <h3><span class="h3num">12.2</span>Feature descriptions</h3>
+                            <h4>Pre-publication review</h4>
                             <p>
                                 Before publishing, inspectors must review and manually change entered or AI-generated responses
                                 via form and notes editing.
@@ -2167,7 +2689,39 @@
                                 </div>
                             </div>
 
-                            <h3><span class="h3num">12.2</span>Dual publish paths</h3>
+                            <h4>Progress sync, Re-sync &amp; search <span class="pill pill--ok">Batch-2</span></h4>
+                            <p>
+                                <strong>Progress</strong> (item list drawer) shows each item with:
+                            </p>
+                            <ul>
+                                <li>Optional field completion bar (<code>filled / total</code>).</li>
+                                <li>
+                                    Aggregate <strong>sync icon</strong> for the item (priority: failed → pending/uploading → all
+                                    sent).
+                                </li>
+                                <li><strong>AI modified</strong> pill when any field on that item is AI-modified (§10).</li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    Header includes <strong>Re-sync</strong>, which triggers a walk-level resync (flush local form
+                                    images where needed, batch sync pending issues / answers with retries).
+                                </li>
+                                <li>Opening Progress refreshes status badges after wand / edits.</li>
+                                <li>
+                                    <strong>Search</strong> (“Search items…”) filters the list client-side by item title /
+                                    numbering and requirement text. Tapping a result navigates to that carousel item. Does
+                                    <em>not</em> search form answers, note bodies, or sync / AI status.
+                                </li>
+                            </ul>
+
+                            <h4>Unsynced export warning <span class="pill pill--ok">Batch-2</span></h4>
+                            <p>
+                                On Publish → Export report → choose template → Continue, if pending/failed data remains, a warning
+                                modal shows completed-field count vs total, a review warning, and actions:
+                                <strong>Open Progress</strong>, <strong>Proceed anyway</strong>, or cancel/dismiss.
+                            </p>
+
+                            <h4>Dual publish paths</h4>
                             <div class="tbl-wrap">
                                 <table>
                                     <thead>
@@ -2199,7 +2753,7 @@
                                 workspace publish, or either? <strong>To be clarified.</strong>
                             </div>
 
-                            <h3><span class="h3num">12.3</span>Report template selection</h3>
+                            <h4>Report template selection</h4>
                             <ul>
                                 <li>Chosen at <strong>export/publish time</strong>, not at inspection create.</li>
                                 <li>Team Carbone templates filtered by checklist ID.</li>
@@ -2215,13 +2769,13 @@
                                 </li>
                             </ul>
 
-                            <h3><span class="h3num">12.4</span>Default report templates</h3>
+                            <h4>Default report templates</h4>
                             <p>
                                 Required formats when no custom template: <strong>Word, PDF, Excel</strong>. Default templates
                                 should be redesigned to reflect checklist content and polished output (backend/design scope).
                             </p>
 
-                            <h3><span class="h3num">12.5</span>Mobile report preview</h3>
+                            <h4>Mobile report preview</h4>
                             <div class="tbl-wrap">
                                 <table>
                                     <thead>
@@ -2249,6 +2803,28 @@
                                 Before export or sending, the inspector must be able to verify: responses, project information,
                                 preset fields, formatting, signatures. Target = pre-export rendered preview.
                             </p>
+
+                            <h3><span class="h3num">12.3</span>Limitations</h3>
+                            <ul>
+                                <li>No rendered pre-export report preview this release.</li>
+                                <li>Progress aggregate sync icon does not show per-field detail on the list row.</li>
+                                <li>Progress search does not filter by sync status or AI status.</li>
+                                <li>Unsynced export warning allows Proceed anyway (not a hard block).</li>
+                                <li>Re-sync depends on network; failed icons persist until resolved.</li>
+                                <li>Selected export template not persisted on inspection metadata.</li>
+                            </ul>
+
+                            <h3><span class="h3num">12.4</span>User journey expected</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>Host opens <strong>Progress</strong>; scans red/clock icons and AI modified pills.</li>
+                                <li>Optionally searches for an item by requirement text; taps to jump to the carousel.</li>
+                                <li>After reconnecting, taps <strong>Re-sync</strong>; icons update toward green.</li>
+                                <li>Publishes → Export report → selects template → Continue.</li>
+                                <li>
+                                    If unsynced data remains, warning modal appears → Open Progress to fix, or Proceed anyway.
+                                </li>
+                                <li>Reviews post-export file (download / share) and/or publishes selected items to workspace.</li>
+                            </ol>
                         </div>
 
                         <!-- §13 Publishing -->
@@ -2258,13 +2834,20 @@
                                 <h2>Publishing, reports, and distribution</h2>
                             </div>
 
-                            <h3><span class="h3num">13.1</span>Publish</h3>
+                            <h3><span class="h3num">13.1</span>Design intent</h3>
+                            <p>
+                                After export or workspace publish, inspectors and managers must download, share, and find reports
+                                again—quickly among many exports—without leaving the project Reports experience.
+                            </p>
+
+                            <h3><span class="h3num">13.2</span>Feature descriptions</h3>
+                            <h4>Publish</h4>
                             <p>
                                 Publishing a report changes inspection status to <strong>Completed</strong> (see open decision on
                                 canonical definition).
                             </p>
 
-                            <h3><span class="h3num">13.2</span>Post-publication access</h3>
+                            <h4>Post-publication access</h4>
                             <ul>
                                 <li>Download report locally.</li>
                                 <li>Send report out.</li>
@@ -2280,17 +2863,39 @@
                                 <li>Preview action bars: open, download, share.</li>
                             </ul>
 
-                            <h3><span class="h3num">13.3</span>Report organization</h3>
+                            <h4>Report organization &amp; search</h4>
                             <div class="tc-grid">
                                 <div class="tc-box is-current">
                                     <h4>Current</h4>
-                                    <p>Organize by template; multiple exported versions under each template.</p>
+                                    <p>
+                                        Grouped by journal / inspection as in the existing UI.
+                                        <span class="pill pill--ok">Implemented</span> keyword
+                                        <strong>search</strong> on Project Reports filters the in-memory list
+                                        (case-insensitive substring) across file name, template name, inspection title, published
+                                        by, and file type. Empty query shows the full list.
+                                    </p>
                                 </div>
                                 <div class="tc-box is-target">
                                     <h4>Target</h4>
-                                    <p>Grouped by template first, then inspections; add keyword search bar.</p>
+                                    <p>Grouped by template first, then inspections (template-first organization still a target).</p>
                                 </div>
                             </div>
+
+                            <h3><span class="h3num">13.3</span>Limitations</h3>
+                            <ul>
+                                <li>Reports search is client-side on already loaded reports—not a full server search index.</li>
+                                <li>Does not search inside report PDF/DOCX content.</li>
+                                <li>Template-first grouping is still target; current grouping is by inspection.</li>
+                                <li>Relies on metadata present on the report records.</li>
+                            </ul>
+
+                            <h3><span class="h3num">13.4</span>User journey expected</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>User opens a project → <strong>Reports</strong> tab.</li>
+                                <li>Types part of a report or inspection name (or template / publisher / file type).</li>
+                                <li>List filters to matching reports.</li>
+                                <li>User opens, shares, or downloads the desired report.</li>
+                            </ol>
                         </div>
 
                         <!-- §14 Sign-off -->
@@ -2300,7 +2905,14 @@
                                 <h2>Sign-off</h2>
                             </div>
 
-                            <h3><span class="h3num">14.1</span>Signature capture</h3>
+                            <h3><span class="h3num">14.1</span>Design intent</h3>
+                            <p>
+                                Capture formal signatures as checklist form fields so sign-off stays in the inspection carousel
+                                and exports with the report—without a dedicated sign-off route.
+                            </p>
+
+                            <h3><span class="h3num">14.2</span>Feature descriptions</h3>
+                            <h4>Signature capture</h4>
                             <div class="tbl-wrap">
                                 <table>
                                     <thead>
@@ -2339,11 +2951,25 @@
                                 </table>
                             </div>
 
-                            <h3><span class="h3num">14.2</span>Offline</h3>
+                            <h4>Offline</h4>
                             <div class="callout is-open">
                                 <span class="co-label">Open decision</span>Signature capture can draw offline but
                                 <strong>upload fails without network</strong>. Define target: queue vs block.
                             </div>
+
+                            <h3><span class="h3num">14.3</span>Limitations</h3>
+                            <ul>
+                                <li>Signer name/date from <code>export_info</code> is not clearly implemented.</li>
+                                <li>Offline draw works; upload requires network (queue vs block still open).</li>
+                                <li>Sign-off is field-based, not a dedicated route—placement depends on checklist design.</li>
+                            </ul>
+
+                            <h3><span class="h3num">14.4</span>User journey expected</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>Inspector reaches final checklist section(s) with signature fields.</li>
+                                <li>Draws signature on the pad; saves (or discards and redraws).</li>
+                                <li>Continues to review / Progress / publish when ready.</li>
+                            </ol>
                         </div>
 
                         <!-- §15 Mobile & desktop -->
@@ -2353,21 +2979,28 @@
                                 <h2>Mobile and desktop inspection usage flow</h2>
                             </div>
 
-                            <h3><span class="h3num">15.1</span>Mobile (primary onsite)</h3>
+                            <h3><span class="h3num">15.1</span>Design intent</h3>
+                            <p>
+                                Mobile is the primary onsite surface; desktop should mirror the inspection and report workflow
+                                (plus a few more features) so work can continue after leaving the site.
+                            </p>
+
+                            <h3><span class="h3num">15.2</span>Feature descriptions</h3>
+                            <h4>Mobile (primary onsite)</h4>
                             <p>Tabs: <strong>Inspections · Projects · Documents · Notifications · More</strong></p>
                             <p>
                                 Supports: start inspections, offline manual entry, photos, AI when connected, review, sign-off,
-                                publication, report access.
+                                publication, report access—plus batch-2 Progress / sync / collaborator notes behaviors.
                             </p>
 
-                            <h3><span class="h3num">15.2</span>Desktop</h3>
+                            <h4>Desktop</h4>
                             <p>
                                 Supports inspection and report workflow: view inspections, open directly, Magic Wand, publish,
                                 project repository. Aim to mirror the mobile workflow 100% plus a few more features. UI functional
                                 but not optimized.
                             </p>
 
-                            <h3><span class="h3num">15.3</span>Team and manager visibility</h3>
+                            <h4>Team and manager visibility</h4>
                             <div class="tbl-wrap">
                                 <table>
                                     <thead>
@@ -2403,6 +3036,19 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <h3><span class="h3num">15.3</span>Limitations</h3>
+                            <ul>
+                                <li>Desktop UI is functional but not optimized for the full mobile parity goal.</li>
+                                <li>Project team inspections view and manager workload are not on mobile this release.</li>
+                            </ul>
+
+                            <h3><span class="h3num">15.4</span>User journey expected</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>On site: inspector uses mobile Inspections tab for create → capture → AI → publish.</li>
+                                <li>Back online / at desk: opens the same inspection on desktop to finish wand / publish if needed.</li>
+                                <li>Manager finds reports under Project → Reports (search available); team inspections list still deferred.</li>
+                            </ol>
                         </div>
 
                         <!-- §16 Multi-inspector -->
@@ -2411,24 +3057,74 @@
                                 <span class="sec__num">16</span>
                                 <h2>Multi-inspector collaboration</h2>
                             </div>
+
+                            <h3><span class="h3num">16.1</span>Design intent</h3>
                             <p>
-                                <strong>Direction:</strong> Multiple inspectors on same inspection; visibility into who
-                                contributed to each requirement.
+                                Support team fieldwork: one <strong>host</strong> owns structured answers and AI fill, while
+                                invited teammates contribute <strong>evidence in notes</strong> (text and photos) without
+                                corrupting the form of record.
                             </p>
+
+                            <h3><span class="h3num">16.2</span>Feature descriptions</h3>
+                            <h4>Current — host + notes collaboration <span class="pill pill--ok">Batch-2</span></h4>
+                            <ul>
+                                <li>Host can <strong>invite</strong> team members into the inspection (journal / walk access).</li>
+                                <li>
+                                    <strong>Collaborators can:</strong> open the inspection; add text and photos in inspector
+                                    notes on items; view forms (typically read-only).
+                                </li>
+                                <li>
+                                    <strong>Collaborators cannot:</strong> edit form field values; run <strong>Magic Wand</strong>.
+                                </li>
+                                <li>
+                                    <strong>Host can:</strong> fill and edit all form fields; run Magic Wand; use AI summary
+                                    generate, etc.
+                                </li>
+                                <li>
+                                    Progress / header may show owner and invited member chips; item cards can show collaborator
+                                    commenter avatars.
+                                </li>
+                                <li>
+                                    Publish / export remains a team workflow (members on the walk may publish depending on product
+                                    rules); form authority stays with the host.
+                                </li>
+                            </ul>
                             <div class="tc-grid">
                                 <div class="tc-box is-current">
-                                    <h4>Current (unvalidated)</h4>
-                                    <p>Single inspector workflow only; no invitation for other inspectors allowed.</p>
+                                    <h4>Current (shipped)</h4>
+                                    <p>
+                                        Host-owned forms + collaborative notes. Host interprets collaborator notes into forms
+                                        (manually or via Magic Wand).
+                                    </p>
                                 </div>
                                 <div class="tc-box is-target">
-                                    <h4>Target (unvalidated) — not this release</h4>
+                                    <h4>Future / target — multi-author forms <span class="pill pill--future">Not this release</span></h4>
                                     <p>
-                                        Invitation button for host to invite others; each inspector can contribute to every form
-                                        field, while offline; on sync, form values show author, time/date, and value; a different
-                                        UI design will be needed.
+                                        Full multi-author form merge: each inspector can contribute to every form field (including
+                                        offline); on sync, values show author, time/date, and value; host confirms final value for
+                                        the report (choose one or show all). Requires field-level author/timestamp in JSON and a
+                                        different conflict UI.
                                     </p>
                                 </div>
                             </div>
+
+                            <h3><span class="h3num">16.3</span>Limitations</h3>
+                            <ul>
+                                <li>No full multi-author merge UI for conflicting form values (deferred).</li>
+                                <li>Collaborators rely on notes for input; host must interpret notes into forms.</li>
+                                <li>Invitation is team-scoped; non-team guests follow invite / pending-join rules of journal access.</li>
+                                <li>
+                                    Read-only form UX for collaborators is opacity / pointer lock—not a separate “viewer app.”
+                                </li>
+                            </ul>
+
+                            <h3><span class="h3num">16.4</span>User journey expected</h3>
+                            <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch">
+                                <li>Host creates inspection and invites teammates.</li>
+                                <li>On site, collaborator opens the same inspection and posts photos / comments on an item.</li>
+                                <li>Host opens that item, sees collaborator notes, fills form (or runs Magic Wand).</li>
+                                <li>Host reviews Progress and publishes / exports the report.</li>
+                            </ol>
                         </div>
 
                         <!-- §17 End-to-end narrative -->
@@ -2442,17 +3138,53 @@
                                     >
                                 </h2>
                             </div>
+                            <h3><span class="h3num">17.1</span>Design intent</h3>
+                            <p>
+                                Provide one reference day-in-the-life that stitches create → capture → AI → Progress → publish
+                                so product and engineering share a single end-to-end expectation (including batch-2 mobile
+                                behaviors).
+                            </p>
+                            <h3><span class="h3num">17.2</span>Feature descriptions</h3>
+                            <p>
+                                This section is a composite narrative only — behaviors are specified in §§6–16. It assumes host
+                                authority for forms / Magic Wand / AI summary, collaborator notes input, sync icons, Progress
+                                search / Re-sync, and soft unsynced export guardrails.
+                            </p>
+                            <h3><span class="h3num">17.3</span>Limitations</h3>
+                            <ul>
+                                <li>Reference path, not a test script; edge cases live in §18.</li>
+                                <li>Offline create of a new inspection still requires signal to load a checklist.</li>
+                                <li>Form multi-author merge remains future (§16); notes collaboration is the current team model.</li>
+                            </ul>
+                            <h3><span class="h3num">17.4</span>User journey expected</h3>
                             <ol style="color: var(--ink-2); padding-left: 20px; max-width: 74ch; line-height: 1.7">
-                                <li>Start inspection on phone → pick project + checklist.</li>
-                                <li>Walk site requirement-by-requirement; enter yes/no and photos offline.</li>
-                                <li>Dictate/type notes per item.</li>
+                                <li>Host starts inspection on phone → pick project + checklist; optionally invites collaborators.</li>
+                                <li>
+                                    Walk site requirement-by-requirement; enter yes/no and photos (camera + markup); sync icons
+                                    show pending while offline.
+                                </li>
+                                <li>Dictate/type notes per item; collaborators may add note photos/comments.</li>
+                                <li>
+                                    On own note photos, host (or note author) may run image-to-text → edit draft → send.
+                                </li>
                                 <li>Duplicate item when same checklist section / requirement applies again downstream.</li>
-                                <li>Regain signal → batch Magic Wand fills narrative fields from notes.</li>
+                                <li>
+                                    Regain signal → host batch Magic Wand fills narrative fields from notes; AI-modified badges
+                                    appear; undo any disagreed values.
+                                </li>
                                 <li>Open Ask AI on tricky clause → insert compiled answer into notes → rerun wand on item.</li>
+                                <li>If present, generate AI summary field; edit as needed.</li>
+                                <li>Open Progress → search items, scan sync / AI pills, Re-sync if needed.</li>
                                 <li>Complete signature section(s).</li>
-                                <li>Publish → choose export template → review generated file → share/download.</li>
+                                <li>
+                                    Publish → choose export template → Continue (unsynced warning if needed) → review generated
+                                    file → share/download.
+                                </li>
                                 <li>Optionally track selected findings to project workspace.</li>
-                                <li>Manager finds report under Project → Reports; inspector sees inspection marked Completed.</li>
+                                <li>
+                                    Manager finds report under Project → Reports (search by name/template/etc.); inspector sees
+                                    inspection marked Completed.
+                                </li>
                             </ol>
                         </div>
 
@@ -2530,7 +3262,10 @@
                                         </tr>
                                         <tr>
                                             <td class="td-key">Reports library</td>
-                                            <td><code>components/WIS/ProjectReportsDashboard.tsx</code></td>
+                                            <td>
+                                                <code>components/WIS/ProjectReportsDashboard.tsx</code>,
+                                                <code>util/reportSearch.ts</code>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="td-key">Preview</td>
@@ -2539,14 +3274,38 @@
                                                 <code>webview-word-preview.tsx</code>, <code>webview-excel-preview.tsx</code>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td class="td-key">AI summary / wand attribution</td>
+                                            <td>
+                                                <code>FormFields.tsx</code>, <code>formFieldComplete.ts</code>,
+                                                <code>aiFieldOverrides.ts</code>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Sync status &amp; unsynced export</td>
+                                            <td>
+                                                <code>formFieldSync.ts</code>, <code>SyncStatusIcon.tsx</code>,
+                                                <code>UnsyncedDataWarningDialog.tsx</code>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Progress (sync / search / Re-sync)</td>
+                                            <td><code>app/walk/[walkId].tsx</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Camera / photo markup</td>
+                                            <td>
+                                                <code>VisionCamera.tsx</code>, <code>react-native-photo-editor</code>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
 
                         <footer>
-                            Inspection App — Usage Phase PRD · v2.0 · Refined against the
-                            <code>wb-billie-mobile</code> implementation.
+                            Inspection App — Usage Phase PRD · v2.0 · Refined against
+                            <code>wb-billie-mobile</code> and batch-2 mobile features PRD.
                         </footer>
                     </section>
 
@@ -2554,7 +3313,9 @@
                     <section class="panel" id="panel-tests" role="tabpanel">
                         <p class="lead" style="margin-bottom: 6px">
                             Test cases reflect <em>expected behavior for this release</em>, grounded in the PRD and current mobile
-                            implementation. Where behavior is deferred or partial, the case is tagged.
+                            implementation—including batch-2 sync icons, camera/markup, image-to-text, AI summary / AI-modified /
+                            Tap to undo, Progress Re-sync &amp; search, unsynced export warning, Reports search, and host + notes
+                            collaboration. Where behavior is deferred or partial, the case is tagged.
                         </p>
                         <p style="color: var(--ink-3); font-size: 13px; margin: 0 0 4px">
                             Format: ID · Priority · Preconditions · Steps · Expected result. Tap any case to expand.
@@ -2801,14 +3562,15 @@
             /* ================= TEST CASE DATA (§18) ================= */
             var TC_GROUPS = [
                 { id: "g-lc", num: "18.1", title: "Inspection lifecycle and list" },
-                { id: "g-fm", num: "18.2", title: "Form capture and offline sync", note: "Dropdown, checkboxes, and number field UI is being refined." },
+                { id: "g-fm", num: "18.2", title: "Form capture and offline sync", note: "Dropdown, checkboxes, and number field UI is being refined. Includes batch-2 sync status icons." },
                 { id: "g-fn", num: "18.3", title: "Findings, duplicate, and sign-off placement" },
-                { id: "g-mw", num: "18.4", title: "Magic Wand" },
+                { id: "g-mw", num: "18.4", title: "Magic Wand", note: "Includes batch-2 AI summary, AI-modified indication, and Tap to undo." },
                 { id: "g-ai", num: "18.5", title: "Knowledge Agent (Ask AI)" },
-                { id: "g-pb", num: "18.6", title: "Publish, export, and reports" },
+                { id: "g-pb", num: "18.6", title: "Publish, export, and reports", note: "Includes batch-2 unsynced export warning and Project Reports search." },
                 { id: "g-so", num: "18.7", title: "Sign-off and signatures" },
-                { id: "g-img", num: "18.8", title: "Image fields and reuse" },
-                { id: "g-pg", num: "18.9", title: "Form progress" },
+                { id: "g-img", num: "18.8", title: "Image fields, camera, markup, image-to-text", note: "Includes batch-2 camera, photo markup, and note image-to-text." },
+                { id: "g-pg", num: "18.9", title: "Form progress", note: "Includes batch-2 Progress sync icons, Re-sync, and item search." },
+                { id: "g-col", num: "18.10", title: "Multi-inspector collaboration", note: "Batch-2 host + notes collaboration model." },
             ]
             var TC = [
                 /* 18.1 */
@@ -2817,7 +3579,6 @@
                     id: "TC-LC-001",
                     p: "P0",
                     cat: "Open",
-                    tags: ["Not ready for testing"],
                     name: "Create inspection without office scheduling",
                     pre: "User is host; device online; project with adopted team checklist exists.",
                     steps: ["Open Inspections tab → tap (+).", "Select project → select team checklist."],
@@ -2828,7 +3589,6 @@
                     id: "TC-LC-002",
                     p: "P0",
                     cat: "Open",
-                    tags: ["Not ready for testing"],
                     name: "Inspection list lifecycle filters",
                     pre: "User has inspections in mixed states.",
                     steps: ["Open Inspections tab.", "Tap Scheduled, In progress, and Completed filter chips in turn."],
@@ -2839,7 +3599,6 @@
                     id: "TC-LC-003",
                     p: "P0",
                     cat: "Open",
-                    tags: ["Not ready for testing"],
                     name: "In Progress after data entry",
                     pre: "New inspection with checklist open.",
                     steps: ["Enter a form answer or inspector note on any item."],
@@ -2860,7 +3619,6 @@
                     id: "TC-LC-007",
                     p: "P0",
                     cat: "Open",
-                    tags: ["Not ready for testing"],
                     name: "Export report marks inspection completed",
                     pre: "In-progress inspection with capturable data; device online.",
                     steps: ["Publish → Export report → complete export."],
@@ -2965,6 +3723,62 @@
                     steps: ["Open time field.", "Select a time via the picker.", "Save/persist and reopen."],
                     exp: "Native/time picker UI opens; selected time is stored in the correct format and appears after reopen.",
                 },
+                {
+                    g: "g-fm",
+                    id: "TC-FM-008",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Sync icons: pending → sent on form fields",
+                    pre: "Inspection open; device online; empty form field visible.",
+                    steps: [
+                        "Confirm empty field shows no sync icon.",
+                        "Enter a value and wait for autosave.",
+                        "Observe icon while save is in flight, then after success.",
+                    ],
+                    exp: "Empty = no icon; in flight shows grey clock/spinner (PENDING/UPLOADING); success shows green tick (SENT).",
+                },
+                {
+                    g: "g-fm",
+                    id: "TC-FM-009",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Sync icons while offline then on reconnect",
+                    pre: "Open inspection; go offline (in-app offline toggle ON if also testing voice).",
+                    steps: [
+                        "Edit a form field while offline.",
+                        "Confirm grey clock (pending) remains.",
+                        "Restore connectivity and wait for flush.",
+                    ],
+                    exp: "Offline edits stay pending (grey clock); on reconnect icons move to green tick, or red exclamation if sync fails.",
+                },
+                {
+                    g: "g-fm",
+                    id: "TC-FM-010",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Failed sync shows red exclamation",
+                    pre: "Way to force form sync failure (e.g. invalid session / blocked network after edit) or reproduce FAILED status.",
+                    steps: ["Trigger a form answer sync failure.", "View the affected field (and notes if applicable)."],
+                    exp: "Red exclamation (FAILED) is shown; user can retry / Re-sync / restore connectivity to clear it.",
+                },
+                {
+                    g: "g-fm",
+                    id: "TC-FM-011",
+                    p: "P1",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Inspector notes use same sync icon language",
+                    pre: "Inspection open; online then briefly offline.",
+                    steps: [
+                        "Add an inspector note while online → confirm green after send.",
+                        "Queue a note while offline → confirm pending icon.",
+                        "Reconnect and confirm icon resolves.",
+                    ],
+                    exp: "Notes use the same green / grey clock / red visual language where sync status applies.",
+                },
                 /* 18.3 */
                 {
                     g: "g-fn",
@@ -3047,6 +3861,92 @@
                     pre: "Ask AI answer inserted into inspector notes on an item.",
                     steps: ["Run Magic Wand on that item."],
                     exp: "Narrative fields incorporate inserted reference text from notes.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-008",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "AI-modified mark after Magic Wand",
+                    pre: "Online; host; item with notes; eligible form fields empty or fillable.",
+                    steps: ["Run item-level Magic Wand.", "Inspect fields AI wrote.", "Open Progress."],
+                    exp: "AI-written fields show AI star / AI-modified chip beside the label; Progress shows an AI modified pill on that item.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-009",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Manual edit clears AI-modified mark",
+                    pre: "Field currently marked AI-modified after Magic Wand.",
+                    steps: ["Manually edit that field value and save/blur.", "Check field label and Progress."],
+                    exp: "AI-modified mark clears on that field; if no other AI-modified fields remain on the item, Progress AI pill clears.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-010",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Tap to undo restores prior AI value",
+                    pre: "Host; field marked AI-modified with a known pre-AI value.",
+                    steps: ["Tap Tap to undo (with AI star) on that field.", "Confirm value and mark."],
+                    exp: "Previous value (snapshot from when AI wrote) is restored; AI-modified mark is removed. Undo is per field; only one prior snapshot.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-011",
+                    p: "P1",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Repeated Magic Wand overwrites undo snapshot",
+                    pre: "Field already AI-modified once; host online.",
+                    steps: [
+                        "Note current field value V1 (AI).",
+                        "Change notes and run Magic Wand again so field becomes V2.",
+                        "Tap Tap to undo.",
+                    ],
+                    exp: "Undo restores the value present immediately before the latest AI write (V1), not the original pre-first-wand value; only latest snapshot kept.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-012",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "AI summary field generate / regenerate",
+                    pre: "Checklist has ai_summary field with contributing fields configured on web; walk has usable contributor answers; host online.",
+                    steps: [
+                        "Open item with AI summary field; confirm chips for contributing field labels.",
+                        "Tap Sparkles to generate.",
+                        "Edit the returned text.",
+                        "Tap Sparkles again to regenerate.",
+                    ],
+                    exp: "Forms-summary API runs; text written into editable summary field; regenerate replaces with a new draft; host can freely edit afterward.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-013",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "AI summary generate disabled offline",
+                    pre: "AI summary field present; device offline; host.",
+                    steps: ["Attempt Sparkles generate on AI summary field."],
+                    exp: "Generate blocked or fails with connectivity requirement; field remains manually editable.",
+                },
+                {
+                    g: "g-mw",
+                    id: "TC-MW-014",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Collaborator cannot run Magic Wand or AI summary",
+                    pre: "Invited collaborator (non-host) on shared inspection; online; notes present; AI summary field exists if available.",
+                    steps: ["Attempt Magic Wand (item/batch).", "Attempt AI summary Sparkles."],
+                    exp: "Both actions unavailable or blocked for collaborator; forms remain non-editable for them.",
                 },
                 /* 18.5 */
                 {
@@ -3238,7 +4138,6 @@
                     id: "TC-PB-012",
                     p: "P0",
                     cat: "Open",
-                    tags: ["Not ready for testing"],
                     name: "Cannot republish already-tracked items to Track Issues",
                     pre: "Some inspection items previously published via Track Issues.",
                     steps: [
@@ -3252,7 +4151,6 @@
                     id: "TC-PB-013",
                     p: "P0",
                     cat: "Open",
-                    tags: ["Not ready for testing"],
                     name: "Tracked items stay editable; further publish via report only",
                     pre: "Item already published to WIS via Track Issues.",
                     steps: [
@@ -3274,6 +4172,69 @@
                         "Open the created WIS item in project workspace.",
                     ],
                     exp: "WIS item carries over the checklist requirement and form field answers (not title-only); requirement/form meta available for follow-up.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-015",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Unsynced export warning modal",
+                    pre: "Inspection with at least one pending or failed sync (form answer and/or note); online enough to open export; templates available.",
+                    steps: [
+                        "Publish → Export report → choose template → Continue.",
+                        "Read modal copy and actions.",
+                    ],
+                    exp: "Warning modal appears with completed-field count vs total and review warning; actions include Open Progress, Proceed anyway, and dismiss/cancel.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-016",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Unsynced warning Open Progress",
+                    pre: "Unsynced export warning modal visible.",
+                    steps: ["Tap Open Progress."],
+                    exp: "User is taken to Progress to review sync / incomplete items; export does not complete from this action alone.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-017",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Unsynced warning Proceed anyway",
+                    pre: "Unsynced export warning modal visible; template already chosen.",
+                    steps: ["Tap Proceed anyway.", "Wait for export / preview."],
+                    exp: "Export continues despite pending/failed data (soft guardrail, not hard block); post-export preview opens per normal export path.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-018",
+                    p: "P1",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "No unsynced warning when all synced",
+                    pre: "Inspection with captured data; all form answers and applicable notes show SENT / green; no FAILED/PENDING.",
+                    steps: ["Publish → Export report → choose template → Continue."],
+                    exp: "Export proceeds without unsynced-data warning modal.",
+                },
+                {
+                    g: "g-pb",
+                    id: "TC-PB-019",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Project Reports keyword search",
+                    pre: "Project with multiple exported reports differing in file name, template, inspection title, publisher, and/or type.",
+                    steps: [
+                        "Projects → select project → Reports tab.",
+                        "Search by part of inspection title.",
+                        "Clear search; search by template name or file type.",
+                        "Enter a string that matches nothing.",
+                    ],
+                    exp: "Case-insensitive substring filter across file name, template name, inspection title, published by, and file type; empty query restores full list; no matches shows empty filtered list (client-side, not PDF content search).",
                 },
                 /* 18.7 */
                 {
@@ -3399,6 +4360,87 @@
                     steps: ["Open published WIS in project workspace."],
                     exp: "Image/signature fields render as an image grid, not “Photo attached” text.",
                 },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-010",
+                    p: "P1",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "In-app camera controls",
+                    pre: "Online; image field or note photo capture; camera permission granted; device with front/back cameras where applicable.",
+                    steps: [
+                        "Open Vision Camera.",
+                        "Switch front/back camera.",
+                        "Toggle torch/flash if hardware supports it.",
+                        "Zoom and tap-to-focus.",
+                        "Press shutter.",
+                    ],
+                    exp: "Controls behave like familiar phone camera; shutter advances to photo editor / markup (or save path) without crash.",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-011",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Photo markup shapes and colors",
+                    pre: "After capture (or editor entry); online enough to save/upload.",
+                    steps: [
+                        "Add an arrow sticker and a rectangle (and ellipse if available).",
+                        "Change color; drag, scale, and rotate a sticker.",
+                        "Confirm / save.",
+                    ],
+                    exp: "Markup stickers apply; edited raster image saves/uploads as the attachment used on notes or image field. iOS/Android tool chrome may differ slightly.",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-012",
+                    p: "P1",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Markup not re-editable as vectors after save",
+                    pre: "Photo previously saved with markup stickers.",
+                    steps: ["Re-open thumbnail in editor."],
+                    exp: "Prior stickers are baked into the image (raster overlay), not independent editable vector layers from the previous session.",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-013",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Image-to-text drafts note caption (own photo)",
+                    pre: "Host or note author; online; own photo message already uploaded in inspector notes (URL present).",
+                    steps: [
+                        "Tap Sparkles on that note photo.",
+                        "Observe composer.",
+                        "Edit the draft caption.",
+                        "Send (or discard).",
+                    ],
+                    exp: "Caption is inserted as a draft in the note composer (not auto-sent); user must send or discard. Does not auto-fill structured form fields. Not Ask AI RAG.",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-014",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Image-to-text only on own note photos",
+                    pre: "Inspection with a collaborator’s photo message in notes; online; viewing as a different user.",
+                    steps: ["Open the other user’s note photo.", "Look for Sparkles image-to-text."],
+                    exp: "Image-to-text Sparkles is not available on others’ note photos (own photos only).",
+                },
+                {
+                    g: "g-img",
+                    id: "TC-IMG-015",
+                    p: "P1",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Image-to-text requires network and uploaded URL",
+                    pre: "Own note photo still uploading or device offline.",
+                    steps: ["Attempt Sparkles image-to-text before URL is ready / while offline."],
+                    exp: "Action blocked or fails until network + uploaded image URL are available.",
+                },
                 /* 18.9 */
                 {
                     g: "g-pg",
@@ -3439,6 +4481,128 @@
                     pre: "Partially fill one requirement’s form.",
                     steps: ["Reopen progress."],
                     exp: "Progress reflects filled vs total via getRequirementFormProgress for form-bearing requirements.",
+                },
+                {
+                    g: "g-pg",
+                    id: "TC-PG-005",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Progress aggregate sync icon priority",
+                    pre: "Inspection with multiple items: one with FAILED sync, one PENDING only, one all SENT.",
+                    steps: ["Open Progress drawer.", "Scan sync icons on item rows."],
+                    exp: "Aggregate icon priority is failed → pending/uploading → all sent. List row does not expand per-field sync detail.",
+                },
+                {
+                    g: "g-pg",
+                    id: "TC-PG-006",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Progress AI modified pill",
+                    pre: "Host ran Magic Wand so at least one field on an item is AI-modified.",
+                    steps: ["Open Progress.", "Manually clear AI mark on all fields of that item (edit or undo).", "Reopen Progress."],
+                    exp: "Item shows AI modified pill while any field is AI-modified; pill clears when none remain. Pill does not list which fields changed.",
+                },
+                {
+                    g: "g-pg",
+                    id: "TC-PG-007",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Progress Re-sync",
+                    pre: "Pending or failed form answers / local form images after reconnect; device online.",
+                    steps: ["Open Progress.", "Tap Re-sync in the header.", "Watch item sync icons."],
+                    exp: "Walk-level resync flushes pending issues/answers (with retries); icons move toward green when successful; red persists until resolved.",
+                },
+                {
+                    g: "g-pg",
+                    id: "TC-PG-008",
+                    p: "P1",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Re-sync requires network",
+                    pre: "Device offline; Progress open with pending items.",
+                    steps: ["Tap Re-sync."],
+                    exp: "Resync does not succeed offline; user needs connectivity; failed/pending icons remain until resolved online.",
+                },
+                {
+                    g: "g-pg",
+                    id: "TC-PG-009",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Progress item search",
+                    pre: "Inspection with several items with distinct titles / requirement text.",
+                    steps: [
+                        "Open Progress → Search items…",
+                        "Type part of a requirement title/number.",
+                        "Tap a result.",
+                        "Clear search; try a string that only appears in a form answer or note body.",
+                    ],
+                    exp: "Client-side filter matches item title/numbering and requirement text; tap navigates to that carousel item. Does not search form answers, note bodies, or sync/AI status.",
+                },
+                {
+                    g: "g-pg",
+                    id: "TC-PG-010",
+                    p: "P1",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Opening Progress refreshes badges",
+                    pre: "Just ran Magic Wand or edited fields that change sync / AI state.",
+                    steps: ["Open Progress immediately after."],
+                    exp: "Status badges (sync icons / AI modified pills / completion) reflect latest wand / edit state.",
+                },
+                /* 18.10 */
+                {
+                    g: "g-col",
+                    id: "TC-COL-001",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Host invites collaborator to inspection",
+                    pre: "Host online; project team members available to invite.",
+                    steps: ["From inspection, invite a teammate.", "Collaborator opens Inspections and finds the walk."],
+                    exp: "Invite succeeds; collaborator can open the shared inspection (journal/walk access).",
+                },
+                {
+                    g: "g-col",
+                    id: "TC-COL-002",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Collaborator adds notes and photos only",
+                    pre: "Collaborator has access; host has form fields on an item.",
+                    steps: [
+                        "As collaborator: add text note and photo on an item.",
+                        "Attempt to edit a form field value.",
+                    ],
+                    exp: "Notes and photos post successfully; form fields are view-only (opacity/pointer lock)—collaborator cannot change form values.",
+                },
+                {
+                    g: "g-col",
+                    id: "TC-COL-003",
+                    p: "P0",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Host fills forms from collaborator notes",
+                    pre: "Collaborator left notes/photos on an item; host online.",
+                    steps: [
+                        "Host opens the item and reads collaborator notes.",
+                        "Host fills form fields manually and/or runs Magic Wand.",
+                    ],
+                    exp: "Host can interpret notes into forms; Magic Wand may consume collaborator note text; collaborator notes remain visible.",
+                },
+                {
+                    g: "g-col",
+                    id: "TC-COL-004",
+                    p: "P1",
+                    cat: "release",
+                    tags: ["Updated 9 sept 2026"],
+                    name: "Owner and member chips / commenter avatars",
+                    pre: "Host plus ≥1 invited collaborator who posted on an item.",
+                    steps: ["Open Progress / inspection header.", "Open an item with collaborator notes."],
+                    exp: "UI may show owner and invited member chips; item cards can show collaborator commenter avatars where implemented.",
                 },
             ]
 
@@ -3868,7 +5032,7 @@
                 [
                     "Form usability polish (color codes, long MC layouts, completion visibility)",
                     "In progress",
-                    "Continuous improvement; not perfect this release — §8.3",
+                    "Continuous improvement; not perfect this release — §8.2",
                 ],
                 [
                     "Report status on inspection list cards",
@@ -3876,33 +5040,40 @@
                     "Computed client-side; display deferred — §6.3",
                 ],
                 [
-                    "AI conflict indicator UI (discrete fields)",
+                    "AI conflict-chooser UI (discrete fields)",
                     "Not in this release",
-                    "Target; batch vs item-level overwrite policy differs — §10.4",
+                    "Target; attribution + Tap to undo are live trust layer; dedicated chooser still open — §10.2",
                 ],
-                ["AI attribution badges", "Not in this release", "Planned for later — §10.3"],
                 [
                     "Offline inspection create + checklist load",
                     "Not in this release",
-                    "Checklist required when signal available — §10.5",
+                    "Checklist required when signal available — §7.3, §10.3",
                 ],
-                ["Ask AI performance optimization", "Not in this release", "Slower than Magic Wand — §11.5"],
-                ["Pre-export rendered report preview", "Not in this release", "Form review/edit fills gap — §12.5"],
-                ["In-app doc editor at publish", "Not in this release", "Aspirational — §12.1"],
+                ["Ask AI performance optimization", "Not in this release", "Slower than Magic Wand — §11.3"],
+                ["Pre-export rendered report preview", "Not in this release", "Form review/edit fills gap — §12.3"],
+                ["In-app doc editor at publish", "Not in this release", "Aspirational — §12.2"],
                 [
-                    "Reports: template-first grouping + keyword search",
+                    "Reports: template-first grouping",
                     "Not in this release",
-                    "Target in §13.3; confirm against ProjectReportsDashboard",
+                    "Keyword search implemented; template-first org still target — §13.2",
                 ],
-                ["Template name on inspection list card", "Not in this release", "Persist after export — linkage TBD — §12.3"],
-                ["Project team inspections view (mobile)", "Not in this release", "Can add later — §15.3"],
-                ["Manager workload view", "Not in this release", "To be discussed — §15.3"],
-                ["Multi-inspector collaboration", "Not in this release", "Single inspector only — §16"],
-                ["Multi-device form conflict merge + host final-value UI", "Not in this release", "§8.2"],
+                ["Template name on inspection list card", "Not in this release", "Persist after export — linkage TBD — §12.2"],
+                ["Project team inspections view (mobile)", "Not in this release", "Can add later — §15.2"],
+                ["Manager workload view", "Not in this release", "To be discussed — §15.2"],
+                [
+                    "Multi-author form merge (field-level author/timestamp + host final-value UI)",
+                    "Not in this release",
+                    "Notes collaboration shipped; form multi-author deferred — §16",
+                ],
+                [
+                    "Multi-device form conflict merge + host final-value UI",
+                    "Not in this release",
+                    "Wholesale server replace today; related to multi-author forms — §8.2, §16",
+                ],
                 [
                     "Blank-capture toggle (disable free-form blank issues per client)",
                     "Not in this release",
-                    "Product feature request — §9.2",
+                    "Product feature request — §9.3",
                 ],
                 ["Checklist locking (Billie admin lock; clients cannot edit)", "Not in this release", "Product feature request"],
                 [
@@ -3916,9 +5087,9 @@
                     "Product feature request — group beyond region and name",
                 ],
                 [
-                    "Image recognition for inspection photos",
+                    "Ask AI image recognition (RAG / knowledge retrieval from photos)",
                     "Not in this release",
-                    "Product feature request — §11.5 out of scope",
+                    "Ask AI has no image recognition; note image-to-text is separate (§8) — §11.3",
                 ],
                 [
                     "Expanded summary module (report-level summaries from findings)",
@@ -3992,9 +5163,9 @@
                 [
                     "Magic Wand overwrite policy",
                     "Partial",
-                    "Partial: batch and item-level both may modify existing values per current API — §10.2",
-                    "Unify to never-overwrite manual discrete values; add conflict UI",
-                    "Trust, §10.4",
+                    "Partial: batch and item-level may modify existing values; AI-modified + Tap to undo are the live trust layer — §10.2",
+                    "Unify to never-overwrite manual discrete values; add dedicated conflict-chooser UI",
+                    "Trust, §10.2",
                 ],
                 [
                     "Project-field population",
@@ -4006,28 +5177,28 @@
                 [
                     "Ask AI insert target",
                     "Decided",
-                    "Decided for this release: inspector notes only — §11.3",
+                    "Decided for this release: inspector notes only — §11.2",
                     "Bound form fields / one-click field actions (future)",
                     "Knowledge Agent workflow",
                 ],
                 [
                     "Report library grouping and search",
-                    "Target",
-                    "Target: by template first, then inspections; keyword search bar — §13.3",
-                    "Confirm current UI vs target; version history presentation",
+                    "Partial",
+                    "Partial: keyword search implemented; grouping still by inspection — §13.2",
+                    "Template-first grouping target; version history presentation",
                     "Project Reports tab",
                 ],
                 [
                     "Template persisted on inspection card",
                     "Open",
-                    "Open: not sure linkage needed yet — §12.3",
+                    "Open: not sure linkage needed yet — §12.2",
                     "Persist reportTemplateId/Name after export vs derive from latest export",
                     "Inspection list cards",
                 ],
                 [
                     "Signer name and date on signatures",
                     "Open",
-                    "Open: should come from export_info JSON — §14.1",
+                    "Open: should come from export_info JSON — §14.2",
                     "Separate form fields vs system captions vs report-template only",
                     "Sign-off, export",
                 ],
@@ -4041,22 +5212,22 @@
                 [
                     "Project team inspections (mobile)",
                     "Deferred",
-                    "Deferred: can add later — §15.3",
+                    "Deferred: can add later — §15.2",
                     "Own = all statuses; others = completed only; refine access rules",
                     "Manager visibility",
                 ],
                 [
                     "Manager workload view",
                     "To be discussed",
-                    "To be discussed — §15.3",
+                    "To be discussed — §15.2",
                     "Desktop-only vs mobile; metrics definition",
                     "Resource planning",
                 ],
                 [
                     "Multi-inspector collaboration",
-                    "Not this release",
-                    "Not this release — §16",
-                    "Invitation flow, author/timestamp per field, host confirms final value for report",
+                    "Partial",
+                    "Partial: host + notes collaboration shipped; multi-author form merge not this release — §16",
+                    "Field-level author/timestamp merge UI; host confirms final value for report",
                     "JSON schema, UI design",
                 ],
                 [
@@ -4121,5 +5292,152 @@
             renderTC()
             buildOutline("req")
         </script>
-    </body>
+    
+<script>
+/* Wrap Design intent / Features / Limitations / Journey into visual cards */
+(function () {
+  function kindFromTitle(t) {
+    t = (t || '').toLowerCase();
+    if (t.indexOf('design intent') >= 0) return 'intent';
+    if (t.indexOf('feature description') >= 0 || t.indexOf('feature descriptions') >= 0) return 'features';
+    if (t.indexOf('limitation') >= 0) return 'limits';
+    if (t.indexOf('user journey') >= 0) return 'journey';
+    return '';
+  }
+  var panel = document.getElementById('panel-req');
+  if (!panel) return;
+  panel.querySelectorAll('.sec').forEach(function (sec) {
+    var nodes = Array.prototype.slice.call(sec.children);
+    var i = 0;
+    while (i < nodes.length) {
+      var el = nodes[i];
+      if (!el || el.tagName !== 'H3') { i++; continue; }
+      var kind = kindFromTitle(el.textContent);
+      if (!kind) { i++; continue; }
+      var wrap = document.createElement('div');
+      wrap.className = 'subsec subsec--' + kind;
+      sec.insertBefore(wrap, el);
+      wrap.appendChild(el);
+      i++;
+      while (i < nodes.length) {
+        var n = nodes[i];
+        if (!n) break;
+        if (n.tagName === 'H3') {
+          if (kindFromTitle(n.textContent)) break;
+        }
+        if (n.classList && (n.classList.contains('sec__head') || n.classList.contains('subsec'))) break;
+        if (n.tagName === 'HR') break;
+        wrap.appendChild(n);
+        i++;
+      }
+      nodes = Array.prototype.slice.call(sec.children);
+      i = nodes.indexOf(wrap) + 1;
+    }
+  });
+})();
+
+/* Section accordion — one feature/section open at a time */
+(function () {
+  var panel = document.getElementById('panel-req');
+  if (!panel) return;
+  var chevSvg =
+    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
+
+  function openSec(sec) {
+    panel.querySelectorAll('.sec.is-open').forEach(function (s) {
+      if (s === sec) return;
+      s.classList.remove('is-open');
+      s.classList.add('is-collapsed');
+      var h = s.querySelector('.sec__head');
+      if (h) h.setAttribute('aria-expanded', 'false');
+    });
+    sec.classList.add('is-open');
+    sec.classList.remove('is-collapsed');
+    var head = sec.querySelector('.sec__head');
+    if (head) head.setAttribute('aria-expanded', 'true');
+  }
+
+  function toggleSec(sec) {
+    if (sec.classList.contains('is-open')) {
+      sec.classList.remove('is-open');
+      sec.classList.add('is-collapsed');
+      var head = sec.querySelector('.sec__head');
+      if (head) head.setAttribute('aria-expanded', 'false');
+    } else {
+      openSec(sec);
+    }
+  }
+
+  panel.querySelectorAll('.sec').forEach(function (sec) {
+    var head = sec.querySelector(':scope > .sec__head');
+    if (!head) return;
+
+    var body = document.createElement('div');
+    body.className = 'sec__body';
+    while (head.nextSibling) body.appendChild(head.nextSibling);
+    sec.appendChild(body);
+
+    var chev = document.createElement('span');
+    chev.className = 'sec__chev';
+    chev.setAttribute('aria-hidden', 'true');
+    chev.innerHTML = chevSvg;
+    head.appendChild(chev);
+
+    sec.classList.add('is-collapsed');
+    head.setAttribute('role', 'button');
+    head.setAttribute('tabindex', '0');
+    head.setAttribute('aria-expanded', 'false');
+
+    head.addEventListener('click', function () {
+      toggleSec(sec);
+    });
+    head.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleSec(sec);
+      }
+    });
+  });
+
+  // Default: open Purpose
+  var first = panel.querySelector('.sec');
+  if (first) openSec(first);
+
+  // Outline / hash navigation opens the matching section
+  function openById(id) {
+    if (!id) return;
+    var sec = document.getElementById(id);
+    if (!sec || !sec.classList.contains('sec')) return;
+    openSec(sec);
+    setTimeout(function () {
+      sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 30);
+  }
+
+  var outline = document.getElementById('outline');
+  if (outline) {
+    outline.addEventListener(
+      'click',
+      function (e) {
+        var a = e.target.closest('a');
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        if (href.charAt(0) !== '#') return;
+        // Only when Main Requirements tab is active
+        if (!panel.classList.contains('is-active')) return;
+        openById(href.slice(1));
+      },
+      true,
+    );
+  }
+
+  if (location.hash) {
+    openById(location.hash.slice(1));
+  }
+
+  window.__openReqSection = openById;
+})();
+</script>
+
+</body>
 </html>
