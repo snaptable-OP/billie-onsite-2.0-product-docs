@@ -3188,7 +3188,7 @@
                             </ol>
                         </div>
 
-                        <!-- Appendix -->
+                        <!-- Appendix A -->
                         <div class="sec" id="s-appendix" data-outline="Appendix · Codebase references">
                             <div class="sec__head">
                                 <span class="sec__num">A</span>
@@ -3303,6 +3303,138 @@
                             </div>
                         </div>
 
+                        <!-- Appendix B · Updated features 9 Sep 2026 -->
+                        <div class="sec" id="s-appendix-sep9" data-outline="Appendix · Updated 9 Sep 2026">
+                            <div class="sec__head">
+                                <span class="sec__num">B</span>
+                                <h2>Appendix: Updated features · 9 Sep 2026</h2>
+                            </div>
+                            <p>
+                                Catalog of mobile features documented / expanded on
+                                <strong>9 Sep 2026</strong> (batch-2). Full specs live in the linked requirement sections;
+                                matching test cases are tagged <span class="pill pill--ok">Updated 9 sept 2026</span> in the
+                                Test Cases tab (§18).
+                            </p>
+                            <div class="tbl-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Feature</th>
+                                            <th>PRD section</th>
+                                            <th>What changed</th>
+                                            <th>Test cases</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-key">Sync status icons</td>
+                                            <td><a href="#s-forms">§8 Form completion</a></td>
+                                            <td>
+                                                Per-field / note sync visuals: green tick (SENT), grey clock (PENDING /
+                                                UPLOADING), red exclamation (FAILED); empty fields show no icon.
+                                            </td>
+                                            <td>TC-FM-008 – TC-FM-011</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Camera capture</td>
+                                            <td><a href="#s-forms">§8 Form completion</a></td>
+                                            <td>
+                                                In-app Vision Camera: front/back, torch/flash, zoom, tap-to-focus, shutter →
+                                                editor / markup → compression / attach.
+                                            </td>
+                                            <td>TC-IMG-010</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Photo markup</td>
+                                            <td><a href="#s-forms">§8 Form completion</a></td>
+                                            <td>
+                                                Shape stickers (arrows, rectangles, related shapes), colors, drag / scale /
+                                                rotate; saved as raster overlay on the attachment.
+                                            </td>
+                                            <td>TC-IMG-011 – TC-IMG-012</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Image-to-text on note photos</td>
+                                            <td><a href="#s-forms">§8 Form completion</a></td>
+                                            <td>
+                                                Sparkles on the author’s own uploaded note photo drafts a caption into the
+                                                composer (not auto-sent; not Ask AI RAG).
+                                            </td>
+                                            <td>TC-IMG-013 – TC-IMG-015</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">AI summary fields</td>
+                                            <td><a href="#s-wand">§10 Magic Wand</a></td>
+                                            <td>
+                                                Special <code>ai_summary</code> fields with contributing-field chips and
+                                                Sparkles generate / regenerate (host-only; network required).
+                                            </td>
+                                            <td>TC-MW-012 – TC-MW-014</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">AI-modified indication</td>
+                                            <td><a href="#s-wand">§10 Magic Wand</a></td>
+                                            <td>
+                                                Fields written by Magic Wand show AI star / chip; Progress shows an
+                                                <strong>AI modified</strong> pill; manual edit clears the mark.
+                                            </td>
+                                            <td>TC-MW-008 – TC-MW-009</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Tap to undo</td>
+                                            <td><a href="#s-wand">§10 Magic Wand</a></td>
+                                            <td>
+                                                Per-field undo restores the single prior snapshot from the latest AI write and
+                                                clears AI-modified.
+                                            </td>
+                                            <td>TC-MW-010 – TC-MW-011</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Progress sync, Re-sync &amp; search</td>
+                                            <td><a href="#s-review">§12 Review &amp; report</a></td>
+                                            <td>
+                                                Aggregate sync icons, AI modified pills, walk-level <strong>Re-sync</strong>,
+                                                and client-side item search by title / requirement text.
+                                            </td>
+                                            <td>TC-PG-005 – TC-PG-010</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Unsynced export warning</td>
+                                            <td><a href="#s-review">§12 Review &amp; report</a></td>
+                                            <td>
+                                                Soft guardrail on Export → Continue when pending/failed data remains: Open
+                                                Progress, Proceed anyway, or dismiss.
+                                            </td>
+                                            <td>TC-PB-015 – TC-PB-018</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Project Reports search</td>
+                                            <td><a href="#s-publish">§13 Publishing &amp; distribution</a></td>
+                                            <td>
+                                                Keyword search on Project → Reports (file name, template, inspection title,
+                                                published by, file type).
+                                            </td>
+                                            <td>TC-PB-019</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-key">Host + notes collaboration</td>
+                                            <td><a href="#s-multi">§16 Multi-inspector</a></td>
+                                            <td>
+                                                Host invites teammates; collaborators add notes/photos only; forms and Magic
+                                                Wand remain host-owned (multi-author form merge still future).
+                                            </td>
+                                            <td>TC-COL-001 – TC-COL-004</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p style="color: var(--ink-3); font-size: 13px; margin-top: 12px">
+                                Related codebase pointers for these features are listed in
+                                <a href="#s-appendix">Appendix A</a> (sync, Progress, camera/markup, AI summary / attribution,
+                                reports search).
+                            </p>
+                        </div>
+
                         <footer>
                             Inspection App — Usage Phase PRD · v2.0 · Refined against
                             <code>wb-billie-mobile</code> and batch-2 mobile features PRD.
@@ -3354,7 +3486,7 @@
                                 />
                             </label>
                             <span class="tc-count" id="tcCount"></span>
-                            <button type="button" class="tc-export-btn" id="tcExportExcel" title="Download currently filtered test cases as Excel">
+                            <button type="button" class="tc-export-btn" id="tcExportExcel" title="Download all test cases as Excel (ignores filters)">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                     <polyline points="7 10 12 15 17 10" />
@@ -4662,13 +4794,37 @@
                     .join("\n")
             }
 
+            function getAllTC() {
+                var out = []
+                TC_GROUPS.forEach(function (grp) {
+                    TC.filter(function (t) {
+                        return t.g === grp.id
+                    }).forEach(function (t) {
+                        out.push(t)
+                    })
+                })
+                return out
+            }
+
             function buildTCExportRows() {
-                var cases = getFilteredTC()
-                var aoa = [["#", "test case title", "pre", "steps", "expected", "Tester Observations"]]
+                // Always export the full suite (including newest cases), regardless of UI filters/search.
+                var cases = getAllTC()
+                var grpById = {}
+                TC_GROUPS.forEach(function (g) {
+                    grpById[g.id] = g
+                })
+                var aoa = [
+                    ["#", "group", "test case title", "priority", "status", "tags", "pre", "steps", "expected", "Tester Observations"],
+                ]
                 cases.forEach(function (t, i) {
+                    var grp = grpById[t.g]
                     aoa.push([
                         String(i + 1),
+                        grp ? grp.num + " " + grp.title : t.g,
                         t.id + " - " + t.name,
+                        t.p || "",
+                        t.cat || "",
+                        (t.tags || []).join("; "),
                         t.pre || "",
                         formatStepsForExcel(t.steps),
                         t.exp + (t.cur ? "\n\nCurrent build: " + t.cur : ""),
@@ -4874,13 +5030,13 @@
             function downloadTCExcel() {
                 var built = buildTCExportRows()
                 if (!built.cases.length) {
-                    alert("No test cases match the current filters.")
+                    alert("No test cases found to export.")
                     return
                 }
                 var stamp = new Date().toISOString().slice(0, 10)
                 try {
                     var blob = buildXlsxBlob(built.aoa)
-                    triggerDownload(blob, "Usage-Phase-Test-Cases-" + stamp + ".xlsx")
+                    triggerDownload(blob, "Usage-Phase-Test-Cases-ALL-" + stamp + ".xlsx")
                 } catch (err) {
                     console.error(err)
                     alert("Excel export failed. Please refresh and try again.")
