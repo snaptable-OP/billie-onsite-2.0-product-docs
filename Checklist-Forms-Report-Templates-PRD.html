@@ -1296,6 +1296,7 @@
   }
   .layer-card:nth-child(2)::before { background: var(--future); }
   .layer-card:nth-child(3)::before { background: var(--open); }
+  .layer-card:nth-child(4)::before { background: var(--warn); }
   .layer-card__kicker {
     font-size: 11px;
     font-weight: 700;
@@ -1521,23 +1522,24 @@
         <h1 class="doc-title">Checklist, Forms &amp; Report Templates</h1>
         <div class="doc-meta">
           <span class="meta-chip"><span class="dot"></span>Status: <b>Living product design document (aligned to current web app architecture)</b></span>
-          <span class="meta-chip">Surfaces: <b>Solution Library · Team Checklist &amp; Forms · Export / Report Template Mapper</b></span>
+          <span class="meta-chip">Surfaces: <b>Solution Library · Team Checklist &amp; Forms · Export / Report Template Mapper · Inspection runtime (web)</b></span>
           <span class="meta-chip">Audience: <b>Product, design, eng (web + backend)</b></span>
+          <span class="meta-chip">Last supplemented: <b>2026-09-09</b></span>
         </div>
       </div>
       <nav class="tabs" id="tabs" role="tablist">
-        <button class="tab is-active" data-tab="overview" role="tab">Overview <span class="tab__badge">§1–2</span></button><button class="tab" data-tab="libraries" role="tab">Libraries <span class="tab__badge">§3–4</span></button><button class="tab" data-tab="forms" role="tab">Forms & Specials <span class="tab__badge">§5–6</span></button><button class="tab" data-tab="export" role="tab">Export & Mapping <span class="tab__badge">§7–8</span></button><button class="tab" data-tab="adoption" role="tab">Adoption <span class="tab__badge">§9–10</span></button><button class="tab" data-tab="scenarios" role="tab">Scenarios & Gaps <span class="tab__badge">§11–13</span></button><button class="tab" data-tab="appendix" role="tab">Appendix <span class="tab__badge">§14</span></button><button class="tab" data-tab="tests" role="tab">Test Cases <span class="tab__badge">§15</span></button>
+        <button class="tab is-active" data-tab="overview" role="tab">Overview <span class="tab__badge">§1–2</span></button><button class="tab" data-tab="libraries" role="tab">Libraries <span class="tab__badge">§3–4</span></button><button class="tab" data-tab="forms" role="tab">Forms & Specials <span class="tab__badge">§5–6</span></button><button class="tab" data-tab="export" role="tab">Export & Mapping <span class="tab__badge">§7–8</span></button><button class="tab" data-tab="adoption" role="tab">Adoption <span class="tab__badge">§9–10</span></button><button class="tab" data-tab="scenarios" role="tab">Scenarios & Gaps <span class="tab__badge">§11–13</span></button><button class="tab" data-tab="appendix" role="tab">Appendix <span class="tab__badge">§14 + B</span></button><button class="tab" data-tab="runtime" role="tab">Runtime <span class="tab__badge">§15</span></button><button class="tab" data-tab="tests" role="tab">Test Cases <span class="tab__badge">§16</span></button>
       </nav>
     </div>
 
     <div class="content">
       <section class="panel is-active" id="panel-overview" role="tabpanel">
-<p class="lead" style="margin-bottom:18px">Billie separates <em>authoring of reusable inspection structure</em> from <em>mapping that structure into customer report documents</em> — Solution Library → Team Library → Report mapping.</p>
+<p class="lead" style="margin-bottom:18px">Billie separates <em>authoring of reusable inspection structure</em> from <em>mapping that structure into customer report documents</em>, and from <em>filling / generating answers on live inspections</em> — Solution Library → Team Library → Report mapping → Inspection runtime (web).</p>
 <div class="stat-row">
-          <div class="stat stat--accent"><div class="stat__n">3</div><div class="stat__l">Product layers</div></div>
-          <div class="stat stat--ok"><div class="stat__n">14</div><div class="stat__l">PRD sections</div></div>
+          <div class="stat stat--accent"><div class="stat__n">4</div><div class="stat__l">Product layers</div></div>
+          <div class="stat stat--ok"><div class="stat__n">15</div><div class="stat__l">PRD sections</div></div>
           <div class="stat stat--future"><div class="stat__n">8</div><div class="stat__l">Regions</div></div>
-          <div class="stat stat--open"><div class="stat__n">12</div><div class="stat__l">Open gaps</div></div>
+          <div class="stat stat--open"><div class="stat__n">16</div><div class="stat__l">Open gaps</div></div>
         </div>
 <div class="legend">
           <strong style="color:var(--ink)">How to read each section</strong>
@@ -1548,7 +1550,7 @@
         </div>
 <div class="sec" id="s-1-purpose-product-arc" data-outline="1 · Purpose &amp; product arc">
 <div class="sec__head"><span class="sec__num">01</span><h2>Purpose & product arc</h2></div>
-<p>Billie separates <strong>authoring of reusable inspection structure</strong> from <strong>mapping that structure into customer report documents</strong>.</p>
+<p>Billie separates <strong>authoring of reusable inspection structure</strong> from <strong>mapping that structure into customer report documents</strong>, and from <strong>filling / generating answers on live inspections</strong>.</p>
 <div class="layer-grid">
   <div class="layer-card">
     <div class="layer-card__kicker">Layer 1</div>
@@ -1565,21 +1567,28 @@
   <div class="layer-card">
     <div class="layer-card__kicker">Layer 3</div>
     <h3 class="layer-card__title">Report mapping</h3>
-    <div class="layer-card__who">Team (or Solution authors)</div>
+    <div class="layer-card__who">Team (or Solution when authoring report templates)</div>
     <p>Links checklist/form JSON paths to placeholders in DOCX/XLSX templates.</p>
+  </div>
+  <div class="layer-card">
+    <div class="layer-card__kicker">Layer 4</div>
+    <h3 class="layer-card__title">Inspection runtime</h3>
+    <div class="layer-card__who">Inspectors (web + mobile)</div>
+    <p>Live form answers, AI summaries, photos/notes; export marks completion.</p>
   </div>
 </div>
 <p style="font-weight:650;color:var(--ink);margin:18px 0 6px">Intended customer journey (cross-product)</p>
 <div class="journey-rail">
   <div class="journey-step"><div class="journey-step__n">1</div><div class="journey-step__body">Solution authors publish checklist / form / report templates for regions (or Universal).</div></div>
-  <div class="journey-step"><div class="journey-step__n">2</div><div class="journey-step__body">A team adopts what they need into their library as a <strong>locked, structurally continuous</strong> copy (IDs carry over; content is not team-editable — see §8).</div></div>
+  <div class="journey-step"><div class="journey-step__n">2</div><div class="journey-step__body">A team adopts what they need into their library as a <strong>locked, structurally continuous</strong> copy (IDs carry over; content is not team-editable — see §9).</div></div>
   <div class="journey-step"><div class="journey-step__n">3</div><div class="journey-step__body">Teams use adopted checklists/forms on projects and map data into report templates for export.</div></div>
-  <div class="journey-step"><div class="journey-step__n">4</div><div class="journey-step__body">If a team needs a custom variant, product may later offer an explicit <strong>“detach / create editable copy”</strong> path; the default adopted asset stays locked to preserve Solution↔report integrity.</div></div>
+  <div class="journey-step"><div class="journey-step__n">4</div><div class="journey-step__body">Inspectors fill forms on web/mobile; section AI summaries can be generated on the inspection; checklist edits reflect into open inspections (§15).</div></div>
+  <div class="journey-step"><div class="journey-step__n">5</div><div class="journey-step__body">If a team needs a custom variant, product may later offer an explicit <strong>“detach / create editable copy”</strong> path; the default adopted asset stays locked to preserve Solution↔report integrity.</div></div>
 </div>
 </div>
 <div class="sec" id="s-2-glossary" data-outline="2 · Glossary">
 <div class="sec__head"><span class="sec__num">02</span><h2>Glossary</h2></div>
-<div class="tbl-wrap"><table><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody><tr><td class="td-key"><strong>Checklist / Requirement set</strong></td><td>Tree of <strong>sections</strong> and <strong>requirements</strong> (<code>UIRequirementSet</code>)</td></tr><tr><td class="td-key"><strong>Requirement</strong></td><td>Leaf inspection item; may carry a <strong>form</strong> (<code>formSchema</code>)</td></tr><tr><td class="td-key"><strong>Section</strong></td><td>Nesting container; may carry <strong>special fields</strong> (<code>specialFormSchema</code>)</td></tr><tr><td class="td-key"><strong>Form (library)</strong></td><td>Named reusable field schema stored in the Forms library</td></tr><tr><td class="td-key"><strong>Form (on requirement)</strong></td><td>Instance of a schema attached to one requirement</td></tr><tr><td class="td-key"><strong>Special field</strong></td><td>Section-level output: AI summary or pivot table — not a mobile fill-in control</td></tr><tr><td class="td-key"><strong>Looped item</strong></td><td>Requirement flagged as repeating (export preview ×3 / pivot source)</td></tr><tr><td class="td-key"><strong>Blank after</strong></td><td>Export-preview flag: insert a blank notes row (text + photo) after a requirement</td></tr><tr><td class="td-key"><strong>Notes (sample)</strong></td><td>Preview-only onsite inspector notes simulating <code>wis_detail[].content[]</code></td></tr><tr><td class="td-key"><strong>Project sync</strong></td><td>In report mapper JSON preview: pull live <code>project_info</code> / metadata from a selected project</td></tr><tr><td class="td-key"><strong>Report / export template</strong></td><td>Carbone-backed DOCX/XLSX + JSON path ↔ tag mappings</td></tr><tr><td class="td-key"><strong>Adopt</strong></td><td>Bring a Solution template into the team library as a <strong>locked</strong> (read-only) copy</td></tr><tr><td class="td-key"><strong>Locked adopted template</strong></td><td>Adopted asset: usable on projects / mapping, <strong>not</strong> editable by the team</td></tr><tr><td class="td-key"><strong>Clone (form onto requirement)</strong></td><td>Copy a library form schema onto a requirement (new field IDs)</td></tr></tbody></table></div>
+<div class="tbl-wrap"><table><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody><tr><td class="td-key"><strong>Checklist / Requirement set</strong></td><td>Tree of <strong>sections</strong> and <strong>requirements</strong> (<code>UIRequirementSet</code>)</td></tr><tr><td class="td-key"><strong>Requirement</strong></td><td>Leaf inspection item; may carry a <strong>form</strong> (<code>formSchema</code>)</td></tr><tr><td class="td-key"><strong>Section</strong></td><td>Nesting container; may carry <strong>special fields</strong> (<code>specialFormSchema</code>)</td></tr><tr><td class="td-key"><strong>Form (library)</strong></td><td>Named reusable field schema stored in the Forms library</td></tr><tr><td class="td-key"><strong>Form (on requirement)</strong></td><td>Instance of a schema attached to one requirement</td></tr><tr><td class="td-key"><strong>Special field</strong></td><td>Section-level output: AI summary — not a mobile fill-in control</td></tr><tr><td class="td-key"><strong>Looped item</strong></td><td>Requirement flagged as repeating (export preview ×3)</td></tr><tr><td class="td-key"><strong>Blank after</strong></td><td>Export-preview flag: insert a blank notes row (text + photo) after a requirement</td></tr><tr><td class="td-key"><strong>Notes (sample)</strong></td><td>Preview-only onsite inspector notes simulating <code>wis_detail[].content[]</code></td></tr><tr><td class="td-key"><strong>Project sync</strong></td><td>In report mapper JSON preview: pull live <code>project_info</code> / metadata from a selected project</td></tr><tr><td class="td-key"><strong>Report / export template</strong></td><td>Carbone-backed DOCX/XLSX + JSON path ↔ tag mappings</td></tr><tr><td class="td-key"><strong>Adopt</strong></td><td>Bring a Solution template into the team library as a <strong>locked</strong> (read-only) copy</td></tr><tr><td class="td-key"><strong>Locked adopted template</strong></td><td>Adopted asset: usable on projects / mapping, <strong>not</strong> editable by the team</td></tr><tr><td class="td-key"><strong>Clone (form onto requirement)</strong></td><td>Copy a library form schema onto a requirement (new field IDs)</td></tr><tr><td class="td-key"><strong>Special as inspection item</strong></td><td>Section with specials materializes as a trailing inspection item keyed by the <strong>section id</strong>; export appends a <code>wis_detail</code> row with <code>special_form.form</code> (not <code>requirement</code>)</td></tr><tr><td class="td-key"><strong>Invalid report template</strong></td><td>Solution report whose linked checklist template id is missing (e.g. after checklist delete)</td></tr><tr><td class="td-key"><strong>Multi-target AI summary</strong></td><td>One form field can feed <strong>several</strong> AI summaries via <code>aiSummaryIds</code> (legacy <code>aiSummaryId</code> = first target)</td></tr><tr><td class="td-key"><strong>Structure sync</strong></td><td>Server sweep that adds new checklist requirements onto existing inspections (<code>structureSyncStatus</code>)</td></tr><tr><td class="td-key"><strong>Smart Description generate</strong></td><td>One-click AI draft of a field’s Smart Description (authoring)</td></tr></tbody></table></div>
 <hr class="divider">
 </div>
 <footer>Billie Onsite — Checklist, Forms &amp; Report Templates PRD · Living design document · aligned to web app architecture.</footer>
@@ -1588,22 +1597,27 @@
 <div class="sec__head"><span class="sec__num">03</span><h2>Solution Library</h2></div>
 <h3><span class="h3num">3.1</span>Design intent</h3>
 <p>Solution Library is an <strong>internal catalog</strong>, not an end-customer workspace. It exists to:</p>
-<ul><li>Standardize high-quality checklist / form / report starting points across markets.</li><li>Control distribution via <strong>regions</strong> (and Universal).</li><li>Use a real <strong>DRAFT → PUBLISHED → ARCHIVED</strong> lifecycle so teams only see published assets.</li><li>Author templates that, once adopted, remain the <strong>locked blueprint</strong> teams run against.</li></ul>
+<ul><li>Standardize high-quality checklist / form / report starting points across markets.</li><li>Control distribution via <strong>regions</strong> (and Universal).</li><li>Use a real <strong>DRAFT → PUBLISHED → ARCHIVED</strong> lifecycle so teams only see published assets.</li><li>Author templates that, once adopted, remain the <strong>locked blueprint</strong> teams run against.</li><li>Allow Solution authors to <strong>remove</strong> obsolete templates (including published ones) while making broken report↔checklist links visible.</li></ul>
 <p>Access is gated (email allowlist today; product intent is Solution-team-only).</p>
 <h3><span class="h3num">3.2</span>Feature descriptions</h3>
-<div class="tbl-wrap"><table><thead><tr><th>Sub-library</th><th>Intent</th><th>Maturity (web)</th></tr></thead><tbody><tr><td class="td-key"><strong>Checklist & Forms templates</strong></td><td>Structure + reusable forms</td><td>Full authoring + publish</td></tr><tr><td class="td-key"><strong>Report templates</strong></td><td>Document layout + mappings + linked checklist</td><td>Full authoring + publish</td></tr><tr><td class="td-key"><strong>Tag templates</strong></td><td>Tagging presets</td><td>Shell / lighter</td></tr><tr><td class="td-key"><strong>Knowledge agent templates</strong></td><td>Agent configs</td><td>Shell / lighter</td></tr></tbody></table></div>
+<div class="tbl-wrap"><table><thead><tr><th>Sub-library</th><th>Intent</th><th>Maturity (web)</th></tr></thead><tbody><tr><td class="td-key"><strong>Checklist & Forms templates</strong></td><td>Structure + reusable forms</td><td>Full authoring + publish + delete</td></tr><tr><td class="td-key"><strong>Report templates</strong></td><td>Document layout + mappings + linked checklist</td><td>Full authoring + publish + delete + Invalid badge</td></tr><tr><td class="td-key"><strong>Tag templates</strong></td><td>Tagging presets</td><td>Shell / lighter</td></tr><tr><td class="td-key"><strong>Knowledge agent templates</strong></td><td>Agent configs</td><td>Shell / lighter</td></tr></tbody></table></div>
 <p><strong>Regions:</strong> <code>UNIVERSAL | AU | US | UK | CA | NZ | HK | SG</code>.</p>
 <ul><li><strong>Universal</strong> = available to all teams.</li><li>Country-specific templates appear for matching team owner regions (server filters customer catalogs).</li><li>Authors can multi-select regions when creating templates.</li></ul>
 <p><strong>Checklist template authoring</strong></p>
 <ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Create template (name, description, regions).</li><li>Edit tree in the shared checklist editor (same UX as team).</li><li>Attach forms to requirements; configure section <strong>Special</strong> fields.</li><li>Save draft or <strong>Publish</strong>.</li></ol>
 <p><strong>Form template authoring</strong></p>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Create named form in Solution Forms catalog (with regions).</li><li>Build fields in the form builder (§5).</li><li>Publish when ready for teams.</li></ol>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Create named form in Solution Forms catalog (with regions).</li><li>Build fields in the form builder (§5).</li><li>Publish when ready for teams.</li><li>Delete allowed for any status (including published), same pattern as team forms ⋮ menu.</li></ol>
 <p><strong>Report template authoring</strong></p>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Create report template (name, regions).</li><li>Open the upload / mapping wizard in Solution mode.</li><li>Optionally bind a checklist template + Carbone template id.</li><li>Map document tags to JSON paths; embed or link checklist JSON + mappings.</li><li>Publish.</li></ol>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Create report template (name, regions).</li><li>Open the upload / mapping wizard in Solution mode.</li><li>Optionally bind a checklist template + <strong>template ID</strong> (UI copy: “Paste your template ID”; not Carbone-branded in the placeholder).</li><li>Map document tags to JSON paths; embed or link checklist JSON + mappings.</li><li>Publish.</li></ol>
+<p><strong>Delete &amp; link integrity</strong></p>
+<div class="tbl-wrap"><table><thead><tr><th>Action</th><th>Behavior</th></tr></thead><tbody><tr><td class="td-key">Delete checklist (any status, including Published)</td><td>Card ⋯ → Delete → confirm. If report templates link to it, dialog <strong>lists those report names</strong> and warns they will no longer be valid.</td></tr><tr><td class="td-key">Delete report (any status)</td><td>Card ⋯ → Delete → confirm.</td></tr><tr><td class="td-key"><strong>Invalid</strong> badge</td><td>Report card whose <code>linkedChecklistTemplateId</code> is set but that checklist is missing from the Solution checklist list.</td></tr><tr><td class="td-key">Cross-list fetch</td><td>Checklist and report lists both load when either library is open so Invalid can be computed and delete warnings can name linked reports.</td></tr></tbody></table></div>
+<p>APIs (mirror form-template delete):</p>
+<ul><li><code>DELETE /backoffice/solution-library/checklist-templates/:id</code></li><li><code>DELETE /backoffice/solution-library/report-templates/:id</code></li></ul>
+<p>Checklist delete invalidates report list caches so Invalid badges refresh.</p>
 <h3><span class="h3num">3.3</span>Limitations</h3>
-<ul><li>Tag / Knowledge agent sub-libraries are thinner than Checklist & Report.</li><li>Teams never edit Solution assets in place; customization belongs on the team side (or future detach).</li><li>Publish lifecycle is real for Solution; team-side draft/publish is still partially mocked (§4).</li></ul>
+<ul><li>Tag / Knowledge agent sub-libraries are thinner than Checklist & Report.</li><li>Teams never edit Solution assets in place; customization belongs on the team side (or future detach).</li><li>Publish lifecycle is real for Solution; team-side draft/publish is still partially mocked (§4).</li><li><strong>Invalid</strong> is client-derived (missing linked checklist id), not a first-class backend status.</li><li>No dedicated “re-link checklist” repair UX yet — author must edit or delete the orphaned report.</li><li>Delete depends on backend DELETE support; UI surfaces an error toast if the API rejects.</li></ul>
 <h3><span class="h3num">3.4</span>User journey expected</h3>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Solution author opens Solution Library → Checklist & Forms (or Reports).</li><li>Creates a regional draft, builds checklist/forms/special fields (or report mappings).</li><li>Publishes when ready for customer catalogs.</li><li>Later, a team adopts the published asset into Team Library as <strong>locked</strong> and uses it on projects / export.</li></ol>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Solution author opens Solution Library → Checklist & Forms (or Reports).</li><li>Creates a regional draft, builds checklist/forms/special fields (or report mappings).</li><li>Publishes when ready for customer catalogs.</li><li>Later, a team adopts the published asset into Team Library as <strong>locked</strong> and uses it on projects / export.</li><li>To retire a checklist: ⋯ → Delete → see named linked reports in the confirm dialog → confirm → those report cards show <strong>Invalid</strong>.</li><li>Author deletes or rewires Invalid report templates separately.</li></ol>
 <hr class="divider">
 </div>
 <div class="sec" id="s-4-team-checklist-forms-library" data-outline="4 · Team Checklist &amp; Forms Library">
@@ -1618,15 +1632,15 @@
 <p><strong>Checklist structure</strong> — a checklist is a <code>UIRequirementSet</code>:</p>
 <ul><li>Ordered <code>checklistItems.ids</code></li><li><code>entities[id]</code> → <code>UIRequirement</code></li><li><strong>SECTION</strong>: nesting + optional <code>specialFormSchema</code></li><li><strong>REQUIREMENT</strong>: inspectable leaf + optional <code>formSchema</code></li><li>Display numbers for humans; <strong>IDs</strong> for the machine contract</li></ul>
 <p><strong>Forms on requirements</strong></p>
-<ul><li>Requirements hold <strong>what inspectors fill</strong> on mobile (<code>formSchema</code>).</li><li>Forms library holds <strong>named reusable schemas</strong>.</li><li>Authors can: build inline, save to library, or <strong>Clone Form</strong> from library onto a requirement.</li><li>Unchanged clone → attach without duplicating the library entry.</li><li>Edited clone → prompt to save as a <strong>new</strong> library form.</li><li>Cloning onto a requirement <strong>regenerates form id + field/option ids</strong>.</li></ul>
+<ul><li>Requirements hold <strong>what inspectors fill</strong> on mobile/web (<code>formSchema</code>).</li><li>Forms library holds <strong>named reusable schemas</strong>.</li><li>Authors can: build inline, save to library, or <strong>Clone Form</strong> from library onto a requirement.</li><li>Unchanged clone → attach without duplicating the library entry.</li><li>Edited clone → prompt to save as a <strong>new</strong> library form.</li><li>Cloning onto a requirement <strong>regenerates form id + field/option ids</strong>.</li></ul>
 <p><strong>Team publish / draft (current reality)</strong></p>
 <div class="tbl-wrap"><table><thead><tr><th>Concept</th><th>Backend today</th><th>Frontend today</th></tr></thead><tbody><tr><td class="td-key">Checklist status</td><td><code>ACTIVE</code> / <code>INACTIVE</code></td><td>Mock DRAFT / PUBLISHED in localStorage</td></tr><tr><td class="td-key">Export template status</td><td><code>ACTIVE</code> / <code>INACTIVE</code></td><td>Similar mock pattern</td></tr></tbody></table></div>
-<p>Saving a form from the checklist editor may immediately PUT the checklist so form content isn’t stranded in Redux only.</p>
+<p>Saving a form from the checklist editor may immediately PUT the checklist so form content isn’t stranded in Redux only — and so open inspections can pick up schema / structure changes (§15).</p>
 <h3><span class="h3num">4.3</span>Limitations</h3>
 <ul><li>Adopted-template lock may not yet disable editors.</li><li>Team DRAFT/PUBLISHED is UX preview until real lifecycle APIs exist.</li><li>Homepage “publish” mock does not always write full <code>requirementJson</code> as production would.</li></ul>
 <h3><span class="h3num">4.4</span>User journey expected</h3>
 <p><strong>Team-authored checklist</strong></p>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Team Checklist & Forms → create checklist → build sections/requirements.</li><li>Open a requirement → Form builder → add fields / clone from library.</li><li>On sections → Special → AI summary / pivots as needed.</li><li>Toggle Looped item / Blank after / Notes where export preview needs them.</li><li>Save / (mock) publish → use on projects or in report mapper.</li></ol>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Team Checklist & Forms → create checklist → build sections/requirements.</li><li>Open a requirement → Form builder → add fields / clone from library.</li><li>On sections → Special → AI summary as needed.</li><li>Toggle Looped item / Blank after / Notes where export preview needs them.</li><li>Save / (mock) publish → use on projects, inspections, or report mapper.</li></ol>
 <p><strong>Adopt from Solution</strong></p>
 <ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Template library → Use checklist or Adopt form.</li><li>Asset appears in team library as <strong>locked</strong>.</li><li>Team uses it on projects / mapping <strong>without</strong> structural edits.</li><li>(Future) Detach only if an editable fork is explicitly required.</li></ol>
 <hr class="divider">
@@ -1636,85 +1650,123 @@
 <div class="sec" id="s-5-form-building-requirement-forms" data-outline="5 · Form building (requirement forms)">
 <div class="sec__head"><span class="sec__num">05</span><h2>Form building (requirement forms)</h2></div>
 <h3><span class="h3num">5.1</span>Design intent</h3>
-<p>Requirement forms are the <strong>inspector input surface</strong>: structured answers collected on mobile for each requirement. Authors compose a small, typed field set per requirement so:</p>
-<ul><li>Inspectors get a clear fill UX.</li><li>Report export can project answers into Carbone JSON via <strong>label slugs</strong>.</li><li>Individual fields can <strong>opt into section AI summaries</strong>.</li><li>Forms can be reused via the Forms library without reinventing the schema each time.</li></ul>
-<p>Special outputs (AI summary, pivots) are <strong>not</strong> requirement form palette items — they live on sections (§6).</p>
+<p>Requirement forms are the <strong>inspector input surface</strong>: structured answers collected on mobile/web for each requirement. Authors compose a small, typed field set per requirement so:</p>
+<ul><li>Inspectors get a clear fill UX.</li><li>Report export can project answers into Carbone JSON via <strong>label slugs</strong>.</li><li>Individual fields can <strong>opt into one or more section AI summaries</strong>.</li><li>Forms can be reused via the Forms library without reinventing the schema each time.</li></ul>
+<p>Special outputs (AI summary) are <strong>not</strong> requirement form palette items — they live on sections (§6).</p>
 <h3><span class="h3num">5.2</span>Feature descriptions</h3>
 <h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Standard field types</h4>
 <div class="tbl-wrap"><table><thead><tr><th>Type</th><th>Label in UI</th><th>Description</th><th>Options?</th></tr></thead><tbody><tr><td class="td-key"><code>short_text</code></td><td>Short text</td><td>Single-line answer</td><td>No</td></tr><tr><td class="td-key"><code>long_text</code></td><td>Long text</td><td>Multi-line answer</td><td>No</td></tr><tr><td class="td-key"><code>number</code></td><td>Number</td><td>Numeric value</td><td>No</td></tr><tr><td class="td-key"><code>date</code></td><td>Date</td><td>Calendar date</td><td>No</td></tr><tr><td class="td-key"><code>time</code></td><td>Time</td><td>Time of day</td><td>No</td></tr><tr><td class="td-key"><code>multiple_choice</code></td><td>Multiple choice</td><td>Pick one option</td><td>Yes</td></tr><tr><td class="td-key"><code>checkboxes</code></td><td>Checkboxes</td><td>Pick one or more</td><td>Yes</td></tr><tr><td class="td-key"><code>dropdown</code></td><td>Dropdown</td><td>Select from a list</td><td>Yes</td></tr><tr><td class="td-key"><code>file_upload</code></td><td>File / image</td><td>Upload a file or photo</td><td>No</td></tr><tr><td class="td-key"><code>signature</code></td><td>Signature</td><td>Sign on screen</td><td>No</td></tr></tbody></table></div>
 <h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Per-field settings (authoring order)</h4>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li><strong>Label</strong> — display name; also drives Carbone <strong>slug</strong> keys in export JSON.</li><li><strong>Placeholder</strong> — empty-state hint in fill UI.</li><li><strong>Smart Description</strong> — authoring hint so AI autofill / generation understands the field.</li><li><strong>Options</strong> — for multiple choice / checkboxes / dropdown (each option has its own id + label).</li><li><strong>Required</strong> — whether the inspector must answer.</li><li><strong>Include in AI summary</strong> — toggle + dropdown of parent-section AI summaries <strong>by label</strong> (see §6).</li></ol>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li><strong>Label</strong> — display name; also drives Carbone <strong>slug</strong> keys in export JSON.</li><li><strong>Placeholder</strong> — empty-state hint in fill UI.</li><li><strong>Smart Description</strong> — authoring hint so AI autofill / generation understands the field.</li><li><strong>Smart Description generate</strong> — sparkles control drafts a description via <code>POST /form-fields/smart-description</code> (Carbone-shaped single-field document). Result lands in the textarea for edit; not auto-saved. Works for standard fields and AI-summary prompts (typed as Long text for the API).</li><li><strong>Options</strong> — for multiple choice / checkboxes / dropdown (each option has its own id + label).</li><li><strong>Required</strong> — whether the inspector must answer.</li><li><strong>Include in AI summary</strong> — toggle + <strong>multi-select</strong> of AI summaries by label (<code>includeInAiSummary</code> + <code>aiSummaryIds[]</code>; legacy <code>aiSummaryId</code> = first target for older mobile). See §6.</li></ol>
 <h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Form-level controls</h4>
 <ul><li><strong>Form name</strong> — required for saving into the Forms library.</li><li>Field list: add from palette, reorder (drag), select, remove, clear all.</li><li><strong>Clone Form</strong> from library onto a requirement.</li><li>Sample answers (<code>formSampleData</code>) and Magic Wand AI fill appear in report-mapper / preview contexts.</li></ul>
-<h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Export relationship</h4>
-<ul><li>Field answers appear under requirement form objects in export JSON keyed by label slug.</li><li>Pivot header/measure wiring from looped fields is <span class="pill pill--future">Not in this release</span> (concept only).</li></ul>
+<h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Export / runtime relationship</h4>
+<ul><li>Field answers appear under requirement form objects in export JSON keyed by label slug.</li><li>In mapper / sample JSON: <code>file_upload</code> → <strong>list of https URLs</strong>; <code>signature</code> → single URL (or empty when unsigned).</li><li>On web inspection: file/image fields support upload; signatures remain device-captured (display-only on web when empty).</li></ul>
 <h3><span class="h3num">5.3</span>Limitations</h3>
-<ul><li>Smart Description is ahead of full runtime autofill parity in some surfaces.</li><li>Renaming a label can break existing Carbone tag mappings (slugs, not UUIDs).</li><li>Cloning onto a requirement always mints new field ids — mappings that keyed by field id must be re-checked.</li><li>Adopted-locked forms should not open in structural edit mode (enforcement may lag).</li><li>File / signature preview fidelity in export JSON is sample-oriented.</li></ul>
+<ul><li>Smart Description generate currently may omit rich context (<code>requirementText</code> / <code>sectionTitle</code>) even though the API supports it; existing text is not sent as a revise prompt (blank → new draft).</li><li>Renaming a label can break existing Carbone tag mappings (slugs, not UUIDs).</li><li>Cloning onto a requirement always mints new field ids — mappings that keyed by field id must be re-checked.</li><li>Adopted-locked forms should not open in structural edit mode (enforcement may lag).</li><li>Signature capture on web is not supported (mobile captures; web shows existing value).</li></ul>
 <h3><span class="h3num">5.4</span>User journey expected</h3>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Author opens a requirement → Form (or Forms library → edit form).</li><li>Adds field types from the left palette until the inspection question is covered.</li><li>Sets Label / Placeholder / Smart Description / Options / Required.</li><li>Optionally toggles <strong>Include in AI summary</strong> and picks the section summary by label.</li><li>Names the form and saves to library, or keeps it only on this requirement.</li><li>Later, in report mapper, sample values / Magic Wand fill blanks for preview mapping.</li></ol>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Author opens a requirement → Form (or Forms library → edit form).</li><li>Adds field types from the left palette until the inspection question is covered.</li><li>Sets Label / Placeholder / Smart Description (optionally <strong>Generate</strong>) / Options / Required.</li><li>Optionally toggles <strong>Include in AI summary</strong> and ticks <strong>one or more</strong> summaries by label.</li><li>Names the form and saves to library, or keeps it only on this requirement.</li><li>Later, in report mapper, sample values / Magic Wand fill blanks for preview mapping.</li><li>On inspection, inspectors fill fields (including photo upload on web); opted-in answers feed AI summary generate (§15).</li></ol>
 <hr class="divider">
 </div>
-<div class="sec" id="s-6-section-special-fields-ai-summary-pivot-" data-outline="6 · Section special fields (AI summary &amp; pivot tables)">
-<div class="sec__head"><span class="sec__num">06</span><h2>Section special fields (AI summary & pivot tables)</h2></div>
+<div class="sec" id="s-6-section-special-fields-ai-summary" data-outline="6 · Section special fields (AI summary)">
+<div class="sec__head"><span class="sec__num">06</span><h2>Section special fields (AI summary)</h2></div>
 <h3><span class="h3num">6.1</span>Design intent</h3>
 <p>Some outputs span <strong>many requirements / findings</strong>, not a single inspector fill control. Those belong on the <strong>section</strong> as <code>specialFormSchema</code>:</p>
-<ul><li><strong>AI summary</strong> — narrative over opted-in nested fields (+ notes), prompted by Smart Description.</li><li><strong>Pivot tables</strong> <span class="pill pill--future">Not in this release</span> — high-level concept only: tabular aggregates from looped nested findings for report/summary views (single or multi-inspection).</li></ul>
-<p>Putting these on a requirement form would misrepresent ownership and mobile fill UX.</p>
+<ul><li><strong>AI summary</strong> — narrative over opted-in fields across the <strong>whole checklist</strong> (by summary id), prompted by Smart Description; generatable on the live inspection.</li></ul>
+<p>Putting these on a requirement form would misrepresent ownership and fill UX. Specials <strong>materialize as inspection items</strong> keyed by the section id so sync stays stable (§15).</p>
 <h3><span class="h3num">6.2</span>Feature descriptions</h3>
 <h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Entry point</h4>
-<ul><li>On a <strong>section</strong> row: <strong>Special</strong> button → <code>SectionSpecialFieldsDialog</code>.</li><li>Palette includes <strong>AI summary</strong> for this release.</li><li>Pivot Table types may appear in authoring UI as future placeholders — <span class="pill pill--future">Not in this release</span>.</li></ul>
+<ul><li>On a <strong>section</strong> row: <strong>Special</strong> button → <code>SectionSpecialFieldsDialog</code>.</li><li>Palette for this release: <strong>AI summary</strong>.</li></ul>
 <h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">AI summary block</h4>
-<div class="tbl-wrap"><table><thead><tr><th>Concern</th><th>Behavior</th></tr></thead><tbody><tr><td class="td-key">Storage</td><td>Special field on section (<code>type: ai_summary</code>)</td></tr><tr><td class="td-key">Prompt</td><td>Field <strong>Smart Description</strong> drives the summary instruction</td></tr><tr><td class="td-key">Label</td><td>Shown in “Include in AI summary” pickers on nested form fields</td></tr><tr><td class="td-key">Sources (product model)</td><td>Opt-in from the <strong>source</strong>, not only from the summary</td></tr><tr><td class="td-key">Per-field opt-in</td><td>On each standard form field: toggle Include → pick summary by label (<code>includeInAiSummary</code> + <code>aiSummaryId</code>)</td></tr><tr><td class="td-key">Included sources UI</td><td>Summary settings list linked sources with unlink</td></tr><tr><td class="td-key">Demo fallback</td><td>If no parent AI summaries exist yet, mock options keep the UI usable</td></tr></tbody></table></div>
-<h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Pivot tables <span class="pill pill--future">Not in this release</span></h4>
-<p>High-level concept only: section-level pivot tables would summarize looped findings into a simple table for reports (counts / optional numeric measures). Detailed builder rules, header types, aggregations, and runtime generation are <strong>out of scope for this release</strong>.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Concern</th><th>Behavior</th></tr></thead><tbody><tr><td class="td-key">Storage</td><td>Special field on section (<code>type: ai_summary</code>)</td></tr><tr><td class="td-key">Prompt</td><td>Field <strong>Smart Description</strong> drives the summary instruction (supports Smart Description <strong>generate</strong>)</td></tr><tr><td class="td-key">Label</td><td>Shown in “Include in AI summary” pickers</td></tr><tr><td class="td-key">Sources (product model)</td><td>Opt-in from the <strong>source</strong>, not only from the summary</td></tr><tr><td class="td-key">Per-field opt-in</td><td>Toggle Include → tick <strong>one or more</strong> summaries (<code>aiSummaryIds[]</code>; legacy <code>aiSummaryId</code> = first)</td></tr><tr><td class="td-key">Target discovery</td><td><strong>All</strong> AI summaries on the checklist (ancestors preferred in ordering); <strong>no mock targets</strong></td></tr><tr><td class="td-key">Included sources UI</td><td>Summary settings list linked sources with unlink (unlink removes <strong>that</strong> summary id only)</td></tr><tr><td class="td-key">Contribution scope</td><td>Walk-wide by summary field id — not limited to the summary’s section subtree</td></tr><tr><td class="td-key">Runtime</td><td>Web inspection shows purple AI summary block + Generate → <code>POST /form-fields/summary</code> (§15)</td></tr></tbody></table></div>
+<h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">How specials become inspection items</h4>
+<ul>
+  <li>A section with <code>specialFormSchema.fields</code> emits a <strong>trailing synthetic item</strong> keyed by the <strong>section id</strong> (stable across re-sync; never duplicated).</li>
+  <li>Live checklist overlays apply the same way as requirement forms.</li>
+  <li>Product contract (e2e): AI special on checklist → inspection shows AI summary + generate control (must not degrade to a plain form).</li>
+  <li>Works for <strong>special-only sections</strong> (no requirement children) as well as sections that also have requirements.</li>
+</ul>
+<p><strong>Export / Carbone <code>wis_detail</code> shape</strong> — after walking a section’s children, if the section has specials, a <strong>trailing</strong> <code>wis_detail</code> entry is appended that:</p>
+<ul>
+  <li>Has <code>special_form.form</code>, <strong>not</strong> <code>requirement</code></li>
+  <li>Does <strong>not</strong> include requirement-style text / result / notes on that form object</li>
+  <li>Belongs to that section in <code>section</code> (title / path)</li>
+</ul>
+<p>Example (label “Fire safety summary” → slug <code>fire_safety_summary</code>):</p>
+<pre class="code">{
+  "wis_detail": [
+    {
+      "section": { "title": "Fire safety", "...": "..." },
+      "requirement": {
+        "form": { "action_taken": "..." }
+      }
+    },
+    {
+      "section": { "title": "Fire safety", "...": "..." },
+      "special_form": {
+        "form": {
+          "fire_safety_summary": ""
+        }
+      }
+    }
+  ]
+}</pre>
+<p style="color:var(--ink-3);font-size:13px;margin-top:8px">Requirement rows keep <code>requirement.form</code>; the specials row is a sibling entry under the same section. See also §7 JSON preview.</p>
 <h3><span class="h3num">6.3</span>Limitations</h3>
-<ul><li>Authoring is ahead of full mobile/backend generation for AI summary.</li><li>Mock AI summary options can appear in demo; real summaries require Special fields saved on the checklist.</li><li>Pivot tables are <span class="pill pill--future">Not in this release</span> — concept only.</li><li>Locked adopted checklists should not allow editing special-field wiring (enforcement may lag).</li></ul>
+<ul><li>Cross-section AI targeting is powerful but easy to misconfigure (any field can point at any summary id).</li><li>Requirement-level <code>uiData</code> multi-target exists in the model; primary authoring path is <strong>per-field</strong>.</li><li>Locked adopted checklists should not allow editing special-field wiring (enforcement may lag).</li><li>Without any authored AI summary, Include controls have no real targets (mocks removed by design).</li></ul>
 <h3><span class="h3num">6.4</span>User journey expected</h3>
 <p><strong>AI summary</strong></p>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Author opens a parent section → Special → add <strong>AI summary</strong> → set label + Smart Description prompt.</li><li>On nested requirements, open forms → for each relevant field, toggle <strong>Include in AI summary</strong> → pick that summary by label.</li><li>Return to Special → confirm <strong>Included sources</strong>; unlink if needed.</li><li>At runtime (future-complete), summary is generated from opted-in answers + notes into report/<code>sp_output</code>.</li></ol>
-<p><strong>Pivot</strong> <span class="pill pill--future">Not in this release</span></p>
-<p>No shipping user journey this release — concept reserved for a later release.</p>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Author opens a section → Special → add <strong>AI summary</strong> → set label + Smart Description (optionally Generate).</li><li>On requirements, open forms → for each relevant field, toggle <strong>Include in AI summary</strong> → tick one or more summaries.</li><li>Return to Special → confirm <strong>Included sources</strong>; unlink if needed.</li><li>Create/open inspection → special item appears for the section → fill opted-in fields → <strong>Generate</strong> AI summary → edit → autosave.</li><li>Export / report mapping can consume stored summary text / <code>specials.*</code> paths.</li></ol>
 <hr class="divider">
 </div>
 <footer>Billie Onsite — Checklist, Forms &amp; Report Templates PRD · Living design document · aligned to web app architecture.</footer>
 </section><section class="panel" id="panel-export" role="tabpanel">
 <div class="sec" id="s-7-checklist-export-flags-report-json-previ" data-outline="7 · Checklist export flags &amp; report JSON preview">
 <div class="sec__head"><span class="sec__num">07</span><h2>Checklist export flags & report JSON preview</h2></div>
-<p>These controls sit <strong>beside</strong> the form builder: they shape how the checklist appears in <strong>export / Carbone sample JSON</strong> while authors map report templates. They are primarily <strong>preview / mapping aids</strong> (with Looped item also feeding pivots).</p>
+<p>These controls sit <strong>beside</strong> the form builder: they shape how the checklist appears in <strong>export / Carbone sample JSON</strong> while authors map report templates. They are primarily <strong>preview / mapping aids</strong> (Looped item is a preview / mapping aid).</p>
 <h3><span class="h3num">7.1</span>Design intent</h3>
 <p>Report authors need a realistic JSON tree before documents are wired:</p>
-<ul><li>Repeating findings (loops),</li><li>Blank spacer rows,</li><li>Onsite notes outside the form,</li><li>Real project metadata instead of placeholders.</li></ul>
+<ul><li>Repeating findings (loops),</li><li>Blank spacer rows,</li><li>Onsite notes outside the form,</li><li>Section <strong>specials</strong> (AI summary placeholders),</li><li>Media fields as <strong>URL shapes</strong> matching runtime,</li><li>Real project metadata instead of placeholders.</li></ul>
 <p>The checklist panel in the upload/export wizard (and team checklist editor flags) lets authors simulate that payload without running a full inspection.</p>
 <h3><span class="h3num">7.2</span>Feature descriptions</h3>
 <h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Checklist bootstrap (mapper panel)</h4>
 <div class="tbl-wrap"><table><thead><tr><th>Control</th><th>What it does</th></tr></thead><tbody><tr><td class="td-key"><strong>From template</strong></td><td>Generate a mock checklist/forms tree from the uploaded DOCX/XLSX (heuristic).</td></tr><tr><td class="td-key"><strong>Blank</strong></td><td>Start an empty local checklist for manual structure.</td></tr><tr><td class="td-key"><strong>Import library…</strong></td><td>Clone a team library checklist into the mapper session.</td></tr></tbody></table></div>
 <h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Per-requirement export flags</h4>
-<div class="tbl-wrap"><table><thead><tr><th>Control</th><th>Storage</th><th>Effect</th></tr></thead><tbody><tr><td class="td-key"><strong>Looped item</strong></td><td><code>uiData.loopRequirement</code> (also accepts legacy <code>repeatingFindings</code> / <code>itemizedLoop</code>)</td><td>Marks requirement as duplicatable findings source. Export preview repeats the finding block <strong>×3</strong> (<code>DEFAULT_REQUIREMENT_LOOP_COUNT</code>). Feeds section <strong>pivot</strong> header/measure pickers. UI rename of older “Loop ×3”.</td></tr><tr><td class="td-key"><strong>Blank after</strong></td><td><code>uiData.insertBlankAfter</code></td><td>Inserts a blank notes item (text + photo placeholders) <strong>after</strong> this requirement in export JSON preview — useful for templates that expect spacer / freeform rows.</td></tr><tr><td class="td-key"><strong>Notes</strong></td><td><code>contentSampleData[]</code></td><td>Preview-only onsite inspector notes (text + image samples) simulating <code>wis_detail[].content[]</code>, separate from form field answers.</td></tr></tbody></table></div>
+<div class="tbl-wrap"><table><thead><tr><th>Control</th><th>Storage</th><th>Effect</th></tr></thead><tbody><tr><td class="td-key"><strong>Looped item</strong></td><td><code>uiData.loopRequirement</code> (also accepts legacy <code>repeatingFindings</code> / <code>itemizedLoop</code>)</td><td>Marks requirement as duplicatable findings source. Export preview repeats the finding block <strong>×3</strong> (<code>DEFAULT_REQUIREMENT_LOOP_COUNT</code>). UI rename of older “Loop ×3”.</td></tr><tr><td class="td-key"><strong>Blank after</strong></td><td><code>uiData.insertBlankAfter</code></td><td>Inserts a blank notes item (text + photo placeholders) <strong>after</strong> this requirement in export JSON preview — useful for templates that expect spacer / freeform rows.</td></tr><tr><td class="td-key"><strong>Notes</strong></td><td><code>contentSampleData[]</code></td><td>Preview-only onsite inspector notes (text + image samples) simulating <code>wis_detail[].content[]</code>, separate from form field answers.</td></tr></tbody></table></div>
 <h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Project sync (JSON preview)</h4>
-<div class="tbl-wrap"><table><thead><tr><th>Control</th><th>What it does</th></tr></thead><tbody><tr><td class="td-key"><strong>Project picker</strong></td><td>Select a real team project for the preview session (<code>JsonPreviewProjectPicker</code>).</td></tr><tr><td class="td-key"><strong>Project & export fields</strong></td><td>Surfaces <code>export_info.<em></code> and <code>project_info.</em></code> (name, code, address, client, contacts) plus custom <code>project_info.metadata.*</code> from Project Setup.</td></tr><tr><td class="td-key"><strong>Sync effect</strong></td><td>Sample / Carbone payload <code>project_info</code> (and related metadata) populate from the selected project instead of empty stubs, so tag mapping previews match real report headers.</td></tr></tbody></table></div>
+<div class="tbl-wrap"><table><thead><tr><th>Control</th><th>What it does</th></tr></thead><tbody><tr><td class="td-key"><strong>Project picker</strong></td><td>Select a real team project for the preview session (<code>JsonPreviewProjectPicker</code>).</td></tr><tr><td class="td-key"><strong>Project & export fields</strong></td><td>Surfaces <code>export_info.<em></code> and <code>project_info.</em></code> (name, code, address, client, contacts) plus custom <code>project_info.metadata.*</code> from Project Setup.</td></tr><tr><td class="td-key"><strong>Sync effect</strong></td><td>Sample / Carbone payload <code>project_info</code> (and related metadata) populate from the selected project instead of empty stubs, so tag mapping previews match real report headers.</td></tr><tr><td class="td-key"><strong>Project Setup integrity</strong></td><td>Saving project details + report metadata must run <strong>sequentially</strong> (<code>updateProject</code> then <code>updateReportMetadata</code>) so parallel saves cannot wipe custom metadata.</td></tr></tbody></table></div>
 <p>Built-in metadata sources include e.g. <code>export_info.templateName</code>, <code>export_info.exportAt</code>, <code>export_info.userName</code>, <code>project_info.name</code>, <code>project_info.projectCode</code>, <code>project_info.clientName</code>, and custom metadata keys.</p>
 <h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">JSON preview panel behavior</h4>
-<ul><li>Shows the Carbone-oriented payload used for mapping: conceptually <code>export_info</code>, <code>project_info</code>, <code>wis_detail</code> (requirements / findings / forms / notes), <code>sp_output</code> as needed.</li><li>Form value keys use <strong>label slugs</strong>, not field UUIDs.</li><li>Magic Wand can fill eligible blank form sample fields for denser previews.</li><li>Path ↔ tag linking uses this JSON tree as the source of truth for mapping.</li></ul>
+<ul><li>Shows the Carbone-oriented payload used for mapping: conceptually <code>export_info</code>, <code>project_info</code>, <code>wis_detail</code> (requirements / findings / forms / notes / <strong>trailing specials</strong>), <code>sp_output</code> as needed.</li><li>Form value keys use <strong>label slugs</strong>, not field UUIDs.</li><li>Media samples: file/image → URL list; signature → single URL.</li><li>Magic Wand can fill eligible blank form sample fields for denser previews.</li><li>Path ↔ tag linking uses this JSON tree as the source of truth for mapping.</li><li>Template ID pane placeholder: <strong>“Paste your template ID”</strong> (shared team + Solution editors).</li></ul>
+<h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Trailing <code>special_form</code> in <code>wis_detail</code></h4>
+<p>After a section’s requirement children are emitted, if that section has specials, the preview / export payload appends a trailing <code>wis_detail</code> row (§6):</p>
+<ul>
+  <li>Uses <code>special_form.form</code> (slug keys for AI summary fields) — <strong>not</strong> a <code>requirement</code> object</li>
+  <li>Omits requirement-style text / result / notes on that form object</li>
+  <li>Carries the same <code>section</code> title/path as sibling requirement rows</li>
+  <li>Emitted even for <strong>special-only</strong> sections (no requirement children)</li>
+</ul>
+<p>Mappers should bind special outputs via paths like <code>wis_detail[].special_form.form.{labelSlug}</code> (and related <code>specials.*</code> helpers where present), not via <code>requirement.form</code>.</p>
 <h3><span class="h3num">7.3</span>Limitations</h3>
 <ul><li>Looped ×3 / Blank after / Notes samples are <strong>frontend simulation</strong> ahead of full backend parity.</li><li>Blank checklist bootstrap is disabled in some flows (e.g. when using a report template ID).</li><li>From-template generation remains heuristic/mock in places.</li><li>Project sync depends on project APIs / metadata configuration; custom fields only appear if defined on the project.</li><li>Editing preview sample data does not change production inspection history.</li></ul>
 <h3><span class="h3num">7.4</span>User journey expected</h3>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Open Export / Report Template Mapper → upload or select DOCX/XLSX.</li><li>In checklist panel: <strong>Import library</strong>, <strong>From template</strong>, or <strong>Blank</strong> to establish structure.</li><li>Mark finding requirements as <strong>Looped item</strong>; add <strong>Blank after</strong> where the Word template needs spacer rows.</li><li>Open <strong>Notes</strong> on requirements that should show freeform onsite content in JSON.</li><li>Pick a <strong>Project</strong> so <code>project_info</code> / metadata sync into the JSON preview.</li><li>Optionally Magic Wand fill sample form answers.</li><li>Bind document tags to JSON paths; save/publish the export template.</li></ol>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Open Export / Report Template Mapper → upload or select DOCX/XLSX (or paste template ID).</li><li>In checklist panel: <strong>Import library</strong>, <strong>From template</strong>, or <strong>Blank</strong> to establish structure.</li><li>Mark finding requirements as <strong>Looped item</strong>; add <strong>Blank after</strong> where the Word template needs spacer rows.</li><li>Open <strong>Notes</strong> on requirements that should show freeform onsite content in JSON.</li><li>Ensure section specials exist if mapping <code>….specials.…</code> paths.</li><li>Pick a <strong>Project</strong> so <code>project_info</code> / metadata sync into the JSON preview.</li><li>Optionally Magic Wand fill sample form answers.</li><li>Bind document tags to JSON paths; save/publish the export template.</li></ol>
 <hr class="divider">
 </div>
 <div class="sec" id="s-8-report-template-mapping" data-outline="8 · Report template mapping">
 <div class="sec__head"><span class="sec__num">08</span><h2>Report template mapping</h2></div>
 <h3><span class="h3num">8.1</span>Design intent</h3>
-<p>Inspection data is structured JSON. Customer reports are DOCX/XLSX with Carbone-style tags. The <strong>mapper</strong> is the bridge between authoring structure (§4–7) and finished documents.</p>
+<p>Inspection data is structured JSON. Customer reports are DOCX/XLSX with Carbone-style tags. The <strong>mapper</strong> is the bridge between authoring structure (§4–7) and finished documents — and the same shapes should match what inspections emit at export time (§15).</p>
 <h3><span class="h3num">8.2</span>Feature descriptions</h3>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Upload / select a document template.</li><li>Detect tags in the document (and optionally Billie-suggested tags).</li><li>Present checklist + form sample data as JSON (§7).</li><li>Bind each tag to a <strong>JSON path</strong> (<code>PathKeyMapping</code>: <code>jsonPath</code> + preview ↔ <code>tagId</code> / <code>tagKey</code>).</li><li>Save/publish a team export template (Carbone template id + checklist link + mappings).</li></ol>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Upload / select a document template <strong>or</strong> load by template ID.</li><li>Detect tags in the document (and optionally Billie-suggested tags).</li><li>Present checklist + form sample data as JSON (§7), including <strong>specials</strong> and media URL shapes.</li><li>Bind each tag to a <strong>JSON path</strong> (<code>PathKeyMapping</code>: <code>jsonPath</code> + preview ↔ <code>tagId</code> / <code>tagKey</code>).</li><li>Save/publish a team export template (template id + checklist link + mappings).</li></ol>
 <p><strong>Why checklist IDs matter</strong></p>
-<p>Mappings and special-field configs may reference requirement ids, field ids (pivots, AI targets), and label slugs (Carbone form paths). Adoption must keep the right identifiers continuous (§9).</p>
+<p>Mappings and special-field configs may reference requirement ids, field ids (AI targets / <code>aiSummaryIds</code>), and label slugs (Carbone form paths). Adoption must keep the right identifiers continuous (§9).</p>
 <p><strong>Team vs Solution report flows</strong></p>
 <div class="tbl-wrap"><table><thead><tr><th>Action</th><th>Behavior</th></tr></thead><tbody><tr><td class="td-key">Author in Solution</td><td>Saves Solution report template (+ optional checklist template id, mappings, checklist JSON)</td></tr><tr><td class="td-key">Use from Team Template Library</td><td>Creates team export template; if a Solution checklist template is linked, <strong>adopt</strong> it into the team first</td></tr><tr><td class="td-key">Publish wizard with Solution checklist id</td><td>Adopt into team before linking — raw Solution checklist ids must not be stored as team <code>checklist_id</code></td></tr></tbody></table></div>
 <h3><span class="h3num">8.3</span>Limitations</h3>
-<ul><li>Field <strong>label</strong> renames break slug-based tags even if UUIDs stay stable.</li><li>Dual adopt paths (client clone vs API) can diverge on nested ID policy (§9).</li><li>Interactive Word/Excel preview fidelity varies by file complexity.</li><li>AI auto-draft on template cells is assistive, not a substitute for real inspection data.</li></ul>
+<ul><li>Field <strong>label</strong> renames break slug-based tags even if UUIDs stay stable.</li><li>Dual adopt paths (client clone vs API) can diverge on nested ID policy (§9).</li><li>Interactive Word/Excel preview fidelity varies by file complexity.</li><li>AI auto-draft on template cells is assistive, not a substitute for real inspection data.</li><li>Solution report cards may show <strong>Invalid</strong> if their linked checklist was deleted (§3).</li></ul>
 <h3><span class="h3num">8.4</span>User journey expected</h3>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Solution or Team author prepares checklist structure (with loops/notes/specials as needed).</li><li>Author opens report mapper, attaches document + checklist JSON preview (with project sync).</li><li>Maps tags → paths; validates preview.</li><li>Publishes export template for the team (adopting linked Solution checklist when required).</li><li>Inspectors run projects; export uses Carbone + mappings against live data shaped like the preview.</li></ol>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Solution or Team author prepares checklist structure (with loops/notes/specials as needed).</li><li>Author opens report mapper, attaches document + checklist JSON preview (with project sync).</li><li>Maps tags → paths (including form slugs and <code>specials.*</code>); validates preview.</li><li>Publishes export template for the team (adopting linked Solution checklist when required).</li><li>Inspectors run projects; <strong>Export as Document</strong> uses Carbone + mappings; successful export contributes to <strong>Completed</strong> lifecycle (§15).</li></ol>
 <hr class="divider">
 </div>
 <footer>Billie Onsite — Checklist, Forms &amp; Report Templates PRD · Living design document · aligned to web app architecture.</footer>
@@ -1724,17 +1776,17 @@
 <h3><span class="h3num">9.1</span>Design intent</h3>
 <p>Adoption brings a Solution template into the <strong>team library</strong> as a team-scoped asset that:</p>
 <ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li><strong>Does not mutate</strong> the Solution original.</li><li><strong>Preserves nested structure and IDs</strong> where the adopt contract requires continuity.</li><li>Is <strong>locked (read-only)</strong> for the adopting team — checklist tree, embedded forms, special fields, and adopted form-library entries must not be editable in the team UI.</li></ol>
-<p><strong>Why lock?</strong> Solution checklists and report templates are a <strong>matched pair</strong>. Team-side edits would break Carbone mappings, pivot refs, and AI summary wiring. Regional standardization stays with Solution; teams <strong>use</strong> the blueprint.</p>
+<p><strong>Why lock?</strong> Solution checklists and report templates are a <strong>matched pair</strong>. Team-side edits would break Carbone mappings and AI summary wiring. Regional standardization stays with Solution; teams <strong>use</strong> the blueprint.</p>
 <p>Adoption is a <strong>snapshot</strong>, not a live sync. Optional future: <strong>Detach / Create editable copy</strong> with remapping warnings.</p>
 <h3><span class="h3num">9.2</span>Feature descriptions</h3>
 <h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Checklist adoption paths (today)</h4>
 <div class="tbl-wrap"><table><thead><tr><th>Path</th><th>Mechanism</th><th>Nested ID policy (web)</th></tr></thead><tbody><tr><td class="td-key"><strong>Team Checklist → Template library → Use</strong></td><td>Client <code>cloneSolutionChecklistForTeam</code> + <code>createCheckList</code></td><td><strong>Preserves</strong> section/requirement ids; <strong>new</strong> checklist set id</td></tr><tr><td class="td-key"><strong>Export / report flows</strong></td><td>API <code>adoptSolutionChecklistTemplate</code></td><td>Backend decides; frontend does not remap</td></tr></tbody></table></div>
 <p><strong>Client clone contract</strong></p>
 <pre class="code">New checklist set id  →  team ownership, new library row
-Same section/requirement ids  →  report mappings, pivots, AI targets keep working
+Same section/requirement ids  →  report mappings and AI targets keep working
 formSchema / specialFormSchema deep-copied  →  field &amp; special field ids preserved on this path</pre>
 <h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">ID continuity matrix</h4>
-<div class="tbl-wrap"><table><thead><tr><th>Identifier</th><th>Client checklist clone</th><th>Form adopt API</th><th>Clone form onto requirement</th><th>Report template “use”</th></tr></thead><tbody><tr><td class="td-key">Checklist set <code>id</code></td><td><strong>New</strong></td><td>Backend (new team checklist)</td><td>—</td><td>Adopted checklist → new team id</td></tr><tr><td class="td-key">Section / requirement <code>id</code></td><td><strong>Preserved</strong></td><td>Backend-dependent</td><td>—</td><td>Backend-dependent via adopt</td></tr><tr><td class="td-key"><code>formSchema</code> field / option ids</td><td><strong>Preserved</strong></td><td>Backend-dependent</td><td><strong>New UUIDs</strong></td><td>Follows adopted checklist</td></tr><tr><td class="td-key">Form library entry <code>id</code></td><td>N/A</td><td><strong>New</strong> team form id</td><td><strong>New</strong> when attaching clone</td><td>N/A</td></tr><tr><td class="td-key">Special field ids</td><td><strong>Preserved</strong></td><td>Backend-dependent</td><td>N/A</td><td>Follows adopted checklist</td></tr><tr><td class="td-key">Carbone form path keys</td><td>Label <strong>slugs</strong></td><td>Same</td><td>Same</td><td>Same</td></tr><tr><td class="td-key">Pivot refs <code>requirementId::fieldId</code></td><td>Stable if ids preserved</td><td>Breaks if ids regenerated</td><td>New field ids if re-cloned</td><td>Depends on adopt</td></tr><tr><td class="td-key">AI summary <code>aiSummaryId</code></td><td>Stable if special ids preserved</td><td>Depends on adopt</td><td>N/A</td><td>Depends on adopt</td></tr></tbody></table></div>
+<div class="tbl-wrap"><table><thead><tr><th>Identifier</th><th>Client checklist clone</th><th>Form adopt API</th><th>Clone form onto requirement</th><th>Report template “use”</th></tr></thead><tbody><tr><td class="td-key">Checklist set <code>id</code></td><td><strong>New</strong></td><td>Backend (new team checklist)</td><td>—</td><td>Adopted checklist → new team id</td></tr><tr><td class="td-key">Section / requirement <code>id</code></td><td><strong>Preserved</strong></td><td>Backend-dependent</td><td>—</td><td>Backend-dependent via adopt</td></tr><tr><td class="td-key"><code>formSchema</code> field / option ids</td><td><strong>Preserved</strong></td><td>Backend-dependent</td><td><strong>New UUIDs</strong></td><td>Follows adopted checklist</td></tr><tr><td class="td-key">Form library entry <code>id</code></td><td>N/A</td><td><strong>New</strong> team form id</td><td><strong>New</strong> when attaching clone</td><td>N/A</td></tr><tr><td class="td-key">Special field ids</td><td><strong>Preserved</strong></td><td>Backend-dependent</td><td>N/A</td><td>Follows adopted checklist</td></tr><tr><td class="td-key">Carbone form path keys</td><td>Label <strong>slugs</strong></td><td>Same</td><td>Same</td><td>Same</td></tr><tr><td class="td-key">AI summary <code>aiSummaryIds</code> / legacy <code>aiSummaryId</code></td><td>Stable if special ids preserved</td><td>Depends on adopt</td><td>N/A</td><td>Depends on adopt</td></tr></tbody></table></div>
 <h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Form adoption</h4>
 <ul><li>Team Forms → Template Library → Adopt published Solution form → <strong>locked</strong> team library entry.</li><li>Optional <code>sourceSolutionFormTemplateId</code> for provenance.</li><li>Prefer attach-without-structural-edit for locked forms; clone-with-new-ids remains for <strong>team-authored</strong> library forms.</li></ul>
 <p><strong>Should stay the same:</strong> nested UUIDs (intended path), embedded schemas/field ids, labels/structure, loop/special configs. <strong>Should change:</strong> checklist set id, team form library id, timestamps/team id/status, lock/provenance flags.</p>
@@ -1749,9 +1801,9 @@ formSchema / specialFormSchema deep-copied  →  field &amp; special field ids p
 <h3><span class="h3num">10.1</span>Design intent</h3>
 <p>Keep Solution authoring privileged and team data scoped, while regional catalogs only expose appropriate published templates.</p>
 <h3><span class="h3num">10.2</span>Feature descriptions</h3>
-<div class="tbl-wrap"><table><thead><tr><th>Concern</th><th>Intention</th></tr></thead><tbody><tr><td class="td-key">Solution Library access</td><td>Restricted to Solution operators</td></tr><tr><td class="td-key">Team assets</td><td>Scoped to active team</td></tr><tr><td class="td-key">Regional catalog</td><td>Server filters by team owner country / Universal</td></tr><tr><td class="td-key">Adoption</td><td>Writes <strong>into</strong> the adopting team; never mutates Solution published source</td></tr></tbody></table></div>
+<div class="tbl-wrap"><table><thead><tr><th>Concern</th><th>Intention</th></tr></thead><tbody><tr><td class="td-key">Solution Library access</td><td>Restricted to Solution operators</td></tr><tr><td class="td-key">Team assets</td><td>Scoped to active team</td></tr><tr><td class="td-key">Regional catalog</td><td>Server filters by team owner country / Universal</td></tr><tr><td class="td-key">Adoption</td><td>Writes <strong>into</strong> the adopting team; never mutates Solution published source</td></tr><tr><td class="td-key">Solution Forms fetch</td><td>Whitelist/Solution contexts suppress noisy team form-template error toasts when team scope is irrelevant</td></tr></tbody></table></div>
 <h3><span class="h3num">10.3</span>Limitations</h3>
-<ul><li>Access control today may still lean on email allowlists rather than full RBAC.</li><li>Regional filtering depends on correct team owner country configuration.</li></ul>
+<ul><li>Access control today may still lean on email allowlists rather than full RBAC.</li><li>Regional filtering depends on correct team owner country configuration.</li><li>Invited users / owner-team resolution matters for checklist fetch during inspection reflection (§15).</li></ul>
 <h3><span class="h3num">10.4</span>User journey expected</h3>
 <ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Solution operator signs in → sees Solution Library.</li><li>Team member signs in → sees Team Checklist & Forms + published regional Template library entries only.</li><li>Adopt writes copies into the active team; Solution originals unchanged.</li></ol>
 <hr class="divider">
@@ -1761,38 +1813,82 @@ formSchema / specialFormSchema deep-copied  →  field &amp; special field ids p
 <div class="sec" id="s-11-cross-cutting-end-to-end-scenarios" data-outline="11 · Cross-cutting end-to-end scenarios">
 <div class="sec__head"><span class="sec__num">11</span><h2>Cross-cutting end-to-end scenarios</h2></div>
 <h3><span class="h3num">11.1</span>Ship a regional checklist + report</h3>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Solution: author checklist template (AU), publish.</li><li>Solution: author report template mapped to that checklist’s JSON (loops/notes/project fields as needed), publish.</li><li>Team (AU): adopt report from Template Library → system adopts linked checklist into team (locked) → creates team export template.</li><li>Team runs inspections → export uses Carbone + mappings against team checklist data.</li></ol>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Solution: author checklist template (AU), publish.</li><li>Solution: author report template mapped to that checklist’s JSON (loops/notes/specials/project fields as needed), publish.</li><li>Team (AU): adopt report from Template Library → system adopts linked checklist into team (locked) → creates team export template.</li><li>Team runs inspections → export uses Carbone + mappings against team checklist data → inspection moves to <strong>Completed</strong>.</li></ol>
 <h3><span class="h3num">11.2</span>Start from Solution checklist only</h3>
 <ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Team Checklist & Forms → Template library → Use checklist template.</li><li>Adopted checklist is <strong>locked</strong>; nested ids preserved; new checklist set created.</li><li>Team uses it on projects / report mapping without editing structure.</li><li>(Future) Detach only if a custom fork is explicitly required.</li></ol>
-<h3><span class="h3num">11.3</span>Build forms + AI summary</h3>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Author creates section + nested requirements; builds standard forms (text, choices, number, dates).</li><li>Marks finding requirements <strong>Looped item</strong> where export preview needs repeating findings.</li><li>Section → Special → AI summary; fields opt in via Include in AI summary.</li><li>In report mapper: import checklist, sync project, preview JSON (×3 loops, notes, blanks), map tags.</li><li>Pivot tables: <span class="pill pill--future">Not in this release</span> — high-level concept only.</li></ol>
+<h3><span class="h3num">11.3</span>Build forms + AI summary + inspect</h3>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Author creates section + nested requirements; builds standard forms (text, choices, number, dates, file).</li><li>Marks finding requirements <strong>Looped item</strong>.</li><li>Section → Special → AI summary; fields multi-opt-in via Include in AI summary.</li><li>In report mapper: import checklist, sync project, preview JSON (×3 loops, notes, blanks, <code>specials.*</code>, media URLs), map tags.</li><li>Create inspection → fill fields / upload photos → Generate AI summary on the special item → Export as Document → Completed.</li></ol>
 <h3><span class="h3num">11.4</span>Reuse a Solution form on many requirements</h3>
 <ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Adopt form into team Forms library as a <strong>locked</strong> library entry.</li><li>Use/attach that form on requirements without opening a structural editor (exact attach UX TBD with lock enforcement).</li><li>Labels (and Carbone slugs) stay consistent because the adopted schema is not team-edited.</li></ol>
+<h3><span class="h3num">11.5</span>Retire a Solution checklist linked to reports</h3>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Solution Library → Checklist card ⋯ → Delete.</li><li>Confirm dialog lists linked report template names and warns they become invalid.</li><li>Report library shows <strong>Invalid</strong> on those cards until deleted or rewired.</li></ol>
+<h3><span class="h3num">11.6</span>Checklist edit after inspection exists</h3>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Create inspection from a checklist.</li><li>Edit the checklist (add field / add requirement) and save/publish.</li><li>Reopen inspection: new <strong>fields</strong> appear via live schema overlay; new <strong>items</strong> appear via server structure sync (Syncing… → Synced).</li></ol>
 <hr class="divider">
 </div>
 <div class="sec" id="s-12-open-product-decisions-gaps" data-outline="12 · Open product decisions / gaps">
 <div class="sec__head"><span class="sec__num">12</span><h2>Open product decisions / gaps</h2></div>
-<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li><strong>Enforce locked adopted templates</strong> — disable checklist/form/special-field editors; surface lock badge + source template.</li><li><strong>Unify checklist adopt paths</strong> — client clone vs <code>/adopt</code> ID semantics.</li><li><strong>Real team DRAFT/PUBLISHED</strong> — replace localStorage mocks.</li><li><strong>Field rename policy</strong> — Carbone slugs vs UUIDs; migration/versioning.</li><li><strong>Re-adopt / update from Solution</strong> — define upgrade path when Solution publishes a new version.</li><li><strong>Detach / editable fork</strong> — optional escape hatch with remapping warnings.</li><li><strong>Runtime for AI summary & pivots</strong> — authoring ahead of full mobile/backend generation.</li><li><strong>Word→checklist extraction</strong> — still heuristic/mock in places.</li><li><strong>Checkbox explode</strong> — ensure export/runtime match pivot preview.</li><li><strong>Provenance UX</strong> — “Adopted from {Solution template} — locked”.</li><li><strong>Export flag backend parity</strong> — Looped item / Blank after / Notes samples vs production payload.</li><li><strong>Project sync completeness</strong> — all custom metadata + offline/empty project states in mapper.</li></ol>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li><strong>Enforce locked adopted templates</strong> — disable checklist/form/special-field editors; surface lock badge + source template. <em>(Still open.)</em></li><li><strong>Unify checklist adopt paths</strong> — client clone vs <code>/adopt</code> ID semantics.</li><li><strong>Real team DRAFT/PUBLISHED</strong> — replace localStorage mocks.</li><li><strong>Field rename policy</strong> — Carbone slugs vs UUIDs; migration/versioning.</li><li><strong>Re-adopt / update from Solution</strong> — define upgrade path when Solution publishes a new version.</li><li><strong>Detach / editable fork</strong> — optional escape hatch with remapping warnings.</li><li><strong>Word→checklist extraction</strong> — still heuristic/mock in places.</li><li><strong>Provenance UX</strong> — “Adopted from {Solution template} — locked”.</li><li><strong>Export flag backend parity</strong> — Looped item / Blank after / Notes samples vs production payload.</li><li><strong>Project sync completeness</strong> — offline/empty project states in mapper (sequential metadata save is in place).</li><li><strong>Invalid report repair</strong> — re-link checklist UX vs delete-only.</li><li><strong>Structure sync UX</strong> — how long SYNCED badges remain; failure/retry messaging.</li><li><strong>Requirement-level AI opt-in</strong> — clarify whether checklist-row Include remains a primary control vs field-only.</li><li><strong>Web signature capture</strong> — still mobile-only.</li></ol>
 <hr class="divider">
 </div>
 <div class="sec" id="s-13-success-criteria-product" data-outline="13 · Success criteria (product)">
 <div class="sec__head"><span class="sec__num">13</span><h2>Success criteria (product)</h2></div>
-<ul><li>Solution authors can publish regional checklist, form, and report templates without touching customer data.</li><li>Teams can adopt templates in ≤ a few clicks; adopted assets appear as <strong>locked</strong>.</li><li>After checklist adoption (intended path), <strong>requirement IDs and embedded form/special field IDs carry over</strong>.</li><li>Form builder exposes the full standard field set with clear settings order and AI-summary opt-in.</li><li>Special fields remain <strong>section outputs</strong>; requirement forms remain <strong>inspector inputs</strong>.</li><li>Pivot tables remain a high-level concept only — <span class="pill pill--future">Not in this release</span>.</li><li>Report mapper JSON preview supports <strong>Looped item</strong>, <strong>Blank after</strong>, <strong>Notes</strong>, and <strong>Project sync</strong> so authors can map confidently.</li><li>Team-authored checklists/forms remain fully editable and clearly distinguished from locked adopted ones.</li></ul>
+<ul><li>Solution authors can publish <strong>and delete</strong> regional checklist, form, and report templates without touching customer data.</li><li>Deleting a linked checklist warns with <strong>named</strong> report templates; orphaned reports show <strong>Invalid</strong>.</li><li>Teams can adopt templates in ≤ a few clicks; adopted assets appear as <strong>locked</strong> (intention; enforcement still open).</li><li>After checklist adoption (intended path), <strong>requirement IDs and embedded form/special field IDs carry over</strong>.</li><li>Form builder exposes the full standard field set, Smart Description generate, and <strong>multi-target</strong> AI-summary opt-in.</li><li>Special fields remain <strong>section outputs</strong> that materialize as stable inspection items; requirement forms remain <strong>inspector inputs</strong>.</li><li>Report mapper JSON preview supports <strong>Looped item</strong>, <strong>Blank after</strong>, <strong>Notes</strong>, <strong>Project sync</strong>, <strong><code>specials.*</code></strong>, and media <strong>URL</strong> shapes.</li><li>Inspectors on web can fill forms (including photo upload), generate AI summaries, see checklist edits reflect, collaborate on answers, and reach <strong>Completed</strong> via export.</li><li>Team-authored checklists/forms remain fully editable and clearly distinguished from locked adopted ones.</li></ul>
 <hr class="divider">
 </div>
 <footer>Billie Onsite — Checklist, Forms &amp; Report Templates PRD · Living design document · aligned to web app architecture.</footer>
 </section><section class="panel" id="panel-appendix" role="tabpanel">
 <div class="sec" id="s-14-appendix-primary-code-anchors" data-outline="14 · Appendix — primary code anchors">
 <div class="sec__head"><span class="sec__num">14</span><h2>Appendix — primary code anchors</h2></div>
-<div class="tbl-wrap"><table><thead><tr><th>Concern</th><th>Location</th></tr></thead><tbody><tr><td class="td-key">Client checklist clone (ID preserve)</td><td><code>src/pages/TeamRequirementLibrary/cloneSolutionChecklist.ts</code></td></tr><tr><td class="td-key">Team template use</td><td><code>TeamRequirementLibrary.tsx</code> → <code>handleUseSolutionTemplate</code></td></tr><tr><td class="td-key">Form clone onto requirement</td><td><code>formLibraryStore.ts</code> → <code>cloneLibraryFormOntoRequirement</code></td></tr><tr><td class="td-key">Form schema / special types</td><td><code>formSchema.ts</code></td></tr><tr><td class="td-key">Form builder UI</td><td><code>RequirementFormBuilderPanel.tsx</code>, <code>RequirementFormBuilderDialog.tsx</code></td></tr><tr><td class="td-key">AI summary sources / opt-in</td><td><code>aiSummarySources.ts</code>, <code>IncludeInAiSummaryControls.tsx</code>, <code>AiSummaryIncludedSources.tsx</code></td></tr><tr><td class="td-key">Pivot / looped field rules</td><td><code>pivotSources.ts</code>, <code>PivotTableBuilder.tsx</code></td></tr><tr><td class="td-key">Section special builder</td><td><code>SectionSpecialFieldsDialog.tsx</code></td></tr><tr><td class="td-key">Looped / blank / notes flags</td><td><code>checklistExportFlags.ts</code>, <code>DraggableChecklistItem.tsx</code>, <code>InspectorNotesSampleSection.tsx</code></td></tr><tr><td class="td-key">Mapper checklist panel</td><td><code>EditableChecklistPanel.tsx</code></td></tr><tr><td class="td-key">Project sync picker</td><td><code>JsonPreviewProjectPicker.tsx</code>, <code>jsonPreviewProjectContext.ts</code></td></tr><tr><td class="td-key">Export wizard + adopt-on-link</td><td><code>UploadExportTemplateWizard.tsx</code></td></tr><tr><td class="td-key">Carbone payload / slugs / mock JSON</td><td><code>checklistToCarbonePayload.ts</code>, <code>buildExportMockJson.ts</code></td></tr><tr><td class="td-key">Metadata source keys</td><td><code>upload-template/types.ts</code> → <code>PROJECT_METADATA_SOURCES</code></td></tr><tr><td class="td-key">Solution hub</td><td><code>SolutionLibrary.tsx</code></td></tr><tr><td class="td-key">Models</td><td><code>src/types/dto.ts</code> (<code>UIRequirement</code>, <code>UIRequirementSet</code>)</td></tr></tbody></table></div>
+<div class="tbl-wrap"><table><thead><tr><th>Concern</th><th>Location</th></tr></thead><tbody><tr><td class="td-key">Client checklist clone (ID preserve)</td><td><code>src/pages/TeamRequirementLibrary/cloneSolutionChecklist.ts</code></td></tr><tr><td class="td-key">Team template use</td><td><code>TeamRequirementLibrary.tsx</code> → <code>handleUseSolutionTemplate</code></td></tr><tr><td class="td-key">Form clone onto requirement</td><td><code>formLibraryStore.ts</code> → <code>cloneLibraryFormOntoRequirement</code></td></tr><tr><td class="td-key">Form schema / special types</td><td><code>formSchema.ts</code></td></tr><tr><td class="td-key">Form builder UI</td><td><code>RequirementFormBuilderPanel.tsx</code>, <code>RequirementFormBuilderDialog.tsx</code></td></tr><tr><td class="td-key">Smart Description generate</td><td><code>smartDescriptionGenerate.ts</code>, <code>SmartDescriptionGenerateButton.tsx</code></td></tr><tr><td class="td-key">AI summary sources / opt-in</td><td><code>aiSummarySources.ts</code>, <code>IncludeInAiSummaryControls.tsx</code>, <code>AiSummaryIncludedSources.tsx</code></td></tr><tr><td class="td-key">Multi-target AI ids</td><td><code>src/util/aiSummaryTargets.ts</code></td></tr><tr><td class="td-key">Section special builder</td><td><code>SectionSpecialFieldsDialog.tsx</code></td></tr><tr><td class="td-key">Specials → inspection items</td><td><code>src/util/checklistRequirements.ts</code></td></tr><tr><td class="td-key">Looped / blank / notes flags</td><td><code>checklistExportFlags.ts</code>, <code>DraggableChecklistItem.tsx</code>, <code>InspectorNotesSampleSection.tsx</code></td></tr><tr><td class="td-key">Mapper checklist panel</td><td><code>EditableChecklistPanel.tsx</code></td></tr><tr><td class="td-key">Template ID pane</td><td><code>TemplateIdPane.tsx</code></td></tr><tr><td class="td-key">Project sync picker</td><td><code>JsonPreviewProjectPicker.tsx</code>, <code>jsonPreviewProjectContext.ts</code></td></tr><tr><td class="td-key">Project + metadata save order</td><td><code>src/util/saveProjectReportMetadata.ts</code></td></tr><tr><td class="td-key">Export wizard + adopt-on-link</td><td><code>UploadExportTemplateWizard.tsx</code></td></tr><tr><td class="td-key">Carbone payload / slugs / mock JSON</td><td><code>checklistToCarbonePayload.ts</code>, <code>buildExportMockJson.ts</code></td></tr><tr><td class="td-key">Metadata source keys</td><td><code>upload-template/types.ts</code> → <code>PROJECT_METADATA_SOURCES</code></td></tr><tr><td class="td-key">Solution hub + delete / Invalid</td><td><code>SolutionLibrary.tsx</code>, <code>solutionChecklistTemplateApi.ts</code>, <code>solutionReportTemplateApi.ts</code></td></tr><tr><td class="td-key">Inspection form + AI summary UI</td><td><code>InspectionFormView.tsx</code>, <code>inspectionAiSummaryCollect.ts</code></td></tr><tr><td class="td-key">Live schemas / autofill</td><td><code>inspectionFormAutofill.ts</code></td></tr><tr><td class="td-key">Inspection status / Completed</td><td><code>src/pages/MyJournals/inspectionStatus.ts</code></td></tr><tr><td class="td-key">Collab form answers (sockets)</td><td><code>walkIssueSocketUpdate.ts</code>, <code>socketIssueContainer.ts</code>, <code>useAwsSocket.tsx</code></td></tr><tr><td class="td-key">Image → draft note</td><td><code>imageRead.ts</code>, <code>JournalImageMessage.tsx</code></td></tr><tr><td class="td-key">Models</td><td><code>src/types/dto.ts</code> (<code>UIRequirement</code>, <code>UIRequirementSet</code>)</td></tr></tbody></table></div>
 <hr class="divider">
-<p><em>This PRD describes design intention as implemented or clearly implied in the web app. Where frontend mocks or dual paths exist, they are called out so product and backend can converge on a single contract.</em></p>
+</div>
+<div class="sec" id="s-appendix-sep9" data-outline="Appendix · Updated 9 Sep 2026">
+<div class="sec__head"><span class="sec__num">B</span><h2>Appendix: Updated features · 9 Sep 2026</h2></div>
+<p>Catalog of web authoring / runtime features documented or expanded on <strong>9 Sep 2026</strong>. Full specs live in the linked PRD sections; matching coverage should be expanded in the Test Cases tab (§16). Tag: <span class="pill pill--ok">Updated 9 Sep 2026</span>.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Feature</th><th>PRD section</th><th>What changed</th></tr></thead><tbody>
+<tr><td class="td-key">Solution delete / Invalid</td><td><a href="#s-3-solution-library">§3 Solution Library</a></td><td>Delete checklist/report (any status); confirm lists linked report names; <strong>Invalid</strong> badge when linked checklist missing; DELETE APIs + cache refresh.</td></tr>
+<tr><td class="td-key">Multi-target AI summaries</td><td><a href="#s-5-form-building-requirement-forms">§5</a> / <a href="#s-6-section-special-fields-ai-summary">§6</a></td><td><code>aiSummaryIds[]</code> multi-select; legacy <code>aiSummaryId</code>; walk-wide targets; no mock targets.</td></tr>
+<tr><td class="td-key">Smart Description generate</td><td><a href="#s-5-form-building-requirement-forms">§5 Form building</a></td><td>Sparkles → <code>POST /form-fields/smart-description</code>; drafts into textarea for author edit.</td></tr>
+<tr><td class="td-key">Specials → inspection items</td><td><a href="#s-6-section-special-fields-ai-summary">§6</a> / <a href="#s-7-checklist-export-flags-report-json-previ">§7</a></td><td>Trailing section item + export <code>wis_detail</code> row with <code>special_form.form</code> (not <code>requirement</code>); works for special-only sections.</td></tr>
+<tr><td class="td-key">Export specials / media URLs</td><td><a href="#s-7-checklist-export-flags-report-json-previ">§7</a> / <a href="#s-8-report-template-mapping">§8</a></td><td><code>specials.{labelSlug}</code> in preview; file URL lists; signature single URL.</td></tr>
+<tr><td class="td-key">Project metadata save order</td><td><a href="#s-7-checklist-export-flags-report-json-previ">§7 Export flags</a></td><td>Sequential <code>updateProject</code> then <code>updateReportMetadata</code> to protect custom metadata.</td></tr>
+</tbody></table></div>
+<hr class="divider">
+<p><em>This PRD describes design intention as implemented or clearly implied in the web app (including uncommitted Solution delete/Invalid work where noted in §3). Where frontend mocks or dual paths exist, they are called out so product and backend can converge on a single contract.</em></p>
+</div>
+<footer>Billie Onsite — Checklist, Forms &amp; Report Templates PRD · Living design document · aligned to web app architecture.</footer>
+</section>
+<section class="panel" id="panel-runtime" role="tabpanel">
+<div class="sec" id="s-15-inspection-runtime-web" data-outline="15 · Inspection runtime (web)">
+<div class="sec__head"><span class="sec__num">15</span><h2>Inspection runtime (web) — reflection, AI summary, collab, lifecycle</h2></div>
+<p>Added since the original authoring/mapping-focused draft. This is where checklist/forms/report contracts meet live work.</p>
+<h3><span class="h3num">15.1</span>Design intent</h3>
+<ul><li>Checklist remains the <strong>source of truth for field schemas</strong> on open inspections.</li><li><strong>New requirements</strong> are added by <strong>ms-walk server structure sync</strong> after checklist save — not by a second client writer (client-side structure sync on open was removed to avoid double-append).</li><li>Section specials appear as real inspection items; AI summaries are <strong>generatable and editable</strong> on web.</li><li>Collaborative hosts/attendees see form answers update live.</li><li>Exporting a report is a primary path to mark an inspection <strong>completed</strong> (aligned with mobile).</li></ul>
+<h3><span class="h3num">15.2</span>Feature descriptions</h3>
+<h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Checklist ↔ inspection reflection</h4>
+<div class="tbl-wrap"><table><thead><tr><th>Concern</th><th>Behavior</th></tr></thead><tbody><tr><td class="td-key">Live form schemas</td><td>Overlay live checklist <code>formSchema</code> / special schemas onto issue snapshots when fetching checklist (refetch threshold ~30s)</td></tr><tr><td class="td-key">New items</td><td>Server sweep after checklist save; <code>structureSyncStatus</code>: <code>SYNCING</code> / <code>SYNCED</code> / null — badges on journal list + detail</td></tr><tr><td class="td-key">Specials</td><td>Trailing item per section with specials; keyed by section id (§6)</td></tr><tr><td class="td-key">Contract (e2e)</td><td>Edit form after inspection exists → new field appears; add requirement → item count grows via sweep (may take tens of seconds)</td></tr></tbody></table></div>
+<h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">On-form AI summary</h4>
+<div class="tbl-wrap"><table><thead><tr><th>Concern</th><th>Behavior</th></tr></thead><tbody><tr><td class="td-key">UI</td><td>Purple AI summary block + sparkles Generate</td></tr><tr><td class="td-key">Collect</td><td>Walk-wide opted-in fields via <code>includeInAiSummary</code> + <code>aiSummaryTargets</code> → <code>POST /form-fields/summary</code> (Smart Description as <code>note</code>)</td></tr><tr><td class="td-key">Blanks</td><td>Blank answers still sent; AI may account for them</td></tr><tr><td class="td-key">Persist</td><td>Editable long text; autosave like other fields</td></tr><tr><td class="td-key">Empty sources</td><td>Info toast directing authors to opt fields in from the checklist builder</td></tr></tbody></table></div>
+<h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Web form fill</h4>
+<div class="tbl-wrap"><table><thead><tr><th>Concern</th><th>Behavior</th></tr></thead><tbody><tr><td class="td-key">Photo / file</td><td>Upload for file/image fields; URL thumbnails</td></tr><tr><td class="td-key">Signature</td><td>Display existing; “captured on mobile” when empty — no web draw/upload</td></tr><tr><td class="td-key">Autosave</td><td>Debounced (~1s); clear saved / progress affordances</td></tr></tbody></table></div>
+<h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Ask image → draft note (adjacent)</h4>
+<ul><li>Sparkles on journal image → <code>POST …/ai/image/read</code> → local draft text message for review before Submit.</li><li>Feeds the notes stream that can later inform autofill / summaries / export content.</li></ul>
+<h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Collaborative live form answers</h4>
+<div class="tbl-wrap"><table><thead><tr><th>Concern</th><th>Behavior</th></tr></thead><tbody><tr><td class="td-key">Socket payloads</td><td>W12/W24 may carry <code>formAnswers</code>; apply with freshness (<code>updatedAt</code>); empty object clears; null/absent leaves cache</td></tr><tr><td class="td-key">New issues</td><td>Socket-created issues seed containers so attendees can post immediately</td></tr><tr><td class="td-key">Scope</td><td>Viewing-path scoped so other walks don’t pollute the open journal</td></tr></tbody></table></div>
+<h4 style="margin:16px 0 8px;font-size:14px;color:var(--ink)">Lifecycle / Completed</h4>
+<p>Derived status includes: archived → completed; all items published → completed; <code>extraData.lifecycle === "completed"</code> → completed; else scheduled / in progress.<br><strong>Export as Document → Export Complete</strong> contributes to Completed (e2e-covered).</p>
+<h3><span class="h3num">15.3</span>Limitations</h3>
+<ul><li>Structure sync depends on ms-walk deploy and correct team/checklist resolution for invited users.</li><li>Live overlay updates <strong>schemas</strong>; brand-new items wait on server sweep.</li><li>Signature capture remains mobile-first.</li><li>Completing via export is one lifecycle path; not every publish path may set the same flag.</li></ul>
+<h3><span class="h3num">15.4</span>User journey expected</h3>
+<ol style="color:var(--ink-2);padding-left:20px;max-width:74ch"><li>Create inspection from a checklist that includes forms + section AI summary.</li><li>Fill opted-in fields (upload photos on web where needed); optionally Ask image → draft note → Submit.</li><li>Open the section special item → Generate AI summary → edit → wait for Saved.</li><li>Host edits while attendee views → attendee sees form answers update without refresh.</li><li>Author adds a field/requirement on the checklist and saves → inspection reflects (fields live; items via Syncing…).</li><li>Publish items as needed → Export as Document with mapped template → inspection appears under <strong>Completed</strong>.</li></ol>
+<hr class="divider">
 </div>
 <footer>Billie Onsite — Checklist, Forms &amp; Report Templates PRD · Living design document · aligned to web app architecture.</footer>
 </section>
 <section class="panel" id="panel-tests" role="tabpanel">
 <p class="lead" style="margin-bottom:6px">Test cases break down each feature and user journey from this PRD into verifiable web-authoring behavior. Where locking, lifecycle mocks, or preview-only simulation apply, cases are tagged.</p>
-<p style="color:var(--ink-3);font-size:13px;margin:0 0 12px">Format: ID · Priority · Preconditions · Steps · Expected result. Tap any case to expand. Use <strong style="color:var(--accent-ink)">Download Excel</strong> in the toolbar to export the currently filtered set.</p>
+<p style="color:var(--ink-3);font-size:13px;margin:0 0 12px">Format: ID · Priority · Preconditions · Steps · Expected result. Tap any case to expand. Use <strong style="color:var(--accent-ink)">Download Excel</strong> to export <em>all</em> test cases (filters/search do not shrink the file).</p>
 <div class="tc-toolbar">
   <div class="filter-grp" id="prioFilter">
     <button class="filter-btn is-on" data-p="all">All</button>
@@ -1812,7 +1908,7 @@ formSchema / specialFormSchema deep-copied  →  field &amp; special field ids p
     <input type="search" id="tcSearch" placeholder="Search test cases…" aria-label="Search test cases"/>
   </label>
   <span class="tc-count" id="tcCount"></span>
-  <button type="button" class="tc-export-btn" id="tcExportExcel" title="Download currently filtered test cases as Excel (.xlsx)">
+  <button type="button" class="tc-export-btn" id="tcExportExcel" title="Download all test cases as Excel (ignores filters)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     Download Excel
   </button>
@@ -1978,21 +2074,22 @@ buildOutline('overview');
 
 
 <script>
-/* ================= TEST CASE DATA (§15) ================= */
+/* ================= TEST CASE DATA (§16) ================= */
 var TC_GROUPS = [
-  { id: "g-sl", num: "15.1", title: "Solution Library authoring" },
-  { id: "g-tl", num: "15.2", title: "Team Checklist & Forms Library", note: "Locking of adopted templates may not be fully enforced in UI yet — treat as required product behavior." },
-  { id: "g-fb", num: "15.3", title: "Form building (requirement forms)" },
-  { id: "g-sp", num: "15.4", title: "Section special fields (AI summary)" },
-  { id: "g-ex", num: "15.5", title: "Export flags & JSON preview", note: "Looped item / Blank after / Notes are primarily frontend simulation ahead of full backend parity." },
-  { id: "g-rm", num: "15.6", title: "Report template mapping" },
-  { id: "g-ad", num: "15.7", title: "Adoption & ID continuity" },
-  { id: "g-pt", num: "15.8", title: "Permissions & tenancy" },
-  { id: "g-e2e", num: "15.9", title: "End-to-end journeys" },
+  { id: "g-sl", num: "16.1", title: "Solution Library authoring" },
+  { id: "g-tl", num: "16.2", title: "Team Checklist & Forms Library", note: "Locking of adopted templates may not be fully enforced in UI yet — treat as required product behavior." },
+  { id: "g-fb", num: "16.3", title: "Form building (requirement forms)" },
+  { id: "g-sp", num: "16.4", title: "Section special fields (AI summary)" },
+  { id: "g-ex", num: "16.5", title: "Export flags & JSON preview", note: "Looped item / Blank after / Notes are primarily frontend simulation ahead of full backend parity." },
+  { id: "g-rm", num: "16.6", title: "Report template mapping" },
+  { id: "g-ad", num: "16.7", title: "Adoption & ID continuity" },
+  { id: "g-pt", num: "16.8", title: "Permissions & tenancy" },
+  { id: "g-e2e", num: "16.9", title: "End-to-end journeys" },
+  { id: "g-rt", num: "16.10", title: "Inspection runtime (web)", note: "Reflection, on-form AI summary, collab, Completed — see §15." },
 ];
 
 var TC = [
-  /* 15.1 Solution Library */
+  /* 16.1 Solution Library */
   {
     g: "g-sl", id: "TC-SL-001", p: "P0", cat: "release",
     name: "Create regional checklist template draft",
@@ -2052,8 +2149,28 @@ var TC = [
     exp: "Surfaces exist but are thinner / shell-level versus full Checklist & Report authoring (per PRD maturity).",
     cur: "Product treats these as lighter; do not block release on full parity."
   },
+  {
+    g: "g-sl", id: "TC-SL-007", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Delete Solution checklist warns linked reports then shows Invalid",
+    pre: "Published Solution checklist is linked from one or more Solution report templates.",
+    steps: [
+      "Open Solution Library → Checklist card ⋯ → Delete.",
+      "Confirm the dialog lists the linked report template names and warns they become invalid.",
+      "Confirm delete; open Report templates library."
+    ],
+    exp: "Checklist is removed; linked report cards show Invalid until deleted or rewired."
+  },
+  {
+    g: "g-sl", id: "TC-SL-008", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Delete Solution report template (any status)",
+    pre: "Solution report template exists (draft or published).",
+    steps: ["Open Report template card ⋯ → Delete.", "Confirm deletion."],
+    exp: "Report template is removed from Solution Library; no customer team data is mutated."
+  },
 
-  /* 15.2 Team Library */
+  /* 16.2 Team Library */
   {
     g: "g-tl", id: "TC-TL-001", p: "P0", cat: "release",
     name: "Create team-authored checklist",
@@ -2106,7 +2223,7 @@ var TC = [
     cur: "Do not treat localStorage mock as production lifecycle."
   },
 
-  /* 15.3 Form building */
+  /* 16.3 Form building */
   {
     g: "g-fb", id: "TC-FB-001", p: "P0", cat: "release",
     name: "Add all standard field types from palette",
@@ -2165,8 +2282,30 @@ var TC = [
     ],
     exp: "Field stores includeInAiSummary + aiSummaryId; summary Included sources lists the field."
   },
+  {
+    g: "g-fb", id: "TC-FB-007", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Smart Description generate drafts into field setting",
+    pre: "Form builder open on a requirement field (or AI summary prompt).",
+    steps: [
+      "Click Smart Description generate (sparkles).",
+      "Wait for draft text; edit if needed; save the form/checklist."
+    ],
+    exp: "API drafts description into the textarea for edit (not auto-saved alone); works for standard fields and AI-summary prompts."
+  },
+  {
+    g: "g-fb", id: "TC-FB-008", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Include in AI summary multi-selects aiSummaryIds",
+    pre: "Checklist has two section AI summaries; form field open.",
+    steps: [
+      "Toggle Include in AI summary.",
+      "Tick two summaries by label; save."
+    ],
+    exp: "Field stores aiSummaryIds[] for both targets; legacy aiSummaryId equals the first target."
+  },
 
-  /* 15.4 Special fields */
+  /* 16.4 Special fields */
   {
     g: "g-sp", id: "TC-SP-001", p: "P0", cat: "release",
     name: "Add AI summary via section Special",
@@ -2192,28 +2331,61 @@ var TC = [
     g: "g-sp", id: "TC-SP-003", p: "P0", cat: "release",
     name: "Special outputs are not requirement form palette items",
     pre: "Requirement form builder open.",
-    steps: ["Inspect the left field palette for AI summary / Pivot Table."],
-    exp: "AI summary and pivots are not available as requirement form fields; they are section Special only."
-  },
-  {
-    g: "g-sp", id: "TC-SP-004", p: "P2", cat: "Future",
-    tags: ["Not in this release"],
-    name: "Pivot tables remain concept-only this release",
-    pre: "Section Special dialog open (if pivot placeholders visible).",
-    steps: ["Look for Pivot Table types / builder.", "Confirm no shipping runtime journey is required."],
-    exp: "Pivot tables are Not in this release — high-level concept only; no required E2E ship path."
+    steps: ["Inspect the left field palette for AI summary / special outputs."],
+    exp: "AI summary is not available as a requirement form field; it is section Special only."
   },
   {
     g: "g-sp", id: "TC-SP-005", p: "P1", cat: "Partial",
-    tags: ["Runtime lag"],
-    name: "AI summary authoring ahead of full generation runtime",
-    pre: "Checklist with AI summary + opted-in fields saved.",
-    steps: ["Complete authoring wiring.", "Check mobile/backend generation / sp_output if available."],
-    exp: "Authoring wiring is available; full mobile/backend generation may still lag — document Partial if runtime missing.",
-    cur: "Authoring ahead of full runtime; mock AI summary options may appear in demo until Special fields are saved."
+    tags: ["Updated 9 Sep 2026", "Runtime lag"],
+    name: "Web AI summary Generate on special item",
+    pre: "Checklist with AI summary + opted-in fields; open web inspection.",
+    steps: [
+      "Open the section special item → Generate AI summary → edit → wait for Saved."
+    ],
+    exp: "AI summary Generate works on web (§15); text is editable and autosaved.",
+    cur: "Web AI summary generate shipped."
+  },
+  {
+    g: "g-sp", id: "TC-SP-006", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Specials materialize as trailing section item (stable section id)",
+    pre: "Checklist section with specialFormSchema (AI summary); create or open inspection.",
+    steps: [
+      "Walk the section’s requirements in the inspection carousel.",
+      "Confirm a trailing special item appears after the section’s children.",
+      "Re-sync / reopen and confirm the special item id stays the section id (not duplicated)."
+    ],
+    exp: "Trailing synthetic item keyed by section id; AI summary shows generate control (must not degrade to a plain form)."
+  },
+  {
+    g: "g-sp", id: "TC-SP-007", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Special-only section still emits trailing special item",
+    pre: "Section with specials and no requirement children.",
+    steps: ["Create/open inspection from the checklist.", "Locate the section’s special item."],
+    exp: "Special item still appears (keyed by section id) even with no requirement children."
+  },
+  {
+    g: "g-sp", id: "TC-SP-008", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "No mock AI summary targets when none authored",
+    pre: "Checklist with no AI summary specials; form field Include controls open.",
+    steps: ["Open Include in AI summary on a field.", "Inspect available targets."],
+    exp: "No mock/demo target options; Include has no real targets until an AI summary is authored on the checklist."
+  },
+  {
+    g: "g-sp", id: "TC-SP-009", p: "P1", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Unlink removes only that summary id from multi-target field",
+    pre: "Field opted into two AI summaries (aiSummaryIds[] length 2).",
+    steps: [
+      "Open one summary’s Included sources → unlink the field.",
+      "Re-open the field Include settings."
+    ],
+    exp: "Only that summary id is removed; the other target remains in aiSummaryIds[]; legacy aiSummaryId reflects the remaining first target."
   },
 
-  /* 15.5 Export flags & JSON preview */
+  /* 16.5 Export flags & JSON preview */
   {
     g: "g-ex", id: "TC-EX-001", p: "P0", cat: "release",
     name: "Import library checklist into report mapper",
@@ -2290,8 +2462,46 @@ var TC = [
     exp: "Both bootstrap paths establish a structure for mapping; From template may remain heuristic/mock in places; Blank may be disabled in some flows (e.g. report template ID).",
     cur: "Heuristic/mock in places; Blank disabled in some flows."
   },
+  {
+    g: "g-ex", id: "TC-EX-009", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Trailing wis_detail uses special_form.form (not requirement)",
+    pre: "Checklist section “Fire safety” (or similar) with a requirement form and an AI summary labeled e.g. Fire safety summary; mapper JSON preview open.",
+    steps: [
+      "Import / load the checklist into the mapper.",
+      "Inspect wis_detail for that section after requirement children."
+    ],
+    exp: "Trailing row has special_form.form with slug key (e.g. fire_safety_summary), not a requirement object; no requirement-style text/result/notes on that form object; section title/path matches siblings."
+  },
+  {
+    g: "g-ex", id: "TC-EX-010", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Special-only section emits wis_detail special_form row",
+    pre: "Section with specials and no requirement children; JSON preview available.",
+    steps: ["Load checklist into mapper.", "Inspect wis_detail for that section."],
+    exp: "A wis_detail entry with special_form.form is still emitted for the section."
+  },
+  {
+    g: "g-ex", id: "TC-EX-011", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Media sample shapes: file URL list; signature single URL",
+    pre: "Checklist with file/image and signature fields; sample values or runtime-shaped preview.",
+    steps: ["Open JSON preview for file/image and signature answers."],
+    exp: "file_upload / image samples are a list of https URLs; signature is a single URL (or empty when unsigned)."
+  },
+  {
+    g: "g-ex", id: "TC-EX-012", p: "P1", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Project Setup saves metadata sequentially",
+    pre: "Project with custom report metadata fields; ability to edit project details + metadata.",
+    steps: [
+      "Edit project details and custom report metadata.",
+      "Save and reload; confirm metadata still present."
+    ],
+    exp: "Saves run updateProject then updateReportMetadata (sequential); custom metadata is not wiped by parallel saves."
+  },
 
-  /* 15.6 Report mapping */
+  /* 16.6 Report mapping */
   {
     g: "g-rm", id: "TC-RM-001", p: "P0", cat: "release",
     name: "Detect tags in uploaded document template",
@@ -2337,8 +2547,20 @@ var TC = [
     ],
     exp: "checklist_id references the team-adopted checklist, not the raw Solution checklist template id."
   },
+  {
+    g: "g-rm", id: "TC-RM-006", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Map tag to wis_detail special_form.form slug path",
+    pre: "Mapper JSON preview shows a trailing special_form.form.{labelSlug} (e.g. fire_safety_summary).",
+    steps: [
+      "Select a document tag intended for the section AI summary / special.",
+      "Bind to wis_detail[].special_form.form.{labelSlug} (not requirement.form).",
+      "Validate preview path."
+    ],
+    exp: "Tag binds to special_form path; mapping does not incorrectly use requirement.form for section specials."
+  },
 
-  /* 15.7 Adoption */
+  /* 16.7 Adoption */
   {
     g: "g-ad", id: "TC-AD-001", p: "P0", cat: "release",
     name: "Adopt checklist via Template library Use (client clone)",
@@ -2418,7 +2640,7 @@ var TC = [
     exp: "No silent overwrite; explicit future upgrade path (not this release)."
   },
 
-  /* 15.8 Permissions */
+  /* 16.8 Permissions */
   {
     g: "g-pt", id: "TC-PT-001", p: "P0", cat: "Partial",
     tags: ["Allowlist"],
@@ -2455,7 +2677,7 @@ var TC = [
     exp: "Only the active team’s assets are shown; adopt writes into the active team."
   },
 
-  /* 15.9 E2E */
+  /* 16.9 E2E */
   {
     g: "g-e2e", id: "TC-E2E-001", p: "P0", cat: "release",
     name: "Ship regional checklist + report end to end",
@@ -2483,15 +2705,15 @@ var TC = [
   },
   {
     g: "g-e2e", id: "TC-E2E-003", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
     name: "Build forms + AI summary + mapper preview",
     pre: "Team-authored checklist editor and report mapper available.",
     steps: [
-      "Create section + nested requirements; build standard forms.",
-      "Mark finding requirements Looped item where needed.",
-      "Section → Special → AI summary; opt fields into Include in AI summary.",
-      "In report mapper: import checklist, sync project, preview JSON (loops/notes/blanks), map at least one tag."
+      "Create section + nested requirements; build standard forms (incl. file).",
+      "Mark finding requirements Looped item; Section → Special → AI summary (multi opt-in).",
+      "In report mapper: import checklist, sync project, preview JSON (loops/notes/blanks/specials.*/media URLs), map at least one tag."
     ],
-    exp: "Authoring + preview journey completes; pivot tables not required (Not in this release)."
+    exp: "Authoring + AI specials + mapper preview complete; specials and media URL shapes visible in JSON where applicable."
   },
   {
     g: "g-e2e", id: "TC-E2E-004", p: "P1", cat: "Partial",
@@ -2505,6 +2727,84 @@ var TC = [
     ],
     exp: "Same locked schema reused; Carbone slugs remain consistent because schema is not team-edited.",
     cur: "Exact attach UX TBD with lock enforcement."
+  },
+  {
+    g: "g-e2e", id: "TC-E2E-005", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Retire Solution checklist → Invalid reports (scenario 11.5)",
+    pre: "Solution checklist linked to ≥1 report template.",
+    steps: [
+      "Solution Library → Checklist ⋯ → Delete; confirm named linked reports in dialog.",
+      "Open Report library and find Invalid badges.",
+      "Delete or rewire an Invalid report."
+    ],
+    exp: "Confirm lists linked report names; Invalid appears until deleted/rewired; customer team data untouched."
+  },
+
+  /* 16.10 Inspection runtime (web) */
+  {
+    g: "g-rt", id: "TC-RT-001", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Live schema overlay shows new form fields on open inspection",
+    pre: "Inspection already created from a checklist; host can edit the checklist.",
+    steps: [
+      "Add a new field to an existing requirement form; save checklist.",
+      "Reopen / stay on the inspection and open that item (allow ~30s refetch if needed)."
+    ],
+    exp: "New field appears via live formSchema overlay without requiring a client-side structure rewrite."
+  },
+  {
+    g: "g-rt", id: "TC-RT-002", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "New requirement appears via server structure sync",
+    pre: "Open inspection exists; add a new requirement to the checklist and save.",
+    steps: [
+      "Save/publish the checklist change.",
+      "Watch journal list/detail for Syncing… → Synced (structureSyncStatus).",
+      "Confirm item count grows (may take tens of seconds)."
+    ],
+    exp: "New items come from ms-walk server sweep; client does not double-append on open."
+  },
+  {
+    g: "g-rt", id: "TC-RT-003", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "On-form AI summary Generate persists editable text",
+    pre: "Web inspection with section AI summary special item; opted-in fields filled (blanks allowed).",
+    steps: [
+      "Open purple AI summary block → Generate.",
+      "Edit returned text; wait for autosave Saved."
+    ],
+    exp: "POST /form-fields/summary uses Smart Description as note; walk-wide opted-in fields collected; text editable + autosaved. Empty sources → info toast to opt in from builder."
+  },
+  {
+    g: "g-rt", id: "TC-RT-004", p: "P1", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Web file upload; signature display-only when empty",
+    pre: "Web inspection with file/image and signature fields.",
+    steps: [
+      "Upload a photo to a file/image field; confirm URL thumbnail.",
+      "Open empty signature field."
+    ],
+    exp: "File upload works on web; empty signature shows captured-on-mobile / display-only — no web draw/upload."
+  },
+  {
+    g: "g-rt", id: "TC-RT-005", p: "P1", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Collaborative form answers update live via sockets",
+    pre: "Host and attendee on the same walk; form fields present.",
+    steps: [
+      "Host edits a form answer.",
+      "Attendee views the same item without refresh."
+    ],
+    exp: "Attendee sees updated formAnswers (freshness via updatedAt); viewing-path scoped so other walks do not pollute."
+  },
+  {
+    g: "g-rt", id: "TC-RT-006", p: "P0", cat: "release",
+    tags: ["Updated 9 Sep 2026"],
+    name: "Export as Document contributes to Completed",
+    pre: "In-progress web inspection with exportable data and mapped template.",
+    steps: ["Publish → Export as Document → complete export."],
+    exp: "Inspection lifecycle moves to Completed (aligned with mobile export completion path)."
   }
 ];
 
@@ -2535,16 +2835,31 @@ function getFilteredTC() {
   });
   return out;
 }
+function getAllTC() {
+  var out = [];
+  TC_GROUPS.forEach(function (grp) {
+    TC.filter(function (t) { return t.g === grp.id; }).forEach(function (t) { out.push(t); });
+  });
+  return out;
+}
 function formatStepsForExcel(steps) {
   return (steps || []).map(function (s, i) { return (i + 1) + ". " + s; }).join("\n");
 }
 function buildTCExportRows() {
-  var cases = getFilteredTC();
-  var aoa = [["#", "test case title", "pre", "steps", "expected", "Tester Observations"]];
+  // Always export the full suite (including newest cases), regardless of UI filters/search.
+  var cases = getAllTC();
+  var grpById = {};
+  TC_GROUPS.forEach(function (g) { grpById[g.id] = g; });
+  var aoa = [["#", "group", "test case title", "priority", "status", "tags", "pre", "steps", "expected", "Tester Observations"]];
   cases.forEach(function (t, i) {
+    var grp = grpById[t.g];
     aoa.push([
       String(i + 1),
+      grp ? grp.num + " " + grp.title : t.g,
       t.id + " - " + t.name,
+      t.p || "",
+      t.cat || "",
+      (t.tags || []).join("; "),
       t.pre || "",
       formatStepsForExcel(t.steps),
       t.exp + (t.cur ? "\n\nCurrent build: " + t.cur : ""),
@@ -2666,10 +2981,10 @@ function buildXlsxBlob(aoa) {
 }
 function downloadTCExcel() {
   var built = buildTCExportRows();
-  if (!built.cases.length) { alert("No test cases match the current filters."); return; }
+  if (!built.cases.length) { alert("No test cases found to export."); return; }
   var stamp = new Date().toISOString().slice(0, 10);
   try {
-    triggerDownload(buildXlsxBlob(built.aoa), "Checklist-Forms-Report-Templates-Test-Cases-" + stamp + ".xlsx");
+    triggerDownload(buildXlsxBlob(built.aoa), "Checklist-Forms-Report-Templates-Test-Cases-ALL-" + stamp + ".xlsx");
   } catch (err) {
     console.error(err);
     alert("Excel export failed. Please refresh and try again.");
