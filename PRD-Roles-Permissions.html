@@ -39,18 +39,77 @@
       <div class="doc-meta">
         <span class="meta-chip">PRD <b>04</b></span>
         <span class="meta-chip">Status: <b>Shipped</b></span>
-        <span class="meta-chip">Surfaces: <b>Desktop journal · Mobile inspection</b></span>
+        <span class="meta-chip">Surfaces: <b>Project Inspections · Desktop journal · Mobile</b></span>
         <span class="meta-chip"><a href="index.html">All docs</a></span>
       </div>
     </div></div>
     <div class="content">
-      <p class="lead">Inspection roles (Manager, Host, Attendee, Viewer) decide who can open a walk and which actions desktop and mobile expose. Manager and Host share one permission set — only the label differs.</p>
+      <p class="lead">Inspection roles (Manager, Host, Attendee, Viewer) decide who can open a walk and which actions desktop and mobile expose. A common setup path is scheduling from the project workspace and assigning a host — that is when the creator becomes <em>Manager</em> and the assignee becomes <em>Host</em>. Manager and Host share one permission set — only the label differs.</p>
       <div class="sec" id="s-1"><div class="sec__head"><span class="sec__num">1</span><h2>Design intent</h2></div><ul>
+<li><strong>Plan on desktop, execute onsite:</strong> from Project → Inspections, schedule a window, attach a checklist, and optionally <strong>Assign host</strong> so the right auditor owns the fieldwork.</li>
 <li><strong>One authority for forms:</strong> only Manager/Host fill forms, run Magic Wand, publish, and manage access.</li>
 <li><strong>Collaborative notes:</strong> Attendees add notes the owner can interpret into answers.</li>
 <li><strong>Safe openness after completion:</strong> project members can open completed/archived inspections as viewers.</li>
-<li><strong>Honest labels:</strong> Manager vs Host is creator vs assigned inspector — not two privilege tiers.</li>
+<li><strong>Honest labels:</strong> Manager vs Host is creator vs assigned inspector — not two privilege tiers. Until someone else is assigned, the creator stays labeled Host.</li>
 </ul></div><div class="sec" id="s-2"><div class="sec__head"><span class="sec__num">2</span><h2>Frontend UI</h2></div>
+
+<div class="app-mocks is-wide">
+  <div class="desk">
+    <div class="desk__chrome"><span class="desk__dots"><i class="r"></i><i class="y"></i><i class="g"></i></span> billie-web · Project workspace → Inspections → Schedule inspection</div>
+    <div class="desk__body" style="background:#f3f4f6;padding:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 12px">
+        <div style="font-weight:700;font-size:16px">Inspections</div>
+        <span class="bw-btn primary">＋ Schedule inspection</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:12px">
+        <div class="bw-pub" style="max-width:none;margin:0">
+          <div class="bw-pub__bar"><span>Schedule inspection</span><span style="color:#9ca3af">✕</span></div>
+          <div class="bw-pub__body" style="gap:10px">
+            <div style="font-size:12px;color:#6b7280">Set a window, assign an auditor, and attach a checklist &amp; report template.</div>
+            <div style="font-size:12px;font-weight:600;color:#374151">Title</div>
+            <div class="box" style="height:34px;border:1px solid #e5e7eb;border-radius:6px;display:flex;align-items:center;padding:0 10px;color:#111">Q3 cold-room audit — Building A</div>
+            <div style="font-size:12px;font-weight:600;color:#374151">When it may happen</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div class="box" style="height:34px;border:1px solid #e5e7eb;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;color:#6b7280">From · 14 Oct</div>
+              <div class="box" style="height:34px;border:1px solid #e5e7eb;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;color:#6b7280">To · 16 Oct</div>
+            </div>
+            <div style="font-size:12px;font-weight:600;color:#374151">Assign host</div>
+            <div style="border:1px solid #e5e7eb;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px">
+              <span class="bw-avatar" style="width:24px;height:24px;font-size:10px;background:#6366f1">SR</span>
+              <span style="font-size:13px;font-weight:500">Sam Rivera</span>
+              <span style="margin-left:auto;font-size:12px;color:#6b7280">▾</span>
+            </div>
+            <div style="font-size:12px;font-weight:600;color:#374151">Checklist &amp; forms</div>
+            <div class="box" style="height:34px;border:1px solid #e5e7eb;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px">Food Safety Checklist v4</div>
+            <div style="font-size:12px;color:#9ca3af">Notes (optional) — Context for the assignee…</div>
+          </div>
+          <div class="bw-pub__foot">
+            <span class="bw-btn outline sm">Cancel</span>
+            <span class="bw-btn primary sm">Schedule</span>
+          </div>
+        </div>
+        <div>
+          <div class="bw-card" style="border-color:#93c5fd;background:#eff6ff">
+            <div style="font-weight:600;margin-bottom:8px">Q3 cold-room audit — Building A</div>
+            <div style="font-size:12px;color:#4b5563;display:grid;gap:4px">
+              <div><strong>Window</strong> · 14–16 Oct</div>
+              <div><strong>Host</strong> · Sam Rivera</div>
+              <div><strong>Checklist</strong> · Food Safety Checklist v4</div>
+            </div>
+            <div class="ui-row" style="margin-top:10px">
+              <span class="bw-chip">scheduled</span>
+              <span class="bw-btn ghost sm" style="margin-left:auto">⋮ Edit</span>
+            </div>
+          </div>
+          <p class="ui-caption" style="margin-top:10px"><strong>After Schedule:</strong> card meta <strong>Host</strong> shows the assigned person (or <strong>Unassigned</strong>). Creator is still the walk creator (<code>hostUserId</code>). In Journal Access, creator → <strong>Manager</strong>, assignee → <strong>Host</strong>.</p>
+          <p class="ui-caption"><strong>Who can Edit later:</strong> only the creator or the assigned host (⋮ → Edit / lifecycle / Delete). Project admin alone does not unlock those mutations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="ui-caption" style="margin-bottom:18px"><strong>Desktop project path:</strong> <code>InspectionsPage</code> → <code>ScheduleInspectionDialog</code>. Assignee is optional at create; required fields are title, window, and checklist. Mobile does not use this schedule dialog — empty-state copy points people to start inspections from the mobile app.</p>
+
 <div class="app-mocks">
   <div>
     <div class="desk">
@@ -128,19 +187,46 @@
   </div>
 </div>
 </div><div class="sec" id="s-3"><div class="sec__head"><span class="sec__num">3</span><h2>Feature logic</h2></div><div class="tbl-wrap"><table><thead><tr><th>Role</th><th>Who</th></tr></thead><tbody>
-<tr><td class="td-key">Manager</td><td>Creator after someone else is assigned</td></tr>
-<tr><td class="td-key">Host</td><td><code>assigneeId</code>, or creator if unassigned</td></tr>
+<tr><td class="td-key">Manager</td><td>Creator (<code>hostUserId</code>) after a <strong>different</strong> person is set as <code>extraData.assigneeId</code></td></tr>
+<tr><td class="td-key">Host</td><td><code>assigneeId</code> when set; otherwise the creator is labeled Host</td></tr>
 <tr><td class="td-key">Attendee</td><td>Invited member</td></tr>
 <tr><td class="td-key">Viewer</td><td>Project member not on the walk (no UI badge)</td></tr>
 </tbody></table></div>
+
+<h3>Schedule from project workspace → Assign host</h3>
+<div class="tbl-wrap"><table><thead><tr><th>Step</th><th>Behavior</th></tr></thead><tbody>
+<tr><td class="td-key">Entry</td><td>Project → <strong>Inspections</strong> → <strong>Schedule inspection</strong> (header or empty state)</td></tr>
+<tr><td class="td-key">Create fields</td><td>Title, window (From/To), optional All day, optional <strong>Assign host</strong>, Checklist &amp; forms (required), optional Notes</td></tr>
+<tr><td class="td-key">Who can schedule</td><td>Anyone who can open the project Inspections tab (no extra mutation permission on the CTA)</td></tr>
+<tr><td class="td-key">Assignee optional</td><td>Can Schedule with Host <strong>Unassigned</strong>; creator remains labeled Host until someone else is assigned</td></tr>
+<tr><td class="td-key">Assign at create</td><td>Picker lists active project members; stores <code>extraData.assigneeId</code>; lifecycle <code>scheduled</code></td></tr>
+<tr><td class="td-key">Assign later</td><td>Card ⋮ → <strong>Edit</strong> (creator or current assigned host only) → change <strong>Assign host</strong> → Save changes</td></tr>
+<tr><td class="td-key">Label flip</td><td>When <code>assigneeId</code> ≠ creator: creator → <strong>Manager</strong>, assignee → <strong>Host</strong>. Same permission set.</td></tr>
+<tr><td class="td-key">Card meta</td><td>Always shows field label <strong>Host</strong> = assignee name or <strong>Unassigned</strong> (does not say “Manager” on the card)</td></tr>
+<tr><td class="td-key">Project-tab mutations</td><td>Edit / Mark in progress|completed|cancelled / Delete: only creator or assigned host — not project admin alone</td></tr>
+</tbody></table></div>
+
 <div class="tbl-wrap"><table><thead><tr><th>Action</th><th>Host/Manager</th><th>Attendee</th><th>Viewer</th></tr></thead><tbody>
 <tr><td class="td-key">Open scheduled / in progress</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td></tr>
 <tr><td class="td-key">Open completed / archived</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes*</td></tr>
 <tr><td class="td-key">Fill forms / Wand / publish / invite</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td></tr>
 <tr><td class="td-key">Own notes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td></tr>
 </tbody></table></div>
-<p>* Viewer must be a project member. Open rules are server-enforced; most mutate actions are client UI gates.</p></div><div class="sec" id="s-4"><div class="sec__head"><span class="sec__num">4</span><h2>User journey</h2></div><ol class="journey">
-<li>Host opens avatar stack → <strong>Journal Access</strong> / <strong>Inspection access</strong>.</li>
+<p>* Viewer must be a project member. Open rules are server-enforced; most mutate actions are client UI gates.</p></div><div class="sec" id="s-4"><div class="sec__head"><span class="sec__num">4</span><h2>User journey</h2></div>
+
+<h3>A · Schedule on desktop, assign a host</h3>
+<ol class="journey">
+<li>Open a project workspace → <strong>Inspections</strong> tab.</li>
+<li>Click <strong>Schedule inspection</strong>.</li>
+<li>Enter title, From/To window, and choose a checklist; under <strong>Assign host</strong>, pick a project member (or leave unassigned).</li>
+<li>Click <strong>Schedule</strong> → toast “Inspection scheduled”; card appears with Window / Host / Checklist.</li>
+<li>If a host was assigned: open Journal Access — scheduler is <strong>Manager</strong>, assignee is <strong>Host</strong>. Both can fill forms when the inspection is open.</li>
+<li>If left Unassigned: open later via ⋮ <strong>Edit</strong> → Assign host → <strong>Save changes</strong> to flip labels the same way.</li>
+</ol>
+
+<h3>B · Collaborate once the inspection is running</h3>
+<ol class="journey">
+<li>Host (or Manager) opens avatar stack → <strong>Journal Access</strong> / <strong>Inspection access</strong>.</li>
 <li>Invites teammates via <strong>Add emails or people</strong> → <strong>Invite</strong>.</li>
 <li>Attendee opens item: amber/grey owner banner; form dimmed; notes still work.</li>
 <li>Host fills forms or Magic Wand, then publishes / exports.</li>
@@ -156,8 +242,13 @@
 </tr>
 <tr>
 <td class="tc-id">TC-ROLE-002</td>
-<td><p class="tc-title">Assigning an inspector promotes creator to Manager</p><p class="tc-pre"><strong>Pre:</strong> Inspection created by User A; User B is a project member.</p><ol><li>As User A, assign User B as the inspection assignee / host.</li><li>Refresh Journal Access / Inspection access for both users.</li><li>As User A and User B, open the same item form.</li></ol></td>
-<td><ul class="tc-exp"><li>User A label becomes <strong>Manager</strong>; User B becomes <strong>Host</strong>.</li><li>Both still have full form-fill, Wand, invite, publish permissions.</li><li>User B appears in My Inspections and can open the walk.</li></ul></td>
+<td><p class="tc-title">Schedule inspection on project workspace and assign a host at create</p><p class="tc-pre"><strong>Pre:</strong> User A can open Project → Inspections; User B is an active project member; at least one checklist exists.</p><ol><li>As User A, open Project → <strong>Inspections</strong> → click <strong>Schedule inspection</strong>.</li><li>Fill Title, From/To window, and Checklist &amp; forms.</li><li>Under <strong>Assign host</strong>, select User B.</li><li>Click <strong>Schedule</strong>.</li><li>On the new card, read Host meta; open the inspection → Journal Access / Inspection access for A and B.</li></ol></td>
+<td><ul class="tc-exp"><li>Toast “Inspection scheduled”; card shows lifecycle scheduled, Host = User B’s name (not Unassigned).</li><li>User A is labeled <strong>Manager</strong>; User B is labeled <strong>Host</strong>.</li><li>Both can open the scheduled inspection and both have Host/Manager action rights (forms, invite, publish when appropriate).</li><li>User B appears under My Inspections.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-ROLE-002b</td>
+<td><p class="tc-title">Schedule without host, then assign host via Edit</p><p class="tc-pre"><strong>Pre:</strong> Same as TC-ROLE-002; leave Assign host empty on create.</p><ol><li>As User A, Schedule inspection with checklist + window but <strong>no</strong> Assign host.</li><li>Confirm card shows <strong>Host · Unassigned</strong>.</li><li>Open Journal Access as User A — confirm labeled <strong>Host</strong> (not Manager yet).</li><li>Card ⋮ → <strong>Edit</strong> → Assign host = User B → <strong>Save changes</strong>.</li><li>Re-check card Host meta and Journal Access labels for A and B.</li></ol></td>
+<td><ul class="tc-exp"><li>Before assign: creator stays <strong>Host</strong>; card Host = Unassigned.</li><li>After Save changes: toast “Inspection updated”; card Host = User B.</li><li>User A → <strong>Manager</strong>; User B → <strong>Host</strong>; permissions remain the shared Host/Manager set.</li><li>A project member who is neither creator nor assignee cannot see Edit / Delete on the card menu.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-ROLE-003</td>
