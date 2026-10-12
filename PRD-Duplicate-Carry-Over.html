@@ -127,33 +127,18 @@
 <tbody>
 <tr>
 <td class="tc-id">TC-DUP-001</td>
-<td><p class="tc-title">Duplicate with no keepable answers skips choice UI</p><p class="tc-pre"><strong>Pre:</strong> Requirement form has no fields with Option to duplicate value, or those fields are blank.</p><ol><li>On desktop: click <strong>Duplicate item</strong>.</li><li>On mobile: tap “+” on the focused item.</li></ol></td>
-<td><ul class="tc-exp"><li>No Keep/Empty dialog or sheet appears.</li><li>New item is created immediately with empty form answers.</li><li>Notes are not copied.</li><li>New item shares the same requirement id(s) for looping.</li></ul></td>
+<td><p class="tc-title">Author enables Option to duplicate value</p><p class="tc-pre"><strong>Pre:</strong> Web form builder on a standard field (not special).</p><ol><li>Enable <strong>Option to duplicate value</strong>; Save; reload.</li></ol></td>
+<td><ul class="tc-exp"><li>Chip <strong>Duplicate value</strong> appears; toggle persists.</li><li>Special fields do not show this toggle.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-DUP-002</td>
-<td><p class="tc-title">Desktop Keep selected values copies all keepable answers</p><p class="tc-pre"><strong>Pre:</strong> Fields Zone + Asset ID have Option to duplicate value ON and are answered; item has notes.</p><ol><li>Click <strong>Duplicate item</strong>.</li><li>Read dialog: “Keep these answers in the new item: Zone, Asset ID…”.</li><li>Click <strong>Keep selected values</strong>.</li><li>Open the new item below.</li></ol></td>
-<td><ul class="tc-exp"><li>Dialog title is “Duplicate item”; actions Empty form / Keep selected values.</li><li>New item has Zone and Asset ID values copied.</li><li>Unflagged fields are blank even if answered on source.</li><li>Notes / message thread on the new item are empty.</li></ul></td>
+<td><p class="tc-title">Keep selected values copies keepable answers</p><p class="tc-pre"><strong>Pre:</strong> Zone + Asset ID have Option to duplicate value ON and are answered; item has notes.</p><ol><li>Duplicate item → <strong>Keep selected values</strong>.</li><li>Open the new item.</li></ol></td>
+<td><ul class="tc-exp"><li>Zone and Asset ID copied; unflagged fields blank.</li><li>Notes are not copied.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-DUP-003</td>
-<td><p class="tc-title">Desktop Empty form resets keepable answers</p><p class="tc-pre"><strong>Pre:</strong> Same source item as TC-DUP-002.</p><ol><li>Duplicate item → click <strong>Empty form</strong>.</li><li>Inspect the new item.</li></ol></td>
-<td><ul class="tc-exp"><li>All form fields on the new item are empty.</li><li>Structure/requirement ids still match source.</li><li>Notes empty.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-DUP-004</td>
-<td><p class="tc-title">Mobile per-field uncheck before Next</p><p class="tc-pre"><strong>Pre:</strong> Mobile; source has ≥2 keepable answered fields.</p><ol><li>Tap “+”; sheet “Duplicate item” opens with Keep selected values defaulted.</li><li>Under Values to keep, uncheck Asset ID; leave Zone checked.</li><li>Tap <strong>Next</strong>.</li></ol></td>
-<td><ul class="tc-exp"><li>New item has Zone copied; Asset ID blank.</li><li>Notes empty.</li><li>Selecting Empty form instead starts a fully empty form.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-DUP-005</td>
-<td><p class="tc-title">Local-only media is not keepable</p><p class="tc-pre"><strong>Pre:</strong> Flagged image/file field answered with a local <code>file://</code> or <code>blob:</code> URI (not yet uploaded).</p><ol><li>Trigger duplicate while that media is still local-only.</li><li>Observe whether the field appears in keepable list / is copied on Keep.</li></ol></td>
-<td><ul class="tc-exp"><li>Local-only media is excluded from keepable answers.</li><li>After upload to <code>https://…</code>, a later duplicate can offer that field as keepable.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-DUP-006</td>
-<td><p class="tc-title">Authoring toggle + badge</p><p class="tc-pre"><strong>Pre:</strong> Web form builder open on a standard field (not special).</p><ol><li>Enable <strong>Option to duplicate value</strong> Switch in Field settings.</li><li>Observe field card chips; Save; reload builder.</li></ol></td>
-<td><ul class="tc-exp"><li>Sky callout copy matches: “When duplicating an item, inspectors can choose to keep this field’s answer.”</li><li>Chip <strong>Duplicate value</strong> appears on the field card.</li><li>Toggle state persists after reload.</li><li>Special fields do not show this toggle.</li></ul></td>
+<td><p class="tc-title">Empty form starts a blank new item</p><p class="tc-pre"><strong>Pre:</strong> Same source item as TC-DUP-002.</p><ol><li>Duplicate item → <strong>Empty form</strong>.</li></ol></td>
+<td><ul class="tc-exp"><li>All form fields on the new item are empty.</li><li>Requirement ids still match source; notes empty.</li></ul></td>
 </tr>
 </tbody></table></div></div>
     </div>

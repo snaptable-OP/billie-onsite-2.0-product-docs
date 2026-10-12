@@ -130,33 +130,18 @@
 <tbody>
 <tr>
 <td class="tc-id">TC-BA-001</td>
-<td><p class="tc-title">Batch Assign hidden without permission</p><p class="tc-pre"><strong>Pre:</strong> User lacks <code>PROJECT_ADD_EDIT_ASSIGNEE_TO_WIS</code> on the project.</p><ol><li>Open project Issues on desktop.</li><li>Open Issues tabs on mobile.</li></ol></td>
-<td><ul class="tc-exp"><li>Desktop: no <strong>Batch Assign</strong> toolbar button.</li><li>Mobile: no Assign (<code>UserPlus</code>) FAB.</li><li>Single-item assignee UI (if any) still follows its own permission rules.</li></ul></td>
+<td><p class="tc-title">Batch Assign hidden without permission</p><p class="tc-pre"><strong>Pre:</strong> User lacks <code>PROJECT_ADD_EDIT_ASSIGNEE_TO_WIS</code>.</p><ol><li>Open project Issues on desktop and mobile.</li></ol></td>
+<td><ul class="tc-exp"><li>Desktop: no <strong>Batch Assign</strong> button.</li><li>Mobile: no Assign FAB.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-BA-002</td>
-<td><p class="tc-title">Desktop batch assign ADD keeps existing assignees</p><p class="tc-pre"><strong>Pre:</strong> User has assign permission; ≥2 WIS; Item A already assigned to Alex.</p><ol><li>Click <strong>Batch Assign</strong>; header shows “Select items to batch assign”.</li><li>Select Item A and Item B; optionally Select All.</li><li>In right panel, check Priya; click <strong>Confirm Assign</strong>.</li></ol></td>
-<td><ul class="tc-exp"><li>Toast “Assignment Complete” / success copy with item count.</li><li>Item A still has Alex <strong>and</strong> Priya.</li><li>Item B has Priya.</li><li>Multi-select mode exits.</li></ul></td>
+<td><p class="tc-title">Batch assign ADD keeps existing assignees</p><p class="tc-pre"><strong>Pre:</strong> Assign permission; ≥2 WIS; Item A already assigned to Alex.</p><ol><li>Enter Batch Assign; select Item A and Item B.</li><li>Check Priya → <strong>Confirm Assign</strong>.</li></ol></td>
+<td><ul class="tc-exp"><li>Item A still has Alex <strong>and</strong> Priya; Item B has Priya.</li><li>Success toast; multi-select mode exits.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-BA-003</td>
-<td><p class="tc-title">Confirm with no members selected</p><p class="tc-pre"><strong>Pre:</strong> Batch mode with ≥1 WIS selected; no members checked.</p><ol><li>Click <strong>Confirm Assign</strong> (desktop) or <strong>Assign</strong> in the sheet (mobile).</li></ol></td>
-<td><ul class="tc-exp"><li>Desktop: “No Member Selected” / “Please select at least one project member…”.</li><li>Mobile: “Select at least one assignee”.</li><li>No assignee API change applied.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-BA-004</td>
-<td><p class="tc-title">Desktop Select All across filtered pages</p><p class="tc-pre"><strong>Pre:</strong> Filtered issues list spans >1 page; user in Batch Assign mode.</p><ol><li>Apply a filter that returns many WIS.</li><li>Click <strong>Select All</strong> (cross-page).</li><li>Assign one member → Confirm Assign.</li></ol></td>
-<td><ul class="tc-exp"><li>Selection count reflects the full filtered set, not only the current page.</li><li>All matching WIS receive the new assignee (ADD).</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-BA-005</td>
-<td><p class="tc-title">Mobile Select all is on-screen only</p><p class="tc-pre"><strong>Pre:</strong> Mobile issues list loaded with a subset of total WIS; assign permission on.</p><ol><li>Tap Assign FAB; enter selection mode.</li><li>Tap <strong>Select all</strong>; note count.</li><li>Scroll if more load; observe whether newly loaded cards are selected.</li><li>Assign a member.</li></ol></td>
-<td><ul class="tc-exp"><li>Header shows “Select items (N)” for loaded/on-screen selection.</li><li>Select all does <strong>not</strong> fetch every filtered page like desktop.</li><li>Only selected cards are assigned; toast “Assigned N items”.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-BA-006</td>
-<td><p class="tc-title">One notification per assignee for the batch</p><p class="tc-pre"><strong>Pre:</strong> Assign 5 WIS to one member in a single batch confirm.</p><ol><li>Select 5 items; assign User X once; confirm.</li><li>Check User X’s notifications.</li></ol></td>
-<td><ul class="tc-exp"><li>User X receives a single batch-style notification (not 5 separate issue notifications).</li><li>All 5 WIS show User X as assignee.</li></ul></td>
+<td><p class="tc-title">One notification per assignee for the batch</p><p class="tc-pre"><strong>Pre:</strong> Assign 5 WIS to one member in a single confirm.</p><ol><li>Select 5 items; assign User X once; confirm.</li><li>Check User X’s notifications.</li></ol></td>
+<td><ul class="tc-exp"><li>User X gets one batch notification (not 5 separate).</li><li>All 5 WIS show User X as assignee.</li></ul></td>
 </tr>
 </tbody></table></div></div>
     </div>

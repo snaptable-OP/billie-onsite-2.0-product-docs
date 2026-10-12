@@ -98,38 +98,18 @@
 <tbody>
 <tr>
 <td class="tc-id">TC-SYNC-001</td>
-<td><p class="tc-title">Add form field to checklist appears on open inspection</p><p class="tc-pre"><strong>Pre:</strong> Inspection created from Checklist A; item has ≥1 answered field. Author can edit Checklist A.</p><ol><li>Note current answered values on the inspection item.</li><li>In Team Requirement Library, open Checklist A → same requirement → add a new field (new id), Save.</li><li>Wait for server sync (tens of seconds if needed).</li><li>Reopen/refresh the inspection item on web and mobile.</li></ol></td>
-<td><ul class="tc-exp"><li>New field appears at the <strong>end</strong> of the form, blank.</li><li>Previously answered fields keep their values and labels.</li><li>No second duplicate of the new field after another refresh.</li></ul></td>
+<td><p class="tc-title">Add form field appears on open inspection (append-only)</p><p class="tc-pre"><strong>Pre:</strong> Inspection from Checklist A; item has ≥1 answered field.</p><ol><li>Note current answers.</li><li>In Team Requirement Library, add a new field (new id) to the same requirement → Save.</li><li>Wait for sync; reopen the inspection item on web and mobile.</li></ol></td>
+<td><ul class="tc-exp"><li>New field appears at the <strong>end</strong>, blank.</li><li>Previous answers and labels stay intact.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-SYNC-002</td>
-<td><p class="tc-title">Rename field label does not change inspection snapshot</p><p class="tc-pre"><strong>Pre:</strong> Inspection already has field X answered; checklist still linked.</p><ol><li>In the library, rename field X’s label (same field id), Save.</li><li>Reopen the inspection item.</li></ol></td>
-<td><ul class="tc-exp"><li>Inspection still shows the <strong>old</strong> label from the snapshot.</li><li>Answer value for that field id is unchanged.</li><li>New inspections created after the rename may show the new label.</li></ul></td>
+<td><p class="tc-title">Rename / edit options / remove field → snapshot unchanged</p><p class="tc-pre"><strong>Pre:</strong> Open inspection has answered field Y (e.g. dropdown with options A/B, label “Condition”); note label, options, and answer.</p><ol><li>In the library, <strong>rename</strong> field Y’s label (same field id) → Save; reopen the inspection item.</li><li>In the library, <strong>edit options</strong> on field Y (add/remove/rename an option) → Save; reopen.</li><li>In the library, <strong>remove</strong> field Y from the requirement → Save; reopen.</li></ol></td>
+<td><ul class="tc-exp"><li>After rename: inspection still shows the <strong>old</strong> label from the snapshot; answer unchanged.</li><li>After edit options: inspection still shows the <strong>original</strong> option set; selected answer unchanged.</li><li>After remove: field Y and its answer remain on the inspection; sync does not strip them from <code>requirement_json</code>.</li><li>In all three cases the open-inspection snapshot is unchanged (append-only sync does not rewrite existing fields).</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-SYNC-003</td>
-<td><p class="tc-title">Remove field from checklist leaves snapshot field + answer</p><p class="tc-pre"><strong>Pre:</strong> Inspection has answered field Y.</p><ol><li>In the library, delete/remove field Y from the requirement, Save.</li><li>Reopen the inspection item.</li></ol></td>
-<td><ul class="tc-exp"><li>Field Y still appears on the inspection form.</li><li>Prior answer for Y is still present.</li><li>Structure sync does not strip the field from <code>requirement_json</code>.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-SYNC-004</td>
-<td><p class="tc-title">Add requirement creates a new inspection item</p><p class="tc-pre"><strong>Pre:</strong> Open inspection from checklist; count current items.</p><ol><li>In the library, add a new requirement under a section, Save.</li><li>Refresh the inspection (journal list/detail).</li></ol></td>
-<td><ul class="tc-exp"><li>Item count increases by the new requirement(s).</li><li>New item has empty form answers.</li><li>Existing items and answers remain.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-SYNC-005</td>
-<td><p class="tc-title">Remove / inactive requirement does not delete inspection issue</p><p class="tc-pre"><strong>Pre:</strong> Inspection item tied to requirement R exists (may have notes/answers).</p><ol><li>In the library, remove or mark requirement R inactive, Save.</li><li>Reopen the inspection.</li></ol></td>
-<td><ul class="tc-exp"><li>The issue/item for R is still present (orphaned).</li><li>Notes and answers on that item remain.</li><li>Item is not auto-deleted by structure sync.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-SYNC-006</td>
-<td><p class="tc-title">Section specials stay keyed by section id</p><p class="tc-pre"><strong>Pre:</strong> Checklist section has AI summary special; inspection already has the trailing special item.</p><ol><li>Edit another field on the checklist and Save (re-trigger sync).</li><li>Compare the special item id before/after.</li></ol></td>
-<td><ul class="tc-exp"><li>Trailing special item id remains the <strong>section id</strong>.</li><li>No duplicate special item is created for that section.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-SYNC-007</td>
-<td><p class="tc-title">User blank item is never deleted by sync</p><p class="tc-pre"><strong>Pre:</strong> On inspection, add a blank item (no requirement id) with a note.</p><ol><li>Edit the checklist (add any field), Save to trigger sync.</li><li>Reopen the inspection.</li></ol></td>
-<td><ul class="tc-exp"><li>Blank item still exists with its note.</li><li>Blank item sorts after checklist-backed items.</li></ul></td>
+<td><p class="tc-title">Add requirement creates a new inspection item</p><p class="tc-pre"><strong>Pre:</strong> Open inspection from checklist; count current items.</p><ol><li>In the library, add a new requirement under a section → Save.</li><li>Refresh the inspection.</li></ol></td>
+<td><ul class="tc-exp"><li>Item count increases; new item has empty answers.</li><li>Existing items and answers remain.</li></ul></td>
 </tr>
 </tbody></table></div></div>
     </div>

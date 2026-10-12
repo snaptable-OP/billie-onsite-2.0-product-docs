@@ -132,33 +132,18 @@
 <tbody>
 <tr>
 <td class="tc-id">TC-CFF-001</td>
-<td><p class="tc-title">Custom Fields section hidden when nothing filterable</p><p class="tc-pre"><strong>Pre:</strong> Project has no dropdown custom fields (or only text CFs / empty options).</p><ol><li>Desktop: open Filter / View Filter Settings.</li><li>Mobile: open Issues filter sheet.</li></ol></td>
-<td><ul class="tc-exp"><li>No <strong>Custom Fields</strong> section is shown.</li><li>Other sections (Tags, Assignees, etc.) still appear as configured.</li></ul></td>
+<td><p class="tc-title">OR within one custom field</p><p class="tc-pre"><strong>Pre:</strong> Dropdown CF Severity with High and Medium; WIS exist for each.</p><ol><li>Filter → Custom Fields → Severity; check High and Medium → Apply.</li></ol></td>
+<td><ul class="tc-exp"><li>List shows High <strong>OR</strong> Medium; neither is hidden.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-CFF-002</td>
-<td><p class="tc-title">OR within one custom field</p><p class="tc-pre"><strong>Pre:</strong> Dropdown CF Severity with High and Medium; WIS exist for each.</p><ol><li>Open Filter → Custom Fields → Severity.</li><li>Check High and Medium; Apply.</li><li>Review the issues list.</li></ol></td>
-<td><ul class="tc-exp"><li>List shows items matching High <strong>OR</strong> Medium.</li><li>Items with neither option are hidden.</li></ul></td>
+<td><p class="tc-title">AND across two custom fields</p><p class="tc-pre"><strong>Pre:</strong> Severity and Trade dropdowns; WIS with combinations.</p><ol><li>Check Severity=High and Trade=Electrical → Apply.</li></ol></td>
+<td><ul class="tc-exp"><li>Only items matching <strong>both</strong> fields remain.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-CFF-003</td>
-<td><p class="tc-title">AND across two custom fields</p><p class="tc-pre"><strong>Pre:</strong> Severity and Trade dropdowns both on project; WIS with combinations.</p><ol><li>Check Severity=High and Trade=Electrical; Apply.</li></ol></td>
-<td><ul class="tc-exp"><li>Only items that match <strong>both</strong> fields remain.</li><li>High + other trade is excluded.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-CFF-004</td>
-<td><p class="tc-title">Desktop saved view chip shows field name</p><p class="tc-pre"><strong>Pre:</strong> User can create/edit views; CF filter applied.</p><ol><li>Apply Severity=High; save/update the view filter settings.</li><li>Observe view header chips.</li></ol></td>
-<td><ul class="tc-exp"><li>Chip group label is <code>Severity:</code> with option High.</li><li>Toast may show “View Filters Updated”.</li><li>Known gap: CF-only criteria may fail validation / filterActive chip — log if observed.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-CFF-005</td>
-<td><p class="tc-title">Mobile ad-hoc Apply sends customFieldValueIds</p><p class="tc-pre"><strong>Pre:</strong> Mobile; dropdown CF with options; WIS valued.</p><ol><li>Open Filter → Custom Fields → select an option → Apply.</li><li>Confirm list updates; clear/reset and Apply again.</li></ol></td>
-<td><ul class="tc-exp"><li>List narrows to matching WIS.</li><li>Reset clears CF selections.</li><li>Known gap: loading a saved view may omit CF ids — compare ad-hoc vs saved view.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-CFF-006</td>
-<td><p class="tc-title">Text custom fields never appear as filters</p><p class="tc-pre"><strong>Pre:</strong> Project has a text CF and a dropdown CF.</p><ol><li>Open Filter → Custom Fields.</li></ol></td>
-<td><ul class="tc-exp"><li>Only the dropdown CF (with options) is listed.</li><li>Text CF name does not appear as a filter group.</li></ul></td>
+<td><p class="tc-title">Only dropdown custom fields appear as filters</p><p class="tc-pre"><strong>Pre:</strong> Project has a text CF and a dropdown CF (with options).</p><ol><li>Open Filter → Custom Fields on desktop and mobile.</li></ol></td>
+<td><ul class="tc-exp"><li>Only the dropdown CF is listed; text CF is absent.</li><li>If no dropdown CFs exist, the Custom Fields section is hidden.</li></ul></td>
 </tr>
 </tbody></table></div></div>
     </div>

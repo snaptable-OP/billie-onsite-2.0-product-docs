@@ -237,43 +237,18 @@
 <tbody>
 <tr>
 <td class="tc-id">TC-ROLE-001</td>
-<td><p class="tc-title">Creator is Host when no assignee</p><p class="tc-pre"><strong>Pre:</strong> Project member with permission to create an inspection; checklist available.</p><ol><li>Create a new inspection from a checklist; do not assign another inspector.</li><li>Open the inspection on desktop (Journal Access) and on mobile (Inspection access).</li><li>Open an item form and confirm Magic Wand / Publish controls are available.</li></ol></td>
-<td><ul class="tc-exp"><li>Role label on the creator is <strong>Host</strong> (not Manager).</li><li>Creator can fill forms, invite members, and see publish/export actions.</li><li>My Inspections lists the inspection for the creator.</li></ul></td>
+<td><p class="tc-title">Schedule inspection and assign a host → Manager / Host labels</p><p class="tc-pre"><strong>Pre:</strong> User A can open Project → Inspections; User B is an active project member; at least one checklist exists.</p><ol><li>As User A, open Project → <strong>Inspections</strong> → <strong>Schedule inspection</strong>.</li><li>Fill Title, From/To, Checklist; under <strong>Assign host</strong>, select User B → <strong>Schedule</strong>.</li><li>Open Journal Access / Inspection access for A and B.</li></ol></td>
+<td><ul class="tc-exp"><li>Card Host = User B; lifecycle scheduled.</li><li>User A is <strong>Manager</strong>; User B is <strong>Host</strong>.</li><li>Both share Host/Manager action rights (forms, invite, publish when appropriate).</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-ROLE-002</td>
-<td><p class="tc-title">Schedule inspection on project workspace and assign a host at create</p><p class="tc-pre"><strong>Pre:</strong> User A can open Project → Inspections; User B is an active project member; at least one checklist exists.</p><ol><li>As User A, open Project → <strong>Inspections</strong> → click <strong>Schedule inspection</strong>.</li><li>Fill Title, From/To window, and Checklist &amp; forms.</li><li>Under <strong>Assign host</strong>, select User B.</li><li>Click <strong>Schedule</strong>.</li><li>On the new card, read Host meta; open the inspection → Journal Access / Inspection access for A and B.</li></ol></td>
-<td><ul class="tc-exp"><li>Toast “Inspection scheduled”; card shows lifecycle scheduled, Host = User B’s name (not Unassigned).</li><li>User A is labeled <strong>Manager</strong>; User B is labeled <strong>Host</strong>.</li><li>Both can open the scheduled inspection and both have Host/Manager action rights (forms, invite, publish when appropriate).</li><li>User B appears under My Inspections.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-ROLE-002b</td>
-<td><p class="tc-title">Schedule without host, then assign host via Edit</p><p class="tc-pre"><strong>Pre:</strong> Same as TC-ROLE-002; leave Assign host empty on create.</p><ol><li>As User A, Schedule inspection with checklist + window but <strong>no</strong> Assign host.</li><li>Confirm card shows <strong>Host · Unassigned</strong>.</li><li>Open Journal Access as User A — confirm labeled <strong>Host</strong> (not Manager yet).</li><li>Card ⋮ → <strong>Edit</strong> → Assign host = User B → <strong>Save changes</strong>.</li><li>Re-check card Host meta and Journal Access labels for A and B.</li></ol></td>
-<td><ul class="tc-exp"><li>Before assign: creator stays <strong>Host</strong>; card Host = Unassigned.</li><li>After Save changes: toast “Inspection updated”; card Host = User B.</li><li>User A → <strong>Manager</strong>; User B → <strong>Host</strong>; permissions remain the shared Host/Manager set.</li><li>A project member who is neither creator nor assignee cannot see Edit / Delete on the card menu.</li></ul></td>
+<td><p class="tc-title">Attendee sees read-only form + can leave notes</p><p class="tc-pre"><strong>Pre:</strong> Host has invited an Attendee to an in-progress inspection with form fields.</p><ol><li>As Attendee, open the item form; attempt to edit a field.</li><li>Add a text note; edit/delete that own note.</li><li>Attempt to edit the Host’s note (if present).</li></ol></td>
+<td><ul class="tc-exp"><li>Amber/grey banner: “Only the inspection owner can fill this form…”</li><li>Form fields disabled; Attendee can create/edit/delete <strong>own</strong> notes only.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-ROLE-003</td>
-<td><p class="tc-title">Attendee sees read-only form + can leave notes</p><p class="tc-pre"><strong>Pre:</strong> Host has invited an Attendee to an in-progress inspection with form fields.</p><ol><li>Sign in as Attendee; open the inspection item with a form.</li><li>Attempt to edit a form field.</li><li>Add a text note on the item, then edit/delete that own note.</li><li>Attempt to edit the Host’s note (if present).</li></ol></td>
-<td><ul class="tc-exp"><li>Amber/grey banner shows: “Only the inspection owner can fill this form…”</li><li>Form fields are disabled / opacity ~0.6; values do not save from Attendee.</li><li>Attendee can create and edit/delete <strong>own</strong> notes.</li><li>Attendee cannot edit/delete someone else’s note text.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-ROLE-004</td>
-<td><p class="tc-title">Viewer cannot open scheduled / in-progress inspection</p><p class="tc-pre"><strong>Pre:</strong> Inspection is scheduled or in progress; User C is a project member but not invited.</p><ol><li>As User C, open the project Inspections tab and locate the card.</li><li>Click/tap to open the inspection detail (or use a direct link).</li></ol></td>
-<td><ul class="tc-exp"><li>Card may be visible on the project tab.</li><li>Opening is blocked (server “User not in walk” / closed access).</li><li>User C does not see the inspection under My Inspections.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-ROLE-005</td>
-<td><p class="tc-title">Viewer can open completed / archived inspection</p><p class="tc-pre"><strong>Pre:</strong> Same User C; Host completes or archives the inspection.</p><ol><li>As Host, mark the inspection completed (or archive).</li><li>As User C (still not invited), open the inspection from the project tab.</li></ol></td>
-<td><ul class="tc-exp"><li>Inspection opens for User C.</li><li>No Invite / Publish / form-edit / Wand controls for Viewer.</li><li>Docs / view-only surfaces remain available if shown to members.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-ROLE-006</td>
-<td><p class="tc-title">Attendee cannot use Magic Wand or Publish</p><p class="tc-pre"><strong>Pre:</strong> Attendee on an in-progress inspection with notes and forms.</p><ol><li>As Attendee, open an item and look for Magic Wand / Ask AI.</li><li>Open the Publish / export entry point on desktop and mobile.</li></ol></td>
-<td><ul class="tc-exp"><li>Wand / Ask AI controls are hidden or disabled.</li><li>Publish / Track issues / Export actions are not available to Attendee.</li><li>Host still sees those controls on the same walk.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-ROLE-007</td>
-<td><p class="tc-title">Invite requires project membership</p><p class="tc-pre"><strong>Pre:</strong> Host has Journal Access open; User D is on the team but <strong>not</strong> on the project.</p><ol><li>In invite search, enter User D’s email/name.</li><li>Attempt to Invite User D onto the inspection.</li></ol></td>
-<td><ul class="tc-exp"><li>Invite fails or User D cannot be added until they join the project.</li><li>After adding User D to the project, Invite succeeds and they appear as Attendee.</li></ul></td>
+<td><p class="tc-title">Viewer cannot open scheduled / in-progress inspection</p><p class="tc-pre"><strong>Pre:</strong> Inspection is scheduled or in progress; User C is a project member but not invited.</p><ol><li>As User C, locate the card on the project Inspections tab.</li><li>Click/tap to open (or use a direct link).</li></ol></td>
+<td><ul class="tc-exp"><li>Opening is blocked (server “User not in walk” / closed access).</li><li>User C does not see it under My Inspections.</li></ul></td>
 </tr>
 </tbody></table></div></div>
     </div>

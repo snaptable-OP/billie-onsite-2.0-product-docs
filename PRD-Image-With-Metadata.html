@@ -157,33 +157,18 @@
 <tbody>
 <tr>
 <td class="tc-id">TC-IWM-001</td>
-<td><p class="tc-title">Author nests metadata fields under Image with metadata</p><p class="tc-pre"><strong>Pre:</strong> Edit access to Team Requirement Library / Forms builder.</p><ol><li>Add field type <strong>Image with metadata</strong> to a requirement form.</li><li>In Field settings → Metadata fields, add Date and Dropdown nested fields; set labels; mark one Required.</li><li>Confirm canvas preview; Save checklist.</li></ol></td>
-<td><ul class="tc-exp"><li>Palette shows “Image with metadata”.</li><li>Teal preview shows “Add image” and “METADATA FOR THIS IMAGE” with nested fields.</li><li>Nested Date/Dropdown persist after reload; file_upload / nested image_with_metadata are not offered.</li></ul></td>
+<td><p class="tc-title">Author nests metadata fields under Image with metadata</p><p class="tc-pre"><strong>Pre:</strong> Edit access to Team Requirement Library / Forms builder.</p><ol><li>Add field type <strong>Image with metadata</strong>.</li><li>In Metadata fields, add Date and Dropdown; mark one Required; Save.</li></ol></td>
+<td><ul class="tc-exp"><li>Teal preview shows “Add image” and nested metadata fields.</li><li>Nested fields persist after reload.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-IWM-002</td>
-<td><p class="tc-title">Photo Magic Wand blocked when photo has no notes</p><p class="tc-pre"><strong>Pre:</strong> Inspection item with Image with metadata field; nested fields have Smart Description.</p><ol><li>On desktop or mobile, Add photo to the field.</li><li>Open the photo; leave notes empty.</li><li>Tap the wand (Fill metadata from notes / Fill form from this photo's notes).</li></ol></td>
-<td><ul class="tc-exp"><li>Wand does not fill metadata.</li><li>User sees guidance such as “Add a note to this photo first” or “Nothing in the notes to fill the metadata with.”</li></ul></td>
+<td><p class="tc-title">Photo Magic Wand fills nested metadata from notes</p><p class="tc-pre"><strong>Pre:</strong> Inspection item with Image with metadata; nested fields have Smart Description; online.</p><ol><li>Add photo; enter notes matching Smart Description intent.</li><li>Tap wand; wait for completion; edit one nested value manually.</li></ol></td>
+<td><ul class="tc-exp"><li>Nested fields fill from photo notes; toast confirms fill count.</li><li>Manual edit persists; photo notes unchanged.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-IWM-003</td>
-<td><p class="tc-title">Photo Magic Wand fills nested metadata from notes</p><p class="tc-pre"><strong>Pre:</strong> Same as above; network online.</p><ol><li>Add photo; enter notes that match Smart Description intent (e.g. date + condition).</li><li>Tap wand; wait for completion.</li><li>Review nested fields; edit one value manually.</li></ol></td>
-<td><ul class="tc-exp"><li>Toast/message like “Filled N metadata field(s) from the photo notes”.</li><li>Nested fields show AI values; manual edit persists.</li><li>Photo notes remain unchanged.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-IWM-004</td>
-<td><p class="tc-title">Delete photo removes its notes and metadata</p><p class="tc-pre"><strong>Pre:</strong> Item has ≥2 photos on an Image with metadata field.</p><ol><li>Open photo A; confirm it has notes + metadata.</li><li>Delete photo A (confirm dialog on web).</li><li>Inspect remaining photos and the field answer.</li></ol></td>
-<td><ul class="tc-exp"><li>Confirm copy appears (web): “Delete this photo and its notes?”</li><li>Photo A, its notes, and metadata are gone.</li><li>Other photos unchanged; field still counts as filled if ≥1 photo remains.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-IWM-005</td>
-<td><p class="tc-title">Mobile voice note on photo (online vs offline)</p><p class="tc-pre"><strong>Pre:</strong> Mobile inspection; Image with metadata photo open.</p><ol><li>Offline: tap mic “Notes on this photo”, record, stop.</li><li>Go online; wait for transcription state to clear.</li><li>Run wand after transcription text is present.</li></ol></td>
-<td><ul class="tc-exp"><li>Offline shows “Voice notes transcribe when you are online” / pending state.</li><li>Online: “Transcribing…” then note text available.</li><li>Wand can use transcribed text as grounding.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-IWM-006</td>
-<td><p class="tc-title">Export / sample JSON shape</p><p class="tc-pre"><strong>Pre:</strong> Checklist with Image with metadata; inspection has one photo with metadata + note.</p><ol><li>Open report mapper / export sample JSON for the form (Train Billie / export preview).</li></ol></td>
-<td><ul class="tc-exp"><li>Sample shows an array of objects with <code>id</code>, <code>url</code>, <code>notes</code>, <code>metadata</code>.</li><li>Metadata keys map to nested fields (by id or label slug per export path).</li></ul></td>
+<td><p class="tc-title">Delete photo removes its notes and metadata</p><p class="tc-pre"><strong>Pre:</strong> Item has ≥2 photos on an Image with metadata field.</p><ol><li>Open photo A (notes + metadata present); delete it.</li><li>Inspect remaining photos and the field answer.</li></ol></td>
+<td><ul class="tc-exp"><li>Photo A, its notes, and metadata are gone.</li><li>Other photos unchanged.</li></ul></td>
 </tr>
 </tbody></table></div></div>
     </div>

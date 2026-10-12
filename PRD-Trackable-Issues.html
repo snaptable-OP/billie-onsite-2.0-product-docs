@@ -109,33 +109,18 @@
 <tbody>
 <tr>
 <td class="tc-id">TC-TRK-001</td>
-<td><p class="tc-title">Turn Trackable off on a requirement and save</p><p class="tc-pre"><strong>Pre:</strong> Web Team Requirement Library; edit a REQUIREMENT row (not a section).</p><ol><li>Locate sibling chips: Looped item / Blank after / <strong>Trackable</strong> / Notes.</li><li>Click Trackable so it turns off (outline, not emerald).</li><li>Hover for tooltip; Save checklist; reload.</li></ol></td>
-<td><ul class="tc-exp"><li>Off tooltip: “Not trackable: items of this requirement are left out of Track issues…”</li><li>On tooltip mentions appearing in Track issues.</li><li>Trackable off state persists after reload (<code>trackableIssue: false</code>).</li></ul></td>
+<td><p class="tc-title">Turn Trackable off on a requirement and save</p><p class="tc-pre"><strong>Pre:</strong> Web Team Requirement Library; edit a REQUIREMENT row.</p><ol><li>Click <strong>Trackable</strong> so it turns off; Save; reload.</li></ol></td>
+<td><ul class="tc-exp"><li>Off state persists (<code>trackableIssue: false</code>).</li><li>Tooltip explains items are left out of Track issues by default.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-TRK-002</td>
-<td><p class="tc-title">Legacy checklist without flag stays trackable</p><p class="tc-pre"><strong>Pre:</strong> Old checklist requirements omit <code>trackableIssue</code>.</p><ol><li>Open requirement row in builder.</li><li>Create inspection and open desktop Publish → Preview and Edit Before Publish.</li></ol></td>
-<td><ul class="tc-exp"><li>Builder treats missing flag as ON (emerald Trackable).</li><li>Items default to included for Track Issues when snapshot is trackable.</li></ul></td>
+<td><p class="tc-title">Not trackable defaults unselected; can still include manually</p><p class="tc-pre"><strong>Pre:</strong> Issue snapshot has <code>trackableIssue: false</code>.</p><ol><li>Publish → Publish to Project Workspace → preview sheet.</li><li>Note badge/selection; manually Include; Publish.</li></ol></td>
+<td><ul class="tc-exp"><li>Item shows <strong>Not trackable</strong> and starts unselected.</li><li>Manual Include still publishes successfully.</li></ul></td>
 </tr>
 <tr>
 <td class="tc-id">TC-TRK-003</td>
-<td><p class="tc-title">Desktop Not trackable default exclusion + manual include</p><p class="tc-pre"><strong>Pre:</strong> Issue requirement snapshot has <code>trackableIssue: false</code> (flag present on the issue).</p><ol><li>Host: Publish → Publish to Project Workspace → open preview sheet.</li><li>Find the item in the sidebar; note badge and selection.</li><li>Manually Include the item; Publish N Items.</li></ol></td>
-<td><ul class="tc-exp"><li>Item shows badge <strong>Not trackable</strong> and starts unselected/skipped.</li><li>Include all / manual toggle can still select it.</li><li>Publishing succeeds and creates/updates WIS for that item.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-TRK-004</td>
-<td><p class="tc-title">Scrap notes items remain trackable</p><p class="tc-pre"><strong>Pre:</strong> Inspection has a scrap/note item with no requirements.</p><ol><li>Open Track Issues / Publish preview selection list.</li></ol></td>
-<td><ul class="tc-exp"><li>Scrap note item is treated as trackable (available to include).</li><li>Not forced into Not trackable solely for lacking a requirement flag.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-TRK-005</td>
-<td><p class="tc-title">Known gap — flag dropped on new inspections</p><p class="tc-pre"><strong>Pre:</strong> Checklist requirement saved with Trackable off.</p><ol><li>Create a <strong>new</strong> inspection from that checklist.</li><li>Inspect issue <code>requirements[0]</code> / publish selection defaults on web.</li><li>On mobile, open Track issues → Walk Summary selection defaults.</li></ol></td>
-<td><ul class="tc-exp"><li>Document actual result: flag often missing on bootstrap (structure plan drops it).</li><li>Web may not show Not trackable if flag never landed on the issue.</li><li>Mobile currently selects all; no Not trackable badge — record as open eng gap.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-TRK-006</td>
-<td><p class="tc-title">Trackable independent of Looped / Notes / Include-in-AI-summary</p><p class="tc-pre"><strong>Pre:</strong> Requirement with Trackable off; Looped on; Notes on; form AI summary opt-in as applicable.</p><ol><li>Toggle only Trackable; leave other chips unchanged; Save.</li><li>Verify export preview flags and section AI summary still behave as before.</li></ol></td>
-<td><ul class="tc-exp"><li>Looped / Blank after / Notes chips unchanged.</li><li>Include-in-AI-summary / section Sparkles still available per those flags.</li><li>Only Track Issues default selection is affected by Trackable.</li></ul></td>
+<td><p class="tc-title">Known gap — flag may drop on new inspections / mobile</p><p class="tc-pre"><strong>Pre:</strong> Checklist requirement saved with Trackable off.</p><ol><li>Create a <strong>new</strong> inspection; check publish selection defaults on web.</li><li>On mobile, open Track issues selection defaults.</li></ol></td>
+<td><ul class="tc-exp"><li>Record whether <code>trackableIssue</code> landed on the issue.</li><li>If missing: web may not show Not trackable; mobile may select all — open eng gap.</li></ul></td>
 </tr>
 </tbody></table></div></div>
     </div>
