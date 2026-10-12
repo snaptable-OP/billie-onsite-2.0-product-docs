@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Batch assign WIS PRD — Billie Onsite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="feature-docs.css">
+<link rel="stylesheet" href="app-ui.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+        <div class="brand">
+      <a href="index.html" class="brand__home" aria-label="All product docs home" title="All docs">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </span>
+        <span>
+          <div class="brand__name">Billie Onsite 2.0</div>
+          <div class="brand__sub">Product Docs</div>
+        </span>
+      </a>
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+    <div><p class="rail-label">Document library</p><ul class="doc-list"><li class="doc-item"><a href="Inspection-Usage-Phase-PRD.html"><span class="doc-item__idx">01</span><span>Usage Phase</span></a></li><li class="doc-item"><a href="Magic-Wand-AI-Logic.html"><span class="doc-item__idx">02</span><span>Magic Wand & AI logic</span></a></li><li class="doc-item"><a href="Checklist-Forms-Report-Templates-PRD.html"><span class="doc-item__idx">03</span><span>Checklist, Forms & Reports</span></a></li><li class="doc-item"><a href="PRD-Roles-Permissions.html"><span class="doc-item__idx">04</span><span>Roles & permissions</span></a></li><li class="doc-item"><a href="PRD-Checklist-Structure-Sync.html"><span class="doc-item__idx">05</span><span>Checklist structure sync</span></a></li><li class="doc-item"><a href="PRD-Image-With-Metadata.html"><span class="doc-item__idx">06</span><span>Image with metadata</span></a></li><li class="doc-item is-active"><a href="PRD-Batch-Assign-WIS.html"><span class="doc-item__idx">07</span><span>Batch assign WIS</span></a></li><li class="doc-item"><a href="PRD-Duplicate-Carry-Over.html"><span class="doc-item__idx">08</span><span>Duplicate carry-over</span></a></li><li class="doc-item"><a href="PRD-Track-Issues-AI-Payload.html"><span class="doc-item__idx">09</span><span>Track Issues AI payload</span></a></li><li class="doc-item"><a href="PRD-Custom-Field-Filters.html"><span class="doc-item__idx">10</span><span>Custom field filters</span></a></li><li class="doc-item"><a href="PRD-Trackable-Issues.html"><span class="doc-item__idx">11</span><span>Trackable issues</span></a></li></ul></div>
+    <div><p class="rail-label">On this page</p><ul class="outline" id="outline"></ul></div>
+  </aside>
+  <div class="main">
+    <div class="topbar"><div class="topbar__inner">
+      <h1 class="doc-title">Batch assign WIS</h1>
+      <div class="doc-meta">
+        <span class="meta-chip">PRD <b>07</b></span>
+        <span class="meta-chip">Status: <b>Shipped</b></span>
+        <span class="meta-chip">Surfaces: <b>Desktop project issues · Mobile issues</b></span>
+        <span class="meta-chip"><a href="index.html">All docs</a></span>
+      </div>
+    </div></div>
+    <div class="content">
+      <p class="lead">Multi-select published WIS issues and assign project members in one <code>mode: ADD</code> request. Separate from walk-level Host assign.</p>
+      <div class="sec" id="s-1"><div class="sec__head"><span class="sec__num">1</span><h2>Design intent</h2></div><ul>
+<li><strong>Clear the backlog fast</strong> without opening each WIS.</li>
+<li><strong>ADD by default</strong> keeps existing assignees.</li>
+<li><strong>One notification per person</strong> for the batch.</li>
+<li>Gated by <code>PROJECT_ADD_EDIT_ASSIGNEE_TO_WIS</code>.</li>
+</ul></div><div class="sec" id="s-2"><div class="sec__head"><span class="sec__num">2</span><h2>Frontend UI</h2></div>
+<div class="app-mocks">
+  <div>
+    <div class="desk">
+      <div class="desk__chrome"><span class="desk__dots"><i class="r"></i><i class="y"></i><i class="g"></i></span> billie-web · Project issues · Batch Assign mode</div>
+      <div class="desk__body">
+        <div style="padding:10px 14px;border-bottom:1px solid #e5e7eb;display:flex;gap:8px;background:#fff">
+          <span class="bw-btn outline">⧉ Filter</span>
+          <span class="bw-btn outline">👤＋ Batch Assign</span>
+        </div>
+        <div class="bw-batch">
+          <div class="main">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+              <h2 style="font-size:20px">Select items to batch assign</h2>
+              <span style="display:flex;align-items:center;gap:6px;font-size:13px"><span class="bw-check">✓</span> Select All</span>
+            </div>
+            <div class="bw-card-sel"><span class="bw-check">✓</span><div><strong>Missing fire extinguisher tag</strong><div style="font-size:12px;color:#6b7280">Level 2 · Corridor</div></div></div>
+            <div class="bw-card-sel"><span class="bw-check">✓</span><div><strong>Damaged gasket on cold room</strong><div style="font-size:12px;color:#6b7280">Kitchen</div></div></div>
+            <div class="bw-card"><span class="bw-check off">✓</span><div style="display:inline"><strong>Signage faded</strong></div></div>
+          </div>
+          <div class="panel">
+            <h2>2 Items Selected</h2>
+            <p class="sub">Select project members to assign these items to</p>
+            <div style="font-size:13px;font-weight:500;color:#374151;margin-bottom:6px">Select members</div>
+            <div style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
+              <div style="padding:8px 10px;border-bottom:1px solid #e5e7eb;color:#9ca3af;font-size:13px">Search members...</div>
+              <div class="bw-member" style="padding:8px 10px"><span class="bw-check">✓</span><span class="bw-avatar" style="width:24px;height:24px;font-size:10px">AK</span> Alex Kim</div>
+              <div class="bw-member" style="padding:8px 10px"><span class="bw-check off">✓</span><span class="bw-avatar" style="width:24px;height:24px;font-size:10px;background:#64748b">PR</span> Priya Rao</div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:16px">
+              <span class="bw-btn outline" style="flex:1;justify-content:center">Cancel</span>
+              <span class="bw-btn primary" style="flex:1;justify-content:center">Confirm Assign</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="ui-caption"><strong>Desktop:</strong> page multi-select + right panel (~1/3), not a modal. Primary CTA is Billie blue <strong>Confirm Assign</strong>.</p>
+  </div>
+  <div>
+    <p class="phone__label">wb-billie-mobile · Issues + Assign FAB</p>
+    <div class="phone"><div class="phone__notch"></div><div class="phone__screen">
+      <div class="bm-header">
+        <span class="link" style="color:#6b7280">Cancel</span>
+        <h3>Select items (2)</h3>
+        <span class="link right"></span>
+      </div>
+      <div class="bm-sel-actions">
+        <span class="btn">Select all</span>
+        <span class="btn primary">👤＋ Assign</span>
+      </div>
+      <div class="bm-wis-card" style="border-color:#0030da;background:#f8faff"><div class="top"><span class="item">Item #12</span><span class="bw-check">✓</span></div><div class="subject" style="font-size:15px">Missing extinguisher tag</div></div>
+      <div class="bm-wis-card" style="border-color:#0030da;background:#f8faff"><div class="top"><span class="item">Item #18</span><span class="bw-check">✓</span></div><div class="subject" style="font-size:15px">Damaged gasket</div></div>
+      <div class="bm-sheet" style="top:42%">
+        <div class="bm-header" style="border:0;padding-top:14px">
+          <span class="link" style="color:#6b7280">Cancel</span>
+          <h3 style="display:flex;align-items:center;justify-content:center;gap:6px">👤 Assignee</h3>
+          <span class="link right bm-primary-text" style="font-weight:700">Assign</span>
+        </div>
+        <div class="bm-pill-search" style="margin-bottom:10px">Search</div>
+        <div class="bm-row"><span class="bm-check on">✓</span><div>Alex Kim</div></div>
+        <div class="bm-row"><span class="bm-check"> </span><div>Priya Rao</div></div>
+      </div>
+    </div></div>
+    <p class="ui-caption"><strong>Mobile:</strong> blue <code>UserPlus</code> FAB → selection header → <code>BatchAssignAssigneeBottomSheet</code> with Cancel | Assignee | Assign.</p>
+  </div>
+</div>
+</div><div class="sec" id="s-3"><div class="sec__head"><span class="sec__num">3</span><h2>Feature logic</h2></div><div class="pre-block">PUT /projects/wises/batch/assignee
+{ "wisIdList": [], "assigneeIds": [], "mode": "ADD" }</div>
+<p>Desktop Select All can span pages; mobile Select all is on-screen only.</p></div><div class="sec" id="s-4"><div class="sec__head"><span class="sec__num">4</span><h2>User journey</h2></div><ol class="journey">
+<li>Open project Issues with assign permission.</li>
+<li><strong>Batch Assign</strong> / Assign FAB → select cards.</li>
+<li>Pick members → <strong>Confirm Assign</strong> / <strong>Assign</strong>.</li>
+<li>List refreshes; assignees updated.</li>
+</ol></div><div class="sec" id="s-5"><div class="sec__head"><span class="sec__num">5</span><h2>Test cases</h2></div>
+<div class="tbl-wrap"><table class="tc-table">
+<thead><tr><th>ID</th><th>Steps</th><th>Expected results</th></tr></thead>
+<tbody>
+<tr>
+<td class="tc-id">TC-BA-001</td>
+<td><p class="tc-title">Batch Assign hidden without permission</p><p class="tc-pre"><strong>Pre:</strong> User lacks <code>PROJECT_ADD_EDIT_ASSIGNEE_TO_WIS</code> on the project.</p><ol><li>Open project Issues on desktop.</li><li>Open Issues tabs on mobile.</li></ol></td>
+<td><ul class="tc-exp"><li>Desktop: no <strong>Batch Assign</strong> toolbar button.</li><li>Mobile: no Assign (<code>UserPlus</code>) FAB.</li><li>Single-item assignee UI (if any) still follows its own permission rules.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-BA-002</td>
+<td><p class="tc-title">Desktop batch assign ADD keeps existing assignees</p><p class="tc-pre"><strong>Pre:</strong> User has assign permission; ≥2 WIS; Item A already assigned to Alex.</p><ol><li>Click <strong>Batch Assign</strong>; header shows “Select items to batch assign”.</li><li>Select Item A and Item B; optionally Select All.</li><li>In right panel, check Priya; click <strong>Confirm Assign</strong>.</li></ol></td>
+<td><ul class="tc-exp"><li>Toast “Assignment Complete” / success copy with item count.</li><li>Item A still has Alex <strong>and</strong> Priya.</li><li>Item B has Priya.</li><li>Multi-select mode exits.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-BA-003</td>
+<td><p class="tc-title">Confirm with no members selected</p><p class="tc-pre"><strong>Pre:</strong> Batch mode with ≥1 WIS selected; no members checked.</p><ol><li>Click <strong>Confirm Assign</strong> (desktop) or <strong>Assign</strong> in the sheet (mobile).</li></ol></td>
+<td><ul class="tc-exp"><li>Desktop: “No Member Selected” / “Please select at least one project member…”.</li><li>Mobile: “Select at least one assignee”.</li><li>No assignee API change applied.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-BA-004</td>
+<td><p class="tc-title">Desktop Select All across filtered pages</p><p class="tc-pre"><strong>Pre:</strong> Filtered issues list spans >1 page; user in Batch Assign mode.</p><ol><li>Apply a filter that returns many WIS.</li><li>Click <strong>Select All</strong> (cross-page).</li><li>Assign one member → Confirm Assign.</li></ol></td>
+<td><ul class="tc-exp"><li>Selection count reflects the full filtered set, not only the current page.</li><li>All matching WIS receive the new assignee (ADD).</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-BA-005</td>
+<td><p class="tc-title">Mobile Select all is on-screen only</p><p class="tc-pre"><strong>Pre:</strong> Mobile issues list loaded with a subset of total WIS; assign permission on.</p><ol><li>Tap Assign FAB; enter selection mode.</li><li>Tap <strong>Select all</strong>; note count.</li><li>Scroll if more load; observe whether newly loaded cards are selected.</li><li>Assign a member.</li></ol></td>
+<td><ul class="tc-exp"><li>Header shows “Select items (N)” for loaded/on-screen selection.</li><li>Select all does <strong>not</strong> fetch every filtered page like desktop.</li><li>Only selected cards are assigned; toast “Assigned N items”.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-BA-006</td>
+<td><p class="tc-title">One notification per assignee for the batch</p><p class="tc-pre"><strong>Pre:</strong> Assign 5 WIS to one member in a single batch confirm.</p><ol><li>Select 5 items; assign User X once; confirm.</li><li>Check User X’s notifications.</li></ol></td>
+<td><ul class="tc-exp"><li>User X receives a single batch-style notification (not 5 separate issue notifications).</li><li>All 5 WIS show User X as assignee.</li></ul></td>
+</tr>
+</tbody></table></div></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  const root = document.documentElement;
+  const key = "billie-docs-theme";
+  const saved = localStorage.getItem(key);
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  const btn = document.getElementById("themeBtn");
+  if (btn) btn.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem(key, next);
+  });
+  const outline = document.getElementById("outline");
+  if (outline) {
+    document.querySelectorAll(".sec[id]").forEach((sec) => {
+      const h = sec.querySelector("h2");
+      if (!h) return;
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "#" + sec.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      outline.appendChild(li);
+    });
+  }
+})();
+</script>
+</body>
+</html>

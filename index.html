@@ -1,21 +1,63 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="refresh" content="0; url=Inspection-Usage-Phase-PRD.html" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Billie Onsite Product Docs</title>
-        <link rel="canonical" href="Inspection-Usage-Phase-PRD.html" />
-        <script>
-            location.replace("Inspection-Usage-Phase-PRD.html")
-        </script>
-    </head>
-    <body>
-        <p>Billie Onsite 2.0 Product Docs</p>
-        <ul>
-            <li><a href="Inspection-Usage-Phase-PRD.html">Usage Phase PRD</a></li>
-            <li><a href="Magic-Wand-AI-Logic.html">Magic Wand &amp; AI logic</a></li>
-            <li><a href="Checklist-Forms-Report-Templates-PRD.html">Checklist, Forms &amp; Report Templates PRD</a></li>
-        </ul>
-    </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Billie Onsite 2.0 Product Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="feature-docs.css">
+</head>
+<body>
+<div class="app" style="grid-template-columns:1fr">
+  <div class="main">
+    <div class="topbar"><div class="topbar__inner">
+      <h1 class="doc-title">Billie Onsite 2.0 Product Docs</h1>
+      <div class="doc-meta">
+        <span class="meta-chip">Product requirements</span>
+        <span class="meta-chip">Audience: <b>Product · Engineering</b></span>
+      </div>
+    </div></div>
+    <div class="content">
+      <p class="lead">All documents below are PRDs — core lifecycle docs and focused topic PRDs for recent product behavior.</p>
+      <div class="sec" id="all">
+        <div class="sec__head"><span class="sec__num">PRDs</span><h2>Document library</h2></div>
+        <div class="hub-grid">
+<a class="hub-card" href="Inspection-Usage-Phase-PRD.html"><div class="hub-card__n">PRD 01</div><h2 class="hub-card__title">Usage Phase</h2><p class="hub-card__desc">Mobile inspection lifecycle, forms, notes, publish, collaboration</p></a>
+<a class="hub-card" href="Magic-Wand-AI-Logic.html"><div class="hub-card__n">PRD 02</div><h2 class="hub-card__title">Magic Wand &amp; AI logic</h2><p class="hub-card__desc">API contracts for wand, Smart Description, Knowledge Agent, Ask AI</p></a>
+<a class="hub-card" href="Checklist-Forms-Report-Templates-PRD.html"><div class="hub-card__n">PRD 03</div><h2 class="hub-card__title">Checklist, Forms &amp; Reports</h2><p class="hub-card__desc">Web authoring, specials, export mapping, inspection reflection</p></a>
+<a class="hub-card" href="PRD-Roles-Permissions.html"><div class="hub-card__n">PRD 04</div><h2 class="hub-card__title">Roles & permissions</h2><p class="hub-card__desc">Desktop journal · Mobile inspection · Shipped</p></a><a class="hub-card" href="PRD-Checklist-Structure-Sync.html"><div class="hub-card__n">PRD 05</div><h2 class="hub-card__title">Checklist structure sync</h2><p class="hub-card__desc">Desktop checklist library → open inspections · Shipped · server sweep</p></a><a class="hub-card" href="PRD-Image-With-Metadata.html"><div class="hub-card__n">PRD 06</div><h2 class="hub-card__title">Image with metadata</h2><p class="hub-card__desc">Desktop form builder · Desktop journal · Mobile inspection · Shipped</p></a><a class="hub-card" href="PRD-Batch-Assign-WIS.html"><div class="hub-card__n">PRD 07</div><h2 class="hub-card__title">Batch assign WIS</h2><p class="hub-card__desc">Desktop project issues · Mobile issues · Shipped</p></a><a class="hub-card" href="PRD-Duplicate-Carry-Over.html"><div class="hub-card__n">PRD 08</div><h2 class="hub-card__title">Duplicate · carry over values</h2><p class="hub-card__desc">Desktop form builder · Desktop journal · Mobile inspection · Shipped</p></a><a class="hub-card" href="PRD-Track-Issues-AI-Payload.html"><div class="hub-card__n">PRD 09</div><h2 class="hub-card__title">Track Issues · AI payload</h2><p class="hub-card__desc">Mobile Track issues · Desktop Publish to Project · ms-walk AI · Shipped</p></a><a class="hub-card" href="PRD-Custom-Field-Filters.html"><div class="hub-card__n">PRD 10</div><h2 class="hub-card__title">Custom fields as filters</h2><p class="hub-card__desc">Desktop All Issues · Mobile Issues filter · Shipped · UI gaps noted</p></a><a class="hub-card" href="PRD-Trackable-Issues.html"><div class="hub-card__n">PRD 11</div><h2 class="hub-card__title">Trackable issues</h2><p class="hub-card__desc">Desktop checklist library · Desktop Track Issues · Mobile (gap) · Partial</p></a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  const root = document.documentElement;
+  const key = "billie-docs-theme";
+  const saved = localStorage.getItem(key);
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  const btn = document.getElementById("themeBtn");
+  if (btn) btn.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem(key, next);
+  });
+  const outline = document.getElementById("outline");
+  if (outline) {
+    document.querySelectorAll(".sec[id]").forEach((sec) => {
+      const h = sec.querySelector("h2");
+      if (!h) return;
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "#" + sec.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      outline.appendChild(li);
+    });
+  }
+})();
+</script>
+</body>
 </html>

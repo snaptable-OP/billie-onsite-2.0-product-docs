@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roles & permissions PRD — Billie Onsite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="feature-docs.css">
+<link rel="stylesheet" href="app-ui.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+        <div class="brand">
+      <a href="index.html" class="brand__home" aria-label="All product docs home" title="All docs">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </span>
+        <span>
+          <div class="brand__name">Billie Onsite 2.0</div>
+          <div class="brand__sub">Product Docs</div>
+        </span>
+      </a>
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+    <div><p class="rail-label">Document library</p><ul class="doc-list"><li class="doc-item"><a href="Inspection-Usage-Phase-PRD.html"><span class="doc-item__idx">01</span><span>Usage Phase</span></a></li><li class="doc-item"><a href="Magic-Wand-AI-Logic.html"><span class="doc-item__idx">02</span><span>Magic Wand & AI logic</span></a></li><li class="doc-item"><a href="Checklist-Forms-Report-Templates-PRD.html"><span class="doc-item__idx">03</span><span>Checklist, Forms & Reports</span></a></li><li class="doc-item is-active"><a href="PRD-Roles-Permissions.html"><span class="doc-item__idx">04</span><span>Roles & permissions</span></a></li><li class="doc-item"><a href="PRD-Checklist-Structure-Sync.html"><span class="doc-item__idx">05</span><span>Checklist structure sync</span></a></li><li class="doc-item"><a href="PRD-Image-With-Metadata.html"><span class="doc-item__idx">06</span><span>Image with metadata</span></a></li><li class="doc-item"><a href="PRD-Batch-Assign-WIS.html"><span class="doc-item__idx">07</span><span>Batch assign WIS</span></a></li><li class="doc-item"><a href="PRD-Duplicate-Carry-Over.html"><span class="doc-item__idx">08</span><span>Duplicate carry-over</span></a></li><li class="doc-item"><a href="PRD-Track-Issues-AI-Payload.html"><span class="doc-item__idx">09</span><span>Track Issues AI payload</span></a></li><li class="doc-item"><a href="PRD-Custom-Field-Filters.html"><span class="doc-item__idx">10</span><span>Custom field filters</span></a></li><li class="doc-item"><a href="PRD-Trackable-Issues.html"><span class="doc-item__idx">11</span><span>Trackable issues</span></a></li></ul></div>
+    <div><p class="rail-label">On this page</p><ul class="outline" id="outline"></ul></div>
+  </aside>
+  <div class="main">
+    <div class="topbar"><div class="topbar__inner">
+      <h1 class="doc-title">Roles & permissions</h1>
+      <div class="doc-meta">
+        <span class="meta-chip">PRD <b>04</b></span>
+        <span class="meta-chip">Status: <b>Shipped</b></span>
+        <span class="meta-chip">Surfaces: <b>Desktop journal · Mobile inspection</b></span>
+        <span class="meta-chip"><a href="index.html">All docs</a></span>
+      </div>
+    </div></div>
+    <div class="content">
+      <p class="lead">Inspection roles (Manager, Host, Attendee, Viewer) decide who can open a walk and which actions desktop and mobile expose. Manager and Host share one permission set — only the label differs.</p>
+      <div class="sec" id="s-1"><div class="sec__head"><span class="sec__num">1</span><h2>Design intent</h2></div><ul>
+<li><strong>One authority for forms:</strong> only Manager/Host fill forms, run Magic Wand, publish, and manage access.</li>
+<li><strong>Collaborative notes:</strong> Attendees add notes the owner can interpret into answers.</li>
+<li><strong>Safe openness after completion:</strong> project members can open completed/archived inspections as viewers.</li>
+<li><strong>Honest labels:</strong> Manager vs Host is creator vs assigned inspector — not two privilege tiers.</li>
+</ul></div><div class="sec" id="s-2"><div class="sec__head"><span class="sec__num">2</span><h2>Frontend UI</h2></div>
+<div class="app-mocks">
+  <div>
+    <div class="desk">
+      <div class="desk__chrome"><span class="desk__dots"><i class="r"></i><i class="y"></i><i class="g"></i></span> billie-web · Journal header → Journal Access dropdown</div>
+      <div class="desk__body" style="background:#f9fafb;padding:12px">
+        <div style="display:flex;align-items:center;gap:4px;padding:8px 12px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:10px;width:fit-content">
+          <span class="bw-avatar stack" style="margin-left:0;background:#0047ff">SC</span>
+          <span class="bw-avatar stack" style="background:#6366f1">SR</span>
+          <span class="bw-avatar stack" style="background:#0ea5e9">JL</span>
+          <span style="font-size:12px;color:#6b7280;margin-left:6px">▾</span>
+        </div>
+        <div class="bw-dd">
+          <h3>Journal Access</h3>
+          <div class="bw-search">
+            <input value="Add emails or people" readonly style="color:#9ca3af">
+            <span class="bw-btn outline">Invite</span>
+          </div>
+          <div class="sec-label">Journal Members</div>
+          <div class="bw-member">
+            <span class="bw-avatar">SC</span>
+            <div><div class="name">Sam Chen</div><div class="role"><span class="bw-crown">♛</span> Manager</div></div>
+          </div>
+          <div class="bw-member">
+            <span class="bw-avatar" style="background:#6366f1">SR</span>
+            <div><div class="name">Sam Rivera</div><div class="role"><span class="bw-crown">♛</span> Host</div></div>
+          </div>
+          <div class="bw-member">
+            <span class="bw-avatar" style="background:#0ea5e9">JL</span>
+            <div><div class="name">Jordan Lee</div><div class="role">Attendee</div></div>
+            <span class="bw-btn ghost sm" style="margin-left:auto;color:#9ca3af">👤−</span>
+          </div>
+        </div>
+        <div class="bw-form-card">
+          <div class="bw-form-head">
+            <div class="title"><span class="bw-indigo">☰</span> Inspection form</div>
+            <span class="bw-chip amber">2/5 answered</span>
+          </div>
+          <div class="bw-amber-banner">Only the inspection owner can fill this form. Leave a comment on this item — the owner will use it (or the magic wand) to fill the answers.</div>
+          <div class="bw-form-fields">
+            <div class="bw-field-row"><label>Temperature</label><div class="box"></div></div>
+            <div class="bw-field-row"><label>Pass / Fail</label><div class="box"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="ui-caption"><strong>Desktop:</strong> <code>JournalAttendees</code> dropdown (<code>w-[400px]</code>). Roles are text + crown, not pills. Form read-only = amber strip inside form card + disabled fields.</p>
+  </div>
+  <div>
+    <p class="phone__label">wb-billie-mobile</p>
+    <div class="phone"><div class="phone__notch"></div><div class="phone__screen" style="background:#f2f2f1">
+      <div style="padding-top:8px">
+        <div class="bm-form-card">
+          <h4>Cold room check</h4>
+          <div class="bm-collab">Only the inspection owner can fill this form. Leave a comment on this item — the owner will use it (or the magic wand) to fill the answers.</div>
+          <div class="bm-fields-dim">
+            <div class="bm-field-m"></div>
+            <div class="bm-field-m"></div>
+          </div>
+        </div>
+      </div>
+      <div class="bm-sheet" style="top:28%">
+        <div class="bm-access-head">
+          <span class="close">×</span>
+          <h3>Inspection access</h3>
+          <span style="width:24px"></span>
+        </div>
+        <div class="bm-pill-search">Add emails or people</div>
+        <div class="bm-people">People in inspection (3)</div>
+        <div class="bm-member-m"><span class="bw-avatar" style="width:32px;height:32px;background:#0030da">SC</span> Sam Chen <span class="role">Manager</span></div>
+        <div class="bm-member-m"><span class="bw-avatar" style="width:32px;height:32px;background:#6366f1">SR</span> Sam Rivera <span class="role">Host ▾</span></div>
+        <div class="bm-member-m"><span class="bw-avatar" style="width:32px;height:32px;background:#0ea5e9">JL</span> Jordan Lee <span class="role">Attendee</span></div>
+      </div>
+    </div></div>
+    <p class="ui-caption"><strong>Mobile:</strong> <code>WalkAccessBottomSheet</code> (80% height, grey close chip). Collaborator banner in <code>MockRequirementJournalBlock</code>; fields <code>opacity: 0.6</code>.</p>
+  </div>
+</div>
+</div><div class="sec" id="s-3"><div class="sec__head"><span class="sec__num">3</span><h2>Feature logic</h2></div><div class="tbl-wrap"><table><thead><tr><th>Role</th><th>Who</th></tr></thead><tbody>
+<tr><td class="td-key">Manager</td><td>Creator after someone else is assigned</td></tr>
+<tr><td class="td-key">Host</td><td><code>assigneeId</code>, or creator if unassigned</td></tr>
+<tr><td class="td-key">Attendee</td><td>Invited member</td></tr>
+<tr><td class="td-key">Viewer</td><td>Project member not on the walk (no UI badge)</td></tr>
+</tbody></table></div>
+<div class="tbl-wrap"><table><thead><tr><th>Action</th><th>Host/Manager</th><th>Attendee</th><th>Viewer</th></tr></thead><tbody>
+<tr><td class="td-key">Open scheduled / in progress</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td></tr>
+<tr><td class="td-key">Open completed / archived</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes*</td></tr>
+<tr><td class="td-key">Fill forms / Wand / publish / invite</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td></tr>
+<tr><td class="td-key">Own notes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td></tr>
+</tbody></table></div>
+<p>* Viewer must be a project member. Open rules are server-enforced; most mutate actions are client UI gates.</p></div><div class="sec" id="s-4"><div class="sec__head"><span class="sec__num">4</span><h2>User journey</h2></div><ol class="journey">
+<li>Host opens avatar stack → <strong>Journal Access</strong> / <strong>Inspection access</strong>.</li>
+<li>Invites teammates via <strong>Add emails or people</strong> → <strong>Invite</strong>.</li>
+<li>Attendee opens item: amber/grey owner banner; form dimmed; notes still work.</li>
+<li>Host fills forms or Magic Wand, then publishes / exports.</li>
+<li>After completion, uninvited project members can open as viewers.</li>
+</ol></div><div class="sec" id="s-5"><div class="sec__head"><span class="sec__num">5</span><h2>Test cases</h2></div>
+<div class="tbl-wrap"><table class="tc-table">
+<thead><tr><th>ID</th><th>Steps</th><th>Expected results</th></tr></thead>
+<tbody>
+<tr>
+<td class="tc-id">TC-ROLE-001</td>
+<td><p class="tc-title">Creator is Host when no assignee</p><p class="tc-pre"><strong>Pre:</strong> Project member with permission to create an inspection; checklist available.</p><ol><li>Create a new inspection from a checklist; do not assign another inspector.</li><li>Open the inspection on desktop (Journal Access) and on mobile (Inspection access).</li><li>Open an item form and confirm Magic Wand / Publish controls are available.</li></ol></td>
+<td><ul class="tc-exp"><li>Role label on the creator is <strong>Host</strong> (not Manager).</li><li>Creator can fill forms, invite members, and see publish/export actions.</li><li>My Inspections lists the inspection for the creator.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-ROLE-002</td>
+<td><p class="tc-title">Assigning an inspector promotes creator to Manager</p><p class="tc-pre"><strong>Pre:</strong> Inspection created by User A; User B is a project member.</p><ol><li>As User A, assign User B as the inspection assignee / host.</li><li>Refresh Journal Access / Inspection access for both users.</li><li>As User A and User B, open the same item form.</li></ol></td>
+<td><ul class="tc-exp"><li>User A label becomes <strong>Manager</strong>; User B becomes <strong>Host</strong>.</li><li>Both still have full form-fill, Wand, invite, publish permissions.</li><li>User B appears in My Inspections and can open the walk.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-ROLE-003</td>
+<td><p class="tc-title">Attendee sees read-only form + can leave notes</p><p class="tc-pre"><strong>Pre:</strong> Host has invited an Attendee to an in-progress inspection with form fields.</p><ol><li>Sign in as Attendee; open the inspection item with a form.</li><li>Attempt to edit a form field.</li><li>Add a text note on the item, then edit/delete that own note.</li><li>Attempt to edit the Host’s note (if present).</li></ol></td>
+<td><ul class="tc-exp"><li>Amber/grey banner shows: “Only the inspection owner can fill this form…”</li><li>Form fields are disabled / opacity ~0.6; values do not save from Attendee.</li><li>Attendee can create and edit/delete <strong>own</strong> notes.</li><li>Attendee cannot edit/delete someone else’s note text.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-ROLE-004</td>
+<td><p class="tc-title">Viewer cannot open scheduled / in-progress inspection</p><p class="tc-pre"><strong>Pre:</strong> Inspection is scheduled or in progress; User C is a project member but not invited.</p><ol><li>As User C, open the project Inspections tab and locate the card.</li><li>Click/tap to open the inspection detail (or use a direct link).</li></ol></td>
+<td><ul class="tc-exp"><li>Card may be visible on the project tab.</li><li>Opening is blocked (server “User not in walk” / closed access).</li><li>User C does not see the inspection under My Inspections.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-ROLE-005</td>
+<td><p class="tc-title">Viewer can open completed / archived inspection</p><p class="tc-pre"><strong>Pre:</strong> Same User C; Host completes or archives the inspection.</p><ol><li>As Host, mark the inspection completed (or archive).</li><li>As User C (still not invited), open the inspection from the project tab.</li></ol></td>
+<td><ul class="tc-exp"><li>Inspection opens for User C.</li><li>No Invite / Publish / form-edit / Wand controls for Viewer.</li><li>Docs / view-only surfaces remain available if shown to members.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-ROLE-006</td>
+<td><p class="tc-title">Attendee cannot use Magic Wand or Publish</p><p class="tc-pre"><strong>Pre:</strong> Attendee on an in-progress inspection with notes and forms.</p><ol><li>As Attendee, open an item and look for Magic Wand / Ask AI.</li><li>Open the Publish / export entry point on desktop and mobile.</li></ol></td>
+<td><ul class="tc-exp"><li>Wand / Ask AI controls are hidden or disabled.</li><li>Publish / Track issues / Export actions are not available to Attendee.</li><li>Host still sees those controls on the same walk.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-ROLE-007</td>
+<td><p class="tc-title">Invite requires project membership</p><p class="tc-pre"><strong>Pre:</strong> Host has Journal Access open; User D is on the team but <strong>not</strong> on the project.</p><ol><li>In invite search, enter User D’s email/name.</li><li>Attempt to Invite User D onto the inspection.</li></ol></td>
+<td><ul class="tc-exp"><li>Invite fails or User D cannot be added until they join the project.</li><li>After adding User D to the project, Invite succeeds and they appear as Attendee.</li></ul></td>
+</tr>
+</tbody></table></div></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  const root = document.documentElement;
+  const key = "billie-docs-theme";
+  const saved = localStorage.getItem(key);
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  const btn = document.getElementById("themeBtn");
+  if (btn) btn.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem(key, next);
+  });
+  const outline = document.getElementById("outline");
+  if (outline) {
+    document.querySelectorAll(".sec[id]").forEach((sec) => {
+      const h = sec.querySelector("h2");
+      if (!h) return;
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "#" + sec.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      outline.appendChild(li);
+    });
+  }
+})();
+</script>
+</body>
+</html>

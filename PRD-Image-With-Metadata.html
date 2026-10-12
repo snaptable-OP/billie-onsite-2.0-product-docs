@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Image with metadata PRD — Billie Onsite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="feature-docs.css">
+<link rel="stylesheet" href="app-ui.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+        <div class="brand">
+      <a href="index.html" class="brand__home" aria-label="All product docs home" title="All docs">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </span>
+        <span>
+          <div class="brand__name">Billie Onsite 2.0</div>
+          <div class="brand__sub">Product Docs</div>
+        </span>
+      </a>
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+    <div><p class="rail-label">Document library</p><ul class="doc-list"><li class="doc-item"><a href="Inspection-Usage-Phase-PRD.html"><span class="doc-item__idx">01</span><span>Usage Phase</span></a></li><li class="doc-item"><a href="Magic-Wand-AI-Logic.html"><span class="doc-item__idx">02</span><span>Magic Wand & AI logic</span></a></li><li class="doc-item"><a href="Checklist-Forms-Report-Templates-PRD.html"><span class="doc-item__idx">03</span><span>Checklist, Forms & Reports</span></a></li><li class="doc-item"><a href="PRD-Roles-Permissions.html"><span class="doc-item__idx">04</span><span>Roles & permissions</span></a></li><li class="doc-item"><a href="PRD-Checklist-Structure-Sync.html"><span class="doc-item__idx">05</span><span>Checklist structure sync</span></a></li><li class="doc-item is-active"><a href="PRD-Image-With-Metadata.html"><span class="doc-item__idx">06</span><span>Image with metadata</span></a></li><li class="doc-item"><a href="PRD-Batch-Assign-WIS.html"><span class="doc-item__idx">07</span><span>Batch assign WIS</span></a></li><li class="doc-item"><a href="PRD-Duplicate-Carry-Over.html"><span class="doc-item__idx">08</span><span>Duplicate carry-over</span></a></li><li class="doc-item"><a href="PRD-Track-Issues-AI-Payload.html"><span class="doc-item__idx">09</span><span>Track Issues AI payload</span></a></li><li class="doc-item"><a href="PRD-Custom-Field-Filters.html"><span class="doc-item__idx">10</span><span>Custom field filters</span></a></li><li class="doc-item"><a href="PRD-Trackable-Issues.html"><span class="doc-item__idx">11</span><span>Trackable issues</span></a></li></ul></div>
+    <div><p class="rail-label">On this page</p><ul class="outline" id="outline"></ul></div>
+  </aside>
+  <div class="main">
+    <div class="topbar"><div class="topbar__inner">
+      <h1 class="doc-title">Image with metadata</h1>
+      <div class="doc-meta">
+        <span class="meta-chip">PRD <b>06</b></span>
+        <span class="meta-chip">Status: <b>Shipped</b></span>
+        <span class="meta-chip">Surfaces: <b>Desktop form builder · Desktop journal · Mobile inspection</b></span>
+        <span class="meta-chip"><a href="index.html">All docs</a></span>
+      </div>
+    </div></div>
+    <div class="content">
+      <p class="lead">Form type <em>Image with metadata</em>: multiple photos, each with nested authored fields and per-photo notes. Photo Magic Wand fills nested metadata from notes — not EXIF/geotag.</p>
+      <div class="sec" id="s-1"><div class="sec__head"><span class="sec__num">1</span><h2>Design intent</h2></div><ul>
+<li><strong>Evidence + structure</strong> — each photo carries the same typed metadata.</li>
+<li><strong>Notes as AI fuel</strong> — text/voice notes ground photo Magic Wand.</li>
+<li><strong>Author once, capture many</strong> — nested schema defined in builder.</li>
+<li><strong>Offline-tolerant</strong> — add photos offline; voice transcribes online.</li>
+</ul></div><div class="sec" id="s-2"><div class="sec__head"><span class="sec__num">2</span><h2>Frontend UI</h2></div>
+<div class="app-mocks">
+  <div>
+    <div class="desk">
+      <div class="desk__chrome"><span class="desk__dots"><i class="r"></i><i class="y"></i><i class="g"></i></span> billie-web · Form builder (Image with metadata)</div>
+      <div class="desk__body">
+        <div class="bw-builder">
+          <aside>
+            <div style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">Field types</div>
+            <div class="bw-type-btn">Short text</div>
+            <div class="bw-type-btn active">🖼 Image with metadata</div>
+            <div class="bw-type-btn">Signature</div>
+          </aside>
+          <div class="mid">
+            <div class="bw-field-card">
+              <div style="display:flex;gap:6px;margin-bottom:8px">
+                <span class="bw-chip tiny">Image with metadata</span>
+                <span class="bw-chip tiny">Required</span>
+              </div>
+              <div style="font-weight:600;margin-bottom:8px">Evidence photos</div>
+              <div class="bw-teal-box">
+                <div class="bw-teal-dash">＋ Add image</div>
+                <div class="bw-teal-meta">
+                  <div class="cap">Metadata for this image</div>
+                  <div style="background:#fff;border:1px solid #e5e7eb;border-radius:6px;padding:8px;margin-bottom:4px;font-size:12px">Date taken <span class="bw-chip tiny">Date</span></div>
+                  <div style="background:#fff;border:1px solid #e5e7eb;border-radius:6px;padding:8px;font-size:12px">Condition <span class="bw-chip tiny">Dropdown</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside class="right">
+            <div style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">Field settings</div>
+            <div class="bw-teal-box">
+              <div style="font-size:12px;font-weight:600;color:#042f2e">Metadata fields</div>
+              <div style="font-size:11px;color:#0f766e;margin:4px 0 8px">These fields are filled for each image (same types as the form builder).</div>
+              <div style="display:flex;flex-wrap:wrap;gap:4px">
+                <span class="bw-chip tiny" style="border-color:#99f6e4;color:#0f766e">Short text</span>
+                <span class="bw-chip tiny" style="border-color:#99f6e4;color:#0f766e">Date</span>
+                <span class="bw-chip tiny" style="border-color:#99f6e4;color:#0f766e">Dropdown</span>
+                <span class="bw-chip tiny" style="border-color:#99f6e4;color:#0f766e">Signature</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+        <div class="bw-photo-card">
+          <div class="bw-thumb"><span style="position:absolute;top:6px;right:6px;color:#ef4444;font-size:12px">🗑</span></div>
+          <div style="flex:1">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="bw-notes-cap">Notes</div>
+              <span class="bw-wand" title="Fill metadata from notes">🪄</span>
+            </div>
+            <div style="background:#f9fafb;border-radius:6px;padding:8px;font-size:12px;color:#6b7280;margin:6px 0">Crack on north wall near drain…</div>
+            <span class="bw-btn outline sm">Add note</span>
+            <div class="bw-notes-cap" style="margin-top:10px">Metadata</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
+              <div style="font-size:11px;color:#6b7280">Date taken<div class="box" style="height:28px;margin-top:2px"></div></div>
+              <div style="font-size:11px;color:#6b7280">Condition<div class="box" style="height:28px;margin-top:2px"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="ui-caption"><strong>Desktop:</strong> Teal nested preview in builder (<code>ImageWithMetadataPreview</code>). Runtime <code>ImageWithMetadataAnswers</code> photo cards with indigo wand.</p>
+  </div>
+  <div>
+    <p class="phone__label">wb-billie-mobile · Photo details modal</p>
+    <div class="phone"><div class="phone__notch"></div><div class="phone__screen" style="background:#f9fafb">
+      <div class="bm-photo-head">
+        <span class="back">‹ Back</span>
+        <h3>Photo details</h3>
+        <span style="min-width:70px;text-align:right;color:#6b7280">🗑</span>
+      </div>
+      <div class="bm-photo-img"></div>
+      <div class="bm-photo-actions">
+        <span class="bm-pill">✎ Mark up photo</span>
+        <span class="bw-wand" style="width:36px;height:36px;border-color:#0030da;color:#0030da">🪄</span>
+      </div>
+      <div class="bm-card-m">
+        <div style="font-size:12px;font-weight:700;margin-bottom:6px">Date taken</div>
+        <div class="bm-field-m" style="margin:0"></div>
+        <div style="font-size:12px;font-weight:700;margin:10px 0 6px">Condition</div>
+        <div class="bm-field-m" style="margin:0"></div>
+      </div>
+      <div class="bm-card-m">
+        <div style="font-size:12px;color:#6b7280">Quick notes on this photo, auto-fill the form above later</div>
+      </div>
+      <div class="bm-mic">🎤 Notes on this photo</div>
+    </div></div>
+    <p class="ui-caption"><strong>Mobile:</strong> page-sheet modal (not grabber sheet). Hint above: “Add photos, record notes, then tap the magic wand…”</p>
+  </div>
+</div>
+</div><div class="sec" id="s-3"><div class="sec__head"><span class="sec__num">3</span><h2>Feature logic</h2></div><ul>
+<li>Type <code>image_with_metadata</code>; nested <code>metadataFields[]</code>.</li>
+<li>Nestable: short/long text, number, date, time, multiple_choice, checkboxes, dropdown, signature.</li>
+<li>Answer: <code>[{ id, url, metadata, notes[] }]</code>; filled when ≥1 photo.</li>
+<li>Wand: <code>POST /form-fields/requirement</code> grounded on photo notes.</li>
+</ul></div><div class="sec" id="s-4"><div class="sec__head"><span class="sec__num">4</span><h2>User journey</h2></div><ol class="journey">
+<li>Author adds <strong>Image with metadata</strong> and nests fields under Metadata fields.</li>
+<li>Inspector <strong>Add photo</strong> → opens <strong>Photo details</strong>.</li>
+<li>Adds notes (type/voice), optionally marks up.</li>
+<li>Taps wand → nested metadata fills; edits as needed.</li>
+</ol></div><div class="sec" id="s-5"><div class="sec__head"><span class="sec__num">5</span><h2>Test cases</h2></div>
+<div class="tbl-wrap"><table class="tc-table">
+<thead><tr><th>ID</th><th>Steps</th><th>Expected results</th></tr></thead>
+<tbody>
+<tr>
+<td class="tc-id">TC-IWM-001</td>
+<td><p class="tc-title">Author nests metadata fields under Image with metadata</p><p class="tc-pre"><strong>Pre:</strong> Edit access to Team Requirement Library / Forms builder.</p><ol><li>Add field type <strong>Image with metadata</strong> to a requirement form.</li><li>In Field settings → Metadata fields, add Date and Dropdown nested fields; set labels; mark one Required.</li><li>Confirm canvas preview; Save checklist.</li></ol></td>
+<td><ul class="tc-exp"><li>Palette shows “Image with metadata”.</li><li>Teal preview shows “Add image” and “METADATA FOR THIS IMAGE” with nested fields.</li><li>Nested Date/Dropdown persist after reload; file_upload / nested image_with_metadata are not offered.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-IWM-002</td>
+<td><p class="tc-title">Photo Magic Wand blocked when photo has no notes</p><p class="tc-pre"><strong>Pre:</strong> Inspection item with Image with metadata field; nested fields have Smart Description.</p><ol><li>On desktop or mobile, Add photo to the field.</li><li>Open the photo; leave notes empty.</li><li>Tap the wand (Fill metadata from notes / Fill form from this photo's notes).</li></ol></td>
+<td><ul class="tc-exp"><li>Wand does not fill metadata.</li><li>User sees guidance such as “Add a note to this photo first” or “Nothing in the notes to fill the metadata with.”</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-IWM-003</td>
+<td><p class="tc-title">Photo Magic Wand fills nested metadata from notes</p><p class="tc-pre"><strong>Pre:</strong> Same as above; network online.</p><ol><li>Add photo; enter notes that match Smart Description intent (e.g. date + condition).</li><li>Tap wand; wait for completion.</li><li>Review nested fields; edit one value manually.</li></ol></td>
+<td><ul class="tc-exp"><li>Toast/message like “Filled N metadata field(s) from the photo notes”.</li><li>Nested fields show AI values; manual edit persists.</li><li>Photo notes remain unchanged.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-IWM-004</td>
+<td><p class="tc-title">Delete photo removes its notes and metadata</p><p class="tc-pre"><strong>Pre:</strong> Item has ≥2 photos on an Image with metadata field.</p><ol><li>Open photo A; confirm it has notes + metadata.</li><li>Delete photo A (confirm dialog on web).</li><li>Inspect remaining photos and the field answer.</li></ol></td>
+<td><ul class="tc-exp"><li>Confirm copy appears (web): “Delete this photo and its notes?”</li><li>Photo A, its notes, and metadata are gone.</li><li>Other photos unchanged; field still counts as filled if ≥1 photo remains.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-IWM-005</td>
+<td><p class="tc-title">Mobile voice note on photo (online vs offline)</p><p class="tc-pre"><strong>Pre:</strong> Mobile inspection; Image with metadata photo open.</p><ol><li>Offline: tap mic “Notes on this photo”, record, stop.</li><li>Go online; wait for transcription state to clear.</li><li>Run wand after transcription text is present.</li></ol></td>
+<td><ul class="tc-exp"><li>Offline shows “Voice notes transcribe when you are online” / pending state.</li><li>Online: “Transcribing…” then note text available.</li><li>Wand can use transcribed text as grounding.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-IWM-006</td>
+<td><p class="tc-title">Export / sample JSON shape</p><p class="tc-pre"><strong>Pre:</strong> Checklist with Image with metadata; inspection has one photo with metadata + note.</p><ol><li>Open report mapper / export sample JSON for the form (Train Billie / export preview).</li></ol></td>
+<td><ul class="tc-exp"><li>Sample shows an array of objects with <code>id</code>, <code>url</code>, <code>notes</code>, <code>metadata</code>.</li><li>Metadata keys map to nested fields (by id or label slug per export path).</li></ul></td>
+</tr>
+</tbody></table></div></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  const root = document.documentElement;
+  const key = "billie-docs-theme";
+  const saved = localStorage.getItem(key);
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  const btn = document.getElementById("themeBtn");
+  if (btn) btn.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem(key, next);
+  });
+  const outline = document.getElementById("outline");
+  if (outline) {
+    document.querySelectorAll(".sec[id]").forEach((sec) => {
+      const h = sec.querySelector("h2");
+      if (!h) return;
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "#" + sec.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      outline.appendChild(li);
+    });
+  }
+})();
+</script>
+</body>
+</html>

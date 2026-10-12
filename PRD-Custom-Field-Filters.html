@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Custom fields as filters PRD — Billie Onsite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="feature-docs.css">
+<link rel="stylesheet" href="app-ui.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+        <div class="brand">
+      <a href="index.html" class="brand__home" aria-label="All product docs home" title="All docs">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </span>
+        <span>
+          <div class="brand__name">Billie Onsite 2.0</div>
+          <div class="brand__sub">Product Docs</div>
+        </span>
+      </a>
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+    <div><p class="rail-label">Document library</p><ul class="doc-list"><li class="doc-item"><a href="Inspection-Usage-Phase-PRD.html"><span class="doc-item__idx">01</span><span>Usage Phase</span></a></li><li class="doc-item"><a href="Magic-Wand-AI-Logic.html"><span class="doc-item__idx">02</span><span>Magic Wand & AI logic</span></a></li><li class="doc-item"><a href="Checklist-Forms-Report-Templates-PRD.html"><span class="doc-item__idx">03</span><span>Checklist, Forms & Reports</span></a></li><li class="doc-item"><a href="PRD-Roles-Permissions.html"><span class="doc-item__idx">04</span><span>Roles & permissions</span></a></li><li class="doc-item"><a href="PRD-Checklist-Structure-Sync.html"><span class="doc-item__idx">05</span><span>Checklist structure sync</span></a></li><li class="doc-item"><a href="PRD-Image-With-Metadata.html"><span class="doc-item__idx">06</span><span>Image with metadata</span></a></li><li class="doc-item"><a href="PRD-Batch-Assign-WIS.html"><span class="doc-item__idx">07</span><span>Batch assign WIS</span></a></li><li class="doc-item"><a href="PRD-Duplicate-Carry-Over.html"><span class="doc-item__idx">08</span><span>Duplicate carry-over</span></a></li><li class="doc-item"><a href="PRD-Track-Issues-AI-Payload.html"><span class="doc-item__idx">09</span><span>Track Issues AI payload</span></a></li><li class="doc-item is-active"><a href="PRD-Custom-Field-Filters.html"><span class="doc-item__idx">10</span><span>Custom field filters</span></a></li><li class="doc-item"><a href="PRD-Trackable-Issues.html"><span class="doc-item__idx">11</span><span>Trackable issues</span></a></li></ul></div>
+    <div><p class="rail-label">On this page</p><ul class="outline" id="outline"></ul></div>
+  </aside>
+  <div class="main">
+    <div class="topbar"><div class="topbar__inner">
+      <h1 class="doc-title">Custom fields as filters</h1>
+      <div class="doc-meta">
+        <span class="meta-chip">PRD <b>10</b></span>
+        <span class="meta-chip">Status: <b>Shipped · UI gaps noted</b></span>
+        <span class="meta-chip">Surfaces: <b>Desktop All Issues · Mobile Issues filter</b></span>
+        <span class="meta-chip"><a href="index.html">All docs</a></span>
+      </div>
+    </div></div>
+    <div class="content">
+      <p class="lead">Project dropdown custom fields appear under <em>Custom Fields</em> in the WIS filter UI. Option IDs filter via <code>customFieldValueIds</code> — not used on inspection lists.</p>
+      <div class="sec" id="s-1"><div class="sec__head"><span class="sec__num">1</span><h2>Design intent</h2></div><ul>
+<li>Team-defined dropdowns should filter the issues board like tags.</li>
+<li>Dropdown-only — text CFs are not filterable.</li>
+<li>OR within a field, AND across fields.</li>
+<li>Desktop saved views persist CF selections as chips.</li>
+</ul></div><div class="sec" id="s-2"><div class="sec__head"><span class="sec__num">2</span><h2>Frontend UI</h2></div>
+<div class="app-mocks">
+  <div>
+    <div class="desk">
+      <div class="desk__chrome"><span class="desk__dots"><i class="r"></i><i class="y"></i><i class="g"></i></span> billie-web · FilterDialog · Custom Fields</div>
+      <div class="desk__body" style="background:#f3f4f6;padding:12px">
+        <div class="bw-filter">
+          <div class="bw-filter__head"><span class="bw-primary-text">Ӿ</span> View Filter Settings</div>
+          <div class="bw-filter__cols">
+            <div class="bw-filter__col">
+              <h4><span class="bw-primary-text">🏷</span> Tags</h4>
+              <div class="bw-member" style="padding:4px 0"><span class="bw-check off"></span> Food Safety</div>
+            </div>
+            <div class="bw-filter__col">
+              <h4><span class="bw-primary-text">👤</span> Assignees</h4>
+              <div class="bw-member" style="padding:4px 0"><span class="bw-check off"></span> Alex Kim</div>
+            </div>
+            <div class="bw-filter__col">
+              <h4><span class="bw-primary-text">☰</span> Custom Fields</h4>
+              <div class="group">Severity</div>
+              <div class="bw-member" style="padding:4px 0"><span class="bw-check">✓</span> High</div>
+              <div class="bw-member" style="padding:4px 0"><span class="bw-check off"></span> Medium</div>
+              <div class="group">Trade</div>
+              <div class="bw-member" style="padding:4px 0"><span class="bw-check off"></span> Electrical</div>
+            </div>
+          </div>
+          <div class="bw-filter__foot">
+            <span class="bw-btn outline pill">Reset</span>
+            <div class="right">
+              <span class="bw-btn outline pill">Cancel</span>
+              <span class="bw-btn primary pill">Apply</span>
+            </div>
+          </div>
+        </div>
+        <div style="padding:8px 4px;display:flex;gap:6px;flex-wrap:wrap">
+          <span class="bw-chip">Severity: High</span>
+        </div>
+      </div>
+    </div>
+    <p class="ui-caption"><strong>Desktop:</strong> wide filter dialog; Custom Fields is the last column block with <code>ListFilter</code> icon. Saved view chips use <code>{field.name}:</code>.</p>
+  </div>
+  <div>
+    <p class="phone__label">wb-billie-mobile · IssuesFilterBottomSheet</p>
+    <div class="phone"><div class="phone__notch"></div><div class="phone__screen" style="background:#f2f2f1">
+      <div class="bm-sheet" style="top:8%;position:relative;min-height:460px;box-shadow:none;border-radius:0">
+        <div class="bm-filter-head"><span style="color:#0030da">Ӿ</span> Filter</div>
+        <div class="bm-filter-sec">
+          <h4>🏷 Tags</h4>
+          <div class="bm-row" style="min-height:44px"><span class="bm-check"></span> Food Safety</div>
+        </div>
+        <div class="bm-filter-sec">
+          <h4>☰ Custom Fields</h4>
+          <div class="group">Severity</div>
+          <div class="bm-row" style="min-height:44px"><span class="bm-check on">✓</span> High</div>
+          <div class="bm-row" style="min-height:44px"><span class="bm-check"></span> Medium</div>
+        </div>
+        <div class="bm-filter-foot">
+          <span class="reset">Reset</span>
+          <div class="actions">
+            <span class="bm-pill-btn">Cancel</span>
+            <span class="bm-pill-btn primary">Apply</span>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    <p class="ui-caption"><strong>Mobile:</strong> 92% sheet; footer is Reset | Cancel + Apply pills (not a full-width CTA bar).</p>
+  </div>
+</div>
+</div><div class="sec" id="s-3"><div class="sec__head"><span class="sec__num">3</span><h2>Feature logic</h2></div><ul>
+<li>Filterable: dropdown with ≥1 option, not INACTIVE.</li>
+<li>Request: <code>customFieldValueIds</code>.</li>
+<li>Known gaps: desktop CF-only filterActive / saved-view validation; mobile saved-view path may omit CF ids.</li>
+</ul></div><div class="sec" id="s-4"><div class="sec__head"><span class="sec__num">4</span><h2>User journey</h2></div><ol class="journey">
+<li>Attach dropdown CF to project; set values on WIS.</li>
+<li>Open Filter → Custom Fields → check options → Apply.</li>
+<li>Desktop may save view; chip shows <code>Severity: High</code>.</li>
+</ol></div><div class="sec" id="s-5"><div class="sec__head"><span class="sec__num">5</span><h2>Test cases</h2></div>
+<div class="tbl-wrap"><table class="tc-table">
+<thead><tr><th>ID</th><th>Steps</th><th>Expected results</th></tr></thead>
+<tbody>
+<tr>
+<td class="tc-id">TC-CFF-001</td>
+<td><p class="tc-title">Custom Fields section hidden when nothing filterable</p><p class="tc-pre"><strong>Pre:</strong> Project has no dropdown custom fields (or only text CFs / empty options).</p><ol><li>Desktop: open Filter / View Filter Settings.</li><li>Mobile: open Issues filter sheet.</li></ol></td>
+<td><ul class="tc-exp"><li>No <strong>Custom Fields</strong> section is shown.</li><li>Other sections (Tags, Assignees, etc.) still appear as configured.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-CFF-002</td>
+<td><p class="tc-title">OR within one custom field</p><p class="tc-pre"><strong>Pre:</strong> Dropdown CF Severity with High and Medium; WIS exist for each.</p><ol><li>Open Filter → Custom Fields → Severity.</li><li>Check High and Medium; Apply.</li><li>Review the issues list.</li></ol></td>
+<td><ul class="tc-exp"><li>List shows items matching High <strong>OR</strong> Medium.</li><li>Items with neither option are hidden.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-CFF-003</td>
+<td><p class="tc-title">AND across two custom fields</p><p class="tc-pre"><strong>Pre:</strong> Severity and Trade dropdowns both on project; WIS with combinations.</p><ol><li>Check Severity=High and Trade=Electrical; Apply.</li></ol></td>
+<td><ul class="tc-exp"><li>Only items that match <strong>both</strong> fields remain.</li><li>High + other trade is excluded.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-CFF-004</td>
+<td><p class="tc-title">Desktop saved view chip shows field name</p><p class="tc-pre"><strong>Pre:</strong> User can create/edit views; CF filter applied.</p><ol><li>Apply Severity=High; save/update the view filter settings.</li><li>Observe view header chips.</li></ol></td>
+<td><ul class="tc-exp"><li>Chip group label is <code>Severity:</code> with option High.</li><li>Toast may show “View Filters Updated”.</li><li>Known gap: CF-only criteria may fail validation / filterActive chip — log if observed.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-CFF-005</td>
+<td><p class="tc-title">Mobile ad-hoc Apply sends customFieldValueIds</p><p class="tc-pre"><strong>Pre:</strong> Mobile; dropdown CF with options; WIS valued.</p><ol><li>Open Filter → Custom Fields → select an option → Apply.</li><li>Confirm list updates; clear/reset and Apply again.</li></ol></td>
+<td><ul class="tc-exp"><li>List narrows to matching WIS.</li><li>Reset clears CF selections.</li><li>Known gap: loading a saved view may omit CF ids — compare ad-hoc vs saved view.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-CFF-006</td>
+<td><p class="tc-title">Text custom fields never appear as filters</p><p class="tc-pre"><strong>Pre:</strong> Project has a text CF and a dropdown CF.</p><ol><li>Open Filter → Custom Fields.</li></ol></td>
+<td><ul class="tc-exp"><li>Only the dropdown CF (with options) is listed.</li><li>Text CF name does not appear as a filter group.</li></ul></td>
+</tr>
+</tbody></table></div></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  const root = document.documentElement;
+  const key = "billie-docs-theme";
+  const saved = localStorage.getItem(key);
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  const btn = document.getElementById("themeBtn");
+  if (btn) btn.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem(key, next);
+  });
+  const outline = document.getElementById("outline");
+  if (outline) {
+    document.querySelectorAll(".sec[id]").forEach((sec) => {
+      const h = sec.querySelector("h2");
+      if (!h) return;
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "#" + sec.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      outline.appendChild(li);
+    });
+  }
+})();
+</script>
+</body>
+</html>

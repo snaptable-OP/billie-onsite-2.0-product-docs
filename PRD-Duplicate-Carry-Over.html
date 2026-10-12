@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Duplicate · carry over values PRD — Billie Onsite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="feature-docs.css">
+<link rel="stylesheet" href="app-ui.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+        <div class="brand">
+      <a href="index.html" class="brand__home" aria-label="All product docs home" title="All docs">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </span>
+        <span>
+          <div class="brand__name">Billie Onsite 2.0</div>
+          <div class="brand__sub">Product Docs</div>
+        </span>
+      </a>
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+    <div><p class="rail-label">Document library</p><ul class="doc-list"><li class="doc-item"><a href="Inspection-Usage-Phase-PRD.html"><span class="doc-item__idx">01</span><span>Usage Phase</span></a></li><li class="doc-item"><a href="Magic-Wand-AI-Logic.html"><span class="doc-item__idx">02</span><span>Magic Wand & AI logic</span></a></li><li class="doc-item"><a href="Checklist-Forms-Report-Templates-PRD.html"><span class="doc-item__idx">03</span><span>Checklist, Forms & Reports</span></a></li><li class="doc-item"><a href="PRD-Roles-Permissions.html"><span class="doc-item__idx">04</span><span>Roles & permissions</span></a></li><li class="doc-item"><a href="PRD-Checklist-Structure-Sync.html"><span class="doc-item__idx">05</span><span>Checklist structure sync</span></a></li><li class="doc-item"><a href="PRD-Image-With-Metadata.html"><span class="doc-item__idx">06</span><span>Image with metadata</span></a></li><li class="doc-item"><a href="PRD-Batch-Assign-WIS.html"><span class="doc-item__idx">07</span><span>Batch assign WIS</span></a></li><li class="doc-item is-active"><a href="PRD-Duplicate-Carry-Over.html"><span class="doc-item__idx">08</span><span>Duplicate carry-over</span></a></li><li class="doc-item"><a href="PRD-Track-Issues-AI-Payload.html"><span class="doc-item__idx">09</span><span>Track Issues AI payload</span></a></li><li class="doc-item"><a href="PRD-Custom-Field-Filters.html"><span class="doc-item__idx">10</span><span>Custom field filters</span></a></li><li class="doc-item"><a href="PRD-Trackable-Issues.html"><span class="doc-item__idx">11</span><span>Trackable issues</span></a></li></ul></div>
+    <div><p class="rail-label">On this page</p><ul class="outline" id="outline"></ul></div>
+  </aside>
+  <div class="main">
+    <div class="topbar"><div class="topbar__inner">
+      <h1 class="doc-title">Duplicate · carry over values</h1>
+      <div class="doc-meta">
+        <span class="meta-chip">PRD <b>08</b></span>
+        <span class="meta-chip">Status: <b>Shipped</b></span>
+        <span class="meta-chip">Surfaces: <b>Desktop form builder · Desktop journal · Mobile inspection</b></span>
+        <span class="meta-chip"><a href="index.html">All docs</a></span>
+      </div>
+    </div></div>
+    <div class="content">
+      <p class="lead">Authors mark fields with <em>Option to duplicate value</em>. On duplicate, inspectors can keep those answers — notes never copy. Mobile allows per-field uncheck; desktop keeps all keepable answers.</p>
+      <div class="sec" id="s-1"><div class="sec__head"><span class="sec__num">1</span><h2>Design intent</h2></div><ul>
+<li><strong>Repeat without retyping</strong> stable answers (zone, asset).</li>
+<li><strong>Author-controlled risk</strong> — only opted-in fields are eligible.</li>
+<li><strong>Notes stay fresh</strong> — findings thread never clones.</li>
+<li><strong>Honest empty state</strong> — no dialog if nothing keepable.</li>
+</ul></div><div class="sec" id="s-2"><div class="sec__head"><span class="sec__num">2</span><h2>Frontend UI</h2></div>
+<div class="app-mocks">
+  <div>
+    <div class="desk">
+      <div class="desk__chrome"><span class="desk__dots"><i class="r"></i><i class="y"></i><i class="g"></i></span> billie-web · Field settings + Duplicate item AlertDialog</div>
+      <div class="desk__body" style="background:#f7f8fa">
+        <div style="padding:14px">
+          <div class="bw-field-card">
+            <div style="display:flex;gap:6px;margin-bottom:8px">
+              <span class="bw-chip tiny">Short text</span>
+              <span class="bw-chip tiny sky">Duplicate value</span>
+            </div>
+            <div style="font-weight:600;margin-bottom:10px">Asset ID</div>
+            <div class="bw-sky-box">
+              <div>
+                <div style="font-size:12px;font-weight:600">Option to duplicate value</div>
+                <div style="font-size:11px;color:#0369a1;margin-top:2px">When duplicating an item, inspectors can choose to keep this field’s answer.</div>
+              </div>
+              <span class="bw-switch"></span>
+            </div>
+          </div>
+        </div>
+        <div class="bw-modal-backdrop">
+          <div class="bw-dialog">
+            <h3>Duplicate item</h3>
+            <p>Keep these answers in the new item: Zone, Asset ID. Or start it with a completely empty form.</p>
+            <div class="footer">
+              <span class="bw-btn outline">Empty form</span>
+              <span class="bw-btn primary">Keep selected values</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="ui-caption"><strong>Desktop:</strong> sky callout + Switch in Field settings; centered <code>AlertDialog</code> (no per-field uncheck). Trigger: ghost <strong>Duplicate item</strong> on journal card.</p>
+  </div>
+  <div>
+    <p class="phone__label">wb-billie-mobile · DuplicateItemOptionsSheet</p>
+    <div class="phone"><div class="phone__notch"></div><div class="phone__screen" style="background:#f2f2f1">
+      <div style="padding:40px 16px;color:#999;font-size:13px;text-align:center">Inspection item · “+” pressed</div>
+      <div class="bm-sheet" style="top:12%">
+        <div class="bm-handle"></div>
+        <div class="bm-sheet__title">Duplicate item</div>
+        <div class="bm-sheet__body">
+          <div class="bm-option on">
+            <span class="bm-radio"></span>
+            <div><div class="t">Keep selected values</div><div class="d">Carry answers over to the new item. Uncheck any you don’t want to keep.</div></div>
+          </div>
+          <div class="bm-option">
+            <span class="bm-radio"></span>
+            <div><div class="t">Empty form</div><div class="d">The new item starts with a completely empty form</div></div>
+          </div>
+          <div style="font-size:13px;font-weight:600;color:#374151;margin:8px 0">Values to keep</div>
+          <div class="bm-row"><div style="flex:1"><div>Zone</div><div class="meta">Freezer A</div></div><span class="bm-check on">✓</span></div>
+          <div class="bm-row"><div style="flex:1"><div>Asset ID</div><div class="meta">CU-204</div></div><span class="bm-check on">✓</span></div>
+        </div>
+        <div class="bm-sheet__foot"><div class="bm-cta">Next</div></div>
+      </div>
+    </div></div>
+    <p class="ui-caption"><strong>Mobile:</strong> SheetShell grabber + radios (<code>#F0F4FF</code> selected) + checkboxes + full-width blue <strong>Next</strong>.</p>
+  </div>
+</div>
+</div><div class="sec" id="s-3"><div class="sec__head"><span class="sec__num">3</span><h2>Feature logic</h2></div><ul>
+<li>Flag <code>optionToDuplicateValue</code> (default off).</li>
+<li>Keepable = flag + non-empty + uploaded <code>https</code> media.</li>
+<li>Structure always copies; notes never copy.</li>
+</ul></div><div class="sec" id="s-4"><div class="sec__head"><span class="sec__num">4</span><h2>User journey</h2></div><ol class="journey">
+<li>Author enables Option to duplicate value → sky <strong>Duplicate value</strong> chip.</li>
+<li>Inspector fills fields, taps Duplicate item / “+”.</li>
+<li>Chooses Keep vs Empty; mobile may uncheck fields.</li>
+<li>New item appears with kept answers; notes blank.</li>
+</ol></div><div class="sec" id="s-5"><div class="sec__head"><span class="sec__num">5</span><h2>Test cases</h2></div>
+<div class="tbl-wrap"><table class="tc-table">
+<thead><tr><th>ID</th><th>Steps</th><th>Expected results</th></tr></thead>
+<tbody>
+<tr>
+<td class="tc-id">TC-DUP-001</td>
+<td><p class="tc-title">Duplicate with no keepable answers skips choice UI</p><p class="tc-pre"><strong>Pre:</strong> Requirement form has no fields with Option to duplicate value, or those fields are blank.</p><ol><li>On desktop: click <strong>Duplicate item</strong>.</li><li>On mobile: tap “+” on the focused item.</li></ol></td>
+<td><ul class="tc-exp"><li>No Keep/Empty dialog or sheet appears.</li><li>New item is created immediately with empty form answers.</li><li>Notes are not copied.</li><li>New item shares the same requirement id(s) for looping.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-DUP-002</td>
+<td><p class="tc-title">Desktop Keep selected values copies all keepable answers</p><p class="tc-pre"><strong>Pre:</strong> Fields Zone + Asset ID have Option to duplicate value ON and are answered; item has notes.</p><ol><li>Click <strong>Duplicate item</strong>.</li><li>Read dialog: “Keep these answers in the new item: Zone, Asset ID…”.</li><li>Click <strong>Keep selected values</strong>.</li><li>Open the new item below.</li></ol></td>
+<td><ul class="tc-exp"><li>Dialog title is “Duplicate item”; actions Empty form / Keep selected values.</li><li>New item has Zone and Asset ID values copied.</li><li>Unflagged fields are blank even if answered on source.</li><li>Notes / message thread on the new item are empty.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-DUP-003</td>
+<td><p class="tc-title">Desktop Empty form resets keepable answers</p><p class="tc-pre"><strong>Pre:</strong> Same source item as TC-DUP-002.</p><ol><li>Duplicate item → click <strong>Empty form</strong>.</li><li>Inspect the new item.</li></ol></td>
+<td><ul class="tc-exp"><li>All form fields on the new item are empty.</li><li>Structure/requirement ids still match source.</li><li>Notes empty.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-DUP-004</td>
+<td><p class="tc-title">Mobile per-field uncheck before Next</p><p class="tc-pre"><strong>Pre:</strong> Mobile; source has ≥2 keepable answered fields.</p><ol><li>Tap “+”; sheet “Duplicate item” opens with Keep selected values defaulted.</li><li>Under Values to keep, uncheck Asset ID; leave Zone checked.</li><li>Tap <strong>Next</strong>.</li></ol></td>
+<td><ul class="tc-exp"><li>New item has Zone copied; Asset ID blank.</li><li>Notes empty.</li><li>Selecting Empty form instead starts a fully empty form.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-DUP-005</td>
+<td><p class="tc-title">Local-only media is not keepable</p><p class="tc-pre"><strong>Pre:</strong> Flagged image/file field answered with a local <code>file://</code> or <code>blob:</code> URI (not yet uploaded).</p><ol><li>Trigger duplicate while that media is still local-only.</li><li>Observe whether the field appears in keepable list / is copied on Keep.</li></ol></td>
+<td><ul class="tc-exp"><li>Local-only media is excluded from keepable answers.</li><li>After upload to <code>https://…</code>, a later duplicate can offer that field as keepable.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-DUP-006</td>
+<td><p class="tc-title">Authoring toggle + badge</p><p class="tc-pre"><strong>Pre:</strong> Web form builder open on a standard field (not special).</p><ol><li>Enable <strong>Option to duplicate value</strong> Switch in Field settings.</li><li>Observe field card chips; Save; reload builder.</li></ol></td>
+<td><ul class="tc-exp"><li>Sky callout copy matches: “When duplicating an item, inspectors can choose to keep this field’s answer.”</li><li>Chip <strong>Duplicate value</strong> appears on the field card.</li><li>Toggle state persists after reload.</li><li>Special fields do not show this toggle.</li></ul></td>
+</tr>
+</tbody></table></div></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  const root = document.documentElement;
+  const key = "billie-docs-theme";
+  const saved = localStorage.getItem(key);
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  const btn = document.getElementById("themeBtn");
+  if (btn) btn.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem(key, next);
+  });
+  const outline = document.getElementById("outline");
+  if (outline) {
+    document.querySelectorAll(".sec[id]").forEach((sec) => {
+      const h = sec.querySelector("h2");
+      if (!h) return;
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "#" + sec.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      outline.appendChild(li);
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checklist structure sync PRD — Billie Onsite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="feature-docs.css">
+<link rel="stylesheet" href="app-ui.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+        <div class="brand">
+      <a href="index.html" class="brand__home" aria-label="All product docs home" title="All docs">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </span>
+        <span>
+          <div class="brand__name">Billie Onsite 2.0</div>
+          <div class="brand__sub">Product Docs</div>
+        </span>
+      </a>
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+    <div><p class="rail-label">Document library</p><ul class="doc-list"><li class="doc-item"><a href="Inspection-Usage-Phase-PRD.html"><span class="doc-item__idx">01</span><span>Usage Phase</span></a></li><li class="doc-item"><a href="Magic-Wand-AI-Logic.html"><span class="doc-item__idx">02</span><span>Magic Wand & AI logic</span></a></li><li class="doc-item"><a href="Checklist-Forms-Report-Templates-PRD.html"><span class="doc-item__idx">03</span><span>Checklist, Forms & Reports</span></a></li><li class="doc-item"><a href="PRD-Roles-Permissions.html"><span class="doc-item__idx">04</span><span>Roles & permissions</span></a></li><li class="doc-item is-active"><a href="PRD-Checklist-Structure-Sync.html"><span class="doc-item__idx">05</span><span>Checklist structure sync</span></a></li><li class="doc-item"><a href="PRD-Image-With-Metadata.html"><span class="doc-item__idx">06</span><span>Image with metadata</span></a></li><li class="doc-item"><a href="PRD-Batch-Assign-WIS.html"><span class="doc-item__idx">07</span><span>Batch assign WIS</span></a></li><li class="doc-item"><a href="PRD-Duplicate-Carry-Over.html"><span class="doc-item__idx">08</span><span>Duplicate carry-over</span></a></li><li class="doc-item"><a href="PRD-Track-Issues-AI-Payload.html"><span class="doc-item__idx">09</span><span>Track Issues AI payload</span></a></li><li class="doc-item"><a href="PRD-Custom-Field-Filters.html"><span class="doc-item__idx">10</span><span>Custom field filters</span></a></li><li class="doc-item"><a href="PRD-Trackable-Issues.html"><span class="doc-item__idx">11</span><span>Trackable issues</span></a></li></ul></div>
+    <div><p class="rail-label">On this page</p><ul class="outline" id="outline"></ul></div>
+  </aside>
+  <div class="main">
+    <div class="topbar"><div class="topbar__inner">
+      <h1 class="doc-title">Checklist structure sync</h1>
+      <div class="doc-meta">
+        <span class="meta-chip">PRD <b>05</b></span>
+        <span class="meta-chip">Status: <b>Shipped · server sweep</b></span>
+        <span class="meta-chip">Surfaces: <b>Desktop checklist library → open inspections</b></span>
+        <span class="meta-chip"><a href="index.html">All docs</a></span>
+      </div>
+    </div></div>
+    <div class="content">
+      <p class="lead">When a checklist is saved, ms-walk appends new structure into inspections that already loaded it. Removals/renames do not erase answered snapshots. Clients do not show Syncing/Synced badges for this status.</p>
+      <div class="sec" id="s-1"><div class="sec__head"><span class="sec__num">1</span><h2>Design intent</h2></div><ul>
+<li><strong>Never punish in-progress work</strong> — answered fields/items survive library edits.</li>
+<li><strong>Additive evolution</strong> — new requirements/fields appear without a second client writer.</li>
+<li><strong>Stable specials</strong> — section specials stay keyed by section id.</li>
+<li><strong>Single pipeline</strong> — server sweep after save; no live client schema overlay.</li>
+</ul></div><div class="sec" id="s-2"><div class="sec__head"><span class="sec__num">2</span><h2>Frontend UI</h2></div>
+<div class="app-mocks is-wide">
+  <div class="desk">
+    <div class="desk__chrome"><span class="desk__dots"><i class="r"></i><i class="y"></i><i class="g"></i></span> billie-web · Team Requirement Library → save → open inspection item</div>
+    <div class="desk__body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;min-height:260px">
+        <div style="padding:14px;border-right:1px solid #e5e7eb;background:#f7f8fa">
+          <div style="font-size:11px;font-weight:700;color:#6b7280;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Checklist editor</div>
+          <div class="bw-field-card">
+            <div style="font-weight:600;margin-bottom:6px">3.2 Cold room check</div>
+            <div class="bw-field-row" style="grid-template-columns:1fr;border:0;padding:4px 0"><label>Temperature (°C)</label><div class="box"></div></div>
+            <div class="bw-field-row" style="grid-template-columns:1fr;border:0;padding:4px 0"><label style="color:#0047ff">+ Probe ID <span class="bw-chip tiny sky">new field</span></label><div class="box" style="border-color:#93c5fd;background:#eff6ff"></div></div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:10px"><span class="bw-btn primary">Save</span></div>
+        </div>
+        <div style="padding:14px;background:#fff">
+          <div style="font-size:11px;font-weight:700;color:#6b7280;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Same inspection · after structure sync</div>
+          <div class="bw-form-card" style="margin:0">
+            <div class="bw-form-head"><div class="title">Inspection form</div><span class="bw-chip emerald">Synced answers kept</span></div>
+            <div style="padding:12px 16px">
+              <div class="bw-field-row"><label>Temperature (°C)</label><div class="box" style="display:flex;align-items:center;padding:0 8px;font-weight:500">3.2</div></div>
+              <div class="bw-field-row"><label>Probe ID</label><div class="box" style="border-style:dashed"></div></div>
+            </div>
+          </div>
+          <p style="font-size:12px;color:#6b7280;margin:12px 0 0">No Syncing… / Synced badge is rendered in web or mobile today. Answer sync (“Re-sync”, “All changes synced”) is a different UI.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="ui-caption">Authoring UI is the web checklist library. Inspectors see new fields appear on the existing form snapshot — there is no dedicated structure-sync status chrome on either client.</p>
+</div><div class="sec" id="s-3"><div class="sec__head"><span class="sec__num">3</span><h2>Feature logic</h2></div><div class="tbl-wrap"><table><thead><tr><th>Checklist change</th><th>Existing inspection</th></tr></thead><tbody>
+<tr><td class="td-key">Add field (new id)</td><td>Appended at end of stored formSchema</td></tr>
+<tr><td class="td-key">Add requirement</td><td>New item via server sweep</td></tr>
+<tr><td class="td-key">Rename / edit options / remove field</td><td class="no">Snapshot unchanged</td></tr>
+<tr><td class="td-key">Remove requirement</td><td>Issue stays</td></tr>
+</tbody></table></div>
+<p>Statuses <code>SYNCING</code> → <code>SYNCED</code> are server-side only today.</p></div><div class="sec" id="s-4"><div class="sec__head"><span class="sec__num">4</span><h2>User journey</h2></div><ol class="journey">
+<li>Inspection already exists from Checklist A.</li>
+<li>Author adds a field in Team Requirement Library → Save.</li>
+<li>Server structure-sync sweeps related walks.</li>
+<li>Inspector sees new blank field; prior answers remain.</li>
+</ol></div><div class="sec" id="s-5"><div class="sec__head"><span class="sec__num">5</span><h2>Test cases</h2></div>
+<div class="tbl-wrap"><table class="tc-table">
+<thead><tr><th>ID</th><th>Steps</th><th>Expected results</th></tr></thead>
+<tbody>
+<tr>
+<td class="tc-id">TC-SYNC-001</td>
+<td><p class="tc-title">Add form field to checklist appears on open inspection</p><p class="tc-pre"><strong>Pre:</strong> Inspection created from Checklist A; item has ≥1 answered field. Author can edit Checklist A.</p><ol><li>Note current answered values on the inspection item.</li><li>In Team Requirement Library, open Checklist A → same requirement → add a new field (new id), Save.</li><li>Wait for server sync (tens of seconds if needed).</li><li>Reopen/refresh the inspection item on web and mobile.</li></ol></td>
+<td><ul class="tc-exp"><li>New field appears at the <strong>end</strong> of the form, blank.</li><li>Previously answered fields keep their values and labels.</li><li>No second duplicate of the new field after another refresh.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-SYNC-002</td>
+<td><p class="tc-title">Rename field label does not change inspection snapshot</p><p class="tc-pre"><strong>Pre:</strong> Inspection already has field X answered; checklist still linked.</p><ol><li>In the library, rename field X’s label (same field id), Save.</li><li>Reopen the inspection item.</li></ol></td>
+<td><ul class="tc-exp"><li>Inspection still shows the <strong>old</strong> label from the snapshot.</li><li>Answer value for that field id is unchanged.</li><li>New inspections created after the rename may show the new label.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-SYNC-003</td>
+<td><p class="tc-title">Remove field from checklist leaves snapshot field + answer</p><p class="tc-pre"><strong>Pre:</strong> Inspection has answered field Y.</p><ol><li>In the library, delete/remove field Y from the requirement, Save.</li><li>Reopen the inspection item.</li></ol></td>
+<td><ul class="tc-exp"><li>Field Y still appears on the inspection form.</li><li>Prior answer for Y is still present.</li><li>Structure sync does not strip the field from <code>requirement_json</code>.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-SYNC-004</td>
+<td><p class="tc-title">Add requirement creates a new inspection item</p><p class="tc-pre"><strong>Pre:</strong> Open inspection from checklist; count current items.</p><ol><li>In the library, add a new requirement under a section, Save.</li><li>Refresh the inspection (journal list/detail).</li></ol></td>
+<td><ul class="tc-exp"><li>Item count increases by the new requirement(s).</li><li>New item has empty form answers.</li><li>Existing items and answers remain.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-SYNC-005</td>
+<td><p class="tc-title">Remove / inactive requirement does not delete inspection issue</p><p class="tc-pre"><strong>Pre:</strong> Inspection item tied to requirement R exists (may have notes/answers).</p><ol><li>In the library, remove or mark requirement R inactive, Save.</li><li>Reopen the inspection.</li></ol></td>
+<td><ul class="tc-exp"><li>The issue/item for R is still present (orphaned).</li><li>Notes and answers on that item remain.</li><li>Item is not auto-deleted by structure sync.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-SYNC-006</td>
+<td><p class="tc-title">Section specials stay keyed by section id</p><p class="tc-pre"><strong>Pre:</strong> Checklist section has AI summary special; inspection already has the trailing special item.</p><ol><li>Edit another field on the checklist and Save (re-trigger sync).</li><li>Compare the special item id before/after.</li></ol></td>
+<td><ul class="tc-exp"><li>Trailing special item id remains the <strong>section id</strong>.</li><li>No duplicate special item is created for that section.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-SYNC-007</td>
+<td><p class="tc-title">User blank item is never deleted by sync</p><p class="tc-pre"><strong>Pre:</strong> On inspection, add a blank item (no requirement id) with a note.</p><ol><li>Edit the checklist (add any field), Save to trigger sync.</li><li>Reopen the inspection.</li></ol></td>
+<td><ul class="tc-exp"><li>Blank item still exists with its note.</li><li>Blank item sorts after checklist-backed items.</li></ul></td>
+</tr>
+</tbody></table></div></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  const root = document.documentElement;
+  const key = "billie-docs-theme";
+  const saved = localStorage.getItem(key);
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  const btn = document.getElementById("themeBtn");
+  if (btn) btn.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem(key, next);
+  });
+  const outline = document.getElementById("outline");
+  if (outline) {
+    document.querySelectorAll(".sec[id]").forEach((sec) => {
+      const h = sec.querySelector("h2");
+      if (!h) return;
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "#" + sec.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      outline.appendChild(li);
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Track Issues · AI payload PRD — Billie Onsite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="feature-docs.css">
+<link rel="stylesheet" href="app-ui.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+        <div class="brand">
+      <a href="index.html" class="brand__home" aria-label="All product docs home" title="All docs">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </span>
+        <span>
+          <div class="brand__name">Billie Onsite 2.0</div>
+          <div class="brand__sub">Product Docs</div>
+        </span>
+      </a>
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+    <div><p class="rail-label">Document library</p><ul class="doc-list"><li class="doc-item"><a href="Inspection-Usage-Phase-PRD.html"><span class="doc-item__idx">01</span><span>Usage Phase</span></a></li><li class="doc-item"><a href="Magic-Wand-AI-Logic.html"><span class="doc-item__idx">02</span><span>Magic Wand & AI logic</span></a></li><li class="doc-item"><a href="Checklist-Forms-Report-Templates-PRD.html"><span class="doc-item__idx">03</span><span>Checklist, Forms & Reports</span></a></li><li class="doc-item"><a href="PRD-Roles-Permissions.html"><span class="doc-item__idx">04</span><span>Roles & permissions</span></a></li><li class="doc-item"><a href="PRD-Checklist-Structure-Sync.html"><span class="doc-item__idx">05</span><span>Checklist structure sync</span></a></li><li class="doc-item"><a href="PRD-Image-With-Metadata.html"><span class="doc-item__idx">06</span><span>Image with metadata</span></a></li><li class="doc-item"><a href="PRD-Batch-Assign-WIS.html"><span class="doc-item__idx">07</span><span>Batch assign WIS</span></a></li><li class="doc-item"><a href="PRD-Duplicate-Carry-Over.html"><span class="doc-item__idx">08</span><span>Duplicate carry-over</span></a></li><li class="doc-item is-active"><a href="PRD-Track-Issues-AI-Payload.html"><span class="doc-item__idx">09</span><span>Track Issues AI payload</span></a></li><li class="doc-item"><a href="PRD-Custom-Field-Filters.html"><span class="doc-item__idx">10</span><span>Custom field filters</span></a></li><li class="doc-item"><a href="PRD-Trackable-Issues.html"><span class="doc-item__idx">11</span><span>Trackable issues</span></a></li></ul></div>
+    <div><p class="rail-label">On this page</p><ul class="outline" id="outline"></ul></div>
+  </aside>
+  <div class="main">
+    <div class="topbar"><div class="topbar__inner">
+      <h1 class="doc-title">Track Issues · AI payload</h1>
+      <div class="doc-meta">
+        <span class="meta-chip">PRD <b>09</b></span>
+        <span class="meta-chip">Status: <b>Shipped</b></span>
+        <span class="meta-chip">Surfaces: <b>Mobile Track issues · Desktop Publish to Project · ms-walk AI</b></span>
+        <span class="meta-chip"><a href="index.html">All docs</a></span>
+      </div>
+    </div></div>
+    <div class="content">
+      <p class="lead">Track Issues builds DRAFT WIS from findings. Title, summary, tags, locations, assignees, and custom fields come from <strong>notes</strong>; form answers are frozen onto each WIS — not sent to the LLM.</p>
+      <div class="sec" id="s-1"><div class="sec__head"><span class="sec__num">1</span><h2>Design intent</h2></div><ul>
+<li><strong>Notes tell the story</strong> for AI title/details/tags.</li>
+<li><strong>Forms travel with the issue</strong> via frozen requirementJson.</li>
+<li><strong>Human review before share</strong> — DRAFT → edit → publish.</li>
+<li><strong>Graceful empties</strong> — “No special findings” when no note text.</li>
+</ul></div><div class="sec" id="s-2"><div class="sec__head"><span class="sec__num">2</span><h2>Frontend UI</h2></div>
+<div class="app-mocks">
+  <div>
+    <div class="desk">
+      <div class="desk__chrome"><span class="desk__dots"><i class="r"></i><i class="y"></i><i class="g"></i></span> billie-web · PublishOptionsDialog → JournalPublish sheet</div>
+      <div class="desk__body" style="background:#f3f4f6;padding:12px">
+        <div class="bw-pub">
+          <div class="bw-pub__bar"><span>Publish</span><span style="color:#9ca3af">✕</span></div>
+          <div class="bw-pub__body">
+            <div class="bw-opt on">
+              <span class="bw-radio"></span>
+              <div><div class="t">⬆ Publish to Project Workspace</div><div class="d">Share findings to workspace for team follow-up</div></div>
+            </div>
+            <div class="bw-opt">
+              <span class="bw-radio"></span>
+              <div><div class="t">📄 Export as Document</div><div class="d">Select from your team's templates…</div></div>
+            </div>
+          </div>
+          <div class="bw-pub__foot"><span class="bw-btn primary sm">Next ›</span></div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-top:12px">
+          <div class="bw-sheet__head"><span class="x bw-btn ghost sm">✕</span>Preview and Edit Before Publish</div>
+          <div class="bw-sheet">
+            <div class="bw-sheet__preview">
+              <div class="bw-item-card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <strong>Item #3</strong><span class="bw-chip emerald">Included</span>
+                </div>
+                <div style="font-size:16px;font-weight:600;margin-bottom:8px">Damaged cold-room gasket</div>
+                <div style="font-size:12px;font-weight:600;color:#6b7280;margin-bottom:4px">Details (AI)</div>
+                <div style="font-size:13px;color:#374151">Gasket torn at lower hinge; condensation pooling…</div>
+                <div style="margin-top:8px"><span class="bw-chip">Food Safety</span></div>
+              </div>
+            </div>
+            <div class="bw-sheet__side">
+              <div style="display:flex;gap:6px">
+                <span class="bw-btn outline sm" style="flex:1;justify-content:center">Include all</span>
+                <span class="bw-btn outline sm" style="flex:1;justify-content:center">Skip all</span>
+              </div>
+              <div class="bw-side-row"><div style="display:flex;justify-content:space-between"><span>Item #3</span></div><div class="meta">Damaged cold-room gasket</div></div>
+              <div class="bw-side-row dim"><div style="display:flex;justify-content:space-between"><span>Item #7</span><span class="bw-chip gray">Not trackable</span></div><div class="meta">Final sign-off</div></div>
+              <div class="bw-side-row dim"><div style="display:flex;justify-content:space-between"><span>Item #2</span><span class="bw-chip emerald">Published</span></div></div>
+              <div style="margin-top:auto"><span class="bw-btn fuchsia full">✈ Publish 1 Items</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="ui-caption"><strong>Desktop:</strong> entry label is <strong>Publish to Project Workspace</strong>. Preview sheet ~1200px with fuchsia publish CTA.</p>
+  </div>
+  <div>
+    <p class="phone__label">wb-billie-mobile · Track issues → Walk Summary</p>
+    <div class="phone"><div class="phone__notch"></div><div class="phone__screen" style="background:#fff">
+      <div class="bm-header"><span>‹</span><h3>Publish to Project</h3><span style="width:24px"></span></div>
+      <div style="padding:8px 14px;font-size:12px;color:#999">2/4 selected · Filter by tags</div>
+      <div class="bm-wis-card">
+        <div class="top"><span class="item">Item #3</span><span class="bm-switch"></span></div>
+        <span class="bm-tag-pill">Food Safety</span>
+        <div class="subject">Damaged cold-room gasket</div>
+        <div class="bm-details-row"><span class="bm-icon-well">≡</span> Details <span style="margin-left:auto;color:#999">▾</span></div>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;padding:12px 14px 22px;background:#fff;border-top:1px solid #eee">
+        <div class="bm-cta">Track 2 issues</div>
+      </div>
+      <!-- overlay showing publish options as small inset -->
+    </div></div>
+    <div class="phone" style="margin-top:14px"><div class="phone__notch"></div><div class="phone__screen" style="background:#f2f2f1">
+      <div style="padding:24px;color:#999;text-align:center;font-size:12px">Publish toolbar</div>
+      <div class="bm-sheet" style="top:20%">
+        <div class="bm-handle"></div>
+        <div class="bm-sheet__title" style="font-size:18px">How would you like to publish</div>
+        <div class="bm-sheet__body">
+          <div class="bm-option on"><span class="bm-radio"></span><div><div class="t">Track issues</div><div class="d">Share findings to project workspace for team follow-up</div></div></div>
+          <div class="bm-option"><span class="bm-radio"></span><div><div class="t">Export report</div><div class="d">Generate the Food Safety Audit Report for this inspection</div></div></div>
+        </div>
+        <div class="bm-sheet__foot"><div class="bm-cta">Next</div></div>
+      </div>
+    </div></div>
+    <p class="ui-caption"><strong>Mobile:</strong> option label is <strong>Track issues</strong>. Summary cards show Item #N + switch, title (Subject), Tags, Details row; footer <strong>Track N issues</strong>.</p>
+  </div>
+</div>
+</div><div class="sec" id="s-3"><div class="sec__head"><span class="sec__num">3</span><h2>Feature logic</h2></div><div class="tbl-wrap"><table><thead><tr><th>Case</th><th>Condition</th><th>AI</th><th>WIS</th></tr></thead><tbody>
+<tr><td class="td-key">1</td><td>Text/Voice/Markdown</td><td class="yes">Yes</td><td>Full AI + freeze forms</td></tr>
+<tr><td class="td-key">2</td><td>Attachments only</td><td class="no">No</td><td>“No special findings”</td></tr>
+<tr><td class="td-key">3</td><td>Forms only</td><td class="no">No</td><td>Freeze forms</td></tr>
+</tbody></table></div>
+<p>LLM gets note text/transcriptions; images as stub text; forms excluded. Custom fields need non-blank descriptions.</p></div><div class="sec" id="s-4"><div class="sec__head"><span class="sec__num">4</span><h2>User journey</h2></div><ol class="journey">
+<li>Capture notes (+ forms).</li>
+<li>Publish → Track issues / Publish to Project Workspace → Next.</li>
+<li>Flush notes; Billie generates Subject/Details/Tags.</li>
+<li>Review, select, publish selected WIS.</li>
+</ol></div><div class="sec" id="s-5"><div class="sec__head"><span class="sec__num">5</span><h2>Test cases</h2></div>
+<div class="tbl-wrap"><table class="tc-table">
+<thead><tr><th>ID</th><th>Steps</th><th>Expected results</th></tr></thead>
+<tbody>
+<tr>
+<td class="tc-id">TC-AI-001</td>
+<td><p class="tc-title">Notes produce AI Subject / Details / Tags + frozen forms</p><p class="tc-pre"><strong>Pre:</strong> Host; item has text/voice notes and filled form fields; project has subset tags.</p><ol><li>Capture notes describing an issue; fill form fields.</li><li>Publish → <strong>Track issues</strong> (mobile) or <strong>Publish to Project Workspace</strong> (desktop) → Next.</li><li>Wait for generation (“Billie is on it…” / preview load).</li><li>Inspect Subject/title, Details, Tags, and requirement/form on the draft.</li></ol></td>
+<td><ul class="tc-exp"><li>DRAFT WIS title/details/tags reflect note content (LLM Case 1).</li><li>Form answers appear frozen on the WIS requirementJson / form section.</li><li>Form field values were <strong>not</strong> required for title generation beyond notes.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-AI-002</td>
+<td><p class="tc-title">Attachment-only item → No special findings</p><p class="tc-pre"><strong>Pre:</strong> Item has image attachment(s) in notes but no text/voice/markdown body.</p><ol><li>Run Track Issues / Publish to Project Workspace generation.</li><li>Open the draft for that item.</li></ol></td>
+<td><ul class="tc-exp"><li>Title is <strong>No special findings</strong> (or equivalent Case 2 path).</li><li>Image URLs appear in WIS content where applicable.</li><li>No invented long summary from empty text.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-AI-003</td>
+<td><p class="tc-title">Form-only item (no messages) still freezes forms</p><p class="tc-pre"><strong>Pre:</strong> Item has requirement + form answers; no note messages.</p><ol><li>Run Track Issues generation; open draft.</li></ol></td>
+<td><ul class="tc-exp"><li>Title is No special findings (Case 3).</li><li>requirementJson includes latest formAnswers.</li><li>Custom fields / tags from AI are empty for this item.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-AI-004</td>
+<td><p class="tc-title">Pending offline notes are flushed before AI</p><p class="tc-pre"><strong>Pre:</strong> Mobile offline: add notes that are still pending sync; then regain network.</p><ol><li>Immediately run Track issues before notes show as synced.</li><li>Confirm drafts reference the new note content.</li></ol></td>
+<td><ul class="tc-exp"><li>Client flushes pending notes before <code>POST …/ai-summary/full</code>.</li><li>Generated Subject/Details include the newly flushed note text.</li><li>If flush fails, generation should not silently ignore pending local-only notes.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-AI-005</td>
+<td><p class="tc-title">Custom field extraction uses CF description + note text</p><p class="tc-pre"><strong>Pre:</strong> Project dropdown CF “Severity” has a non-blank description and options High/Medium; notes mention “high severity”.</p><ol><li>Run Track Issues; open draft custom fields.</li></ol></td>
+<td><ul class="tc-exp"><li>Severity is set to High when extractor matches an option name.</li><li>A CF with blank description is not sent to the custom-field AI call.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-AI-006</td>
+<td><p class="tc-title">Already published items stay locked</p><p class="tc-pre"><strong>Pre:</strong> Item previously published to workspace.</p><ol><li>Open Publish / Track Issues preview again.</li></ol></td>
+<td><ul class="tc-exp"><li>Item shows <strong>Published</strong> (desktop) / is not republished as a new generation target.</li><li>Existing WIS is not duplicated by a full regenerate for that issue.</li></ul></td>
+</tr>
+<tr>
+<td class="tc-id">TC-AI-007</td>
+<td><p class="tc-title">Publish selected does not complete the inspection</p><p class="tc-pre"><strong>Pre:</strong> Track Issues drafts ready; select a subset.</p><ol><li>Desktop: Publish N Items. Mobile: Track N issues / continue with selected.</li><li>Return to inspection list/status.</li></ol></td>
+<td><ul class="tc-exp"><li>Selected WIS appear in project workspace.</li><li>Inspection is <strong>not</strong> marked Completed solely by Track Issues (unlike Export report path).</li></ul></td>
+</tr>
+</tbody></table></div></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  const root = document.documentElement;
+  const key = "billie-docs-theme";
+  const saved = localStorage.getItem(key);
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  const btn = document.getElementById("themeBtn");
+  if (btn) btn.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem(key, next);
+  });
+  const outline = document.getElementById("outline");
+  if (outline) {
+    document.querySelectorAll(".sec[id]").forEach((sec) => {
+      const h = sec.querySelector("h2");
+      if (!h) return;
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "#" + sec.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      outline.appendChild(li);
+    });
+  }
+})();
+</script>
+</body>
+</html>
