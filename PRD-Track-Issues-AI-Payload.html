@@ -44,12 +44,12 @@
       </div>
     </div></div>
     <div class="content">
-      <p class="lead">Track Issues builds DRAFT WIS from findings. Title, summary, tags, locations, assignees, and custom fields come from <strong>notes</strong>; form answers are frozen onto each WIS — not sent to the LLM.</p>
+      <p class="lead">Track Issues AI now uses <strong>form field values</strong> as well as notes when generating Subject, Details, Tags, and related draft fields. Filled answers are part of the LLM payload — not only frozen onto the WIS afterward.</p>
       <div class="sec" id="s-1"><div class="sec__head"><span class="sec__num">1</span><h2>Design intent</h2></div><ul>
-<li><strong>Notes tell the story</strong> for AI title/details/tags.</li>
-<li><strong>Forms travel with the issue</strong> via frozen requirementJson.</li>
-<li><strong>Human review before share</strong> — DRAFT → edit → publish.</li>
-<li><strong>Graceful empties</strong> — “No special findings” when no note text.</li>
+<li><strong>Forms inform the write-up:</strong> answered fields (labels + values) are included in the AI generation payload so drafts reflect structured capture, not notes alone.</li>
+<li><strong>Notes still contribute:</strong> text / voice / markdown remain in the same generation call and combine with form context.</li>
+<li><strong>Freeze is separate:</strong> form answers still land on the WIS requirementJson for follow-up — that freeze does not replace sending values to the LLM.</li>
+<li><strong>Empty forms do not invent answers:</strong> blank fields are omitted or treated as empty context; AI should not fabricate form values.</li>
 </ul></div><div class="sec" id="s-2"><div class="sec__head"><span class="sec__num">2</span><h2>Frontend UI</h2></div>
 <div class="app-mocks">
   <div>
@@ -79,9 +79,14 @@
                   <strong>Item #3</strong><span class="bw-chip emerald">Included</span>
                 </div>
                 <div style="font-size:16px;font-weight:600;margin-bottom:8px">Damaged cold-room gasket</div>
-                <div style="font-size:12px;font-weight:600;color:#6b7280;margin-bottom:4px">Details (AI)</div>
-                <div style="font-size:13px;color:#374151">Gasket torn at lower hinge; condensation pooling…</div>
+                <div style="font-size:12px;font-weight:600;color:#6b7280;margin-bottom:4px">Details (AI · notes + forms)</div>
+                <div style="font-size:13px;color:#374151">Gasket torn at lower hinge; form: Temperature 8.2°C (Fail), Pass/Fail = Fail…</div>
                 <div style="margin-top:8px"><span class="bw-chip">Food Safety</span></div>
+                <div style="margin-top:10px;padding:8px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;font-size:11px;color:#6b7280">
+                  <div style="font-weight:600;color:#374151;margin-bottom:4px">AI payload includes</div>
+                  <div>Notes · “Gasket torn…”</div>
+                  <div>Forms · Temperature = 8.2 · Pass/Fail = Fail</div>
+                </div>
               </div>
             </div>
             <div class="bw-sheet__side">
@@ -98,23 +103,23 @@
         </div>
       </div>
     </div>
-    <p class="ui-caption"><strong>Desktop:</strong> entry label is <strong>Publish to Project Workspace</strong>. Preview sheet ~1200px with fuchsia publish CTA.</p>
+    <p class="ui-caption"><strong>Desktop:</strong> Publish to Project Workspace → preview. AI Details should reflect both note text and answered form fields from that item.</p>
   </div>
   <div>
     <p class="phone__label">wb-billie-mobile · Track issues → Walk Summary</p>
     <div class="phone"><div class="phone__notch"></div><div class="phone__screen" style="background:#fff">
       <div class="bm-header"><span>‹</span><h3>Publish to Project</h3><span style="width:24px"></span></div>
-      <div style="padding:8px 14px;font-size:12px;color:#999">2/4 selected · Filter by tags</div>
+      <div style="padding:8px 14px;font-size:12px;color:#999">Generating from notes + form values…</div>
       <div class="bm-wis-card">
         <div class="top"><span class="item">Item #3</span><span class="bm-switch"></span></div>
         <span class="bm-tag-pill">Food Safety</span>
         <div class="subject">Damaged cold-room gasket</div>
         <div class="bm-details-row"><span class="bm-icon-well">≡</span> Details <span style="margin-left:auto;color:#999">▾</span></div>
+        <div style="margin:8px 0 0;padding:8px;background:#f7f7f6;border-radius:8px;font-size:11px;color:#666;line-height:1.4">Includes form: Temp 8.2°C · Fail</div>
       </div>
       <div style="position:absolute;left:0;right:0;bottom:0;padding:12px 14px 22px;background:#fff;border-top:1px solid #eee">
         <div class="bm-cta">Track 2 issues</div>
       </div>
-      <!-- overlay showing publish options as small inset -->
     </div></div>
     <div class="phone" style="margin-top:14px"><div class="phone__notch"></div><div class="phone__screen" style="background:#f2f2f1">
       <div style="padding:24px;color:#999;text-align:center;font-size:12px">Publish toolbar</div>
@@ -128,57 +133,35 @@
         <div class="bm-sheet__foot"><div class="bm-cta">Next</div></div>
       </div>
     </div></div>
-    <p class="ui-caption"><strong>Mobile:</strong> option label is <strong>Track issues</strong>. Summary cards show Item #N + switch, title (Subject), Tags, Details row; footer <strong>Track N issues</strong>.</p>
+    <p class="ui-caption"><strong>Mobile:</strong> Track issues generation payload includes answered form fields for each item, alongside notes.</p>
   </div>
 </div>
-</div><div class="sec" id="s-3"><div class="sec__head"><span class="sec__num">3</span><h2>Feature logic</h2></div><div class="tbl-wrap"><table><thead><tr><th>Case</th><th>Condition</th><th>AI</th><th>WIS</th></tr></thead><tbody>
-<tr><td class="td-key">1</td><td>Text/Voice/Markdown</td><td class="yes">Yes</td><td>Full AI + freeze forms</td></tr>
-<tr><td class="td-key">2</td><td>Attachments only</td><td class="no">No</td><td>“No special findings”</td></tr>
-<tr><td class="td-key">3</td><td>Forms only</td><td class="no">No</td><td>Freeze forms</td></tr>
+</div><div class="sec" id="s-3"><div class="sec__head"><span class="sec__num">3</span><h2>Feature logic</h2></div><div class="tbl-wrap"><table><thead><tr><th>Input</th><th>In AI payload?</th><th>Effect on draft</th></tr></thead><tbody>
+<tr><td class="td-key">Note text / voice / markdown</td><td class="yes">Yes</td><td>Subject, Details, Tags (and related extractors)</td></tr>
+<tr><td class="td-key">Form field answers (label + value)</td><td class="yes">Yes</td><td>Used with notes so generated copy can cite measured / selected values</td></tr>
+<tr><td class="td-key">Blank / unanswered form fields</td><td class="no">No*</td><td>Omitted from payload; must not invent values</td></tr>
+<tr><td class="td-key">Form answers on WIS</td><td>—</td><td>Still frozen onto requirementJson after generation (unchanged)</td></tr>
 </tbody></table></div>
-<p>LLM gets note text/transcriptions; images as stub text; forms excluded. Custom fields need non-blank descriptions.</p></div><div class="sec" id="s-4"><div class="sec__head"><span class="sec__num">4</span><h2>User journey</h2></div><ol class="journey">
-<li>Capture notes (+ forms).</li>
-<li>Publish → Track issues / Publish to Project Workspace → Next.</li>
-<li>Flush notes; Billie generates Subject/Details/Tags.</li>
-<li>Review, select, publish selected WIS.</li>
+<p>* Only non-empty answers are meaningful context. Forms-only items (no notes) can still generate from answered fields. Attachment-only / empty context remains a low-signal path.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Case</th><th>Condition</th><th>AI generation</th></tr></thead><tbody>
+<tr><td class="td-key">A</td><td>Notes + filled forms</td><td class="yes">Yes — both in payload</td></tr>
+<tr><td class="td-key">B</td><td>Forms only (answered)</td><td class="yes">Yes — form values drive draft</td></tr>
+<tr><td class="td-key">C</td><td>Notes only (no form answers)</td><td class="yes">Yes — notes only</td></tr>
+</tbody></table></div>
+</div><div class="sec" id="s-4"><div class="sec__head"><span class="sec__num">4</span><h2>User journey</h2></div><ol class="journey">
+<li>On an item, fill form fields and (optionally) capture notes.</li>
+<li>Publish → <strong>Track issues</strong> / <strong>Publish to Project Workspace</strong> → Next.</li>
+<li>Billie generates Subject / Details / Tags using <strong>notes + form values</strong> in the AI payload.</li>
+<li>Review draft: Details should reflect key form answers; forms also remain frozen on the WIS.</li>
+<li>Select and publish.</li>
 </ol></div><div class="sec" id="s-5"><div class="sec__head"><span class="sec__num">5</span><h2>Test cases</h2></div>
 <div class="tbl-wrap"><table class="tc-table">
 <thead><tr><th>ID</th><th>Steps</th><th>Expected results</th></tr></thead>
 <tbody>
 <tr>
 <td class="tc-id">TC-AI-001</td>
-<td><p class="tc-title">Notes produce AI Subject / Details / Tags + frozen forms</p><p class="tc-pre"><strong>Pre:</strong> Host; item has text/voice notes and filled form fields; project has subset tags.</p><ol><li>Capture notes describing an issue; fill form fields.</li><li>Publish → <strong>Track issues</strong> (mobile) or <strong>Publish to Project Workspace</strong> (desktop) → Next.</li><li>Wait for generation (“Billie is on it…” / preview load).</li><li>Inspect Subject/title, Details, Tags, and requirement/form on the draft.</li></ol></td>
-<td><ul class="tc-exp"><li>DRAFT WIS title/details/tags reflect note content (LLM Case 1).</li><li>Form answers appear frozen on the WIS requirementJson / form section.</li><li>Form field values were <strong>not</strong> required for title generation beyond notes.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-AI-002</td>
-<td><p class="tc-title">Attachment-only item → No special findings</p><p class="tc-pre"><strong>Pre:</strong> Item has image attachment(s) in notes but no text/voice/markdown body.</p><ol><li>Run Track Issues / Publish to Project Workspace generation.</li><li>Open the draft for that item.</li></ol></td>
-<td><ul class="tc-exp"><li>Title is <strong>No special findings</strong> (or equivalent Case 2 path).</li><li>Image URLs appear in WIS content where applicable.</li><li>No invented long summary from empty text.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-AI-003</td>
-<td><p class="tc-title">Form-only item (no messages) still freezes forms</p><p class="tc-pre"><strong>Pre:</strong> Item has requirement + form answers; no note messages.</p><ol><li>Run Track Issues generation; open draft.</li></ol></td>
-<td><ul class="tc-exp"><li>Title is No special findings (Case 3).</li><li>requirementJson includes latest formAnswers.</li><li>Custom fields / tags from AI are empty for this item.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-AI-004</td>
-<td><p class="tc-title">Pending offline notes are flushed before AI</p><p class="tc-pre"><strong>Pre:</strong> Mobile offline: add notes that are still pending sync; then regain network.</p><ol><li>Immediately run Track issues before notes show as synced.</li><li>Confirm drafts reference the new note content.</li></ol></td>
-<td><ul class="tc-exp"><li>Client flushes pending notes before <code>POST …/ai-summary/full</code>.</li><li>Generated Subject/Details include the newly flushed note text.</li><li>If flush fails, generation should not silently ignore pending local-only notes.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-AI-005</td>
-<td><p class="tc-title">Custom field extraction uses CF description + note text</p><p class="tc-pre"><strong>Pre:</strong> Project dropdown CF “Severity” has a non-blank description and options High/Medium; notes mention “high severity”.</p><ol><li>Run Track Issues; open draft custom fields.</li></ol></td>
-<td><ul class="tc-exp"><li>Severity is set to High when extractor matches an option name.</li><li>A CF with blank description is not sent to the custom-field AI call.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-AI-006</td>
-<td><p class="tc-title">Already published items stay locked</p><p class="tc-pre"><strong>Pre:</strong> Item previously published to workspace.</p><ol><li>Open Publish / Track Issues preview again.</li></ol></td>
-<td><ul class="tc-exp"><li>Item shows <strong>Published</strong> (desktop) / is not republished as a new generation target.</li><li>Existing WIS is not duplicated by a full regenerate for that issue.</li></ul></td>
-</tr>
-<tr>
-<td class="tc-id">TC-AI-007</td>
-<td><p class="tc-title">Publish selected does not complete the inspection</p><p class="tc-pre"><strong>Pre:</strong> Track Issues drafts ready; select a subset.</p><ol><li>Desktop: Publish N Items. Mobile: Track N issues / continue with selected.</li><li>Return to inspection list/status.</li></ol></td>
-<td><ul class="tc-exp"><li>Selected WIS appear in project workspace.</li><li>Inspection is <strong>not</strong> marked Completed solely by Track Issues (unlike Export report path).</li></ul></td>
+<td><p class="tc-title">Filled form, no inspector notes — AI still generates</p><p class="tc-pre"><strong>Pre:</strong> Host; item has answered form fields with distinctive values (e.g. Temperature = 8.2, Pass/Fail = Fail). <strong>No</strong> text, voice, or markdown inspector notes on the item.</p><ol><li>Confirm the form is saved and the notes thread is empty.</li><li>Publish → <strong>Track issues</strong> (mobile) or <strong>Publish to Project Workspace</strong> (desktop) → Next.</li><li>Wait for generation; open Subject, Details, and Tags on the draft.</li></ol></td>
+<td><ul class="tc-exp"><li>AI completes successfully (no empty / failed generation solely because notes are missing).</li><li>Subject and/or Details are grounded in the answered form field labels and values.</li><li>Draft is usable for review and publish like a notes-backed item.</li></ul></td>
 </tr>
 </tbody></table></div></div>
     </div>
